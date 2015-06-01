@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Dominion
 {
-    public partial class Form1 : Form
+    public partial class formGame : Form
     {
-        public Form1()
+        public formGame()
         {
             InitializeComponent();
         }
