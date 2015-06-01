@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
 using NUnit.Framework;
 
 namespace org.gbd.Dominion.Model
@@ -14,11 +15,13 @@ namespace org.gbd.Dominion.Model
         public void DrawFromBaseDeck()
         {
 
-            
+            TestSetup.Kernel.Bind<IDeck>().To<StartingDeck>();
 
-            this.Bind<IDeck>().To<StartingDeck>();
-            Deck d =
+            var d = TestSetup.Kernel.Get<IDeck>();
+
+            d.Draw();
+
+
         }
-
     }
 }

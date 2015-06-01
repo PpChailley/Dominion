@@ -7,7 +7,7 @@ using org.gbd.Dominion.Model.Actions;
 
 namespace org.gbd.Dominion.Model
 {
-    public class Deck: Queue<ICard>
+    public class Deck: Queue<ICard>, IDeck
     {
         public ICollection<ICard> Cards = new List<ICard>();
 
