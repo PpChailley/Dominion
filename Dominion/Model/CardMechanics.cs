@@ -5,7 +5,7 @@ namespace org.gbd.Dominion.Model
 {
     public class CardMechanics
     {
-        public Cost cost;
+        public Cost Cost;
         public List<IGameAction> OnBuyTrigger = new List<IGameAction>();
         public List<IGameAction> OnPlayTrigger = new List<IGameAction>();
 
