@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ninject;
 using NUnit.Framework;
 
@@ -17,9 +14,12 @@ namespace org.gbd.Dominion.Model
 
             TestSetup.Kernel.Bind<IDeck>().To<StartingDeck>();
 
-            var d = TestSetup.Kernel.Get<IDeck>();
+            IDeck d = TestSetup.Kernel.Get<IDeck>();
+            var cards = d.Dequeue(3);
 
-            d.Draw();
+            Assert.That(cards.Count, Is.EqualTo(3));
+
+            Assert.That(d.ToList().Count, Is.EqualTo(7));
 
 
         }
