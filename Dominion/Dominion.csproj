@@ -57,7 +57,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\AbstractCard.cs" />
+    <Compile Include="Model\Actions\Draw.cs" />
+    <Compile Include="Model\Actions\OpponentDraw.cs" />
+    <Compile Include="Model\Actions\Player.cs" />
+    <Compile Include="Model\Actions\PlayerChoice.cs" />
+    <Compile Include="Model\Actions\PlayersDesignation.cs" />
     <Compile Include="Model\CardMechanics.cs" />
+    <Compile Include="Model\Cost.cs" />
+    <Compile Include="Model\Deck.cs" />
+    <Compile Include="Model\GameAction.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,10 +1,11 @@
-﻿using System.Media;
+﻿using System.Collections.Generic;
+using System.Media;
 
 namespace org.gbd.Dominion.Model.Actions
 {
-    public class Draw: GameAction
+    public class Draw: GameActionTargetingPlayers, IGameActionTargetingPlayers
     {
-        public PlayersDesignation DesignatedPlayer;
+        
         public int Amount;
 
 
@@ -14,12 +15,10 @@ namespace org.gbd.Dominion.Model.Actions
         }
 
 
-        public override void Do()
+
+        protected override void DoToPlayer(Player p)
         {
-            Player.get(DesignatedPlayer).Deck.Draw(this.Amount);
+            p.Draw(this.Amount);
         }
-
-        
-
     }
 }

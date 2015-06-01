@@ -1,4 +1,4 @@
-﻿namespace org.gbd.Dominion.Model
+﻿namespace org.gbd.Dominion.Model.Actions
 {
     public abstract class GameAction
     {

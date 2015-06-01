@@ -7,12 +7,15 @@ namespace org.gbd.Dominion.Model.Actions
 {
     public class Player
     {
-        public static ICollection<Player> get(ICollection<PlayerChoice> designatedPlayers)
+
+        #region Static Accessors
+
+        public static ICollection<Player> Get(ICollection<PlayerChoice> designatedPlayers)
         {
-            return designatedPlayers.Select(player => get(player)).ToList();
+            return designatedPlayers.Select(player => Get(player)).ToList();
         }
 
-        private static Player get(PlayerChoice designatedPlayer)
+        private static Player Get(PlayerChoice designatedPlayer)
         {
             switch (designatedPlayer)
             {
@@ -30,7 +33,7 @@ namespace org.gbd.Dominion.Model.Actions
             }
         }
 
-        public Player CurrentPlayer
+        public static Player CurrentPlayer
         {
             get
             {
@@ -38,6 +41,7 @@ namespace org.gbd.Dominion.Model.Actions
             }
         }
 
+        #endregion
 
 
         public String Name;
@@ -50,8 +54,22 @@ namespace org.gbd.Dominion.Model.Actions
             }
         }
 
+        public Deck Deck;
+        public Hand Hand;
 
 
+        public void Draw(int amount)
+        {
+            foreach (var card in Deck.Dequeue(amount))
+            {
+                Hand.Add(card);
+            }
+        }
 
+
+        public void Discard(int amount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
