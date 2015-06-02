@@ -10,6 +10,8 @@ namespace org.gbd.Dominion.Model
 
         private readonly CardMechanics _mechanics = new CardMechanics();
 
+        public abstract GameSet PresentInSet { get; }
+
 
         // TODO: Change type to more precise 
         public Object Illustration;

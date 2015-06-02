@@ -8,7 +8,7 @@ using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Contents
 {
-    public class Silver: Card
+    public class Silver : BaseSetCard
     {
         public Silver()
         {

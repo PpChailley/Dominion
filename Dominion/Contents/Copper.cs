@@ -3,7 +3,7 @@ using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Contents
 {
-    class Copper: Card
+    class Copper : BaseSetCard
     {
         public Copper()
         {

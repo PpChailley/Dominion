@@ -3,7 +3,7 @@ using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Contents
 {
-    public class Province : Card, ICard
+    public class Province : BaseSetCard
     {
         public Province()
         {

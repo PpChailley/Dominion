@@ -2,7 +2,7 @@
 
 namespace org.gbd.Dominion.Contents
 {
-    public class Curse:Card
+    public class Curse: BaseSetCard
     {
         public Curse()
         {

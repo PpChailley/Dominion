@@ -3,7 +3,7 @@ using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Contents
 {
-    public class Estate: Card, ICard
+    public class Estate : BaseSetCard
     {
         public Estate()
         {
