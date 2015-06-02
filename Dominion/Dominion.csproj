@@ -83,6 +83,9 @@
     <Compile Include="Model\Actions\Draw.cs" />
     <Compile Include="Model\Hand.cs" />
     <Compile Include="Model\IDeck.cs" />
+    <Compile Include="Model\IHand.cs" />
+    <Compile Include="Model\ILibrary.cs" />
+    <Compile Include="Model\Library.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\NonameCard.cs" />
     <Compile Include="Model\Player.cs" />
@@ -94,8 +97,9 @@
     <Compile Include="Model\Actions\GameAction.cs" />
     <Compile Include="Model\SmokeTests.cs" />
     <Compile Include="Model\StartingDeck.cs" />
-    <Compile Include="Model\TestSetup.cs" />
+    <Compile Include="Model\BaseTest.cs" />
     <Compile Include="Tools\CodeAnalysisTests.cs" />
+    <Compile Include="Tools\Collections.cs" />
     <Compile Include="Tools\Logging.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>

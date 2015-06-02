@@ -1,4 +1,4 @@
-namespace org.gbd.Dominion.Model.Actions
+namespace org.gbd.Dominion.Model
 {
     public class Card : ICard
     {

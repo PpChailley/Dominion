@@ -54,13 +54,14 @@ namespace org.gbd.Dominion.Model.Actions
             }
         }
 
-        public Deck Deck;
-        public Hand Hand;
+        public IDeck Deck;
+        public ILibrary Library;
+        public IHand Hand;
 
 
         public void Draw(int amount)
         {
-            foreach (var card in Deck.Dequeue(amount))
+            foreach (var card in Library.Dequeue(amount))
             {
                 Hand.Add(card);
             }
