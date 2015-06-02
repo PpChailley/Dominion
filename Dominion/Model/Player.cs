@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using Ninject;
+using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.Actions
+namespace org.gbd.Dominion.Model
 {
     public class Player
     {
@@ -46,31 +47,37 @@ namespace org.gbd.Dominion.Model.Actions
 
         public String Name;
 
+        public IDeck Deck = IoC.Kernel.Get<IDeck>();
+        public IHand Hand{ get { return Deck.Hand; }}
+        public IDiscardPile DiscardPile{ get { return Deck.DiscardPile; }}
+        public ILibrary Library{ get { return Deck.Library; }} 
+
+
         public int CurrentScore
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return Deck.CurrentScore; }
         }
 
-        public IDeck Deck;
-        public ILibrary Library;
-        public IHand Hand;
-
-
-        public void Draw(int amount)
+        public void GetReadyToStartGame()
         {
-            foreach (var card in Library.Dequeue(amount))
-            {
-                Hand.Add(card);
-            }
+            Deck.GetReadyToStartGame();
         }
 
+
+
+        public void Draw(int amount = 1)
+        {
+            Hand.Add(Library.GetFromTop(amount).ToList());
+        }
 
         public void Discard(int amount)
         {
             throw new NotImplementedException();
+        }
+
+        public void Gain(ICard card, CardsPile destination = CardsPile.Discard, PositionInCardsCollection position = PositionInCardsCollection.Top)
+        {
+            Deck.Add(card, destination, position);
         }
     }
 }

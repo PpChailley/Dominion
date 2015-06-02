@@ -14,9 +14,6 @@ namespace org.gbd.Dominion.Model
     public class BaseTest
     {
 
-        public IKernel Kernel = new StandardKernel();
-
-
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
@@ -42,7 +39,7 @@ namespace org.gbd.Dominion.Model
 
         private void InitIoC()
         {
-            // everything is done in static yet
+            IoC.Kernel = IoC.InitKernel();
         }
     }
 }

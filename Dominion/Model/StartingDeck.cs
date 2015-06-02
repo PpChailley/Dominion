@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Threading;
+using org.gbd.Dominion.Model.Cards;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
@@ -14,7 +15,7 @@ namespace org.gbd.Dominion.Model
 
             for (var i = 0; i < 10; i++)
             {
-                Cards.Add(new NonameCard());
+                DiscardPile.Cards.Add(new EmptyCard());
             }
         }
 

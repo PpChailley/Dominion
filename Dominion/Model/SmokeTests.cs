@@ -8,7 +8,7 @@ using org.gbd.Dominion.Model.Actions;
 namespace org.gbd.Dominion.Model
 {
     [TestFixture]
-    public class SmokeTests
+    public class SmokeTests: BaseTest
     {
 
         [Test]
