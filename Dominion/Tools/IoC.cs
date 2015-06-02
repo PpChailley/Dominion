@@ -33,6 +33,7 @@ namespace org.gbd.Dominion.Tools
             _kernel.Bind<IDeck>().To<StartingDeck>();
             _kernel.Bind<IDiscardPile>().To<DiscardPile>();
             _kernel.Bind<ILibrary>().To<Library>();
+            _kernel.Bind<IPlayZone>().To<PlayZone>();
 
         //    _kernel.Bind<IEnumerator<ICard>>().To<Deck.DeckSimpleEnumerator>();
 

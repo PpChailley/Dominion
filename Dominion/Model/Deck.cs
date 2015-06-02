@@ -9,14 +9,17 @@ namespace org.gbd.Dominion.Model
 {
     public class Deck: IDeck
     {
+
         
         private readonly IHand _hand = IoC.Kernel.Get<IHand>();
+        private readonly IPlayZone _playZone = IoC.Kernel.Get<IPlayZone>();
         private readonly IDiscardPile _discard = IoC.Kernel.Get<IDiscardPile>();
         private readonly ILibrary _library = IoC.Kernel.Get<ILibrary>();
-        private readonly IPlayZone _playZone = IoC.Kernel.Get<IPlayZone>();
+        
 
 
         
+
 
         public IHand Hand{ get { return _hand; } }
         public IDiscardPile DiscardPile{ get { return _discard; } }
@@ -100,8 +103,20 @@ namespace org.gbd.Dominion.Model
             return Library;
         }
 
+        public void GetReadyToStartGame()
+        {
+            Library.Init(this);
+        }
 
 
+        public IList<ICard> ShuffleToLibrary()
+        {
+            throw new NotImplementedException();
+        }
 
+        protected void AddToStartingDeck(ICard card)
+        {
+            
+        }
     }
 }

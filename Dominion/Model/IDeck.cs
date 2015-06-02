@@ -18,5 +18,6 @@ namespace org.gbd.Dominion.Model
 
         void EndOfTurnCleanup();
         ILibrary ShuffleDiscardToLibrary();
+        void GetReadyToStartGame();
     }
 }

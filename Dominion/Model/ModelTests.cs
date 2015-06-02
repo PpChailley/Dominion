@@ -43,6 +43,7 @@ namespace org.gbd.Dominion.Model
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
+            player.GetReadyToStartGame();
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
@@ -61,6 +62,7 @@ namespace org.gbd.Dominion.Model
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
             var player = new Player();
+            player.GetReadyToStartGame();
 
             Assert.That(player.CurrentScore, Is.EqualTo(0));
 

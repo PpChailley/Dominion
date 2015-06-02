@@ -15,7 +15,7 @@ namespace org.gbd.Dominion.Model
 
             for (var i = 0; i < 10; i++)
             {
-                Cards.Add(new EmptyCard());
+                DiscardPile.Cards.Add(new EmptyCard());
             }
         }
 

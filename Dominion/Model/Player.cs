@@ -58,6 +58,10 @@ namespace org.gbd.Dominion.Model
             get { return Deck.CurrentScore; }
         }
 
+        public void GetReadyToStartGame()
+        {
+            Deck.GetReadyToStartGame();
+        }
 
 
 

@@ -8,5 +8,6 @@ namespace org.gbd.Dominion.Model
         IList<ICard> Cards { get;  }
         IEnumerable<ICard> GetFromTop(int amount);
         void Add(ICard card, PositionInCardsCollection position);
+        void Init(IDeck deck);
     }
 }
