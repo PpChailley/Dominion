@@ -76,11 +76,11 @@ namespace org.gbd.Dominion.Model
             var player = new Player();
             player.GetReadyToStartGame();
 
-            Assert.That(player.CurrentScore, Is.EqualTo(0));
+            Assert.That(player.CurrentScore, Is.EqualTo(3));
 
             player.Gain(new Estate());
 
-            Assert.That(player.CurrentScore, Is.EqualTo(1));
+            Assert.That(player.CurrentScore, Is.EqualTo(4));
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK + 1));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
 
@@ -94,17 +94,17 @@ namespace org.gbd.Dominion.Model
 
             var player = new Player();
 
-            Assert.That(player.CurrentScore, Is.EqualTo(0));
+            Assert.That(player.CurrentScore, Is.EqualTo(3));
 
             player.Gain(new Estate());
-            Assert.That(player.CurrentScore, Is.EqualTo(1));
+            Assert.That(player.CurrentScore, Is.EqualTo(4));
 
 
             player.Gain(new Duchy());
-            Assert.That(player.CurrentScore, Is.EqualTo(4));
+            Assert.That(player.CurrentScore, Is.EqualTo(7));
 
             player.Gain(new Province());
-            Assert.That(player.CurrentScore, Is.EqualTo(10));
+            Assert.That(player.CurrentScore, Is.EqualTo(13));
 
 
 

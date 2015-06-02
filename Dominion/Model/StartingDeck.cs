@@ -14,11 +14,14 @@ namespace org.gbd.Dominion.Model
         {
             // TODO/ Ultimately this should be sent through NInject (and this class obsoleted?)
 
-            for (var i = 0; i < 10; i++)
-            {
-                DiscardPile.Cards.Add(new EmptyCard());
-            }
+            for (var i = 0; i < 7; i++)
+                DiscardPile.Cards.Add(new Copper());
+
+            for (var i = 0; i < 3; i++)
+                DiscardPile.Cards.Add(new Estate());
+
         }
+
 
     }
 }

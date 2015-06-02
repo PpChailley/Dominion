@@ -77,10 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contents\Copper.cs" />
+    <Compile Include="Contents\Curse.cs" />
     <Compile Include="Contents\Duchy.cs" />
-    <Compile Include="Contents\EmptyCard.cs" />
     <Compile Include="Contents\Estate.cs" />
+    <Compile Include="Contents\Gold.cs" />
     <Compile Include="Contents\Province.cs" />
+    <Compile Include="Contents\Silver.cs" />
     <Compile Include="Model\AbstractCard.cs" />
     <Compile Include="Model\Actions\Discard.cs" />
     <Compile Include="Model\Actions\IGameActionTargetingPlayers.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Model\Cards\CardAttribute.cs" />
     <Compile Include="Model\Cards\CardMechanics.cs" />
     <Compile Include="Model\Cards\ICardType.cs" />
+    <Compile Include="Model\Cards\NCurse.cs" />
     <Compile Include="Model\Cards\Treasure.cs" />
     <Compile Include="Model\Cards\Victory.cs" />
     <Compile Include="Model\PositionInCardsCollection.cs" />
