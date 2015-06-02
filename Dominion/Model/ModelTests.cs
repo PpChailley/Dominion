@@ -36,8 +36,6 @@ namespace org.gbd.Dominion.Model
         [TestCase(2,2,8)]
         [TestCase(5,5,5)]
         [TestCase(10,10,0)]
-        [TestCase(11,10,0)]
-        [TestCase(199,10,0)]
         public void PlayerDraw(int amountToDraw, int expectedInHand, int expectedInLibrary)
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();
@@ -54,6 +52,19 @@ namespace org.gbd.Dominion.Model
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(expectedInLibrary));
             Assert.That(player.Hand.Cards.Count(), Is.EqualTo(expectedInHand));
 
+        }
+
+        [ExpectedException(typeof(DeckEmptyException))]
+        [Test]
+        public void PlayerDrawAllDeckPlusOne()
+        {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
+
+            var player = IoC.Kernel.Get<Player>();
+            player.GetReadyToStartGame();
+
+
+            player.Draw(NB_CARDS_IN_DEFAULT_DECK + 1);
         }
 
         [Test]
