@@ -76,6 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\CardsIntegrityTests.cs" />
+    <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Copper.cs" />
     <Compile Include="Contents\Curse.cs" />
     <Compile Include="Contents\Duchy.cs" />
@@ -120,7 +122,7 @@
     <Compile Include="Model\SmokeTests.cs" />
     <Compile Include="Model\StartingDeck.cs" />
     <Compile Include="Model\BaseTest.cs" />
-    <Compile Include="Tools\CodeAnalysisTests.cs" />
+    <Compile Include="Tools\CardsFinder.cs" />
     <Compile Include="Tools\Collections.cs" />
     <Compile Include="Tools\IoC.cs" />
     <Compile Include="Tools\Logging.cs" />

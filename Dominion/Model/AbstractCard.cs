@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using org.gbd.Dominion.Contents;
 using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Model
@@ -23,6 +24,8 @@ namespace org.gbd.Dominion.Model
             get { return _attributes; }
         }
 
+
+        public abstract GameExtension Extension { get; }
 
         public CardMechanics Mechanics
         {

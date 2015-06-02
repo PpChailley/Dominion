@@ -70,7 +70,7 @@ namespace org.gbd.Dominion.Model
             Hand.Add(Library.GetFromTop(amount).ToList());
         }
 
-        public void Discard(int amount)
+        public void DiscardFromHand(int amount)
         {
             throw new NotImplementedException();
         }

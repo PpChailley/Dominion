@@ -27,6 +27,63 @@ namespace org.gbd.Dominion.Model
 
             Assert.That(deck.Cards.Count, Is.EqualTo(10));
             Assert.That(library.Cards.Count(), Is.EqualTo(10));
+        }
+
+        [Test]
+        public void ShufflePlayersDeck()
+        {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
+
+            var player = IoC.Kernel.Get<Player>();
+
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(player.Library.Cards.Count(), Is.EqualTo(10));
+            Assert.That(player.CurrentScore, Is.EqualTo(3));
+
+            player.Draw(5);
+            player.DiscardFromHand(5);
+
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(player.Library.Cards.Count(), Is.EqualTo(5));
+            Assert.That(player.DiscardPile.Cards.Count(), Is.EqualTo(5));
+            Assert.That(player.Hand.Cards.Count(), Is.EqualTo(0));
+            Assert.That(player.CurrentScore, Is.EqualTo(3));
+
+            player.Deck.ShuffleDiscardToLibrary();
+
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(player.Library.Cards.Count(), Is.EqualTo(10));
+            Assert.That(player.DiscardPile.Cards.Count(), Is.EqualTo(0));
+            Assert.That(player.Hand.Cards.Count(), Is.EqualTo(0));
+            Assert.That(player.CurrentScore, Is.EqualTo(3));
+
+        }
+
+
+        [TestCase(0, 0, false, 0, 10, 0)]
+        [TestCase(10, 2, false, 8, 0, 2)]
+        [TestCase(10, 2, true, 8, 2, 0)]
+        [TestCase(5, 2, true, 3, 7, 0)]
+        public void DiscardFromHand(int draw, int discard, bool shuffle, int expectInHand, int expectInLib,
+            int expectInDiscard)
+        {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
+
+            var player = IoC.Kernel.Get<Player>();
+
+            player.Draw(draw);
+            player.DiscardFromHand(discard);
+
+            if (shuffle)
+                player.Deck.ShuffleDiscardToLibrary();
+
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
+            Assert.That(player.CurrentScore, Is.EqualTo(3));
+
+            Assert.That(player.Hand.Cards.Count, Is.EqualTo(expectInHand));
+            Assert.That(player.DiscardPile.Cards.Count, Is.EqualTo(expectInDiscard));
+            Assert.That(player.Library.Cards.Count, Is.EqualTo(expectInLib));
+
 
 
         }

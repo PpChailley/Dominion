@@ -12,7 +12,7 @@
 
         protected override void DoToPlayer(Player p)
         {
-            p.Discard(Amount);
+            p.DiscardFromHand(Amount);
         }
     }
 }
