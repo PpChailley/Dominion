@@ -108,15 +108,5 @@ namespace org.gbd.Dominion.Model
             Library.Init(this);
         }
 
-
-        public IList<ICard> ShuffleToLibrary()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected void AddToStartingDeck(ICard card)
-        {
-            
-        }
     }
 }

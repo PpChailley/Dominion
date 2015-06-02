@@ -15,12 +15,6 @@ namespace org.gbd.Dominion.Model
         private IDeck _parentDeck;
 
         
-        //Keep this private to prevent NInject from messing things up
-        public Library()
-        {
-            int i = 0;
-        }
-
 
         public void Init(IDeck deck)
         {
@@ -33,6 +27,7 @@ namespace org.gbd.Dominion.Model
             }
 
             _parentDeck.DiscardPile.Cards.Clear();
+            _cards.Shuffle();
         }
 
 
@@ -41,10 +36,7 @@ namespace org.gbd.Dominion.Model
             get { return _cards; }
         }
 
-        public IEnumerable<ICard> GetFromTop(int amount)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void Add(ICard card, PositionInCardsCollection position)
         {
@@ -64,33 +56,36 @@ namespace org.gbd.Dominion.Model
 
    
 
-        public IEnumerable<ICard> Dequeue(int amount = 1)
+        public IEnumerable<ICard> GetFromTop(int amount = 1)
         {
             var toreturn = new List<ICard>();
 
             for (var i = 0; i < amount; i++)
             {
-                if (_cards.Any() == false)
-                {
-                    if (_parentDeck.Cards.Any() == false)
-                    {
-                        throw new DeckEmptyException();
-                    }
-                    else
-                    {
-                        throw new NotImplementedException();
-                        //_cards = _parentDeck.ShuffleToLibrary();
-                    }
-                }
-                throw new NotImplementedException();
-                //var card = _cards.Dequeue();
-                //toreturn.Add(card);
+                
+                toreturn.Add(GetOneFromTop());
             }
 
             return toreturn;
         }
 
+        private ICard GetOneFromTop()
+        {
+            if (_cards.Any() == false)
+            {
+                if (_parentDeck.Cards.Any() == false)
+                {
+                    throw new DeckEmptyException();
+                }
+                else
+                {
+                    _parentDeck.ShuffleDiscardToLibrary();
+                }
+            }
 
-
+            var card = _cards.First();
+            _cards.Remove(card);
+            return card;
+        }
     }
 }

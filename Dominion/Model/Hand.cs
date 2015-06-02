@@ -7,11 +7,6 @@ namespace org.gbd.Dominion.Model
 
         private readonly IList<ICard> _cards = new List<ICard>();
 
-        public Hand()
-        {
-            int i = 0;
-        }
-
         public void Add(ICollection<ICard> cards)
         {
             foreach (var card in cards)
