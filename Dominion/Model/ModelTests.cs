@@ -2,6 +2,7 @@
 using System.Linq;
 using Ninject;
 using NUnit.Framework;
+using org.gbd.Dominion.Contents;
 using org.gbd.Dominion.Model.Actions;
 using org.gbd.Dominion.Model.Cards;
 using org.gbd.Dominion.Tools;

@@ -76,18 +76,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Copper.cs" />
+    <Compile Include="Contents\Duchy.cs" />
+    <Compile Include="Contents\EmptyCard.cs" />
+    <Compile Include="Contents\Estate.cs" />
+    <Compile Include="Contents\Province.cs" />
     <Compile Include="Model\AbstractCard.cs" />
     <Compile Include="Model\Actions\Discard.cs" />
     <Compile Include="Model\Actions\IGameActionTargetingPlayers.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Actions\Draw.cs" />
-    <Compile Include="Model\CardAttribute.cs" />
-    <Compile Include="Model\Cards\Copper.cs" />
+    <Compile Include="Model\Cards\Action.cs" />
+    <Compile Include="Model\Cards\CardAttribute.cs" />
+    <Compile Include="Model\Cards\CardMechanics.cs" />
+    <Compile Include="Model\Cards\ICardType.cs" />
+    <Compile Include="Model\Cards\Treasure.cs" />
+    <Compile Include="Model\Cards\Victory.cs" />
     <Compile Include="Model\PositionInCardsCollection.cs" />
     <Compile Include="Model\CardsPile.cs" />
-    <Compile Include="Model\Cards\Duchy.cs" />
-    <Compile Include="Model\Cards\Estate.cs" />
-    <Compile Include="Model\Cards\Province.cs" />
     <Compile Include="Model\DeckEmptyException.cs" />
     <Compile Include="Model\DiscardPile.cs" />
     <Compile Include="Model\Hand.cs" />
@@ -98,11 +104,9 @@
     <Compile Include="Model\IPlayZone.cs" />
     <Compile Include="Model\Library.cs" />
     <Compile Include="Model\ModelTests.cs" />
-    <Compile Include="Model\Cards\EmptyCard.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerChoice.cs" />
     <Compile Include="Model\PlayersDesignation.cs" />
-    <Compile Include="Model\CardMechanics.cs" />
     <Compile Include="Model\Resources.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Actions\GameAction.cs" />

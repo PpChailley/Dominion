@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
+using org.gbd.Dominion.Model.Cards;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model

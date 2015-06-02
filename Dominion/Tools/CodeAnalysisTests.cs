@@ -6,6 +6,7 @@ using System.Reflection;
 using NLog;
 using NUnit.Framework;
 using org.gbd.Dominion.Model;
+using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Tools
 {
@@ -60,12 +61,8 @@ namespace org.gbd.Dominion.Tools
         {
             Assert.That(card.Mechanics.Types.Any());
             Assert.That(card.Mechanics.Cost, Is.Not.Null);
-            Assert.That(card.Mechanics.BuyValue, Is.Not.Null);
+            Assert.That(card.Mechanics.TreasureValue, Is.Not.Null);
 
-            if (card.Mechanics.Types.Contains(CardType.Victory))
-            {
-                Assert.That(card.Mechanics.VictoryPoints, Is.AtLeast(1));
-            }
 
             //TODO: Many tests to add => change model ?
 
