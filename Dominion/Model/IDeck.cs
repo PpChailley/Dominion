@@ -4,11 +4,10 @@ using org.gbd.Dominion.Model.Actions;
 
 namespace org.gbd.Dominion.Model
 {
-    public interface IDeck: ICollection<Card>
+    public interface IDeck
     {
-        void Shuffle();
+        IList<ICard> Cards { get; set; }
 
-        ICollection<ICard> Dequeue(int n);
-
+        ILibrary Shuffle();
     }
 }

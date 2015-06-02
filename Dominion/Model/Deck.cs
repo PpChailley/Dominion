@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
 {
-    public class Deck: Queue<ICard>, IDeck
+    public class Deck: IDeck
     {
-        public ICollection<ICard> Cards = new List<ICard>();
+        private IList<ICard> _cards = new List<ICard>();
 
-        public ICollection<ICard> Dequeue(int n)
+
+        public IList<ICard> Cards
         {
-            return Cards.Select(card => this.Dequeue()).ToList();
+            get { return _cards; }
+            set { _cards = value.ToList(); }
         }
 
-        public void Shuffle()
+        ILibrary IDeck.Shuffle()
         {
-            throw new NotImplementedException();
+            return new Library(this._cards);
         }
-
-        
     }
 }

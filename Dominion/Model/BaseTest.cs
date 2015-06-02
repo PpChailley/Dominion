@@ -10,18 +10,30 @@ using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
 {
-    public class TestSetup
+    [TestFixture]
+    public class BaseTest
     {
 
-        public static IKernel Kernel = new StandardKernel();
+        public IKernel Kernel = new StandardKernel();
 
 
         [TestFixtureSetUp]
-        public void Init()
+        public void TestFixtureSetUp()
         {
             InitLogging();
             InitIoC();
         }
+
+
+        [SetUp]
+        public void SetUp()
+        {
+            InitIoC();
+        }
+
+
+
+
 
         private void InitLogging()
         {

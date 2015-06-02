@@ -1,7 +1,8 @@
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Threading;
-using org.gbd.Dominion.Model.Actions;
+using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
 {
@@ -13,14 +14,9 @@ namespace org.gbd.Dominion.Model
 
             for (var i = 0; i < 10; i++)
             {
-                this.Enqueue(new NonameCard());
+                Cards.Add(new NonameCard());
             }
         }
 
-
-        public IEnumerator<Card> GetEnumerator()
-        {
-            return base.GetEnumerator();
-        }
     }
 }
