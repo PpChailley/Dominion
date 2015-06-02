@@ -3,6 +3,8 @@ using System.Linq;
 using Ninject;
 using NUnit.Framework;
 using org.gbd.Dominion.Model.Actions;
+using org.gbd.Dominion.Model.Cards;
+using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
 {
@@ -17,11 +19,10 @@ namespace org.gbd.Dominion.Model
         [Test]
         public void ShuffleDeck()
         {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
 
-            Kernel.Bind<IDeck>().To<StartingDeck>();
-
-            var deck = Kernel.Get<IDeck>();
-            var library = deck.Shuffle();
+            var deck = IoC.Kernel.Get<IDeck>();
+            var library = deck.ShuffleToLibrary();
 
             Assert.That(deck.Cards.Count(), Is.EqualTo(10));
             Assert.That(library.Cards.Count(), Is.EqualTo(10));
@@ -39,9 +40,9 @@ namespace org.gbd.Dominion.Model
         [TestCase(199,10,0)]
         public void PlayerDraw(int amountToDraw, int expectedInHand, int expectedInLibrary)
         {
-            Kernel.Bind<IDeck>().To<StartingDeck>();
+            IoC.ReBind<IDeck>().To<StartingDeck>();
 
-            var player = new Player();
+            var player = IoC.Kernel.Get<Player>();
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
@@ -51,6 +52,47 @@ namespace org.gbd.Dominion.Model
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(expectedInLibrary));
             Assert.That(player.Hand.Cards.Count(), Is.EqualTo(expectedInHand));
+
+        }
+
+        [Test]
+        public void PlayerGainCard()
+        {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
+
+            var player = new Player();
+
+            Assert.That(player.CurrentScore, Is.EqualTo(0));
+
+            player.Gain(new Estate());
+
+            Assert.That(player.CurrentScore, Is.EqualTo(1));
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK + 1));
+            Assert.That(player.Library.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
+
+        }
+
+
+        [Test]
+        public void CountVictory()
+        {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
+
+            var player = new Player();
+
+            Assert.That(player.CurrentScore, Is.EqualTo(0));
+
+            player.Gain(new Estate());
+            Assert.That(player.CurrentScore, Is.EqualTo(1));
+
+
+            player.Gain(new Duchy());
+            Assert.That(player.CurrentScore, Is.EqualTo(4));
+
+            player.Gain(new Province());
+            Assert.That(player.CurrentScore, Is.EqualTo(10));
+
+
 
         }
 

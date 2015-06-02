@@ -16,9 +16,9 @@ namespace org.gbd.Dominion.Model
             set { _cards = value.ToList(); }
         }
 
-        ILibrary IDeck.Shuffle()
+        public ILibrary ShuffleToLibrary()
         {
-            return new Library(this._cards);
+            return new Library(this.Cards);
         }
     }
 }

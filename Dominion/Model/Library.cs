@@ -1,23 +1,36 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using org.gbd.Dominion.Model.Actions;
+using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
 {
     public class Library :  ILibrary
     {
 
-        private readonly Queue<ICard> _cards;
+        private Queue<ICard> _cards;
+        private readonly Deck _parentDeck;
 
-        public Library(IEnumerable<ICard> cards)
+        
+        public Library(Deck deck)
         {
+            _parentDeck = deck;
             _cards = new Queue<ICard>();
 
-            foreach (var card in cards)
+            Init();
+        }
+
+        private void Init()
+        {
+            Deck deck;
+            foreach (var card in _parentDeck.Cards)
             {
                 _cards.Enqueue(card);
             }
         }
+
 
         public IEnumerable<ICard> Cards
         {
@@ -28,12 +41,27 @@ namespace org.gbd.Dominion.Model
         {
             var toreturn = new List<ICard>();
 
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < amount; i++)
             {
-                toreturn.Add(_cards.Dequeue());
+                if (_cards.Any() == false)
+                {
+                    if (_parentDeck.Cards.Any() == false)
+                    {
+                        throw new DeckEmptyException();
+                    }
+                    else
+                    {
+                        _cards = _parentDeck.ShuffleToLibrary();
+                    }
+                }
+                var card = _cards.Dequeue();
+                toreturn.Add(card);
             }
 
             return toreturn;
         }
+
+
+
     }
 }

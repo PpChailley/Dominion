@@ -81,13 +81,18 @@
     <Compile Include="Model\Actions\IGameActionTargetingPlayers.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Actions\Draw.cs" />
+    <Compile Include="Model\Cards\Duchy.cs" />
+    <Compile Include="Model\Cards\Estate.cs" />
+    <Compile Include="Model\Cards\Province.cs" />
+    <Compile Include="Model\DiscardPile.cs" />
     <Compile Include="Model\Hand.cs" />
     <Compile Include="Model\IDeck.cs" />
+    <Compile Include="Model\IDiscardPile.cs" />
     <Compile Include="Model\IHand.cs" />
     <Compile Include="Model\ILibrary.cs" />
     <Compile Include="Model\Library.cs" />
     <Compile Include="Model\ModelTests.cs" />
-    <Compile Include="Model\NonameCard.cs" />
+    <Compile Include="Model\Cards\EmptyCard.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerChoice.cs" />
     <Compile Include="Model\PlayersDesignation.cs" />
@@ -100,6 +105,7 @@
     <Compile Include="Model\BaseTest.cs" />
     <Compile Include="Tools\CodeAnalysisTests.cs" />
     <Compile Include="Tools\Collections.cs" />
+    <Compile Include="Tools\IoC.cs" />
     <Compile Include="Tools\Logging.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>

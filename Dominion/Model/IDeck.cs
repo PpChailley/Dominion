@@ -8,6 +8,7 @@ namespace org.gbd.Dominion.Model
     {
         IList<ICard> Cards { get; set; }
 
-        ILibrary Shuffle();
+        ILibrary ShuffleToLibrary();
+
     }
 }

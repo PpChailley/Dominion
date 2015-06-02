@@ -11,8 +11,9 @@ namespace org.gbd.Dominion.Model
         // TODO: Change type to more precise 
         public Object Illustration;
 
-        public CardMechanics C; 
+        public CardMechanics C;
 
 
+        public abstract CardMechanics Mechanics { get; }
     }
 }

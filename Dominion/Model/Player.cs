@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using Ninject;
+using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.Actions
+namespace org.gbd.Dominion.Model
 {
     public class Player
     {
@@ -46,22 +47,45 @@ namespace org.gbd.Dominion.Model.Actions
 
         public String Name;
 
-        public int CurrentScore
+        public IDeck Deck = IoC.Kernel.Get<IDeck>();
+        public IHand Hand = IoC.Kernel.Get<IHand>();
+        public IDiscardPile DiscardPile = IoC.Kernel.Get<IDiscardPile>();
+        public ILibrary Library; 
+
+
+
+        public Player()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            Library = Deck.ShuffleToLibrary();
         }
 
-        public IDeck Deck;
-        public ILibrary Library;
-        public IHand Hand;
+        public int CurrentScore
+        {
+            get { return Deck.Cards.Sum(card => card.Mechanics.VictoryPoints); }
+        }
+
+
 
 
         public void Draw(int amount)
         {
-            foreach (var card in Library.Dequeue(amount))
+            for (int i = 0; i < amount; i++)
+            {
+                Draw();
+            }
+        }
+
+        public void Draw()
+        {
+            if (Library.Cards.Any() == false)
+            {
+                Shuffle();
+            }
+
+            Hand.Add(Library.Dequeue());
+
+
+    foreach (var card in Library.Dequeue(amount))
             {
                 Hand.Add(card);
             }
@@ -71,6 +95,12 @@ namespace org.gbd.Dominion.Model.Actions
         public void Discard(int amount)
         {
             throw new NotImplementedException();
+        }
+
+        public void Gain(ICard card)
+        {
+            Deck.Cards.Add(card);
+            DiscardPile.Cards.Add(card);
         }
     }
 }
