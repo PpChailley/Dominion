@@ -22,9 +22,9 @@ namespace org.gbd.Dominion.Model
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
             var deck = IoC.Kernel.Get<IDeck>();
-            var library = deck.ShuffleToLibrary();
+            var library = deck.ShuffleDiscardToLibrary();
 
-            Assert.That(deck.Cards.Count(), Is.EqualTo(10));
+            Assert.That(deck.Cards.Count, Is.EqualTo(10));
             Assert.That(library.Cards.Count(), Is.EqualTo(10));
 
 

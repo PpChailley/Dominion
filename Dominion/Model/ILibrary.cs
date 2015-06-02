@@ -5,8 +5,8 @@ namespace org.gbd.Dominion.Model
 {
     public interface ILibrary
     {
-        IEnumerable<ICard> Cards { get;  }
-
-        IEnumerable<ICard> Dequeue(int amount);
+        IList<ICard> Cards { get;  }
+        IEnumerable<ICard> GetFromTop(int amount);
+        void Add(ICard card, PositionInCardsCollection position);
     }
 }

@@ -48,59 +48,32 @@ namespace org.gbd.Dominion.Model
         public String Name;
 
         public IDeck Deck = IoC.Kernel.Get<IDeck>();
-        public IHand Hand = IoC.Kernel.Get<IHand>();
-        public IDiscardPile DiscardPile = IoC.Kernel.Get<IDiscardPile>();
-        public ILibrary Library; 
+        public IHand Hand{ get { return Deck.Hand; }}
+        public IDiscardPile DiscardPile{ get { return Deck.DiscardPile; }}
+        public ILibrary Library{ get { return Deck.Library; }} 
 
-
-
-        public Player()
-        {
-            Library = Deck.ShuffleToLibrary();
-        }
 
         public int CurrentScore
         {
-            get { return Deck.Cards.Sum(card => card.Mechanics.VictoryPoints); }
+            get { return Deck.CurrentScore; }
         }
 
 
 
 
-        public void Draw(int amount)
+        public void Draw(int amount = 1)
         {
-            for (int i = 0; i < amount; i++)
-            {
-                Draw();
-            }
+            Hand.Add(Library.GetFromTop(amount).ToList());
         }
-
-        public void Draw()
-        {
-            if (Library.Cards.Any() == false)
-            {
-                Shuffle();
-            }
-
-            Hand.Add(Library.Dequeue());
-
-
-    foreach (var card in Library.Dequeue(amount))
-            {
-                Hand.Add(card);
-            }
-        }
-
 
         public void Discard(int amount)
         {
             throw new NotImplementedException();
         }
 
-        public void Gain(ICard card)
+        public void Gain(ICard card, CardsPile destination = CardsPile.Discard, PositionInCardsCollection position = PositionInCardsCollection.Top)
         {
-            Deck.Cards.Add(card);
-            DiscardPile.Cards.Add(card);
+            Deck.Add(card, destination, position);
         }
     }
 }

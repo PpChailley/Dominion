@@ -1,19 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace org.gbd.Dominion.Model
 {
     public abstract class AbstractCard: ICard
     {
-        public int Id;
-        public String Name;
         public String Text;
+
+        private readonly CardMechanics _mechanics = new CardMechanics();
+
 
         // TODO: Change type to more precise 
         public Object Illustration;
 
-        public CardMechanics C;
+        private readonly IList<CardAttribute> _attributes = new List<CardAttribute>();
+
+        public IList<CardAttribute> Attributes
+        {
+            get { return _attributes; }
+        }
 
 
-        public abstract CardMechanics Mechanics { get; }
+        public CardMechanics Mechanics
+        {
+            get { return _mechanics; }
+        }
+
+
     }
 }

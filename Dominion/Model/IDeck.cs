@@ -6,9 +6,17 @@ namespace org.gbd.Dominion.Model
 {
     public interface IDeck
     {
-        IList<ICard> Cards { get; set; }
+        IList<ICard> Cards { get; }
+        IHand Hand { get; }
+        IDiscardPile DiscardPile { get; }
+        ILibrary Library { get; }
 
-        ILibrary ShuffleToLibrary();
+        int CurrentScore { get; }
 
+        void Add(ICard card, CardsPile destination);
+        void Add(ICard card, CardsPile destination, PositionInCardsCollection positionInCardsCollection);
+
+        void EndOfTurnCleanup();
+        ILibrary ShuffleDiscardToLibrary();
     }
 }
