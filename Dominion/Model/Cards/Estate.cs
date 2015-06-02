@@ -5,7 +5,7 @@
         public Estate()
         {
             Mechanics.VictoryPoints = 1;
-            Mechanics.Cost = new Cost(2);
+            Mechanics.Cost = new Resources(2);
         }
     }
 }

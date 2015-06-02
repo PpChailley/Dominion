@@ -5,13 +5,14 @@ namespace org.gbd.Dominion.Model
 {
     public class CardMechanics
     {
-        public Cost Cost;
+        public Resources Cost;
+        public Resources BuyValue;
+
         public int VictoryPoints;
         public List<IGameAction> OnBuyTrigger = new List<IGameAction>();
         public List<IGameAction> OnPlayTrigger = new List<IGameAction>();
 
-        public IList<CardType> Types;
-
+        public IList<CardType> Types = new List<CardType>();
 
 
     }

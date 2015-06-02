@@ -5,7 +5,7 @@
         public Province()
         {
             Mechanics.VictoryPoints = 6;
-            Mechanics.Cost = new Cost(8);
+            Mechanics.Cost = new Resources(8);
         }
     }
 }

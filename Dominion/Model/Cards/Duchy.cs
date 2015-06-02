@@ -5,7 +5,7 @@
         public Duchy()
         {
             Mechanics.VictoryPoints = 3;
-            Mechanics.Cost = new Cost(5);
+            Mechanics.Cost = new Resources(5);
         }
     }
 }

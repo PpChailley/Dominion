@@ -82,6 +82,7 @@
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Actions\Draw.cs" />
     <Compile Include="Model\CardAttribute.cs" />
+    <Compile Include="Model\Cards\Copper.cs" />
     <Compile Include="Model\PositionInCardsCollection.cs" />
     <Compile Include="Model\CardsPile.cs" />
     <Compile Include="Model\Cards\Duchy.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Model\PlayerChoice.cs" />
     <Compile Include="Model\PlayersDesignation.cs" />
     <Compile Include="Model\CardMechanics.cs" />
-    <Compile Include="Model\Cost.cs" />
+    <Compile Include="Model\Resources.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Actions\GameAction.cs" />
     <Compile Include="Model\PlayZone.cs" />
