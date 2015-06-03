@@ -2,8 +2,8 @@
 
 namespace org.gbd.Dominion.Model
 {
-    public interface IPlayZone
+    public interface IPlayZone: IZone
     {
-        IList<ICard> Cards { get; }
+        
     }
 }

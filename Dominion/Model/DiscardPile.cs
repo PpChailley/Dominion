@@ -6,7 +6,7 @@ namespace org.gbd.Dominion.Model
     {
         private IList<ICard> _cards = new List<ICard>();
 
-        public ICollection<ICard> Cards
+        public IList<ICard> Cards
         {
             get { return _cards; }
         }

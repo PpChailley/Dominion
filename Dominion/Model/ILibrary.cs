@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace org.gbd.Dominion.Model
 {
-    public interface ILibrary
+    public interface ILibrary: IZone
     {
-        IList<ICard> Cards { get;  }
         IEnumerable<ICard> GetFromTop(int amount);
         void Add(ICard card, PositionInCardsCollection position);
         void Init(IDeck deck);

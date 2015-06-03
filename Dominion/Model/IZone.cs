@@ -2,8 +2,9 @@ using System.Collections.Generic;
 
 namespace org.gbd.Dominion.Model
 {
-    public interface IDiscardPile: IZone
+    public interface IZone
     {
-        
+
+        IList<ICard> Cards { get; }
     }
 }
