@@ -16,7 +16,10 @@ namespace org.gbd.Dominion.Contents
         [Test]
         public void BaseExtensionIsComplete()
         {
-            IEnumerable<object> inSelectedExtension = CardsFinder.GetCardInstances().Where(c => c.Extension == GameExtension.BaseGame);
+            IEnumerable<object> inSelectedExtension = ReflectionClassFinder
+                                    .GetAllImplementedCards()
+                                    .Select(type => (ICard)Activator.CreateInstance(type))
+                                    .Where(c => c.Extension == GameExtension.BaseGame);
 
             Assert.That(inSelectedExtension.Count(), Is.EqualTo(25));
         }
@@ -24,7 +27,10 @@ namespace org.gbd.Dominion.Contents
         [Test]
         public void SeasideExtensionIsComplete()
         {
-            IEnumerable<object> inSelectedExtension = CardsFinder.GetCardInstances().Where(c => c.Extension == GameExtension.Seaside);
+            IEnumerable<object> inSelectedExtension = ReflectionClassFinder
+                                    .GetAllImplementedCards()
+                                    .Select(type => (ICard)Activator.CreateInstance(type))
+                                    .Where(c => c.Extension == GameExtension.Seaside);
 
             Assert.That(inSelectedExtension.Count(), Is.EqualTo(26));
         }

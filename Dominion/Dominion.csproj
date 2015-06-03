@@ -76,7 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contents\CardsIntegrityTests.cs" />
+    <Compile Include="AI\IAi.cs" />
+    <Compile Include="AI\RandomAi.cs" />
+    <Compile Include="Contents\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Copper.cs" />
     <Compile Include="Contents\Curse.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Model\AbstractCard.cs" />
     <Compile Include="Model\Actions\Discard.cs" />
     <Compile Include="Model\Actions\IGameActionTargetingPlayers.cs" />
+    <Compile Include="Model\AiTest.cs" />
     <Compile Include="Model\BaseSetCard.cs" />
     <Compile Include="Model\Actions\Draw.cs" />
     <Compile Include="Model\Cards\Action.cs" />
@@ -97,8 +100,12 @@
     <Compile Include="Model\Cards\NCurse.cs" />
     <Compile Include="Model\Cards\Treasure.cs" />
     <Compile Include="Model\Cards\Victory.cs" />
+    <Compile Include="Model\Game.cs" />
     <Compile Include="Model\GameSet.cs" />
+    <Compile Include="Model\IIntelligence.cs" />
+    <Compile Include="Model\IZone.cs" />
     <Compile Include="Model\OptionalCard.cs" />
+    <Compile Include="Model\PlayerTest.cs" />
     <Compile Include="Model\PositionInCardsCollection.cs" />
     <Compile Include="Model\CardsPile.cs" />
     <Compile Include="Model\DeckEmptyException.cs" />
@@ -108,7 +115,7 @@
     <Compile Include="Model\IDiscardPile.cs" />
     <Compile Include="Model\IHand.cs" />
     <Compile Include="Model\ILibrary.cs" />
-    <Compile Include="Model\IPlayZone.cs" />
+    <Compile Include="Model\IBattleField.cs" />
     <Compile Include="Model\Library.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\Player.cs" />
@@ -117,12 +124,12 @@
     <Compile Include="Model\Resources.cs" />
     <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\Actions\GameAction.cs" />
-    <Compile Include="Model\PlayZone.cs" />
+    <Compile Include="Model\BattleField.cs" />
     <Compile Include="Model\SelectableCard.cs" />
     <Compile Include="Model\SmokeTests.cs" />
     <Compile Include="Model\StartingDeck.cs" />
     <Compile Include="Model\BaseTest.cs" />
-    <Compile Include="Tools\CardsFinder.cs" />
+    <Compile Include="Tools\ReflectionClassFinder.cs" />
     <Compile Include="Tools\Collections.cs" />
     <Compile Include="Tools\IoC.cs" />
     <Compile Include="Tools\Logging.cs" />
