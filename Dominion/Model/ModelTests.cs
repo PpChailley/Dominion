@@ -35,6 +35,7 @@ namespace org.gbd.Dominion.Model
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
+            player.GetReadyToStartGame();
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(10));
