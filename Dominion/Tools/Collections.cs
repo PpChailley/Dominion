@@ -31,16 +31,16 @@ namespace org.gbd.Dominion.Tools
 
         public static T Random<T>(this ICollection<T> me)
         {
-            return me.ElementAt(Rnd.Next(me.Count));
+            return me.Random(1).Single();
         }
 
-        public static ICollection<T> Random<T>(this IList<T> me, int count)
+        public static ICollection<T> Random<T>(this ICollection<T> me, int count)
         {
             var l = new List<T>(count);
 
             for (var i = 0; i < count; i++)
             {
-                l.Add(me.Random());
+                l.Add(me.ElementAt(Rnd.Next(me.Count)));
             }
 
             return l;
