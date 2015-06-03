@@ -9,6 +9,10 @@ namespace org.gbd.Dominion.Model
     public class Player
     {
 
+        public const int STARTING_HAND_SIZE = 5;
+
+
+
         #region Static Accessors
 
         public static ICollection<Player> Get(ICollection<PlayerChoice> designatedPlayers)
@@ -45,6 +49,9 @@ namespace org.gbd.Dominion.Model
         #endregion
 
 
+        private readonly IIntelligence _intelligence = IoC.Kernel.Get<IIntelligence>();
+
+
         public String Name;
 
         public IDeck Deck = IoC.Kernel.Get<IDeck>();
@@ -61,8 +68,8 @@ namespace org.gbd.Dominion.Model
         public void GetReadyToStartGame()
         {
             Deck.GetReadyToStartGame();
+            Draw(STARTING_HAND_SIZE);
         }
-
 
 
         public void Draw(int amount = 1)
@@ -72,8 +79,10 @@ namespace org.gbd.Dominion.Model
 
         public void DiscardFromHand(int amount)
         {
-            throw new NotImplementedException();
+            var toDiscard = this._intelligence.ChooseAndDiscard(amount);
+            Game.MoveCards(toDiscard, Hand, this.DiscardPile, PositionInCardsCollection.Top);
         }
+
 
         public void Gain(ICard card, CardsPile destination = CardsPile.Discard, PositionInCardsCollection position = PositionInCardsCollection.Top)
         {
