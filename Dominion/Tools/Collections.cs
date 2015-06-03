@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace org.gbd.Dominion.Tools
 {
     public static class Collections
     {
 
+        private static readonly Random Rnd = new Random();
 
         /// <summary>
         /// http://stackoverflow.com/questions/273313/randomize-a-listt-in-c-sharp
@@ -17,12 +16,11 @@ namespace org.gbd.Dominion.Tools
         /// <param name="list"></param>
         public static IList<T> Shuffle<T>(this IList<T> list)
         {
-            Random rng = new Random();
             int n = list.Count;
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
+                int k = Rnd.Next(n + 1);
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
@@ -30,6 +28,24 @@ namespace org.gbd.Dominion.Tools
 
             return list;
         }
+
+        public static T Random<T>(this ICollection<T> me)
+        {
+            return me.ElementAt(Rnd.Next(me.Count));
+        }
+
+        public static ICollection<T> Random<T>(this IList<T> me, int count)
+        {
+            var l = new List<T>(count);
+
+            for (var i = 0; i < count; i++)
+            {
+                l.Add(me.Random());
+            }
+
+            return l;
+        }
+
 
     }
 }
