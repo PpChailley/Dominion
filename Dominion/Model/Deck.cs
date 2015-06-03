@@ -13,7 +13,7 @@ namespace org.gbd.Dominion.Model
 
         
         private readonly IHand _hand = IoC.Kernel.Get<IHand>();
-        private readonly IPlayZone _playZone = IoC.Kernel.Get<IPlayZone>();
+        private readonly IBattleField _playZone = IoC.Kernel.Get<IBattleField>();
         private readonly IDiscardPile _discard = IoC.Kernel.Get<IDiscardPile>();
         private readonly ILibrary _library = IoC.Kernel.Get<ILibrary>();
         
@@ -25,7 +25,7 @@ namespace org.gbd.Dominion.Model
         public IHand Hand{ get { return _hand; } }
         public IDiscardPile DiscardPile{ get { return _discard; } }
         public ILibrary Library{ get { return _library; } }
-        public IPlayZone PlayZone { get { return _playZone; } }
+        public IBattleField PlayZone { get { return _playZone; } }
 
         public IList<ICard> Cards
         {

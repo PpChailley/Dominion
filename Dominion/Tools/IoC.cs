@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Ninject;
 using Ninject.Syntax;
+using org.gbd.Dominion.AI;
 using org.gbd.Dominion.Model;
 
 namespace org.gbd.Dominion.Tools
@@ -14,14 +14,7 @@ namespace org.gbd.Dominion.Tools
 
         public static IKernel Kernel
         {
-            get
-            {
-                if (_kernel == null)
-                {
-                    _kernel = InitKernel();
-                }
-                return _kernel;
-            }
+            get { return _kernel ?? (_kernel = InitKernel()); }
             set { _kernel = value; }
         }
 
@@ -33,10 +26,13 @@ namespace org.gbd.Dominion.Tools
             _kernel.Bind<IDeck>().To<StartingDeck>();
             _kernel.Bind<IDiscardPile>().To<DiscardPile>();
             _kernel.Bind<ILibrary>().To<Library>();
-            _kernel.Bind<IPlayZone>().To<PlayZone>();
+            _kernel.Bind<IBattleField>().To<BattleField>();
+
+            _kernel.Bind<IIntelligence>().To<RandomAi>();
 
         //    _kernel.Bind<IEnumerator<ICard>>().To<Deck.DeckSimpleEnumerator>();
 
+            _kernel.Bind<IAi>().To<RandomAi>();
 
             return _kernel;
         }
