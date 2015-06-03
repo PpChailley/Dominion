@@ -2,7 +2,7 @@
 
 namespace org.gbd.Dominion.Model
 {
-    public class PlayZone : IPlayZone
+    public class BattleField : IBattleField
     {
         private readonly IList<ICard> _cards = new List<ICard>();
 

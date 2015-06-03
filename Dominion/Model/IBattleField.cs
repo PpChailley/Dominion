@@ -2,7 +2,7 @@
 
 namespace org.gbd.Dominion.Model
 {
-    public interface IPlayZone: IZone
+    public interface IBattleField: IZone
     {
         
     }
