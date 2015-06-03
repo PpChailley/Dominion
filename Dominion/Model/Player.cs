@@ -49,12 +49,19 @@ namespace org.gbd.Dominion.Model
         #endregion
 
 
-        private readonly IIntelligence _intelligence = IoC.Kernel.Get<IIntelligence>();
+        private readonly IIntelligence _intelligence;
 
 
         public String Name;
 
-        public IDeck Deck = IoC.Kernel.Get<IDeck>();
+        public IDeck Deck;
+
+        public Player()
+        {
+            Deck = IoC.Kernel.Get<IDeck>();
+            _intelligence = IoC.Kernel.Get<IIntelligence>();
+        }
+
         public IHand Hand{ get { return Deck.Hand; }}
         public IDiscardPile DiscardPile{ get { return Deck.DiscardPile; }}
         public ILibrary Library{ get { return Deck.Library; }} 
@@ -68,6 +75,7 @@ namespace org.gbd.Dominion.Model
         public void GetReadyToStartGame()
         {
             Deck.GetReadyToStartGame();
+            _intelligence.Init(this);
             Draw(STARTING_HAND_SIZE);
         }
 

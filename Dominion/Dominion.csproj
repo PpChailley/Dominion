@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\AbstractIntelligence.cs" />
     <Compile Include="AI\IAi.cs" />
     <Compile Include="AI\RandomAi.cs" />
     <Compile Include="Contents\ReflectionSelfTests.cs" />
