@@ -87,11 +87,10 @@ namespace org.gbd.Dominion.Model
         }
 
 
-        [TestCase(0,0,10)]
-        [TestCase(1,1,9)]
-        [TestCase(2,2,8)]
-        [TestCase(5,5,5)]
-        [TestCase(10,10,0)]
+        [TestCase(0,5,5)]
+        [TestCase(1,6,4)]
+        [TestCase(2,7,3)]
+        [TestCase(5,10,0)]
         public void PlayerDraw(int amountToDraw, int expectedInHand, int expectedInLibrary)
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();
@@ -100,7 +99,7 @@ namespace org.gbd.Dominion.Model
             player.GetReadyToStartGame();
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
+            Assert.That(player.Library.Cards.Count(), Is.EqualTo(5));
 
             player.Draw(amountToDraw);
 
@@ -110,7 +109,7 @@ namespace org.gbd.Dominion.Model
 
         }
 
-        [ExpectedException(typeof(DeckEmptyException))]
+        [ExpectedException(typeof(NotEnoughCardsException))]
         [Test]
         public void PlayerDrawAllDeckPlusOne()
         {
@@ -120,7 +119,7 @@ namespace org.gbd.Dominion.Model
             player.GetReadyToStartGame();
 
 
-            player.Draw(NB_CARDS_IN_DEFAULT_DECK + 1);
+            player.Draw(6);
         }
 
         [Test]

@@ -83,7 +83,6 @@ namespace org.gbd.Dominion.Model
         public void Draw(int amount = 1)
         {
             Game.MoveCards(Library, Hand, amount);
-            Hand.Add(Library.GetFromTop(amount).ToList());
         }
 
         public void DiscardFromHand(int amount)
