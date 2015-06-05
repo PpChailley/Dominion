@@ -1,11 +1,4 @@
-﻿using System.Net.Mime;
-using System.Windows.Forms;
-using Ninject;
-using NLog;
-using NLog.Config;
-using NLog.Fluent;
-using NLog.Targets;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model

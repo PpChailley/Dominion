@@ -1,4 +1,5 @@
-﻿using org.gbd.Dominion.Model.Actions;
+﻿using System;
+using org.gbd.Dominion.Model.Actions;
 
 namespace org.gbd.Dominion.Model.GameMechanics.Actions
 {
@@ -28,7 +29,7 @@ namespace org.gbd.Dominion.Model.GameMechanics.Actions
          * */
         protected override void DoToPlayer(Player p)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

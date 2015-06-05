@@ -1,11 +1,14 @@
-﻿namespace Dominion
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Dominion
 {
     partial class formGame
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -97,12 +100,12 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel panelPlayerHand;
-        private System.Windows.Forms.FlowLayoutPanel panelBuyZone;
-        private System.Windows.Forms.FlowLayoutPanel panelGameZone;
-        private System.Windows.Forms.FlowLayoutPanel PanelDeckInfoZone;
-        private System.Windows.Forms.FlowLayoutPanel PanelOpponentDeckZone;
-        private System.Windows.Forms.FlowLayoutPanel PanelGameInfoZone;
+        private FlowLayoutPanel panelPlayerHand;
+        private FlowLayoutPanel panelBuyZone;
+        private FlowLayoutPanel panelGameZone;
+        private FlowLayoutPanel PanelDeckInfoZone;
+        private FlowLayoutPanel PanelOpponentDeckZone;
+        private FlowLayoutPanel PanelGameInfoZone;
     }
 }
 

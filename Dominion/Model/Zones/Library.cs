@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NLog.Fluent;
-using NUnit.Framework;
-using org.gbd.Dominion.Model.Actions;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
