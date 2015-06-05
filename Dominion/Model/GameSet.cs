@@ -5,6 +5,7 @@
         BaseSet,
         Optional,
         Selectable,
-        DependsOnOtherCards
+        DependsOnOtherCards,
+        TestCards
     }
 }

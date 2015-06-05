@@ -2,10 +2,8 @@ using System.Collections.Generic;
 
 namespace org.gbd.Dominion.Model
 {
-    public class Hand : IHand
+    public class Hand : AbstractZone, IHand
     {
-
-        private readonly IList<ICard> _cards = new List<ICard>();
 
         public void Add(ICollection<ICard> cards)
         {
@@ -20,9 +18,5 @@ namespace org.gbd.Dominion.Model
             _cards.Add(card);
         }
 
-        public IList<ICard> Cards
-        {
-            get { return _cards; }
-        }
     }
 }

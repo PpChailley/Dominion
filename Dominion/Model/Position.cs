@@ -1,6 +1,6 @@
 ﻿namespace org.gbd.Dominion.Model
 {
-    public enum PositionInCardsCollection
+    public enum Position
     {
         Top, 
         Bottom

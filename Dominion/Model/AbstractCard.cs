@@ -14,6 +14,8 @@ namespace org.gbd.Dominion.Model
         public abstract GameExtension Extension { get; }
         public abstract GameSet PresentInSet { get; }
 
+        public CardMetadata Meta;
+
 
         private readonly CardMechanics _mechanics = new CardMechanics();
         private readonly IList<CardAttribute> _attributes = new List<CardAttribute>();
@@ -27,6 +29,17 @@ namespace org.gbd.Dominion.Model
         {
             get { return _mechanics; }
         }
+
+
+        /* TODO: deal with these metadata later
+        protected AbstractCard(CardOrigin origin, int indexInOrigin)
+        {
+            this.Meta.Origin = origin;
+            this.Meta.IndexInOrigin = indexInOrigin;
+        }
+         * */
+
+
 
         public void ClearInPlayAttributes()
         {

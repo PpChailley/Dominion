@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
@@ -13,7 +12,7 @@ namespace org.gbd.Dominion.Model
 
         
         private readonly IHand _hand = IoC.Kernel.Get<IHand>();
-        private readonly IBattleField _playZone = IoC.Kernel.Get<IBattleField>();
+        private readonly IBattleField _battleField = IoC.Kernel.Get<IBattleField>();
         private readonly IDiscardPile _discard = IoC.Kernel.Get<IDiscardPile>();
         private readonly ILibrary _library = IoC.Kernel.Get<ILibrary>();
         
@@ -25,7 +24,7 @@ namespace org.gbd.Dominion.Model
         public IHand Hand{ get { return _hand; } }
         public IDiscardPile DiscardPile{ get { return _discard; } }
         public ILibrary Library{ get { return _library; } }
-        public IBattleField PlayZone { get { return _playZone; } }
+        public IBattleField BattleField { get { return _battleField; } }
 
         public IList<ICard> Cards
         {
@@ -35,11 +34,12 @@ namespace org.gbd.Dominion.Model
                 toreturn.AddRange(Library.Cards);
                 toreturn.AddRange(Hand.Cards);
                 toreturn.AddRange(DiscardPile.Cards);
-                toreturn.AddRange(PlayZone.Cards);
+                toreturn.AddRange(BattleField.Cards);
 
                 return toreturn.AsReadOnly();
             }
 
+            set { throw new NotImplementedException(); }
         }
 
 
@@ -48,12 +48,20 @@ namespace org.gbd.Dominion.Model
             get { return Cards.Sum(card => card.Mechanics.VictoryPoints); }
         }
 
-        public void Add(ICard card, CardsPile destination)
+        public CardRepartition CardCountByZone
         {
-            Add(card, destination, PositionInCardsCollection.Top);
+            get
+            {
+                return new CardRepartition(Library.Cards.Count, Hand.Cards.Count, DiscardPile.Cards.Count, BattleField.Cards.Count);
+            }
         }
 
-        public void Add(ICard card, CardsPile destination, PositionInCardsCollection positionInCardsCollection)
+        public void Add(ICard card, CardsPile destination)
+        {
+            Add(card, destination, Position.Top);
+        }
+
+        public void Add(ICard card, CardsPile destination, Position position)
         {
             switch (destination)
             {
@@ -66,7 +74,7 @@ namespace org.gbd.Dominion.Model
                     break;
 
                 case CardsPile.Library:
-                    _library.Add(card, positionInCardsCollection);
+                    _library.Add(card, position);
                     break;
 
                 default:
@@ -77,7 +85,7 @@ namespace org.gbd.Dominion.Model
 
         public void EndOfTurnCleanup()
         {
-            foreach (var card in PlayZone.Cards)
+            foreach (var card in BattleField.Cards)
             {
                 if (card.Attributes.Contains(CardAttribute.StayInPlayOnce))
                 {
@@ -86,10 +94,10 @@ namespace org.gbd.Dominion.Model
                 }
 
                 DiscardPile.Cards.Add(card);
-                PlayZone.Cards.Remove(card);
+                BattleField.Cards.Remove(card);
             }
 
-            PlayZone.Cards.Clear();
+            BattleField.Cards.Clear();
         }
 
         public ILibrary ShuffleDiscardToLibrary()

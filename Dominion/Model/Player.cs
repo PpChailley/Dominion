@@ -82,17 +82,18 @@ namespace org.gbd.Dominion.Model
 
         public void Draw(int amount = 1)
         {
+            Game.MoveCards(Library, Hand, amount);
             Hand.Add(Library.GetFromTop(amount).ToList());
         }
 
         public void DiscardFromHand(int amount)
         {
             var toDiscard = this._intelligence.ChooseAndDiscard(amount);
-            Game.MoveCards(toDiscard, Hand, this.DiscardPile, PositionInCardsCollection.Top);
+            Game.MoveCards(toDiscard, Hand, this.DiscardPile, Position.Top);
         }
 
 
-        public void Gain(ICard card, CardsPile destination = CardsPile.Discard, PositionInCardsCollection position = PositionInCardsCollection.Top)
+        public void Gain(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top)
         {
             Deck.Add(card, destination, position);
         }

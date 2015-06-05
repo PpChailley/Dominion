@@ -12,9 +12,10 @@ namespace org.gbd.Dominion.Model
         ILibrary Library { get; }
 
         int CurrentScore { get; }
+        CardRepartition CardCountByZone { get; }
 
         void Add(ICard card, CardsPile destination);
-        void Add(ICard card, CardsPile destination, PositionInCardsCollection positionInCardsCollection);
+        void Add(ICard card, CardsPile destination, Position position);
 
         void EndOfTurnCleanup();
         ILibrary ShuffleDiscardToLibrary();

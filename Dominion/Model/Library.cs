@@ -8,10 +8,9 @@ using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
 {
-    public class Library :  ILibrary
+    public class Library : AbstractZone, ILibrary
     {
 
-        private IList<ICard> _cards = new List<ICard>();
         private IDeck _parentDeck;
 
         
@@ -23,29 +22,23 @@ namespace org.gbd.Dominion.Model
 
             foreach (var card in _parentDeck.DiscardPile.Cards)
             {
-                _cards.Add(card);
+                Cards.Add(card);
             }
 
             _parentDeck.DiscardPile.Cards.Clear();
-            _cards.Shuffle();
-        }
-
-
-        public IList<ICard> Cards
-        {
-            get { return _cards; }
+            Cards.Shuffle();
         }
 
 
 
-        public void Add(ICard card, PositionInCardsCollection position)
+        public void Add(ICard card, Position position)
         {
             switch (position)
             {
-                case PositionInCardsCollection.Bottom:
+                case Position.Bottom:
                     Cards.Insert(0, card);
                     break;
-                case PositionInCardsCollection.Top:
+                case Position.Top:
                     Cards.Add(card);
                     break;
 
@@ -87,5 +80,12 @@ namespace org.gbd.Dominion.Model
             _cards.Remove(card);
             return card;
         }
+
+
+        public new int TotalCardsAvailable
+        {
+            get { return Cards.Count + _parentDeck.DiscardPile.Cards.Count; }
+        }
+
     }
 }

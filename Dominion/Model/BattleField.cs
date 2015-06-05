@@ -1,14 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace org.gbd.Dominion.Model
+﻿namespace org.gbd.Dominion.Model
 {
-    public class BattleField : IBattleField
+    public class BattleField : AbstractZone, IBattleField
     {
-        private readonly IList<ICard> _cards = new List<ICard>();
-
-        public IList<ICard> Cards
-        {
-            get { return _cards; }
-        }
     }
 }

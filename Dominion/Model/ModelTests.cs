@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Ninject;
 using NUnit.Framework;
 using org.gbd.Dominion.Contents;
-using org.gbd.Dominion.Model.Actions;
-using org.gbd.Dominion.Model.Cards;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model
@@ -167,6 +164,90 @@ namespace org.gbd.Dominion.Model
 
 
         }
+
+
+
+        [Test]
+        public void ReshuffleWhenEmpty()
+        {
+            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+
+            var player = IoC.Kernel.Get<Player>();
+            player.GetReadyToStartGame();
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
+
+            player.DiscardFromHand(3);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,2,3,0)));
+
+            player.Draw(5);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 7, 3, 0)));
+
+            player.DiscardFromHand(3);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 5, 5, 0)));
+
+            player.Draw(2);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 7, 0, 0)));
+
+        }
+
+
+        [Test, ExpectedException(typeof(DeckEmptyException))]
+        public void ExceptionWhenDrawFromEmptyDeck()
+        {
+            IoC.ReBind<IDeck>().To<StartingDeck>();
+
+            var player = IoC.Kernel.Get<Player>();
+            player.GetReadyToStartGame();
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
+
+            player.Draw(5);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 10, 0, 0)));
+
+            player.Draw(2);
+
+        }
+
+        [Test]
+        [Explicit]
+        public void CardGet()
+        {
+            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+
+            var player = IoC.Kernel.Get<Player>();
+
+            player.Library.Init(player.Deck);
+            player.Deck.Library.SortCards(card => ((TestCard) card).Index);
+
+
+            var sample = player.Library.Get(1, Position.Top).ToList();
+
+            Assert.That(sample.Count(), Is.EqualTo(1));
+            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(1));
+            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(1));
+
+            sample = player.Library.Get(5, Position.Top).ToList();
+
+            Assert.That(sample.Count(), Is.EqualTo(5));
+            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(1));
+            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(5));
+
+            sample = player.Library.Get(1, Position.Bottom).ToList();
+
+            Assert.That(sample.Count(), Is.EqualTo(1));
+            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(10));
+            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(10));
+
+            sample = player.Library.Get(4, Position.Bottom).ToList();
+
+            Assert.That(sample.Count(), Is.EqualTo(4));
+            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(10));
+            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(7));
+     
+        }
+
+
 
         
     }
