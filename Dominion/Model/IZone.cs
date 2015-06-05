@@ -8,8 +8,10 @@ namespace org.gbd.Dominion.Model
     {
 
         IList<ICard> Cards { get; }
-        IEnumerable<ICard> Get(int amount, Position positionFrom);
+        IEnumerable<ICard> Get(int amount, Position positionFrom = Position.Top);
 
         void SortCards(Func<ICard, IComparable> comparer);
+
+        int TotalCardsAvailable { get; }
     }
 }

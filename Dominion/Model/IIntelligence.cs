@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace org.gbd.Dominion.Model
 {
-    internal interface IIntelligence
+    public interface IIntelligence
     {
         IEnumerable<ICard> ChooseAndDiscard(int amount);
 

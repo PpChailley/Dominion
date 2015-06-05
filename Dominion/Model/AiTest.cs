@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Moq;
 using Ninject;
 using NUnit.Framework;
 using org.gbd.Dominion.AI;
@@ -17,38 +18,63 @@ namespace org.gbd.Dominion.Model
         }
 
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllAiTestCaseData")]
+        [Repeat(30)]
         public void AiIsAbleToDiscard(Type ai)
         {
+            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
             IoC.ReBind<IAi>().To(ai);
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(5));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
             player.DiscardFromHand(0);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(5));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
             player.DiscardFromHand(1);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(4));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 4, 1, 0)));
 
             player.DiscardFromHand(2);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(2));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 2, 3, 0)));
 
             player.Draw(1);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(3));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 3, 3, 0)));
 
             player.DiscardFromHand(2);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(1));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 1, 5, 0)));
 
             player.Draw(6);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(7));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 7, 0, 0)));
 
             player.DiscardFromHand(5);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(2));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 2, 5, 0)));
 
             player.Draw(1);
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(3));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(2, 3, 5, 0)));
         }
 
+        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllAiTestCaseData")]
+        public void seeBelow(Type ai)
+        {
+            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.ReBind<IAi>().To(ai);
+
+            var deck = IoC.Kernel.Get<IDeck>();
+            deck.GetReadyToStartGame();
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(10, 0, 0, 0)));
+
+            var currentAi = IoC.Kernel.Get<IAi>();
+
+
+            Game.MoveCards(deck.Library, deck.Hand, 4);
+            //currentAi.ChooseAndDiscard()
+            
+
+        }
+
+
+
     }
+
+
 }

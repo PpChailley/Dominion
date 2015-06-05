@@ -25,5 +25,25 @@ namespace org.gbd.Dominion.Model
         {
             MoveCards(from.Get(amount, positionFrom), from, to, positionTo);
         }
+
+        public static void MoveCards(ILibrary from, IZone to, int amount = 1, Position positionFrom = Position.Top, Position positionTo = Position.Top)
+        {
+            if (from.TotalCardsAvailable < amount)
+                throw new NotEnoughCardsException();
+
+            if (from.Cards.Count < amount)
+            {
+                int toMoveAfterShuffle = amount - from.Cards.Count;
+                MoveCards(from.Get(from.Cards.Count, positionFrom), from, to, positionTo);
+                from.ShuffleDiscardToLibrary();
+                MoveCards(from.Get(toMoveAfterShuffle, positionFrom), from, to, positionTo);
+            }
+            else
+            {
+                MoveCards(from.Get(amount, positionFrom), from, to, positionTo);
+            }
+        }
+
+
     }
 }

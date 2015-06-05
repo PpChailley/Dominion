@@ -29,6 +29,10 @@ namespace org.gbd.Dominion.Model
             Cards.Shuffle();
         }
 
+        public void ShuffleDiscardToLibrary()
+        {
+            this._parentDeck.ShuffleDiscardToLibrary();
+        }
 
 
         public void Add(ICard card, Position position)
@@ -82,7 +86,7 @@ namespace org.gbd.Dominion.Model
         }
 
 
-        public new int TotalCardsAvailable
+        public override int TotalCardsAvailable
         {
             get { return Cards.Count + _parentDeck.DiscardPile.Cards.Count; }
         }

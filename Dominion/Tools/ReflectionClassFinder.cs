@@ -48,6 +48,7 @@ namespace org.gbd.Dominion.Tools
         {
             return Assembly.GetExecutingAssembly()
                 .GetTypes()
+                .Where(t => t.IsClass)
                 .Where(t => typeof (IAi).IsAssignableFrom(t));
         }
 

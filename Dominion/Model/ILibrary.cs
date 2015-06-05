@@ -9,5 +9,6 @@ namespace org.gbd.Dominion.Model
         [Obsolete] IEnumerable<ICard> GetFromTop(int amount);
         void Add(ICard card, Position position);
         void Init(IDeck deck);
+        void ShuffleDiscardToLibrary();
     }
 }

@@ -11,7 +11,7 @@ namespace org.gbd.Dominion.Model
     {
 
         [Test]
-        public void DiscardFromHand()
+        public void NoTestYet()
         {
             throw new Exception();
         }

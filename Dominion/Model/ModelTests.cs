@@ -26,48 +26,18 @@ namespace org.gbd.Dominion.Model
             Assert.That(library.Cards.Count(), Is.EqualTo(10));
         }
 
-        [Test]
-        public void ShufflePlayersDeck()
+   
+
+
+        [TestCase(0, 0, false, 5, 5, 0)]
+        [TestCase(5, 2, false, 8, 0, 2)]
+        [TestCase(5, 2, true, 8, 2, 0)]
+        public void DiscardFromHand(int draw, int discard, bool shuffle, int expectInHand, int expectInLib, int expectInDiscard)
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
-
-            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(10));
-            Assert.That(player.CurrentScore, Is.EqualTo(3));
-
-            player.Draw(5);
-            player.DiscardFromHand(5);
-
-            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(5));
-            Assert.That(player.DiscardPile.Cards.Count(), Is.EqualTo(5));
-            Assert.That(player.Hand.Cards.Count(), Is.EqualTo(0));
-            Assert.That(player.CurrentScore, Is.EqualTo(3));
-
-            player.Deck.ShuffleDiscardToLibrary();
-
-            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(10));
-            Assert.That(player.DiscardPile.Cards.Count(), Is.EqualTo(0));
-            Assert.That(player.Hand.Cards.Count(), Is.EqualTo(0));
-            Assert.That(player.CurrentScore, Is.EqualTo(3));
-
-        }
-
-
-        [TestCase(0, 0, false, 0, 10, 0)]
-        [TestCase(10, 2, false, 8, 0, 2)]
-        [TestCase(10, 2, true, 8, 2, 0)]
-        [TestCase(5, 2, true, 3, 7, 0)]
-        public void DiscardFromHand(int draw, int discard, bool shuffle, int expectInHand, int expectInLib,
-            int expectInDiscard)
-        {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
-
-            var player = IoC.Kernel.Get<Player>();
 
             player.Draw(draw);
             player.DiscardFromHand(discard);
@@ -81,9 +51,6 @@ namespace org.gbd.Dominion.Model
             Assert.That(player.Hand.Cards.Count, Is.EqualTo(expectInHand));
             Assert.That(player.DiscardPile.Cards.Count, Is.EqualTo(expectInDiscard));
             Assert.That(player.Library.Cards.Count, Is.EqualTo(expectInLib));
-
-
-
         }
 
 
@@ -176,22 +143,22 @@ namespace org.gbd.Dominion.Model
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
-            player.DiscardFromHand(3);
+            Game.MoveCards(player.Hand, player.DiscardPile, 3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,2,3,0)));
 
             player.Draw(5);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 7, 3, 0)));
 
             player.DiscardFromHand(3);
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 5, 5, 0)));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 4, 6, 0)));
 
-            player.Draw(2);
+            player.Draw(3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 7, 0, 0)));
 
         }
 
 
-        [Test, ExpectedException(typeof(DeckEmptyException))]
+        [Test, ExpectedException(typeof(NotEnoughCardsException))]
         public void ExceptionWhenDrawFromEmptyDeck()
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();

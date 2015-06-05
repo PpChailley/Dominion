@@ -18,7 +18,7 @@ namespace org.gbd.Dominion.Model
         {
             var cardsCount = Cards.Count;
 
-            if (TotalCardsAvailable < amount)
+            if (Cards.Count < amount)
             {
                 throw new NotEnoughCardsException();
             }
@@ -51,7 +51,7 @@ namespace org.gbd.Dominion.Model
             this._cards = Cards.OrderBy(comparer).ToList();
         }
 
-        public int TotalCardsAvailable
+        public virtual int TotalCardsAvailable
         {
             get { return Cards.Count; }
         }
