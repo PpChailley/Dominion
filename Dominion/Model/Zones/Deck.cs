@@ -5,7 +5,7 @@ using Ninject;
 using org.gbd.Dominion.Model.Cards;
 using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model
+namespace org.gbd.Dominion.Model.Zones
 {
     public class Deck: IDeck
     {

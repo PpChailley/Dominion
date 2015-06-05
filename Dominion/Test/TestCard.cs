@@ -1,7 +1,8 @@
 using System;
+using org.gbd.Dominion.Contents;
 using org.gbd.Dominion.Model;
 
-namespace org.gbd.Dominion.Contents
+namespace org.gbd.Dominion.Test
 {
     public class TestCard : AbstractCard, ICard
     {

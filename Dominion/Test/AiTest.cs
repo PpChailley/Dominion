@@ -6,7 +6,7 @@ using NUnit.Framework;
 using org.gbd.Dominion.AI;
 using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model
+namespace org.gbd.Dominion.Test
 {
     [TestFixture]
     public class AiTest : BaseTest

@@ -4,7 +4,7 @@ using System.Linq;
 using Ninject;
 using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model
+namespace org.gbd.Dominion.Model.GameMechanics
 {
     public class Player
     {
@@ -17,7 +17,7 @@ namespace org.gbd.Dominion.Model
 
         public static ICollection<Player> Get(ICollection<PlayerChoice> designatedPlayers)
         {
-            return designatedPlayers.Select(player => Get(player)).ToList();
+            return designatedPlayers.Select(player => Get((PlayerChoice) player)).ToList();
         }
 
         private static Player Get(PlayerChoice designatedPlayer)
