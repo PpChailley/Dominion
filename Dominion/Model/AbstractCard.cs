@@ -24,6 +24,11 @@ namespace org.gbd.Dominion.Model
             get { return _attributes; }
         }
 
+        public void ClearInPlayAttributes()
+        {
+            this.Attributes.Clear();
+        }
+
 
         public abstract GameExtension Extension { get; }
 

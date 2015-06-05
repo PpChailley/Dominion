@@ -14,5 +14,6 @@ namespace org.gbd.Dominion.Model
         CardMechanics Mechanics { get; }
         IList<CardAttribute> Attributes { get; }
 
+        void ClearInPlayAttributes();
     }
 }
