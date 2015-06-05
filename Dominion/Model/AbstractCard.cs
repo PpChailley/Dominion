@@ -8,15 +8,14 @@ namespace org.gbd.Dominion.Model
     public abstract class AbstractCard: ICard
     {
         public String Text;
-
-        private readonly CardMechanics _mechanics = new CardMechanics();
-
-        public abstract GameSet PresentInSet { get; }
-
-
         // TODO: Change type to more precise 
         public Object Illustration;
 
+        public abstract GameExtension Extension { get; }
+        public abstract GameSet PresentInSet { get; }
+
+
+        private readonly CardMechanics _mechanics = new CardMechanics();
         private readonly IList<CardAttribute> _attributes = new List<CardAttribute>();
 
         public IList<CardAttribute> Attributes
@@ -24,18 +23,16 @@ namespace org.gbd.Dominion.Model
             get { return _attributes; }
         }
 
+        public CardMechanics Mechanics
+        {
+            get { return _mechanics; }
+        }
+
         public void ClearInPlayAttributes()
         {
             this.Attributes.Clear();
         }
 
-
-        public abstract GameExtension Extension { get; }
-
-        public CardMechanics Mechanics
-        {
-            get { return _mechanics; }
-        }
 
 
     }
