@@ -2,6 +2,8 @@
 using Ninject;
 using NUnit.Framework;
 using org.gbd.Dominion.Contents;
+using org.gbd.Dominion.Model.GameMechanics;
+using org.gbd.Dominion.Test;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model

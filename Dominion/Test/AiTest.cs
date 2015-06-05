@@ -4,6 +4,8 @@ using Moq;
 using Ninject;
 using NUnit.Framework;
 using org.gbd.Dominion.AI;
+using org.gbd.Dominion.Model;
+using org.gbd.Dominion.Model.GameMechanics;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Test
@@ -22,6 +24,7 @@ namespace org.gbd.Dominion.Test
         {
 
             throw new NotImplementedException();
+            /*
             IoC.ReBind<IAi>().To(aiType);
             var ai = IoC.Kernel.Get<IAi>();
 
@@ -32,7 +35,7 @@ namespace org.gbd.Dominion.Test
             ai.Init(playerMock.Object);
 
             var toDiscard = ai.ChooseAndDiscard(3);
-
+            */
 
 
 

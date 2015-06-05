@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Media;
+using org.gbd.Dominion.Model.GameMechanics;
+using org.gbd.Dominion.Model.GameMechanics.Actions;
 
 namespace org.gbd.Dominion.Model.Actions
 {

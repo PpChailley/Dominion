@@ -4,6 +4,7 @@ using Ninject;
 using Ninject.Syntax;
 using org.gbd.Dominion.AI;
 using org.gbd.Dominion.Model;
+using org.gbd.Dominion.Model.GameMechanics;
 
 namespace org.gbd.Dominion.Tools
 {

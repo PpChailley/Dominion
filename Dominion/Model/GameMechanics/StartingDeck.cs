@@ -1,11 +1,8 @@
-using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Threading;
 using org.gbd.Dominion.Contents;
-using org.gbd.Dominion.Model.Cards;
-using org.gbd.Dominion.Tools;
+using org.gbd.Dominion.Contents.Cards;
+using org.gbd.Dominion.Model.Zones;
 
-namespace org.gbd.Dominion.Model
+namespace org.gbd.Dominion.Model.GameMechanics
 {
     public class StartingDeck : Deck, IDeck
     {

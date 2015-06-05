@@ -74,6 +74,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\EasyToTrackDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
     <Compile Include="Model\GameMechanics\AI\RandomAi.cs" />
@@ -105,7 +106,6 @@
     <Compile Include="Model\Cards\Curse.cs" />
     <Compile Include="Model\Cards\Treasure.cs" />
     <Compile Include="Model\Cards\Victory.cs" />
-    <Compile Include="Model\Zones\EasyToTrackDeck.cs" />
     <Compile Include="Model\GameMechanics\Game.cs" />
     <Compile Include="Model\Cards\GameSet.cs" />
     <Compile Include="Model\GameMechanics\IIntelligence.cs" />

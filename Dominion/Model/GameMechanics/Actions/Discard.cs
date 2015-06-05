@@ -1,4 +1,6 @@
-﻿namespace org.gbd.Dominion.Model.Actions
+﻿using org.gbd.Dominion.Model.Actions;
+
+namespace org.gbd.Dominion.Model.GameMechanics.Actions
 {
     public class Discard:GameActionTargetingPlayers, IGameActionTargetingPlayers
     {
@@ -10,9 +12,23 @@
         }
 
 
+        //TODO: Try to map this action model to that of GameMechanics
+
+        /*
         protected override void DoToPlayer(Player p)
         {
             p.DiscardFromHand(Amount);
+        }
+
+        protected override void DoToPlayer(Player p)
+        {
+            throw new System.NotImplementedException();
+        }
+         * 
+         * */
+        protected override void DoToPlayer(Player p)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

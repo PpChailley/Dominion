@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using org.gbd.Dominion.Model.Actions;
 
-namespace org.gbd.Dominion.Model.Actions
+namespace org.gbd.Dominion.Model.GameMechanics.Actions
 {
     public abstract class GameActionTargetingPlayers : IGameActionTargetingPlayers
     {
