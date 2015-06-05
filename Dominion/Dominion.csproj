@@ -80,6 +80,9 @@
     <Compile Include="Model\GameMechanics\AI\RandomAi.cs" />
     <Compile Include="Contents\Cards\Copper.cs" />
     <Compile Include="Contents\GameExtension.cs" />
+    <Compile Include="Model\Zones\ISupplyPile.cs" />
+    <Compile Include="Model\Zones\ISupplyZone.cs" />
+    <Compile Include="Model\Zones\SupplyZone.cs" />
     <Compile Include="Test\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Cards\Curse.cs" />
@@ -136,6 +139,7 @@
     <Compile Include="Test\BaseTest.cs" />
     <Compile Include="Model\Zones\Deck.cs" />
     <Compile Include="Test\AiTest.cs" />
+    <Compile Include="Test\SupplyZoneTest.cs" />
     <Compile Include="Test\TestCard.cs" />
     <Compile Include="Tools\ProcessExtensions.cs" />
     <Compile Include="Tools\ReflectionClassFinder.cs" />
