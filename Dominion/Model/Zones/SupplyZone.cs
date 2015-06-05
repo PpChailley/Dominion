@@ -8,7 +8,7 @@ using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model.Zones
 {
-    public class SupplyZone: ISupplyZone
+    public abstract class AbstractSupplyZone: ISupplyZone
     {
 
 
@@ -38,5 +38,9 @@ namespace org.gbd.Dominion.Model.Zones
         {
             get { return this.Cards.Count; }
         }
+
+        public abstract void GetReadyToPlay();
+
+        
     }
 }
