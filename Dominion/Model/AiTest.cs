@@ -53,24 +53,7 @@ namespace org.gbd.Dominion.Model
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(2, 3, 5, 0)));
         }
 
-        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllAiTestCaseData")]
-        public void seeBelow(Type ai)
-        {
-            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
-            IoC.ReBind<IAi>().To(ai);
-
-            var deck = IoC.Kernel.Get<IDeck>();
-            deck.GetReadyToStartGame();
-            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(10, 0, 0, 0)));
-
-            var currentAi = IoC.Kernel.Get<IAi>();
-
-
-            Game.MoveCards(deck.Library, deck.Hand, 4);
-            //currentAi.ChooseAndDiscard()
-            
-
-        }
+ 
 
 
 
