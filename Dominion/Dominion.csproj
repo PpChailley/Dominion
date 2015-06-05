@@ -82,9 +82,11 @@
     <Compile Include="Contents\GameExtension.cs" />
     <Compile Include="Model\GameMechanics\EndOfGameCondition.cs" />
     <Compile Include="Model\GameMechanics\GameException.cs" />
+    <Compile Include="Model\GameMechanics\IGame.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyZone.cs" />
+    <Compile Include="Test\GameScenarioTest.cs" />
     <Compile Include="Test\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Cards\Curse.cs" />

@@ -6,7 +6,20 @@ using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model.GameMechanics
 {
-    public class Player
+    public interface IPlayer
+    {
+        IHand Hand { get; }
+        IDiscardPile DiscardPile { get; }
+        ILibrary Library { get; }
+        int CurrentScore { get; }
+        void GetReadyToStartGame();
+        void Draw(int amount = 1);
+        void DiscardFromHand(int amount);
+        void Gain(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top);
+        void Receive(ICard card);
+    }
+
+    public class Player : IPlayer
     {
 
         public const int STARTING_HAND_SIZE = 5;
@@ -25,7 +38,7 @@ namespace org.gbd.Dominion.Model.GameMechanics
             switch (designatedPlayer)
             {
                 case PlayerChoice.Current:
-                    return CurrentPlayer;
+                    return Game.CurrentPlayer;
 
                 case PlayerChoice.Left:
                 case PlayerChoice.Right:
@@ -35,14 +48,6 @@ namespace org.gbd.Dominion.Model.GameMechanics
                     throw new NotImplementedException();
 
 
-            }
-        }
-
-        public static Player CurrentPlayer
-        {
-            get
-            {
-                throw new NotImplementedException();
             }
         }
 
@@ -95,6 +100,11 @@ namespace org.gbd.Dominion.Model.GameMechanics
         public void Gain(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top)
         {
             Deck.Add(card, destination, position);
+        }
+
+        public void Receive(ICard card)
+        {
+            Game.MoveCards(new List<ICard> {card}, Game.SupplyZone, DiscardPile, Position.Top);
         }
     }
 }
