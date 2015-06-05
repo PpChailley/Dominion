@@ -7,7 +7,7 @@ using NUnit.Framework;
 using org.gbd.Dominion.Model;
 using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Contents
+namespace org.gbd.Dominion.Test
 {
     
     [TestFixture]
