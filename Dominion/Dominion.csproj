@@ -97,6 +97,7 @@
     <Compile Include="Model\AbstractCard.cs" />
     <Compile Include="Model\AbstractZone.cs" />
     <Compile Include="Model\Actions\Discard.cs" />
+    <Compile Include="Model\Actions\GameActionTargetingPlayers.cs" />
     <Compile Include="Model\Actions\IGameActionTargetingPlayers.cs" />
     <Compile Include="Model\AiTest.cs" />
     <Compile Include="Model\BaseSetCard.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="Model\Cards\CardAttribute.cs" />
     <Compile Include="Model\Cards\CardMechanics.cs" />
     <Compile Include="Model\Cards\ICardType.cs" />
-    <Compile Include="Model\Cards\NCurse.cs" />
+    <Compile Include="Model\Cards\Curse.cs" />
     <Compile Include="Model\Cards\Treasure.cs" />
     <Compile Include="Model\Cards\Victory.cs" />
     <Compile Include="Model\EasyToTrackDeck.cs" />
