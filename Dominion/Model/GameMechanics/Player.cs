@@ -1,24 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms.VisualStyles;
 using Ninject;
+using org.gbd.Dominion.Model.Zones;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model.GameMechanics
 {
-    public interface IPlayer
-    {
-        IHand Hand { get; }
-        IDiscardPile DiscardPile { get; }
-        ILibrary Library { get; }
-        int CurrentScore { get; }
-        void GetReadyToStartGame();
-        void Draw(int amount = 1);
-        void DiscardFromHand(int amount);
-        void Gain(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top);
-        void Receive(ICard card);
-    }
-
     public class Player : IPlayer
     {
 
@@ -28,17 +17,17 @@ namespace org.gbd.Dominion.Model.GameMechanics
 
         #region Static Accessors
 
-        public static ICollection<Player> Get(ICollection<PlayerChoice> designatedPlayers)
+        public static ICollection<IPlayer> Get(ICollection<PlayerChoice> designatedPlayers)
         {
             return designatedPlayers.Select(player => Get((PlayerChoice) player)).ToList();
         }
 
-        private static Player Get(PlayerChoice designatedPlayer)
+        private static IPlayer Get(PlayerChoice designatedPlayer)
         {
             switch (designatedPlayer)
             {
                 case PlayerChoice.Current:
-                    return Game.CurrentPlayer;
+                    return Game.G.CurrentPlayer;
 
                 case PlayerChoice.Left:
                 case PlayerChoice.Right:
@@ -56,15 +45,16 @@ namespace org.gbd.Dominion.Model.GameMechanics
 
         private readonly IIntelligence _intelligence;
 
-
+        public PlayerStatus Status { get; set; }
+        public IDeck Deck { get; set; }
         public String Name;
 
-        public IDeck Deck;
 
         public Player()
         {
             Deck = IoC.Kernel.Get<IDeck>();
             _intelligence = IoC.Kernel.Get<IIntelligence>();
+            Status = IoC.Kernel.Get<PlayerStatus>();
         }
 
         public IHand Hand{ get { return Deck.Hand; }}
@@ -76,6 +66,7 @@ namespace org.gbd.Dominion.Model.GameMechanics
         {
             get { return Deck.CurrentScore; }
         }
+
 
         public void GetReadyToStartGame()
         {
@@ -97,14 +88,29 @@ namespace org.gbd.Dominion.Model.GameMechanics
         }
 
 
-        public void Gain(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top)
+        public void AddToDeck(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top)
         {
             Deck.Add(card, destination, position);
         }
 
+        public void Receive(IList<ICard> cards)
+        {
+            Game.MoveCards(cards, Game.G.SupplyZone, DiscardPile, Position.Top);
+        }
         public void Receive(ICard card)
         {
-            Game.MoveCards(new List<ICard> {card}, Game.SupplyZone, DiscardPile, Position.Top);
+            Receive(new List<ICard>() { card });
         }
+
+        public void Buy(IList<ICard> cards)
+        {
+            this.Status.Resources.Pay(cards.Select(card => card.Mechanics.Cost));
+            Receive(cards);
+        }
+        public void Buy(ICard card)
+        {
+            Buy(new List<ICard>() { card });
+        }
+
     }
 }

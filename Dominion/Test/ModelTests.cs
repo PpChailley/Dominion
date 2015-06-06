@@ -4,6 +4,7 @@ using NUnit.Framework;
 using org.gbd.Dominion.Contents;
 using org.gbd.Dominion.Model;
 using org.gbd.Dominion.Model.GameMechanics;
+using org.gbd.Dominion.Model.Zones;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Test
@@ -101,7 +102,7 @@ namespace org.gbd.Dominion.Test
 
             Assert.That(player.CurrentScore, Is.EqualTo(3));
 
-            player.Gain(new Estate());
+            player.AddToDeck(new Estate());
 
             Assert.That(player.CurrentScore, Is.EqualTo(4));
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK + 1));
@@ -119,14 +120,14 @@ namespace org.gbd.Dominion.Test
 
             Assert.That(player.CurrentScore, Is.EqualTo(3));
 
-            player.Gain(new Estate());
+            player.AddToDeck(new Estate());
             Assert.That(player.CurrentScore, Is.EqualTo(4));
 
 
-            player.Gain(new Duchy());
+            player.AddToDeck(new Duchy());
             Assert.That(player.CurrentScore, Is.EqualTo(7));
 
-            player.Gain(new Province());
+            player.AddToDeck(new Province());
             Assert.That(player.CurrentScore, Is.EqualTo(13));
 
 

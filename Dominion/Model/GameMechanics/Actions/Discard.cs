@@ -27,7 +27,7 @@ namespace org.gbd.Dominion.Model.GameMechanics.Actions
         }
          * 
          * */
-        protected override void DoToPlayer(Player p)
+        protected override void DoToPlayer(IPlayer p)
         {
             throw new NotImplementedException();
         }

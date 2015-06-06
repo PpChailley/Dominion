@@ -3,7 +3,7 @@ using org.gbd.Dominion.Test;
 
 namespace org.gbd.Dominion.Model
 {
-    public class EasyToTrackDeck : Deck, IDeck
+    public class EasyToTrackDeck : AbstractDeck, IDeck
     {
         public EasyToTrackDeck()
         {

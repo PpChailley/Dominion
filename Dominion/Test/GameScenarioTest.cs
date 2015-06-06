@@ -7,6 +7,7 @@ using Ninject;
 using NUnit.Framework;
 using org.gbd.Dominion.Model;
 using org.gbd.Dominion.Model.GameMechanics;
+using org.gbd.Dominion.Model.Zones;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Test
@@ -27,7 +28,7 @@ namespace org.gbd.Dominion.Test
             base.SetUp();
 
             IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
-            Game.MakeReadyToStart();
+            Game.G.MakeReadyToStart();
 
         }
 
@@ -41,16 +42,16 @@ namespace org.gbd.Dominion.Test
         [Test]
         public void PlayerRecievesACard()
         {
-            Game.CurrentPlayer.Receive(Game.SupplyZone.Cards.First());
+            Game.G.CurrentPlayer.Receive(Game.G.SupplyZone.Cards.First());
         }
 
         [Test]
         public void PlayerBuysACard()
         {
-            Game.CurrentPlayer.LastTurnStatus.Coins = 100;
-            Game.CurrentPlayer.Buy(Game.SupplyZone.Cards.First());
+            Game.G.CurrentPlayer.Status.Resources = new Resources(100);
+            Game.G.CurrentPlayer.Buy(Game.G.SupplyZone.Cards.First());
 
-            Assert.That(Game.CurrentPlayer.Deck.Cards.Count == 11);
+            Assert.That(Game.G.CurrentPlayer.Deck.Cards.Count == 11);
         }
 
 
@@ -58,8 +59,8 @@ namespace org.gbd.Dominion.Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void PlayerBuysAnIllegalCard()
         {
-            Game.CurrentPlayer.LastTurnStatus.Coins = 100;
-            Game.CurrentPlayer.Buy(Game.SupplyZone.Cards.First());
+            Game.G.CurrentPlayer.Status.Resources = new Resources(100);
+            Game.G.CurrentPlayer.Buy(Game.G.SupplyZone.Cards.First());
 
             Assert.Fail();
         }
@@ -69,8 +70,8 @@ namespace org.gbd.Dominion.Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void PlayerBuysAnInvalidCard()
         {
-            Game.CurrentPlayer.LastTurnStatus.Coins = 100;
-            Game.CurrentPlayer.Buy(IoC.Kernel.Get<ICard>());
+            Game.G.CurrentPlayer.Status.Resources = new Resources(100);
+            Game.G.CurrentPlayer.Buy(IoC.Kernel.Get<ICard>());
 
             Assert.Fail();
         }

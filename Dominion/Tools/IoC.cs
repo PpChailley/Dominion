@@ -5,6 +5,7 @@ using Ninject.Syntax;
 using org.gbd.Dominion.AI;
 using org.gbd.Dominion.Model;
 using org.gbd.Dominion.Model.GameMechanics;
+using org.gbd.Dominion.Model.Zones;
 
 namespace org.gbd.Dominion.Tools
 {
@@ -31,7 +32,7 @@ namespace org.gbd.Dominion.Tools
 
             _kernel.Bind<IIntelligence>().To<RandomAi>();
 
-        //    _kernel.Bind<IEnumerator<ICard>>().To<Deck.DeckSimpleEnumerator>();
+        //    _kernel.Bind<IEnumerator<ICard>>().To<AbstractDeck.DeckSimpleEnumerator>();
 
             _kernel.Bind<IAi>().To<RandomAi>();
 

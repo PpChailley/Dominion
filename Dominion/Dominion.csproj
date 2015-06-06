@@ -83,6 +83,8 @@
     <Compile Include="Model\GameMechanics\EndOfGameCondition.cs" />
     <Compile Include="Model\GameMechanics\GameException.cs" />
     <Compile Include="Model\GameMechanics\IGame.cs" />
+    <Compile Include="Model\GameMechanics\IPlayer.cs" />
+    <Compile Include="Model\GameMechanics\PlayerStatus.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyZone.cs" />
@@ -141,7 +143,7 @@
     <Compile Include="Test\SmokeTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
     <Compile Include="Test\BaseTest.cs" />
-    <Compile Include="Model\Zones\Deck.cs" />
+    <Compile Include="Model\Zones\AbstractDeck.cs" />
     <Compile Include="Test\AiTest.cs" />
     <Compile Include="Test\SupplyZoneTest.cs" />
     <Compile Include="Test\TestCard.cs" />

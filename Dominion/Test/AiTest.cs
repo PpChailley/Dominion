@@ -5,6 +5,7 @@ using NUnit.Framework;
 using org.gbd.Dominion.AI;
 using org.gbd.Dominion.Model;
 using org.gbd.Dominion.Model.GameMechanics;
+using org.gbd.Dominion.Model.Zones;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Test
@@ -28,7 +29,7 @@ namespace org.gbd.Dominion.Test
             var ai = IoC.Kernel.Get<IAi>();
 
             var playerMock = new Mock<Player>();
-            playerMock.Setup(p => p.Deck);
+            playerMock.Setup(p => p.AbstractDeck);
 
 
             ai.Init(playerMock.Object);

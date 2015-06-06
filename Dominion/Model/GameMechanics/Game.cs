@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
+using org.gbd.Dominion.Model.Zones;
 using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model.GameMechanics
 {
     public class Game : IGame
     {
+
+
         public static int MoveCards(IEnumerable<ICard> toMove, IZone from, IZone to, Position positionInTargetCollection)
         {
             foreach (var card in toMove.ToList())
@@ -46,16 +49,44 @@ namespace org.gbd.Dominion.Model.GameMechanics
             }
         }
 
+        public static IGame G { get; set; }
+
+        static Game()
+        {
+            G = IoC.Kernel.Get<IGame>();
+        }
+
+
+        public Game()
+        {
+            Players = IoC.Kernel.Get<ICollection<IPlayer>>();
+        }
 
 
 
-        public ICollection<IPlayer> Players { get; set; } = IoC.Kernel.Get<ICollection<IPlayer>>();
+        public IPlayer CurrentPlayer { get; private set; }
+        
+        public ISupplyZone SupplyZone { get; private set; }
+
+
+        
+
+
+        public ICollection<IPlayer> Players { get; set; }
+
 
 
 
         public void MakeReadyToStart()
         {
             Init();
+
+            foreach (var player in Players)
+            {
+                player.GetReadyToStartGame();
+            }
+
+            SupplyZone.MakeReadyToStartGame();
 
             throw new NotImplementedException();
         }
@@ -66,16 +97,7 @@ namespace org.gbd.Dominion.Model.GameMechanics
             throw new NotImplementedException();
         }
 
-        public static Player CurrentPlayer
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public static IZone SupplyZone { get; private set; }
-
+        
 
     }
     

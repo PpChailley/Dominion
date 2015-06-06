@@ -39,6 +39,8 @@ namespace org.gbd.Dominion.Model.Zones
             get { return this.Cards.Count; }
         }
 
+        public abstract void MakeReadyToStartGame();
+
         public abstract void GetReadyToPlay();
 
         

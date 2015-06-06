@@ -17,7 +17,7 @@ namespace org.gbd.Dominion.Model.GameMechanics.Actions
             }
         }
 
-        protected abstract void DoToPlayer(Player p);
+        protected abstract void DoToPlayer(IPlayer p);
 
     }
 }

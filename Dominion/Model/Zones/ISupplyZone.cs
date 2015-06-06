@@ -2,6 +2,6 @@
 {
     public interface ISupplyZone: IZone
     {
-        
+        void MakeReadyToStartGame();
     }
 }

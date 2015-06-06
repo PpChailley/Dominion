@@ -7,7 +7,7 @@ using org.gbd.Dominion.Tools;
 
 namespace org.gbd.Dominion.Model.Zones
 {
-    public class Deck: IDeck
+    public abstract class AbstractDeck: IDeck
     {
 
         
@@ -56,11 +56,13 @@ namespace org.gbd.Dominion.Model.Zones
             }
         }
 
+        [Obsolete] 
         public void Add(ICard card, CardsPile destination)
         {
             Add(card, destination, Position.Top);
         }
 
+        [Obsolete]
         public void Add(ICard card, CardsPile destination, Position position)
         {
             switch (destination)

@@ -4,7 +4,7 @@ using org.gbd.Dominion.Model.Zones;
 
 namespace org.gbd.Dominion.Model.GameMechanics
 {
-    public class StartingDeck : Deck, IDeck
+    public class StartingDeck : AbstractDeck, IDeck
     {
         public StartingDeck()
         {

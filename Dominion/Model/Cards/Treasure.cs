@@ -10,7 +10,7 @@
             BuyValue = res;
         }
 
-        public Treasure(int coins)
+        public Treasure(uint coins)
         {
             BuyValue = new Resources(coins);
         }
