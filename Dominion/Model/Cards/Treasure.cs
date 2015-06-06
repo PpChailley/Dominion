@@ -1,4 +1,6 @@
-﻿namespace org.gbd.Dominion.Model.Cards
+﻿using org.gbd.Dominion.Model.GameMechanics;
+
+namespace org.gbd.Dominion.Model.Cards
 
 {
     public class Treasure : ICardType
@@ -10,7 +12,7 @@
             BuyValue = res;
         }
 
-        public Treasure(uint coins)
+        public Treasure(int coins)
         {
             BuyValue = new Resources(coins);
         }

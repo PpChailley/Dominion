@@ -7,8 +7,8 @@ namespace org.gbd.Dominion.Model.GameMechanics
     {
 
         public Resources Resources = IoC.Kernel.Get<Resources>();
-        public int AvailableActions = 0;
-        public int AvailableBuys = 0;
+        public int AvailableActions { get; set; }
+        public int AvailableBuys { get; set; }
 
         
         public void StartTurn()

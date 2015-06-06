@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ninject;
 using Ninject.Syntax;
@@ -24,6 +25,8 @@ namespace org.gbd.Dominion.Tools
         {
             _kernel = new StandardKernel();
 
+            _kernel.Bind<int>().ToConstant(0);
+
             _kernel.Bind<IHand>().To<Hand>();
             _kernel.Bind<IDeck>().To<StartingDeck>();
             _kernel.Bind<IDiscardPile>().To<DiscardPile>();
@@ -35,6 +38,13 @@ namespace org.gbd.Dominion.Tools
         //    _kernel.Bind<IEnumerator<ICard>>().To<AbstractDeck.DeckSimpleEnumerator>();
 
             _kernel.Bind<IAi>().To<RandomAi>();
+            _kernel.Bind<IPlayer>().To<Player>();
+            _kernel.Bind<IGame>().To<Game>();
+            
+            _kernel.Bind<ICollection<IPlayer>>()
+                            .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+            
+            
 
             return _kernel;
         }

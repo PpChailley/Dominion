@@ -39,7 +39,7 @@ namespace org.gbd.Dominion.Test
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
-            var player = IoC.Kernel.Get<Player>();
+            var player = IoC.Kernel.Get<IPlayer>();
             player.GetReadyToStartGame();
 
             player.Draw(draw);
