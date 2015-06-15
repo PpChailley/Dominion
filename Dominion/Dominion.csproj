@@ -7,7 +7,7 @@
     <ProjectGuid>{FCE0CA99-3343-47A8-9CA7-D0A0A84B5DAF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>org.gbd.Dominion</RootNamespace>
+    <RootNamespace>gbd.Dominion</RootNamespace>
     <AssemblyName>Dominion</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
