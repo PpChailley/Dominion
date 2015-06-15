@@ -47,5 +47,16 @@ namespace org.gbd.Dominion.Tools
         }
 
 
+        /// <summary>
+        /// Return the last n elements of collection
+        /// http://stackoverflow.com/questions/3453274/using-linq-to-get-the-last-n-elements-of-a-collection
+        /// See also Take() method
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> source, int n)
+        {
+            return source.Skip(Math.Max(0, source.Count() - n));
+        }
+
     }
 }

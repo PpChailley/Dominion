@@ -217,7 +217,17 @@ namespace org.gbd.Dominion.Test
         }
 
 
+        [Test, ExpectedException(typeof(NotEnoughCardsException))]
+        public void GetTooManyCardsFromZone()
+        {
+            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
 
+            var deck = IoC.Kernel.Get<IDeck>();
+            Assert.That(deck.Cards.Count, Is.EqualTo(10));
+
+            deck.Library.Get(11);
+
+        }
         
     }
 }

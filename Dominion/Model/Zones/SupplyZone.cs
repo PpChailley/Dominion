@@ -19,7 +19,7 @@ namespace org.gbd.Dominion.Model.Zones
         {
             get
             {
-                IList<ICard> toreturn = Piles.SelectMany(pile => pile).ToList();
+                IList<ICard> toreturn = Piles.SelectMany(pile => pile.Cards).ToList();
                 return toreturn;
             }
         }

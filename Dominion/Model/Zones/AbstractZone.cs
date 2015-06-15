@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using org.gbd.Dominion.Model.GameMechanics;
 
-namespace org.gbd.Dominion.Model
+namespace org.gbd.Dominion.Model.Zones
 {
     public abstract class AbstractZone: IZone
     {

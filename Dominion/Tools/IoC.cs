@@ -43,6 +43,8 @@ namespace org.gbd.Dominion.Tools
             
             _kernel.Bind<ICollection<IPlayer>>()
                             .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+
+            _kernel.Bind<ISupplyPile>().To<SupplyPile>();
             
             
 

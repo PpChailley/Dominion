@@ -87,6 +87,7 @@
     <Compile Include="Model\GameMechanics\PlayerStatus.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
+    <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\SupplyZone.cs" />
     <Compile Include="Test\GameScenarioTest.cs" />
     <Compile Include="Test\ReflectionSelfTests.cs" />

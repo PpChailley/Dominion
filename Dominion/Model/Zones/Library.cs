@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using org.gbd.Dominion.Model.Zones;
+using org.gbd.Dominion.Model.GameMechanics;
 using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model
+namespace org.gbd.Dominion.Model.Zones
 {
     public class Library : AbstractZone, ILibrary
     {
