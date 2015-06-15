@@ -15,7 +15,7 @@ namespace gbd.Dominion.Model.Zones
 
         public void Add(ICard card)
         {
-            _cards.Add(card);
+            Cards.Add(card);
         }
 
     }

@@ -17,7 +17,7 @@ namespace gbd.Dominion.Model.Zones
         public void Init(IDeck deck)
         {
             _parentDeck = deck;
-            _cards = new List<ICard>();
+            Cards = new List<ICard>();
 
             foreach (var card in _parentDeck.DiscardPile.Cards)
             {
@@ -67,7 +67,7 @@ namespace gbd.Dominion.Model.Zones
 
         private ICard GetOneFromTop()
         {
-            if (_cards.Any() == false)
+            if (Cards.Any() == false)
             {
                 if (_parentDeck.Cards.Any() == false)
                 {
@@ -79,8 +79,8 @@ namespace gbd.Dominion.Model.Zones
                 }
             }
 
-            var card = _cards.First();
-            _cards.Remove(card);
+            var card = Cards.First();
+            Cards.Remove(card);
             return card;
         }
 
