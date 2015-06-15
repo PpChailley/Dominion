@@ -150,7 +150,11 @@
     <Compile Include="Test\Scenarios\SupplyZoneTest.cs" />
     <Compile Include="Test\Utilities\TestCard.cs" />
     <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
+    <Compile Include="Test\Utilities\TestSupplyPile.cs" />
+    <Compile Include="Test\Utilities\TestSupplyZone.cs" />
+    <Compile Include="Tools\IoCMechanicsModule.cs" />
     <Compile Include="Tools\IoC.cs" />
+    <Compile Include="Tools\IoCTestModule.cs" />
     <Compile Include="Tools\Logging.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>

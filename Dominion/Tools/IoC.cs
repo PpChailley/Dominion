@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using gbd.Dominion.AI;
-using gbd.Dominion.Model;
-using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.Zones;
 using Ninject;
 using Ninject.Syntax;
 
@@ -23,33 +18,15 @@ namespace gbd.Dominion.Tools
 
         public static IKernel InitKernel()
         {
-            _kernel = new StandardKernel();
-
-            _kernel.Bind<int>().ToConstant(0);
-
-            _kernel.Bind<IHand>().To<Hand>();
-            _kernel.Bind<IDeck>().To<StartingDeck>();
-            _kernel.Bind<IDiscardPile>().To<DiscardPile>();
-            _kernel.Bind<ILibrary>().To<Library>();
-            _kernel.Bind<IBattleField>().To<BattleField>();
-
-            _kernel.Bind<IIntelligence>().To<RandomAi>();
-
-        //    _kernel.Bind<IEnumerator<ICard>>().To<AbstractDeck.DeckSimpleEnumerator>();
-
-            _kernel.Bind<IAi>().To<RandomAi>();
-            _kernel.Bind<IPlayer>().To<Player>();
-            _kernel.Bind<IGame>().To<Game>();
-            
-            _kernel.Bind<ICollection<IPlayer>>()
-                            .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
-
-            _kernel.Bind<ISupplyPile>().To<SupplyPile>();
-            
-            
+            _kernel = new StandardKernel(   new IoCMechanicsModule(),
+                                            new IoCTestModule());
 
             return _kernel;
         }
+
+        
+
+
 
         public static IBindingToSyntax<T> ReBind<T>()
         {
