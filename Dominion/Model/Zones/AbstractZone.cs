@@ -3,59 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Model.GameMechanics;
+using gbd.Tools.Cli;
 
 namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractZone: IZone
     {
-
-        protected IList<ICard> _cards = new List<ICard>();
-
-        public IList<ICard> Cards
+        protected AbstractZone()
         {
-            get { return _cards; }
+            Cards = new List<ICard>();
         }
 
-        public IEnumerable<ICard> Get(int amount, Position positionFrom)
+        public IList<ICard> Cards { get; protected set; }
+
+        public IEnumerable<ICard> Get(int amount, Position positionFrom = Position.Top)
         {
-            var cardsCount = Cards.Count;
+            if (amount > Cards.Count)
+                throw new NotEnoughCardsException("Cannot get {0} cards, collection has only {1}".Format(amount, Cards.Count));
 
-            if (Cards.Count < amount)
+            switch (positionFrom)
             {
-                throw new NotEnoughCardsException();
+                case Position.Top:
+                    return Cards.Take(amount);
+
+                case Position.Bottom:
+                    return Cards.TakeLast(amount);
+
+                default:
+                    throw new InvalidOperationException();
             }
-
-            var toreturn = new List<ICard>();
-
-            for (var i = 0; i < amount; i++)
-            {
-                switch (positionFrom)
-                {
-                    case Position.Top:
-                        toreturn.Add(Cards.ElementAt(i));
-                        break;
-
-                    case Position.Bottom:
-                        int index = cardsCount - i - 1;
-                        toreturn.Add(Cards.ElementAt(index));
-                        break;
-
-                    default:
-                        throw new NotImplementedException();
-                }
-            }
-
-            return toreturn;
         }
 
         public void SortCards(Func<ICard, IComparable> comparer)
         {
-            this._cards = Cards.OrderBy(comparer).ToList();
+            this.Cards = Cards.OrderBy(comparer).ToList();
         }
 
         public virtual int TotalCardsAvailable
         {
             get { return Cards.Count; }
+        }
+
+
+        public override string ToString()
+        {
+            return StringContentsExtension.Format("{0} with {1} cards available and {2} in Cards", 
+                                this.GetType().Name, 
+                                this.TotalCardsAvailable,
+                                this.Cards.Count);
         }
     }
 }

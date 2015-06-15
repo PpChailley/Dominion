@@ -9,12 +9,10 @@ using Ninject;
 
 namespace gbd.Dominion.Model.Zones
 {
-    public class SupplyPile: ISupplyPile
+    public class SupplyPile : AbstractZone, ISupplyPile 
     {
 
         public const int DEFAULT_SUPPLY_PILE_SIZE = 10;
-
-        public IList<ICard> Cards { get; private set; }
 
 
 
@@ -39,33 +37,6 @@ namespace gbd.Dominion.Model.Zones
   */      
 
 
-        public IEnumerable<ICard> Get(int amount, Position positionFrom = Position.Top)
-        {
-
-            if (amount > Cards.Count)
-                throw new NotEnoughCardsException("Cannot get {0} cards, collection has only {1}".Format(amount, Cards.Count));
-
-            switch (positionFrom)
-            {
-                case Position.Top:
-                    return Cards.Take(amount);
-
-                case Position.Bottom:
-                    return Cards.TakeLast(amount);
-
-                default:
-                    throw new InvalidOperationException();
-            }
-        }
-
-        public void SortCards(Func<ICard, IComparable> comparer)
-        {
-            Cards = Cards.OrderBy(comparer).ToList();
-        }
-
-        public int TotalCardsAvailable
-        {
-            get { return Cards.Count; }
-        }
+ 
     }
 }
