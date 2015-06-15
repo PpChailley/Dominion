@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gbd.Dominion.Model.Zones;
 using Ninject;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.Zones
+namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractSupplyZone: ISupplyZone
     {

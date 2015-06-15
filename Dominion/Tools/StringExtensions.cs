@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 {
   /// <summary>
   /// from http://stackoverflow.com/questions/359827/ignoring-accented-letters-in-string-comparison

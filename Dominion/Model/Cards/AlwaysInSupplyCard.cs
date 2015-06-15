@@ -1,6 +1,6 @@
-﻿using org.gbd.Dominion.Contents;
+﻿using gbd.Dominion.Contents;
 
-namespace org.gbd.Dominion.Model.Cards
+namespace gbd.Dominion.Model.Cards
 {
     /// <summary>
     /// A card that is always in the supply, whatever the game. Like copper, curse, province...

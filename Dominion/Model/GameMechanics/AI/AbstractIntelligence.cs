@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace org.gbd.Dominion.Model.GameMechanics.AI
+namespace gbd.Dominion.Model.GameMechanics.AI
 {
     public abstract class AbstractIntelligence: IIntelligence
     {

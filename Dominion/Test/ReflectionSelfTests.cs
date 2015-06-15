@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Model;
+using gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Test
+namespace gbd.Dominion.Test
 {
     
     [TestFixture]

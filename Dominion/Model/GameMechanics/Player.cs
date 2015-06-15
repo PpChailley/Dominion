@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms.VisualStyles;
 using Ninject;
-using org.gbd.Dominion.Model.Zones;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.GameMechanics
+namespace gbd.Dominion.Model.GameMechanics
 {
     public class Player : IPlayer
     {

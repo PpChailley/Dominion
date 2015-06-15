@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
-using org.gbd.Dominion.AI;
-using org.gbd.Dominion.Model;
+using gbd.Dominion.AI;
+using gbd.Dominion.Model;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 
 {
     public class ReflectionClassFinder

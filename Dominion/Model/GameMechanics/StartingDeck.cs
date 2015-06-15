@@ -1,8 +1,8 @@
-using org.gbd.Dominion.Contents;
-using org.gbd.Dominion.Contents.Cards;
-using org.gbd.Dominion.Model.Zones;
+using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Contents;
+using gbd.Dominion.Model.Zones;
 
-namespace org.gbd.Dominion.Model.GameMechanics
+namespace gbd.Dominion.Model.GameMechanics
 {
     public class StartingDeck : AbstractDeck, IDeck
     {

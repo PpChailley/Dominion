@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using org.gbd.Dominion.Model.Zones;
+using gbd.Dominion.Model.Zones;
 
-namespace org.gbd.Dominion.Model.GameMechanics
+namespace gbd.Dominion.Model.GameMechanics
 {
     public interface IPlayer
     {

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Ninject;
-using org.gbd.Dominion.Model.Zones;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Model.GameMechanics;
 
-namespace org.gbd.Dominion.Model.GameMechanics
+namespace gbd.Dominion.Model.GameMechanics
 {
     public interface IGame
     {

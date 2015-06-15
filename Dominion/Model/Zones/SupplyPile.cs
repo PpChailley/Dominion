@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.Zones
+namespace gbd.Dominion.Model.Zones
 {
     internal class SupplyPile: ISupplyPile
     {

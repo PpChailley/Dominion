@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 {
     public static class Collections
     {

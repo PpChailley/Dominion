@@ -1,4 +1,4 @@
-﻿namespace org.gbd.Dominion.Model.Cards
+﻿namespace gbd.Dominion.Model.Cards
 {
     public enum GameSet
     {

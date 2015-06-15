@@ -1,9 +1,9 @@
 using System;
-using org.gbd.Dominion.Contents;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Model.Cards;
+using gbd.Dominion.Contents;
+using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
 
-namespace org.gbd.Dominion.Test
+namespace gbd.Dominion.Test
 {
 
     /// <summary>

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
-using org.gbd.Dominion.Model.Cards;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.Zones
+namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractDeck: IDeck
     {

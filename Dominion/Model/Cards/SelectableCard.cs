@@ -1,4 +1,4 @@
-﻿namespace org.gbd.Dominion.Model.Cards
+﻿namespace gbd.Dominion.Model.Cards
 {
     /// <summary>
     /// A standard card that can be randomly included in the supply by the game creation process 

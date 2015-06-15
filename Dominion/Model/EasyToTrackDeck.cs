@@ -1,7 +1,7 @@
-using org.gbd.Dominion.Model.Zones;
-using org.gbd.Dominion.Test;
+using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Test;
 
-namespace org.gbd.Dominion.Model
+namespace gbd.Dominion.Model
 {
     public class EasyToTrackDeck : AbstractDeck, IDeck
     {

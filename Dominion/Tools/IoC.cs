@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Model.GameMechanics;
 using Ninject;
 using Ninject.Syntax;
-using org.gbd.Dominion.AI;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Model.GameMechanics;
-using org.gbd.Dominion.Model.Zones;
+using gbd.Dominion.AI;
+using gbd.Dominion.Model;
+using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.Zones;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 {
     public class IoC
     {

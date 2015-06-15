@@ -1,7 +1,7 @@
 using Ninject;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Model.GameMechanics
+namespace gbd.Dominion.Model.GameMechanics
 {
     public class PlayerStatus
     {

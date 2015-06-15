@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 {
   public static class ProcessExtensions
   {

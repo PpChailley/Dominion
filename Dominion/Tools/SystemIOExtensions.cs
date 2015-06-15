@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 {
   public static class SystemIoExtensions
   {

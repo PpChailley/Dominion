@@ -3,7 +3,7 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Tools
 {
     public class Logging
     {

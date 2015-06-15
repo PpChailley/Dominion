@@ -1,4 +1,4 @@
-﻿namespace org.gbd.Dominion.Model
+﻿namespace gbd.Dominion.Model
 {
     public class CardMetadata
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using org.gbd.Dominion.Model.Actions;
+using gbd.Dominion.Model.Actions;
 
-namespace org.gbd.Dominion.Model.GameMechanics.Actions
+namespace gbd.Dominion.Model.GameMechanics.Actions
 {
     public class Discard:GameActionTargetingPlayers, IGameActionTargetingPlayers
     {

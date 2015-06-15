@@ -1,6 +1,7 @@
-using org.gbd.Dominion.Model.Zones;
+using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Model.Zones;
 
-namespace org.gbd.Dominion.Model
+namespace gbd.Dominion.Model
 {
     public interface IDiscardPile: IZone
     {

@@ -1,6 +1,6 @@
-﻿using org.gbd.Dominion.Model.GameMechanics;
+﻿using gbd.Dominion.Model.GameMechanics;
 
-namespace org.gbd.Dominion.Model.Cards
+namespace gbd.Dominion.Model.Cards
 
 {
     public class Treasure : ICardType

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using org.gbd.Dominion.Contents;
+using gbd.Dominion.Contents;
 
-namespace org.gbd.Dominion.Model.Cards
+namespace gbd.Dominion.Model.Cards
 {
     public abstract class ConditionalCard: AbstractCard
     {

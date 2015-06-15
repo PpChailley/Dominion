@@ -1,4 +1,4 @@
-﻿namespace org.gbd.Dominion.Model.GameMechanics
+﻿namespace gbd.Dominion.Model.GameMechanics
 {
     public class EndOfGameCondition : GameException
     {
