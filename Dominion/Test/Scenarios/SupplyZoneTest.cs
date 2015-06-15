@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
 using Ninject;
 using NUnit.Framework;
@@ -11,8 +13,19 @@ using NUnit.Framework;
 namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
-    class SupplyZoneTest
+    public class SupplyZoneTest: BaseTest
     {
+
+        [SetUp]
+        public new void SetUp()
+        {
+            base.SetUp();
+
+            IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
+        }
+
+
+
 
         [Test]
         public void SupplyZone()
@@ -24,7 +37,10 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyPile()
         {
-            IoC.ReBind<ISupplyPile>().To<SupplyPile>();
+            IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
+
+            IoC.ReBind<ICollection<IPlayer>>()
+                .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
@@ -32,8 +48,9 @@ namespace gbd.Dominion.Test.Scenarios
 
             Game.MoveCards(pile, player.DiscardPile);
 
-            Assert.That(pile.Cards.Count, Is.EqualTo(9));
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(11));
+            Assert.That(pile.Cards.Count, Is.EqualTo(9));
+            
 
         }
 
