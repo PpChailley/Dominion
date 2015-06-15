@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NUnit.Framework;
 using gbd.Dominion.Model;
-using gbd.Dominion.Tools;
+using gbd.Dominion.Test.Utilities;
+using NUnit.Framework;
 
-namespace gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     
     [TestFixture]

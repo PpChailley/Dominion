@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Dominion.Tools;
+using gbd.Tools.Cli;
 
 namespace gbd.Dominion.AI
 {

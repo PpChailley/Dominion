@@ -1,5 +1,5 @@
 using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Test;
+using gbd.Dominion.Test.Utilities;
 
 namespace gbd.Dominion.Model
 {

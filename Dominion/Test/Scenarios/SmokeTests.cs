@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using gbd.Dominion.Model;
-using gbd.Dominion.Model.GameMechanics;
+﻿using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Test.Utilities;
+using NUnit.Framework;
 
-namespace gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
     public class SmokeTests: BaseTest

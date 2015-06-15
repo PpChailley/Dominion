@@ -1,15 +1,14 @@
 ﻿using System.Linq;
-using gbd.Dominion.Model.GameMechanics;
-using Ninject;
-using NUnit.Framework;
 using gbd.Dominion.Contents;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Test;
+using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
+using Ninject;
+using NUnit.Framework;
 
-namespace gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
     public class ModelTests: BaseTest

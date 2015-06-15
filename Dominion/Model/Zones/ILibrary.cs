@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Model.Zones;
 
-namespace gbd.Dominion.Model
+namespace gbd.Dominion.Model.Zones
 {
     public interface ILibrary: IZone
     {

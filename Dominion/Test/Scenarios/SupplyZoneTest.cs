@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Ninject;
-using NUnit.Framework;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Tools;
+using Ninject;
+using NUnit.Framework;
 
-namespace gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
     class SupplyZoneTest

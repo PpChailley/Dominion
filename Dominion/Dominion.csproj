@@ -90,8 +90,8 @@
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\SupplyZone.cs" />
-    <Compile Include="Test\GameScenarioTest.cs" />
-    <Compile Include="Test\ReflectionSelfTests.cs" />
+    <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
+    <Compile Include="Test\Scenarios\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Cards\Curse.cs" />
     <Compile Include="Contents\Cards\Duchy.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Model\Zones\IZone.cs" />
     <Compile Include="Model\GameMechanics\NotEnoughCardsException.cs" />
     <Compile Include="Model\Cards\OptionalCard.cs" />
-    <Compile Include="Test\PlayerTest.cs" />
+    <Compile Include="Test\Scenarios\PlayerTest.cs" />
     <Compile Include="Model\GameMechanics\Position.cs" />
     <Compile Include="Model\Zones\CardsPile.cs" />
     <Compile Include="Model\GameMechanics\DeckEmptyException.cs" />
@@ -135,27 +135,23 @@
     <Compile Include="Model\Zones\ILibrary.cs" />
     <Compile Include="Model\Zones\IBattleField.cs" />
     <Compile Include="Model\Zones\Library.cs" />
-    <Compile Include="Test\ModelTests.cs" />
+    <Compile Include="Test\Scenarios\ModelTests.cs" />
     <Compile Include="Model\GameMechanics\PlayerChoice.cs" />
     <Compile Include="Model\GameMechanics\PlayersDesignation.cs" />
     <Compile Include="Model\GameMechanics\Resources.cs" />
     <Compile Include="Model\GameMechanics\Actions\GameAction.cs" />
     <Compile Include="Model\Zones\BattleField.cs" />
     <Compile Include="Model\Cards\SelectableCard.cs" />
-    <Compile Include="Test\SmokeTests.cs" />
+    <Compile Include="Test\Scenarios\SmokeTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
-    <Compile Include="Test\BaseTest.cs" />
+    <Compile Include="Test\Utilities\BaseTest.cs" />
     <Compile Include="Model\Zones\AbstractDeck.cs" />
-    <Compile Include="Test\AiTest.cs" />
-    <Compile Include="Test\SupplyZoneTest.cs" />
-    <Compile Include="Test\TestCard.cs" />
-    <Compile Include="Tools\ProcessExtensions.cs" />
-    <Compile Include="Tools\ReflectionClassFinder.cs" />
-    <Compile Include="Tools\Collections.cs" />
+    <Compile Include="Test\Scenarios\AiTest.cs" />
+    <Compile Include="Test\Scenarios\SupplyZoneTest.cs" />
+    <Compile Include="Test\Utilities\TestCard.cs" />
+    <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
     <Compile Include="Tools\IoC.cs" />
     <Compile Include="Tools\Logging.cs" />
-    <Compile Include="Tools\StringExtensions.cs" />
-    <Compile Include="Tools\SystemIOExtensions.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools\Tools\Tools.csproj">
+      <Project>{4A58FBBA-B0C2-4CDD-991C-87163CC279D4}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

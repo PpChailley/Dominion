@@ -3,7 +3,7 @@ using gbd.Dominion.Contents;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 
-namespace gbd.Dominion.Test
+namespace gbd.Dominion.Test.Utilities
 {
 
     /// <summary>
