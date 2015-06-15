@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
 using NUnit.Framework;
+using org.gbd.Dominion.Model;
+using org.gbd.Dominion.Model.Cards;
 using org.gbd.Dominion.Model.GameMechanics;
 using org.gbd.Dominion.Model.Zones;
 using org.gbd.Dominion.Tools;
@@ -39,9 +42,16 @@ namespace org.gbd.Dominion.Test
         }
 
         [Test]
-        public void EnoughCardsForFullSUpplyZone()
+        public void EnoughCardsForPlayableSupplyZone()
         {
-            throw new NotImplementedException();
+            var classes = Assembly.GetExecutingAssembly().GetTypes();
+
+            var cards = classes.Where(t => typeof(SelectableCard).IsAssignableFrom(t)
+                                                               && t.IsInterface == false
+                                                               && t.IsAbstract == false);
+
+
+            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(10));
         }
 
         

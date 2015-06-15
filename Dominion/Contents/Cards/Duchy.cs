@@ -4,7 +4,7 @@ using org.gbd.Dominion.Model.GameMechanics;
 
 namespace org.gbd.Dominion.Contents
 {
-    public class Duchy : BaseSetCard
+    public class Duchy : AlwaysInSupplyCard
     {
         public Duchy()
         {

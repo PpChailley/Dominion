@@ -5,6 +5,10 @@ using org.gbd.Dominion.Model.Cards;
 
 namespace org.gbd.Dominion.Test
 {
+
+    /// <summary>
+    /// A card that is included in the supply only in test games
+    /// </summary>
     public class TestCard : AbstractCard, ICard
     {
         public static int LastIndex = 0;

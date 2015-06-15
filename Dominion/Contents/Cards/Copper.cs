@@ -4,7 +4,7 @@ using org.gbd.Dominion.Model.GameMechanics;
 
 namespace org.gbd.Dominion.Contents.Cards
 {
-    class Copper : BaseSetCard, ICard
+    class Copper : AlwaysInSupplyCard, ICard
     {
         public Copper()
         {

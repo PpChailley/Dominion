@@ -74,6 +74,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\EasyToTrackDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Model\GameMechanics\Actions\Discard.cs" />
     <Compile Include="Model\GameMechanics\Actions\GameActionTargetingPlayers.cs" />
     <Compile Include="Model\GameMechanics\Actions\IGameActionTargetingPlayers.cs" />
-    <Compile Include="Model\Cards\BaseSetCard.cs" />
+    <Compile Include="Model\Cards\AlwaysInSupplyCard.cs" />
     <Compile Include="Model\GameMechanics\Actions\Draw.cs" />
     <Compile Include="Model\Cards\CardMetadata.cs" />
     <Compile Include="Model\Zones\CardOrigin.cs" />

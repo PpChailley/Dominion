@@ -2,11 +2,14 @@
 
 namespace org.gbd.Dominion.Model.Cards
 {
-    public abstract class BaseSetCard: AbstractCard
+    /// <summary>
+    /// A card that is always in the supply, whatever the game. Like copper, curse, province...
+    /// </summary>
+    public abstract class AlwaysInSupplyCard: AbstractCard
     {
         public override GameSet PresentInSet
         {
-            get { return GameSet.BaseSet; }
+            get { return GameSet.AlwaysIncluded; }
         }
 
         public override GameExtension Extension
