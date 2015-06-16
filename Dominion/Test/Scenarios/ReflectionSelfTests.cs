@@ -21,7 +21,7 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-
+/*
        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public void HaveEnoughCardsImplementedToPlay()

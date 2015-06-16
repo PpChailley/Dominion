@@ -19,6 +19,8 @@ namespace gbd.Dominion.Tools
             Bind<ISupplyPile>().To<TestSupplyPile>();
             Bind<ISupplyZone>().To<TestSupplyZone>();
             Bind<IDeck>().To<EasyToTrackDeck>();
+            Bind<ISupplyPile>().To<TestSupplyPile>();
+            Bind<ISupplyZone>().To<TestSupplyZone>();
 
             //foreach (var binding in this.BindMultipleTimes<ICard>(10))
             //{

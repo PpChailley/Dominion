@@ -14,6 +14,8 @@ namespace gbd.Dominion.Test.Scenarios
     [TestFixture]
     public class AiTest : BaseTest
     {
+
+        /*
         [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public void EnoughAiImplemented()
@@ -38,6 +40,7 @@ namespace gbd.Dominion.Test.Scenarios
             ai.Init(playerMock.Object);
 
             var toDiscard = ai.ChooseAndDiscard(3);
+            * /
 
 
 
