@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Tools.NInject;
+using Ninject.Activation;
 using Ninject.Modules;
 
 namespace gbd.Dominion.Tools
@@ -24,9 +26,12 @@ namespace gbd.Dominion.Tools
             Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 
-            Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10));
-            Bind<IList<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10));
+            //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<IZone>();
+            //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<ISupplyPile>();
+            //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<ISupplyZone>();
+            Bind<IList<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<IZone>();
 
         }
+
     }
 }
