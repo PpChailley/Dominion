@@ -16,7 +16,6 @@ namespace gbd.Dominion.Tools
             Bind<int>().ToConstant(0);
 
             Bind<IHand>().To<Hand>();
-            //Bind<IDeck>().To<StartingDeck>();
             Bind<IDiscardPile>().To<DiscardPile>();
             Bind<ILibrary>().To<Library>();
             Bind<IBattleField>().To<BattleField>();
@@ -24,13 +23,6 @@ namespace gbd.Dominion.Tools
             Bind<IGame>().To<Game>();
 
             Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
-
-
-            //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<IZone>();
-            //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<ISupplyPile>();
-            //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<ISupplyZone>();
-            
-            Bind<IList<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10));
 
         }
 

@@ -22,15 +22,6 @@ namespace gbd.Dominion.Tools
             Bind<ISupplyPile>().To<TestSupplyPile>();
             Bind<ISupplyZone>().To<TestSupplyZone>();
 
-            //foreach (var binding in this.BindMultipleTimes<ICard>(10))
-            //{
-            //    binding.To<TestCard>().WhenInjectedInto<ILibrary>();
-            //}
-
-
-            //this.BindMultipleTimes<ICard>(10).ForEach( 
-            //    x => x.To<TestCard>().WhenInjectedInto<ILibrary>());
-
             this.BindMultipleTimesTo<ICard, TestCard>(10, x => x.WhenInjectedInto<ILibrary>());
 
 
