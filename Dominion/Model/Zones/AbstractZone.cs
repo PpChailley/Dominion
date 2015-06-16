@@ -9,9 +9,9 @@ namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractZone: IZone
     {
-        protected AbstractZone()
+        protected AbstractZone(IList<ICard> cards)
         {
-            Cards = new List<ICard>();
+            Cards = cards;
         }
 
         public IList<ICard> Cards { get; protected set; }

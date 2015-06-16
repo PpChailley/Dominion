@@ -5,6 +5,7 @@ using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
+using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
 
@@ -16,12 +17,17 @@ namespace gbd.Dominion.Test.Scenarios
 
         public const int NB_CARDS_IN_DEFAULT_DECK = 10;
 
-
+        [Test]
+        public void Deck()
+        {
+            var deck = IoC.Kernel.Get<IDeck>();
+            Assert.That(deck.Cards.Count, Is.EqualTo(10));
+        }
 
         [Test]
         public void ShuffleDeck()
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var deck = IoC.Kernel.Get<IDeck>();
             var library = deck.ShuffleDiscardToLibrary();
@@ -38,7 +44,7 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(5, 2, true, 8, 2, 0)]
         public void DiscardFromHand(int draw, int discard, bool shuffle, int expectInHand, int expectInLib, int expectInDiscard)
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.GetReadyToStartGame();
@@ -64,10 +70,12 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(5,10,0)]
         public void PlayerDraw(int amountToDraw, int expectedInHand, int expectedInLibrary)
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
+
+            Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(10));
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(5));
@@ -84,7 +92,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void PlayerDrawAllDeckPlusOne()
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
@@ -96,9 +104,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void PlayerGainCard()
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
-            var player = new Player();
+            var player = IoC.Kernel.Get<IPlayer>();
             player.GetReadyToStartGame();
 
             Assert.That(player.CurrentScore, Is.EqualTo(3));
@@ -115,9 +123,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void CountVictory()
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
-            var player = new Player();
+            var player = IoC.Kernel.Get<IPlayer>();
 
             Assert.That(player.CurrentScore, Is.EqualTo(3));
 
@@ -140,7 +148,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void ReshuffleWhenEmpty()
         {
-            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
@@ -165,7 +173,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test, ExpectedException(typeof(NotEnoughCardsException))]
         public void ExceptionWhenDrawFromEmptyDeck()
         {
-            IoC.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
@@ -183,7 +191,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Explicit]
         public void CardGet()
         {
-            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
 
             var player = IoC.Kernel.Get<Player>();
 
@@ -221,7 +229,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test, ExpectedException(typeof(NotEnoughCardsException))]
         public void GetTooManyCardsFromZone()
         {
-            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
 
             var deck = IoC.Kernel.Get<IDeck>();
             Assert.That(deck.Cards.Count, Is.EqualTo(10));

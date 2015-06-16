@@ -50,11 +50,11 @@ namespace gbd.Dominion.Model.GameMechanics
         public String Name;
 
 
-        public Player()
+        public Player(IDeck deck, IIntelligence intel, PlayerStatus status)
         {
-            Deck = IoC.Kernel.Get<IDeck>();
-            _intelligence = IoC.Kernel.Get<IIntelligence>();
-            Status = IoC.Kernel.Get<PlayerStatus>();
+            Deck = deck;
+            _intelligence = intel;
+            Status = status;
         }
 
         public IHand Hand{ get { return Deck.Hand; }}

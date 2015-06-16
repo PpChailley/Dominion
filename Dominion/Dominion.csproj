@@ -89,7 +89,7 @@
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyPile.cs" />
-    <Compile Include="Model\Zones\SupplyZone.cs" />
+    <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
     <Compile Include="Test\Scenarios\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />

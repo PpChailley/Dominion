@@ -9,6 +9,7 @@ using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
+using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
 
@@ -23,7 +24,7 @@ namespace gbd.Dominion.Test.Scenarios
         {
             base.SetUp();
 
-            IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
+            IoC.Kernel.ReBind<ISupplyPile>().To<TestSupplyPile>();
         }
 
 
@@ -32,10 +33,10 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyZone()
         {
-            IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
-            IoC.ReBind<ISupplyZone>().To<TestSupplyZone>();
-            IoC.ReBind<ICard>().To<TestCard>();
-            IoC.ReBind<ICollection<IPlayer>>()
+            IoC.Kernel.ReBind<ISupplyPile>().To<TestSupplyPile>();
+            IoC.Kernel.ReBind<ISupplyZone>().To<TestSupplyZone>();
+            
+            IoC.Kernel.ReBind<ICollection<IPlayer>>()
                 .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 
@@ -53,10 +54,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyPile()
         {
-            IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
-            IoC.ReBind<ICard>().To<TestCard>();
+            IoC.Kernel.ReBind<ISupplyPile>().To<TestSupplyPile>();
 
-            IoC.ReBind<ICollection<IPlayer>>()
+            IoC.Kernel.ReBind<ICollection<IPlayer>>()
                 .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 

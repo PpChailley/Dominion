@@ -13,7 +13,12 @@ namespace gbd.Dominion.Model.Zones
     {
 
 
-        public IList<ISupplyPile> Piles = IoC.Kernel.Get<IList<ISupplyPile>>();
+        public IList<ISupplyPile> Piles;
+
+        protected AbstractSupplyZone(IList<ISupplyPile> piles)
+        {
+            Piles = piles;
+        }
 
 
         public IList<ICard> Cards

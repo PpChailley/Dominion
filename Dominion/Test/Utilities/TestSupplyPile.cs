@@ -7,9 +7,8 @@ namespace gbd.Dominion.Test.Utilities
 {
     public class TestSupplyPile: SupplyPile, ISupplyPile
     {
-
-
-
-
+        public TestSupplyPile(IList<ICard> cards) : base(cards)
+        {
+        }
     }
 }

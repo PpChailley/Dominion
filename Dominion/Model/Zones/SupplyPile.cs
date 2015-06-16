@@ -11,10 +11,7 @@ namespace gbd.Dominion.Model.Zones
 
 
 
-        public SupplyPile()
-        {
-            Cards = IoC.Kernel.Get<IList<ICard>>();
-        }
+        public SupplyPile(IList<ICard> cards) : base(cards) {}
 
     }
 }

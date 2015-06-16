@@ -20,8 +20,9 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
- 
 
+/*
+       [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public void HaveEnoughCardsImplementedToPlay()
         {
@@ -32,6 +33,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(castedTestCases.Count() > 10);
         }
 
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof(ReflectionClassFinder),"GetAllImplementedCardsTestData")]
         public void CardsRequirements(ICard card)
         {
@@ -46,6 +48,7 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllTestRelatedClassesTestCaseData")]
         public void AllTestsFixturesDeriveFromBaseTest(Type t)
         {
@@ -53,13 +56,14 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
-
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllTestRelatedClassesTestCaseData")]
         public void AllTestRelatedClassesAreTestFixtures(Type t)
         {
             Assert.That(t.GetCustomAttributes(typeof (TestFixtureAttribute), true).Any(), Is.True);
         }
 
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public double TestMethodsAmountIsCorrect()
         {
@@ -83,11 +87,14 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public void TestMethodsAmountIsGood()
         {
             Assert.That(TestMethodsAmountIsCorrect(), Is.GreaterThan(0.6));
         }
+ * 
+ * */
 
     }
 }
