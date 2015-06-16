@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Tools;
+using gbd.Tools.Cli;
 using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics
@@ -34,7 +35,9 @@ namespace gbd.Dominion.Model.GameMechanics
         public static void MoveCards(ILibrary from, IZone to, int amount = 1, Position positionFrom = Position.Top, Position positionTo = Position.Top)
         {
             if (@from.TotalCardsAvailable < amount)
-                throw new NotEnoughCardsException();
+                throw new NotEnoughCardsException(
+                    "Expected: {0}, Available: {1}"
+                    .Format(amount, @from.TotalCardsAvailable));
 
             if (@from.Cards.Count < amount)
             {

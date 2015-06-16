@@ -14,12 +14,14 @@ namespace gbd.Dominion.Test.Scenarios
     [TestFixture]
     public class AiTest : BaseTest
     {
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public void EnoughAiImplemented()
         {
             Assert.That(ReflectionClassFinder.GetAllAiTestCaseData().Count(), Is.GreaterThan(0));
         }
 
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllAiTestCaseData")]
         public void AiKnowsWhatToDiscard(Type aiType)
         {
@@ -42,9 +44,8 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
-
+        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllAiTestCaseData")]
-        [Repeat(30)]
         public void AiIsAbleToDiscard(Type ai)
         {
             IoC.ReBind<IDeck>().To<EasyToTrackDeck>();

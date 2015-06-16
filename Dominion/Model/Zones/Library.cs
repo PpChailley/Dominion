@@ -14,7 +14,10 @@ namespace gbd.Dominion.Model.Zones
 
 
 
-        public Library(IList<ICard> cards) : base(cards) { }
+        public Library(IList<ICard> cards) : base(cards)
+        {
+            int i = 0;
+        }
 
         public void Init(IDeck deck)
         {
