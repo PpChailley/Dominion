@@ -5,6 +5,7 @@ using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
+using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
 
@@ -25,7 +26,7 @@ namespace gbd.Dominion.Test.Scenarios
         {
             base.SetUp();
 
-            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
             Game.G.MakeReadyToStart();
 
         }

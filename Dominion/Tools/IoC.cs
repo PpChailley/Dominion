@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Model;
+using gbd.Tools.Cli;
 using Ninject;
 using Ninject.Syntax;
 
@@ -25,22 +28,5 @@ namespace gbd.Dominion.Tools
         }
 
         
-
-
-
-        public static IBindingToSyntax<T> ReBind<T>()
-        {
-            int nbBindingsDefined = Kernel.GetBindings(typeof (T)).Count();
-            if (nbBindingsDefined != 1)
-            {
-                throw new InvalidOperationException("Rebind() should only be called when exactly one binding is defined\n" +
-                                                    "  Defined: " + nbBindingsDefined + "\n" +
-                                                    "  0  - Binding is missing from normal operations declaration\n" +
-                                                    "  >1 - There is trash in here");
-            }
-
-            Kernel.Unbind<T>();
-            return Kernel.Bind<T>();
-        }
     }
 }
