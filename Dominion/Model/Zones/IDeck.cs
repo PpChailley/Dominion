@@ -7,7 +7,7 @@ namespace gbd.Dominion.Model.Zones
         IList<ICard> Cards { get; }
         IHand Hand { get; }
         IDiscardPile DiscardPile { get; }
-        ILibrary Library { get; }
+        ILibrary Library { get; set; }
 
         int CurrentScore { get; }
         CardRepartition CardCountByZone { get; }

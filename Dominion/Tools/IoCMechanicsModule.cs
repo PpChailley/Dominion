@@ -29,7 +29,8 @@ namespace gbd.Dominion.Tools
             //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<IZone>();
             //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<ISupplyPile>();
             //Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<ISupplyZone>();
-            Bind<IList<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10)).WhenInjectedInto<IZone>();
+            
+            //Bind<IList<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10));
 
         }
 

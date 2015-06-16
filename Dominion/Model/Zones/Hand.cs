@@ -18,5 +18,6 @@ namespace gbd.Dominion.Model.Zones
             Cards.Add(card);
         }
 
+        public Hand(IList<ICard> cards) : base(cards) {}
     }
 }

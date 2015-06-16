@@ -98,7 +98,7 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
-            var player = new Player();
+            var player = IoC.Kernel.Get<IPlayer>();
             player.GetReadyToStartGame();
 
             Assert.That(player.CurrentScore, Is.EqualTo(3));
@@ -117,7 +117,7 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.ReBind<IDeck>().To<StartingDeck>();
 
-            var player = new Player();
+            var player = IoC.Kernel.Get<IPlayer>();
 
             Assert.That(player.CurrentScore, Is.EqualTo(3));
 

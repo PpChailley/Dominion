@@ -13,9 +13,16 @@ namespace gbd.Dominion.Tools
         {
             Bind<IIntelligence>().To<RandomAi>();
             Bind<IAi>().To<RandomAi>();
+            Bind<ICard>().To<TestCard>();
+
+
 
             Bind<ISupplyPile>().To<TestSupplyPile>();
-            Bind<ICard>().To<TestCard>();
+            Bind<ISupplyZone>().To<TestSupplyZone>();
+
+//            Bind<ISupplyPile>().ToMethod(x => 
+//                    new TestSupplyPile())
+            
 
             // TODO: Understand contextual binding (!)
             /*

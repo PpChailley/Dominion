@@ -1,5 +1,7 @@
 ﻿using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Test.Utilities;
+using gbd.Dominion.Tools;
+using Ninject;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Test.Scenarios
@@ -11,7 +13,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SmokeTest()
         {
-            var player = new Player();
+            var player = IoC.Kernel.Get<IPlayer>();
         }
 
 
