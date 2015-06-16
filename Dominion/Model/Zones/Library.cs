@@ -12,26 +12,21 @@ namespace gbd.Dominion.Model.Zones
 
         public IDeck ParentDeck { get; private set; }
 
-        
 
-        public Library(IDeck deck, IList<ICard> cards) : base(cards)
+
+        public Library(IList<ICard> cards) : base(cards) { }
+
+        public void Init(IDeck deck)
         {
             ParentDeck = deck;
-            deck.Library = this;
 
             foreach (var card in ParentDeck.DiscardPile.Cards)
             {
                 Cards.Add(card);
             }
-
             ParentDeck.DiscardPile.Cards.Clear();
             Cards.Shuffle();
-        }
 
-
-        public void Init(IDeck deck)
-        {
-            ParentDeck = deck;
         }
 
         public void ShuffleDiscardToLibrary()
@@ -96,6 +91,5 @@ namespace gbd.Dominion.Model.Zones
             get { return Cards.Count + ParentDeck.DiscardPile.Cards.Count; }
         }
 
-        public Library(IList<ICard> cards) : base(cards) {}
     }
 }

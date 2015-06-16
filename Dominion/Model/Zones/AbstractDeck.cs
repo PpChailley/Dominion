@@ -10,17 +10,20 @@ namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractDeck: IDeck
     {
-        protected AbstractDeck(IDiscardPile discard,  IBattleField bf, IHand hand)
+        protected AbstractDeck(IDiscardPile discard, ILibrary lib, IBattleField bf, IHand hand)
         {
             DiscardPile = discard;
+            Library = lib;
             BattleField = bf;
             Hand = hand;
         }
 
 
+        
+        
         public IHand Hand { get; protected set; }
         public IDiscardPile DiscardPile { get; protected set; }
-        public ILibrary Library { get; set; }
+        public ILibrary Library { get; protected set; }
         public IBattleField BattleField { get; protected set; }
 
         public IList<ICard> Cards
