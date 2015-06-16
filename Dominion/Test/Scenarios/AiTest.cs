@@ -6,6 +6,7 @@ using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
+using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
 
@@ -15,15 +16,12 @@ namespace gbd.Dominion.Test.Scenarios
     public class AiTest : BaseTest
     {
 
-        /*
-        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test]
         public void EnoughAiImplemented()
         {
             Assert.That(ReflectionClassFinder.GetAllAiTestCaseData().Count(), Is.GreaterThan(0));
         }
 
-        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllAiTestCaseData")]
         public void AiKnowsWhatToDiscard(Type aiType)
         {
@@ -40,13 +38,12 @@ namespace gbd.Dominion.Test.Scenarios
             ai.Init(playerMock.Object);
 
             var toDiscard = ai.ChooseAndDiscard(3);
-            * /
+            */
 
 
 
         }
 
-        [Ignore("Suppress any call to ReflectionClassFinder")]
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllAiTestCaseData")]
         public void AiIsAbleToDiscard(Type ai)
         {
@@ -83,7 +80,7 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
  
-*/
+
 
 
     }
