@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
@@ -30,7 +32,21 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyZone()
         {
-            throw new NotImplementedException();
+            IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
+            IoC.ReBind<ISupplyZone>().To<TestSupplyZone>();
+            IoC.ReBind<ICard>().To<TestCard>();
+            IoC.ReBind<ICollection<IPlayer>>()
+                .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+
+
+            var player = IoC.Kernel.Get<IPlayer>();
+            var supply = IoC.Kernel.Get<ISupplyZone>();
+
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(supply.Cards.Count, Is.EqualTo(100));
+
+
+
         }
 
 
@@ -38,6 +54,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void SupplyPile()
         {
             IoC.ReBind<ISupplyPile>().To<TestSupplyPile>();
+            IoC.ReBind<ICard>().To<TestCard>();
 
             IoC.ReBind<ICollection<IPlayer>>()
                 .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
@@ -50,9 +67,8 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(11));
             Assert.That(pile.Cards.Count, Is.EqualTo(9));
-            
-
         }
+
 
         [Test]
         public void EnoughCardsForPlayableSupplyZone()
