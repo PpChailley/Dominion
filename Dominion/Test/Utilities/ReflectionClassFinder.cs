@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace gbd.Dominion.Test.Utilities
 
 {
-    public class ReflectionClassFinder
+    public class ReflectionClassFinder_DISABLED
     {
         public static IEnumerable<TestCaseData> GetAllImplementedCardsTestData
         {
