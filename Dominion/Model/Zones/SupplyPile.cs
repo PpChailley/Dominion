@@ -18,7 +18,7 @@ namespace gbd.Dominion.Model.Zones
 
         public SupplyPile()
         {
-            Cards = IoC.Kernel.Get<IList<ICard>>().Inject(IoC.Kernel, 10);
+            Cards = IoC.Kernel.Get<IList<ICard>>();
         }
 
 

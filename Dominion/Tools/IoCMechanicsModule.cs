@@ -21,13 +21,11 @@ namespace gbd.Dominion.Tools
             Bind<IPlayer>().To<Player>();
             Bind<IGame>().To<Game>();
 
-            // Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
             Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 
-            Bind<ICollection<ICard>>().ToConstructor(x =>new List<ICard>(x.Inject<IList<ICard>>()));
-            Bind<IList<ICard>>().ToConstructor(x => new List<ICard>(x.Inject<IList<ICard>>()));
-            //Bind<IList<ICard>>().To<List<ICard>>();
+            Bind<ICollection<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10));
+            Bind<IList<ICard>>().ToMethod(x => new List<ICard>().Inject(IoC.Kernel, 10));
 
         }
     }
