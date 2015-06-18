@@ -5,6 +5,11 @@ namespace gbd.Dominion.Model.Zones
     public class Hand : AbstractZone, IHand
     {
 
+        public Hand(IList<ICard> cards) : base(cards) { }
+        public Hand() : base(new List<ICard>()) { }
+
+
+
         public void Add(ICollection<ICard> cards)
         {
             foreach (var card in cards)
@@ -18,6 +23,5 @@ namespace gbd.Dominion.Model.Zones
             Cards.Add(card);
         }
 
-        public Hand(IList<ICard> cards) : base(cards) {}
     }
 }

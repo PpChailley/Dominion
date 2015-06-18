@@ -4,6 +4,7 @@ using System.Linq;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Tools;
 using gbd.Tools.Cli;
+using Ninject;
 
 namespace gbd.Dominion.Model.Zones
 {
@@ -13,7 +14,7 @@ namespace gbd.Dominion.Model.Zones
         public IDeck ParentDeck { get; private set; }
 
 
-
+        [Inject]
         public Library(IList<ICard> cards) : base(cards)
         {
             int i = 0;

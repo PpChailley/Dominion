@@ -18,7 +18,14 @@ namespace gbd.Dominion.Model.Zones
             Hand = hand;
         }
 
-
+        [Inject]
+        protected AbstractDeck(ILibrary lib)
+        {
+            DiscardPile = new DiscardPile();
+            Library = lib;
+            BattleField = new BattleField();
+            Hand = new Hand();
+        }
         
         
         public IHand Hand { get; protected set; }
