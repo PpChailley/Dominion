@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Cards\ConditionalCard.cs" />
-    <Compile Include="Model\EasyToTrackDeck.cs" />
+    <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
     <Compile Include="Model\GameMechanics\AI\RandomAi.cs" />

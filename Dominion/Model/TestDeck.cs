@@ -5,13 +5,13 @@ using Ninject;
 
 namespace gbd.Dominion.Model
 {
-    public class EasyToTrackDeck : AbstractDeck, IDeck
+    public class TestDeck : AbstractDeck, IDeck
     {
-        public EasyToTrackDeck(IDiscardPile discard, ILibrary lib, IBattleField bf, IHand hand) 
+        public TestDeck(IDiscardPile discard, ILibrary lib, IBattleField bf, IHand hand) 
             : base(discard, lib, bf, hand)  {}
 
         [Inject]
-        public EasyToTrackDeck(ILibrary lib)
+        public TestDeck(ILibrary lib)
             : base(lib) { }
 
 

@@ -29,7 +29,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void InjectionDifferBetweenDeckImplementations()
         {
             var startingDeck = IoC.Kernel.Get<StartingDeck>();
-            var testDeck = IoC.Kernel.Get<EasyToTrackDeck>();
+            var testDeck = IoC.Kernel.Get<TestDeck>();
 
             Assert.That(startingDeck.Cards.Count, Is.GreaterThanOrEqualTo(1));
             Assert.That(testDeck.Cards.Count, Is.GreaterThanOrEqualTo(1));

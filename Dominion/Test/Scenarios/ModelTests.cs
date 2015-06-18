@@ -70,8 +70,6 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(5,10,0)]
         public void PlayerDraw(int amountToDraw, int expectedInHand, int expectedInLibrary)
         {
-            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
-
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
 
@@ -148,7 +146,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void ReshuffleWhenEmpty()
         {
-            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
@@ -191,7 +189,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Explicit]
         public void CardGet()
         {
-            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var player = IoC.Kernel.Get<Player>();
 
@@ -229,7 +227,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test, ExpectedException(typeof(NotEnoughCardsException))]
         public void GetTooManyCardsFromZone()
         {
-            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var deck = IoC.Kernel.Get<IDeck>();
             Assert.That(deck.Cards.Count, Is.EqualTo(10));

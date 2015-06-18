@@ -35,7 +35,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void WhenAnyAncestorOfType_Collection(int collectionSize)
         {
             IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize)
-                .WhenAnyAncestorOfType(typeof (EasyToTrackDeck));
+                .WhenAnyAncestorOfType(typeof (TestDeck));
         }
     }
 }

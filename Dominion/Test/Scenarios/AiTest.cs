@@ -47,7 +47,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllAiTestCaseData")]
         public void AiIsAbleToDiscard(Type ai)
         {
-            IoC.Kernel.ReBind<IDeck>().To<EasyToTrackDeck>();
+            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
             IoC.Kernel.ReBind<IAi>().To(ai);
 
             var player = IoC.Kernel.Get<Player>();

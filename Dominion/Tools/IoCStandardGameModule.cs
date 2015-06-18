@@ -1,4 +1,5 @@
-﻿using gbd.Dominion.Contents;
+﻿using System;
+using gbd.Dominion.Contents;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Zones;
@@ -15,11 +16,14 @@ namespace gbd.Dominion.Tools
             //Bind<IAi>().To<RandomAi>();
             //Bind<ISupplyPile>().To<TestSupplyPile>();
             //Bind<ISupplyZone>().To<TestSupplyZone>();
-            //Bind<IDeck>().To<EasyToTrackDeck>();
+            //Bind<IDeck>().To<TestDeck>();
 
 
             this.Kernel.BindMultipleTimesTo<ICard, Copper>(7).WhenAnyAncestorOfType<Copper, IDeck>();
             this.Kernel.BindMultipleTimesTo<ICard, Estate>(3).WhenAnyAncestorOfType<Estate, IDeck>();
+
+            throw new NotImplementedException("Not ready to start standard game: \n" +
+                                              "  Need to init supply pile");
         }
     }
 }
