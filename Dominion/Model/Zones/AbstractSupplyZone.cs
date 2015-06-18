@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gbd.Dominion.Model.Zones;
-using Ninject;
-using gbd.Dominion.Tools;
 
 namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractSupplyZone: ISupplyZone
     {
+        public IList<ISupplyPile> Piles { get; protected set; }
 
-
-        public IList<ISupplyPile> Piles;
-
+        
         protected AbstractSupplyZone(IList<ISupplyPile> piles)
         {
             Piles = piles;
