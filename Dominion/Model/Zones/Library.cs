@@ -17,8 +17,7 @@ namespace gbd.Dominion.Model.Zones
         [Inject]
         public Library(IList<ICard> cards) : base(cards)
         {
-            int i = 0;
-            var bindings = IoC.Kernel.GetBindings(typeof (ICard)).Count();
+     
         }
 
         public void Init(IDeck deck)
