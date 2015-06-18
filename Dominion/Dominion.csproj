@@ -156,7 +156,7 @@
     <Compile Include="Test\Utilities\TestSupplyZone.cs" />
     <Compile Include="Tools\IoCMechanicsModule.cs" />
     <Compile Include="Tools\IoC.cs" />
-    <Compile Include="Tools\IoCModelModule.cs" />
+    <Compile Include="Tools\IoCStandardGameModule.cs" />
     <Compile Include="Tools\IoCTestModule.cs" />
     <Compile Include="Tools\Logging.cs" />
     <Compile Include="Tools\Xxx.cs" />

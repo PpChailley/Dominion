@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using gbd.Dominion.Model;
+﻿using System.Collections.Generic;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
-using gbd.Tools.NInject;
-using Ninject.Activation;
 using Ninject.Modules;
 
 namespace gbd.Dominion.Tools

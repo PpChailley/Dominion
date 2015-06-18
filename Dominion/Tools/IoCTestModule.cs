@@ -1,12 +1,9 @@
-﻿using System;
-using System.Linq;
-using gbd.Dominion.AI;
+﻿using gbd.Dominion.AI;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Tools.NInject;
 using Ninject.Modules;
-using NUnit.Framework;
 
 namespace gbd.Dominion.Tools
 {
@@ -19,24 +16,10 @@ namespace gbd.Dominion.Tools
             Bind<ISupplyPile>().To<TestSupplyPile>();
             Bind<ISupplyZone>().To<TestSupplyZone>();
             Bind<IDeck>().To<EasyToTrackDeck>();
-            Bind<ISupplyPile>().To<TestSupplyPile>();
-            Bind<ISupplyZone>().To<TestSupplyZone>();
-
-            this.BindMultipleTimesTo<ICard, TestCard>(10, x => x.WhenInjectedInto<ILibrary>());
 
 
-
-
-
-            // TODO: Understand contextual binding (!)
-            /*
-            Bind<ICard>().To<TestCard>().WhenInjectedInto<ISupplyPile>();
-            Bind<ICard>().To<TestCard>().WhenClassHas<InSupplyAttribute>();
-            Bind<ICard>().To<TestCard>().WhenTargetHas<InSupplyAttribute>();
-             * 
-             public class InSupplyAttribute: Attribute{}
-             * */
-
+            this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10).WhenAnyAncestorOfType<TestCard, IDeck>();
         }
+
     }
 }
