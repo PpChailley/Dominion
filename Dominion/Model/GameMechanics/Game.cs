@@ -97,7 +97,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Init()
         {
-            throw new NotImplementedException();
+            // Nothing to do yet
         }
 
         
