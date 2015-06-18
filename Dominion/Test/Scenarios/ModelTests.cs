@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using gbd.Dominion.Contents;
+using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
@@ -56,7 +58,6 @@ namespace gbd.Dominion.Test.Scenarios
                 player.Deck.ShuffleDiscardToLibrary();
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
-            Assert.That(player.CurrentScore, Is.EqualTo(3));
 
             Assert.That(player.Hand.Cards.Count, Is.EqualTo(expectInHand));
             Assert.That(player.DiscardPile.Cards.Count, Is.EqualTo(expectInDiscard));
@@ -73,7 +74,6 @@ namespace gbd.Dominion.Test.Scenarios
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();
 
-            Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(10));
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
             Assert.That(player.Library.Cards.Count(), Is.EqualTo(5));
@@ -102,40 +102,45 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void PlayerGainCard()
         {
-            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
-
             var player = IoC.Kernel.Get<IPlayer>();
             player.GetReadyToStartGame();
 
-            Assert.That(player.CurrentScore, Is.EqualTo(3));
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
             player.AddToDeck(new Estate());
 
-            Assert.That(player.CurrentScore, Is.EqualTo(4));
-            Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK + 1));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
-
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 1, 0)));
         }
 
 
-        [Test]
-        public void CountVictory()
+        [TestCase(0,0)]
+        [TestCase(3,0)]
+        [TestCase(0,3)]
+        [TestCase(7,9)]
+        public void CountVictory(int estates, int provinces)
         {
-            IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
+            IoC.Kernel.Unbind<ICard>();
+
+            int numberOfFillCards = Math.Max(10 - estates - provinces, 3);
+            int expectedScore = 1*estates + 6*provinces;
+
+            IoC.Kernel.BindMultipleTimesTo<ICard, Estate>(estates).WhenAnyAncestorOfType<Estate, IDeck>();
+            IoC.Kernel.BindMultipleTimesTo<ICard, Province>(provinces).WhenAnyAncestorOfType<Province, IDeck>();    
+            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(numberOfFillCards).WhenAnyAncestorOfType<Copper, IDeck>();    
 
             var player = IoC.Kernel.Get<IPlayer>();
 
-            Assert.That(player.CurrentScore, Is.EqualTo(3));
+            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
             player.AddToDeck(new Estate());
-            Assert.That(player.CurrentScore, Is.EqualTo(4));
+            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 1 ));
 
 
             player.AddToDeck(new Duchy());
-            Assert.That(player.CurrentScore, Is.EqualTo(7));
+            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 4));
 
             player.AddToDeck(new Province());
-            Assert.That(player.CurrentScore, Is.EqualTo(13));
+            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
 
 
 
@@ -186,11 +191,8 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
         [Test]
-        [Explicit]
         public void CardGet()
         {
-            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
-
             var player = IoC.Kernel.Get<Player>();
 
             player.Library.Init(player.Deck);
@@ -218,8 +220,8 @@ namespace gbd.Dominion.Test.Scenarios
             sample = player.Library.Get(4, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(4));
-            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(10));
-            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(7));
+            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(7));
+            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(10));
      
         }
 

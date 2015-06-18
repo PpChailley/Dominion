@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using gbd.Dominion.Model;
-using gbd.Dominion.Model.GameMechanics.AI;
-using gbd.Dominion.Tools;
+using gbd.Dominion.AI;
 using gbd.Tools.Cli;
 
-namespace gbd.Dominion.AI
+namespace gbd.Dominion.Model.GameMechanics.AI
 {
     public class RandomAi : AbstractIntelligence, IIntelligence, IAi
     {

@@ -14,7 +14,9 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public static int MoveCards(IEnumerable<ICard> toMove, IZone from, IZone to, Position positionInTargetCollection)
         {
-            foreach (var card in toMove.ToList())
+            var l = toMove.ToList();
+
+            foreach (var card in l)
             {
                 if (@from.Cards.Contains(card) == false)
                     throw new InvalidOperationException(String.Format("Card {0} is not in source collection {1}", card, @from));
@@ -24,7 +26,7 @@ namespace gbd.Dominion.Model.GameMechanics
                 card.ClearInPlayAttributes();
             }
             
-            return toMove.Count();
+            return l.Count;
         }
 
         public static void MoveCards(IZone from, IZone to, int amount = 1, Position positionFrom = Position.Top, Position positionTo = Position.Top)

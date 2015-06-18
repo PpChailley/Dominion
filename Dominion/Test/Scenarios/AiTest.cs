@@ -22,28 +22,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(ReflectionClassFinder.GetAllAiTestCaseData().Count(), Is.GreaterThan(0));
         }
 
-        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllAiTestCaseData")]
-        public void AiKnowsWhatToDiscard(Type aiType)
-        {
-
-            throw new NotImplementedException();
-            /*
-            IoC.Kernel.ReBind<IAi>().To(aiType);
-            var ai = IoC.Kernel.Get<IAi>();
-
-            var playerMock = new Mock<Player>();
-            playerMock.Setup(p => p.AbstractDeck);
-
-
-            ai.Init(playerMock.Object);
-
-            var toDiscard = ai.ChooseAndDiscard(3);
-            */
-
-
-
-        }
-
+ 
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllAiTestCaseData")]
         public void AiIsAbleToDiscard(Type ai)
         {

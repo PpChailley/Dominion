@@ -1,5 +1,6 @@
 ﻿using gbd.Dominion.AI;
 using gbd.Dominion.Model;
+using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Tools.NInject;
