@@ -1,4 +1,6 @@
-﻿namespace org.gbd.Dominion.Model.Cards
+﻿using gbd.Dominion.Model.GameMechanics;
+
+namespace gbd.Dominion.Model.Cards
 
 {
     public class Treasure : ICardType

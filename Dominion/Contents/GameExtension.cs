@@ -1,4 +1,4 @@
-﻿namespace org.gbd.Dominion.Contents
+﻿namespace gbd.Dominion.Contents
 {
     public enum GameExtension
     {

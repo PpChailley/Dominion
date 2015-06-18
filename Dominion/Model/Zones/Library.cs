@@ -1,34 +1,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Tools;
+using gbd.Tools.Cli;
+using Ninject;
 
-namespace org.gbd.Dominion.Model
+namespace gbd.Dominion.Model.Zones
 {
     public class Library : AbstractZone, ILibrary
     {
 
-        private IDeck _parentDeck;
+        public IDeck ParentDeck { get; private set; }
 
-        
+
+        [Inject]
+        public Library(IList<ICard> cards) : base(cards)
+        {
+     
+        }
 
         public void Init(IDeck deck)
         {
-            _parentDeck = deck;
-            _cards = new List<ICard>();
+            ParentDeck = deck;
 
-            foreach (var card in _parentDeck.DiscardPile.Cards)
+            foreach (var card in ParentDeck.DiscardPile.Cards)
             {
                 Cards.Add(card);
             }
-
-            _parentDeck.DiscardPile.Cards.Clear();
+            ParentDeck.DiscardPile.Cards.Clear();
             Cards.Shuffle();
+
         }
 
         public void ShuffleDiscardToLibrary()
         {
-            this._parentDeck.ShuffleDiscardToLibrary();
+            this.ParentDeck.ShuffleDiscardToLibrary();
         }
 
 
@@ -65,27 +72,27 @@ namespace org.gbd.Dominion.Model
 
         private ICard GetOneFromTop()
         {
-            if (_cards.Any() == false)
+            if (Cards.Any() == false)
             {
-                if (_parentDeck.Cards.Any() == false)
+                if (ParentDeck.Cards.Any() == false)
                 {
                     throw new DeckEmptyException();
                 }
                 else
                 {
-                    _parentDeck.ShuffleDiscardToLibrary();
+                    ParentDeck.ShuffleDiscardToLibrary();
                 }
             }
 
-            var card = _cards.First();
-            _cards.Remove(card);
+            var card = Cards.First();
+            Cards.Remove(card);
             return card;
         }
 
 
         public override int TotalCardsAvailable
         {
-            get { return Cards.Count + _parentDeck.DiscardPile.Cards.Count; }
+            get { return Cards.Count + ParentDeck.DiscardPile.Cards.Count; }
         }
 
     }

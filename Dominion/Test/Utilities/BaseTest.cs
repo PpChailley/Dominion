@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using org.gbd.Dominion.Tools;
+﻿using gbd.Dominion.Tools;
+using NUnit.Framework;
 
-namespace org.gbd.Dominion.Model
+namespace gbd.Dominion.Test.Utilities
 {
     [TestFixture]
     public class BaseTest

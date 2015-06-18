@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Dominion;
 
-namespace org.gbd.Dominion.UI
+namespace gbd.Dominion.UI
 
 {
     static class Program

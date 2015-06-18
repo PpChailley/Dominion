@@ -1,7 +1,7 @@
-﻿using org.gbd.Dominion.Model.GameMechanics;
-using org.gbd.Dominion.Model.GameMechanics.Actions;
+﻿using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.GameMechanics.Actions;
 
-namespace org.gbd.Dominion.Model.Actions
+namespace gbd.Dominion.Model.Actions
 {
     public class Draw: GameActionTargetingPlayers, IGameActionTargetingPlayers
     {
@@ -16,7 +16,7 @@ namespace org.gbd.Dominion.Model.Actions
 
 
 
-        protected override void DoToPlayer(Player p)
+        protected override void DoToPlayer(IPlayer p)
         {
             p.Draw(this.Amount);
         }

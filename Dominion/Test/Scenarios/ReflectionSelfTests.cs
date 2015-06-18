@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using gbd.Dominion.Model;
+using gbd.Dominion.Test.Utilities;
 using NUnit.Framework;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     
     [TestFixture]
@@ -20,7 +20,7 @@ namespace org.gbd.Dominion.Test
 
         }
 
- 
+
 
         [Test]
         public void HaveEnoughCardsImplementedToPlay()
@@ -52,7 +52,6 @@ namespace org.gbd.Dominion.Test
             Assert.That(typeof(BaseTest).IsAssignableFrom(t), Is.True);
 
         }
-
 
         [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllTestRelatedClassesTestCaseData")]
         public void AllTestRelatedClassesAreTestFixtures(Type t)

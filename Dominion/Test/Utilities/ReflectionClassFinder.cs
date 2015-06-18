@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using gbd.Dominion.AI;
+using gbd.Dominion.Model;
 using NUnit.Framework;
-using org.gbd.Dominion.AI;
-using org.gbd.Dominion.Model;
 
-namespace org.gbd.Dominion.Tools
+namespace gbd.Dominion.Test.Utilities
 
 {
     public class ReflectionClassFinder

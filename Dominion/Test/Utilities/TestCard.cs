@@ -1,10 +1,14 @@
 using System;
-using org.gbd.Dominion.Contents;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Model.Cards;
+using gbd.Dominion.Contents;
+using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
 
-namespace org.gbd.Dominion.Test
+namespace gbd.Dominion.Test.Utilities
 {
+
+    /// <summary>
+    /// A card that is included in the supply only in test games
+    /// </summary>
     public class TestCard : AbstractCard, ICard
     {
         public static int LastIndex = 0;

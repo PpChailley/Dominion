@@ -2,29 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ninject;
-using org.gbd.Dominion.Model.Cards;
-using org.gbd.Dominion.Tools;
+using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Tools;
+using gbd.Tools.Cli;
 
-namespace org.gbd.Dominion.Model.Zones
+namespace gbd.Dominion.Model.Zones
 {
-    public class Deck: IDeck
+    public abstract class AbstractDeck: IDeck
     {
+        protected AbstractDeck(IDiscardPile discard, ILibrary lib, IBattleField bf, IHand hand)
+        {
+            DiscardPile = discard;
+            Library = lib;
+            BattleField = bf;
+            Hand = hand;
+        }
 
+        [Inject]
+        protected AbstractDeck(ILibrary lib)
+        {
+            DiscardPile = new DiscardPile();
+            Library = lib;
+            BattleField = new BattleField();
+            Hand = new Hand();
+        }
         
-        private readonly IHand _hand = IoC.Kernel.Get<IHand>();
-        private readonly IBattleField _battleField = IoC.Kernel.Get<IBattleField>();
-        private readonly IDiscardPile _discard = IoC.Kernel.Get<IDiscardPile>();
-        private readonly ILibrary _library = IoC.Kernel.Get<ILibrary>();
         
-
-
-        
-
-
-        public IHand Hand{ get { return _hand; } }
-        public IDiscardPile DiscardPile{ get { return _discard; } }
-        public ILibrary Library{ get { return _library; } }
-        public IBattleField BattleField { get { return _battleField; } }
+        public IHand Hand { get; protected set; }
+        public IDiscardPile DiscardPile { get; protected set; }
+        public ILibrary Library { get; protected set; }
+        public IBattleField BattleField { get; protected set; }
 
         public IList<ICard> Cards
         {
@@ -56,25 +63,27 @@ namespace org.gbd.Dominion.Model.Zones
             }
         }
 
+        [Obsolete] 
         public void Add(ICard card, CardsPile destination)
         {
             Add(card, destination, Position.Top);
         }
 
+        [Obsolete]
         public void Add(ICard card, CardsPile destination, Position position)
         {
             switch (destination)
             {
                 case CardsPile.Discard:
-                    _discard.Cards.Add(card);
+                    DiscardPile.Cards.Add(card);
                     break;
 
                 case CardsPile.Hand:
-                    _hand.Add(card);
+                    Hand.Add(card);
                     break;
 
                 case CardsPile.Library:
-                    _library.Add(card, position);
+                    Library.Add(card, position);
                     break;
 
                 default:

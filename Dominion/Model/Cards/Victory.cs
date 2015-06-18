@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace org.gbd.Dominion.Model.Cards
+namespace gbd.Dominion.Model.Cards
 {
     public class Victory : ICardType
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using org.gbd.Dominion.Contents;
+using gbd.Dominion.Contents;
 
-namespace org.gbd.Dominion.Model.Cards
+namespace gbd.Dominion.Model.Cards
 {
     public abstract class AbstractCard: ICard
     {

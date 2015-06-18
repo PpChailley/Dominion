@@ -1,52 +1,33 @@
 ﻿using System;
 using System.Linq;
+using gbd.Dominion.AI;
+using gbd.Dominion.Model;
+using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Test.Utilities;
+using gbd.Dominion.Tools;
+using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
-using org.gbd.Dominion.AI;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Model.GameMechanics;
-using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
     public class AiTest : BaseTest
     {
+
         [Test]
         public void EnoughAiImplemented()
         {
             Assert.That(ReflectionClassFinder.GetAllAiTestCaseData().Count(), Is.GreaterThan(0));
         }
 
-        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllAiTestCaseData")]
-        public void AiKnowsWhatToDiscard(Type aiType)
-        {
-
-            throw new NotImplementedException();
-            /*
-            IoC.ReBind<IAi>().To(aiType);
-            var ai = IoC.Kernel.Get<IAi>();
-
-            var playerMock = new Mock<Player>();
-            playerMock.Setup(p => p.Deck);
-
-
-            ai.Init(playerMock.Object);
-
-            var toDiscard = ai.ChooseAndDiscard(3);
-            */
-
-
-
-        }
-
-
+ 
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllAiTestCaseData")]
-        [Repeat(30)]
         public void AiIsAbleToDiscard(Type ai)
         {
-            IoC.ReBind<IDeck>().To<EasyToTrackDeck>();
-            IoC.ReBind<IAi>().To(ai);
+            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
+            IoC.Kernel.ReBind<IAi>().To(ai);
 
             var player = IoC.Kernel.Get<Player>();
             player.GetReadyToStartGame();

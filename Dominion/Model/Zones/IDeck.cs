@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace org.gbd.Dominion.Model
+namespace gbd.Dominion.Model.Zones
 {
     public interface IDeck
     {
         IList<ICard> Cards { get; }
         IHand Hand { get; }
         IDiscardPile DiscardPile { get; }
-        ILibrary Library { get; }
+        ILibrary Library { get;  }
 
         int CurrentScore { get; }
         CardRepartition CardCountByZone { get; }

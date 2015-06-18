@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Model;
+using gbd.Dominion.Test.Utilities;
 using NUnit.Framework;
-using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Tools;
 
-namespace org.gbd.Dominion.Contents
+namespace gbd.Dominion.Contents
 {
     [TestFixture]
     public class ContentPresenceTests: BaseTest
     {
-
+        /*
         [Test]
         public void BaseExtensionIsComplete()
         {
@@ -32,6 +32,6 @@ namespace org.gbd.Dominion.Contents
 
             Assert.That(inSelectedExtension.Count(), Is.EqualTo(26));
         }
-
+        */
     }
 }

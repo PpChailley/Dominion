@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using org.gbd.Dominion.Model.Actions;
+using gbd.Dominion.Model.Actions;
 
-namespace org.gbd.Dominion.Model.GameMechanics.Actions
+namespace gbd.Dominion.Model.GameMechanics.Actions
 {
     public abstract class GameActionTargetingPlayers : IGameActionTargetingPlayers
     {
@@ -17,7 +17,7 @@ namespace org.gbd.Dominion.Model.GameMechanics.Actions
             }
         }
 
-        protected abstract void DoToPlayer(Player p);
+        protected abstract void DoToPlayer(IPlayer p);
 
     }
 }

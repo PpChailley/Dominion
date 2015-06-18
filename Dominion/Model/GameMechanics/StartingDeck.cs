@@ -1,23 +1,18 @@
-using org.gbd.Dominion.Contents;
-using org.gbd.Dominion.Contents.Cards;
-using org.gbd.Dominion.Model.Zones;
+using System.Collections.Generic;
+using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Contents;
+using gbd.Dominion.Model.Zones;
+using Ninject;
 
-namespace org.gbd.Dominion.Model.GameMechanics
+namespace gbd.Dominion.Model.GameMechanics
 {
-    public class StartingDeck : Deck, IDeck
+    public class StartingDeck : AbstractDeck, IDeck
     {
-        public StartingDeck()
-        {
-            // TODO/ Ultimately this should be sent through NInject (and this class obsoleted?)
+        public StartingDeck(IDiscardPile discard, ILibrary lib, IBattleField bf, IHand hand) 
+            : base(discard, lib, bf, hand) {}
 
-            for (var i = 0; i < 7; i++)
-                DiscardPile.Cards.Add(new Copper());
-
-            for (var i = 0; i < 3; i++)
-                DiscardPile.Cards.Add(new Estate());
-
-        }
-
-
+        [Inject]
+        public StartingDeck(ILibrary lib)
+            : base(lib) { }
     }
 }

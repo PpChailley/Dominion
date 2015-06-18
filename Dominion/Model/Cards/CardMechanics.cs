@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using org.gbd.Dominion.Model.Actions;
+using gbd.Dominion.Model.Actions;
+using gbd.Dominion.Model.GameMechanics;
 
-namespace org.gbd.Dominion.Model.Cards
+namespace gbd.Dominion.Model.Cards
 {
     public class CardMechanics
     {

@@ -1,8 +1,8 @@
 ﻿using System;
+using gbd.Dominion.Test.Utilities;
 using NUnit.Framework;
-using org.gbd.Dominion.Model;
 
-namespace org.gbd.Dominion.Test
+namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
     public class PlayerTest: BaseTest

@@ -1,9 +1,10 @@
-﻿using org.gbd.Dominion.Model;
-using org.gbd.Dominion.Model.Cards;
+﻿using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Model.GameMechanics;
 
-namespace org.gbd.Dominion.Contents.Cards
+namespace gbd.Dominion.Contents.Cards
 {
-    class Copper : BaseSetCard, ICard
+    class Copper : AlwaysInSupplyCard, ICard
     {
         public Copper()
         {
