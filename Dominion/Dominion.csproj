@@ -159,7 +159,6 @@
     <Compile Include="Tools\IoCStandardGameModule.cs" />
     <Compile Include="Tools\IoCTestModule.cs" />
     <Compile Include="Tools\Logging.cs" />
-    <Compile Include="Tools\Xxx.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>
     </Compile>
