@@ -1,6 +1,5 @@
 using System;
 using gbd.Dominion.Contents;
-using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Test.Utilities

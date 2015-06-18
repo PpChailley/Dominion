@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using gbd.Dominion.Model;
-using gbd.Tools.Cli;
-using Ninject;
-using Ninject.Syntax;
+﻿using Ninject;
 
 namespace gbd.Dominion.Tools
 {

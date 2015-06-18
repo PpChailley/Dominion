@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using gbd.Dominion.Model.Actions;
 
 namespace gbd.Dominion.Model.GameMechanics.Actions
 {

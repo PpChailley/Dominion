@@ -1,4 +1,4 @@
-﻿namespace gbd.Dominion.Model
+﻿namespace gbd.Dominion.Model.GameMechanics
 {
     public enum Position
     {

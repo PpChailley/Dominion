@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ninject;
 using gbd.Dominion.Model.Cards;
-using gbd.Dominion.Tools;
+using gbd.Dominion.Model.GameMechanics;
 using gbd.Tools.Cli;
+using Ninject;
 
 namespace gbd.Dominion.Model.Zones
 {

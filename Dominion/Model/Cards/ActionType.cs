@@ -1,6 +1,6 @@
 ﻿namespace gbd.Dominion.Model.Cards
 {
-    public class Action : ICardType
+    public class ActionType : ICardType
     {
         
     }

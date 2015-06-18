@@ -1,4 +1,6 @@
-﻿namespace gbd.Dominion.Model
+﻿using gbd.Dominion.Model.Zones;
+
+namespace gbd.Dominion.Model.Cards
 {
     public class CardMetadata
     {

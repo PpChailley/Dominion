@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using gbd.Dominion.AI;
+using gbd.Dominion.Model.Cards;
 using gbd.Tools.Cli;
 
 namespace gbd.Dominion.Model.GameMechanics.AI

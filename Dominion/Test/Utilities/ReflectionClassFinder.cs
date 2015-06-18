@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using gbd.Dominion.AI;
-using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Model.GameMechanics.AI;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Test.Utilities

@@ -1,5 +1,5 @@
-using Ninject;
 using gbd.Dominion.Tools;
+using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics
 {

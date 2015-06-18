@@ -2,12 +2,12 @@
 
 namespace gbd.Dominion.Model.Cards
 {
-    public class Curse : ICardType
+    public class CurseType : ICardType
     {
         public int CurseValue;
 
 
-        public Curse(int value)
+        public CurseType(int value)
         {
             if (value > 0)
                 throw new InvalidOperationException("Curse value must be negative or null");

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace gbd.Dominion.Model.Actions
+namespace gbd.Dominion.Model.GameMechanics
 {
     public class PlayersDesignation 
     {

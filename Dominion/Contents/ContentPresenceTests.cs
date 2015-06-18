@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using gbd.Dominion.Model;
-using gbd.Dominion.Test.Utilities;
+﻿using gbd.Dominion.Test.Utilities;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Contents

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using gbd.Dominion.Model.Actions;
 using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.GameMechanics.Actions;
 
 namespace gbd.Dominion.Model.Cards
 {
@@ -14,7 +14,7 @@ namespace gbd.Dominion.Model.Cards
         {
             get
             {
-                var treasureType = (Treasure) GetCardType<Treasure>();
+                var treasureType = (TreasureType) GetCardType<TreasureType>();
                 if (treasureType == null)   return new Resources(0);
                 else                        return treasureType.BuyValue;
             }
@@ -24,7 +24,7 @@ namespace gbd.Dominion.Model.Cards
         {
             get
             {
-                var victoryType = (Victory)GetCardType<Victory>();
+                var victoryType = (VictoryType)GetCardType<VictoryType>();
                 if (victoryType == null) return 0;
                 else return victoryType.VictoryPoints;
             }
