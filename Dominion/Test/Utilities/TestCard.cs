@@ -1,5 +1,4 @@
 using System;
-using gbd.Dominion.Contents;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 
@@ -7,7 +6,7 @@ namespace gbd.Dominion.Test.Utilities
 {
 
     /// <summary>
-    /// A card that is included in the supply only in test games
+    /// A card that is included only in test games
     /// </summary>
     public class TestCard : Card, ICard
     {
@@ -22,17 +21,8 @@ namespace gbd.Dominion.Test.Utilities
 
         public override string ToString()
         {
-            return String.Format("Test Card # {0}", Index);
+            return String.Format("{0}  with testIndex {1}", this.GetType(), Index);
         }
 
-        public override GameExtension Extension
-        {
-            get { return GameExtension.TestCards; }
-        }
-
-        public override GameSet PresentInSet
-        {
-            get { return GameSet.TestCards; }
-        }
     }
 }

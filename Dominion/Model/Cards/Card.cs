@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using gbd.Dominion.Contents;
 
 namespace gbd.Dominion.Model.Cards
 {
@@ -19,6 +20,19 @@ namespace gbd.Dominion.Model.Cards
         {
             this.Attributes.Clear();
         }
+
+
+        public override GameExtension Extension
+        {
+            get { return GameExtension.TestCards; }
+        }
+
+        public override GameSet PresentInSet
+        {
+            get { return GameSet.TestCards; }
+        }
+
+
 
 
     }
