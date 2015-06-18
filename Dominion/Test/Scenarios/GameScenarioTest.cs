@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
@@ -75,12 +77,20 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.Fail();
         }
 
-        [Test]
-        public void DummyTest()
-        {
-            throw new NotImplementedException();
-        }
 
+
+        [Test]
+        public void EnoughCardsImplementedForPlayableSupplyZone()
+        {
+            var classes = Assembly.GetExecutingAssembly().GetTypes();
+
+            var cards = classes.Where(t => typeof(SelectableCard).IsAssignableFrom(t)
+                                                               && t.IsInterface == false
+                                                               && t.IsAbstract == false);
+
+
+            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(10));
+        }
 
 
     }

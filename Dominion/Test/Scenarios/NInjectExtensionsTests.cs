@@ -94,6 +94,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void WhenAnyAncestorOfType_SelfShouldBeAnAncestor_Level0B()
         {
+            IoC.Kernel.Unbind<ISupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
+            
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(ISupplyPile));
 

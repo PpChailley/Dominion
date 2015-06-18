@@ -16,21 +16,10 @@ namespace gbd.Dominion.Test.Scenarios
     public class SupplyZoneTest: BaseTest
     {
 
-        [SetUp]
-        public new void SetUp()
-        {
-            base.SetUp();
-        }
-
-
-
 
         [Test]
         public void SupplyZone()
         {
-            IoC.Kernel.ReBind<ISupplyPile>().To<TestSupplyPile>();
-            IoC.Kernel.ReBind<ISupplyZone>().To<TestSupplyZone>();
-            
             IoC.Kernel.ReBind<ICollection<IPlayer>>()
                 .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
@@ -39,9 +28,8 @@ namespace gbd.Dominion.Test.Scenarios
             var supply = IoC.Kernel.Get<ISupplyZone>();
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(supply.Piles.Count, Is.EqualTo(10));
             Assert.That(supply.Cards.Count, Is.EqualTo(100));
-
-
 
         }
 
@@ -49,6 +37,8 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyPile()
         {
+            IoC.Kernel.Unbind<ISupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<TestSupplyPile>();
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
             var deck = IoC.Kernel.Get<IDeck>();
@@ -62,6 +52,8 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void MoveCardFromSupply()
         {
+            IoC.Kernel.Unbind<ISupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<TestSupplyPile>();
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
             var player = IoC.Kernel.Get<IPlayer>();
@@ -77,18 +69,6 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-        [Test]
-        public void EnoughCardsForPlayableSupplyZone()
-        {
-            var classes = Assembly.GetExecutingAssembly().GetTypes();
-
-            var cards = classes.Where(t => typeof(SelectableCard).IsAssignableFrom(t)
-                                                               && t.IsInterface == false
-                                                               && t.IsAbstract == false);
-
-
-            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(10));
-        }
 
         
 
