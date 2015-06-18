@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
+using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Test.Utilities;
@@ -11,7 +15,7 @@ using NUnit.Framework;
 namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
-    public class SmokeTests: BaseTest
+    public class NInjectTests: BaseTest
     {
 
         [Test]
@@ -34,20 +38,6 @@ namespace gbd.Dominion.Test.Scenarios
                 Is.Not.EqualTo(testDeck.Cards.First().GetType()));
         }
 
-
-
-        [Test]
-        public void NInjectBindMultipleTimes()
-        {
-            IoC.Kernel.Unbind<ICard>();
-            Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(0));
-
-            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, TestCard>();
-            Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(10));
-
-            IoC.Kernel.Bind<ICard>().To<TestCard>();
-            Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(11));
-        }
 
     }
 }
