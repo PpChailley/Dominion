@@ -25,18 +25,6 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-        [Test]
-        public void InjectionDifferBetweenDeckImplementations()
-        {
-            var startingDeck = IoC.Kernel.Get<StartingDeck>();
-            var testDeck = IoC.Kernel.Get<TestDeck>();
-
-            Assert.That(startingDeck.Cards.Count, Is.GreaterThanOrEqualTo(1));
-            Assert.That(testDeck.Cards.Count, Is.GreaterThanOrEqualTo(1));
-
-            Assert.That(startingDeck.Cards.First().GetType(), 
-                Is.Not.EqualTo(testDeck.Cards.First().GetType()));
-        }
 
 
     }
