@@ -13,12 +13,20 @@ namespace gbd.Dominion.Tools
         {
             Bind<IIntelligence>().To<RandomAi>();
             Bind<IAi>().To<RandomAi>();
-            Bind<ISupplyPile>().To<TestSupplyPile>();
             Bind<ISupplyZone>().To<TestSupplyZone>();
-            Bind<IDeck>().To<EasyToTrackDeck>();
 
-
+            Bind<IDeck>().To<TestDeck>();
             this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10).WhenAnyAncestorOfType<TestCard, IDeck>();
+
+            Bind<ISupplyPile>().To<TestSupplyPile>();
+            this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10).WhenAnyAncestorOfType<TestCard, ISupplyPile>();
+            
+            
+            //this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10);
+
+
+
+            
         }
 
     }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
@@ -23,8 +20,6 @@ namespace gbd.Dominion.Test.Scenarios
         public new void SetUp()
         {
             base.SetUp();
-
-            IoC.Kernel.ReBind<ISupplyPile>().To<TestSupplyPile>();
         }
 
 
@@ -54,14 +49,26 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyPile()
         {
-            IoC.Kernel.ReBind<ISupplyPile>().To<TestSupplyPile>();
 
-            IoC.Kernel.ReBind<ICollection<IPlayer>>()
-                .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+            var pile = IoC.Kernel.Get<ISupplyPile>();
+            var deck = IoC.Kernel.Get<IDeck>();
 
+            Assert.That(deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(pile.Cards.Count, Is.EqualTo(10));
+        }
+
+
+
+        [Test]
+        public void MoveCardFromSupply()
+        {
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
             var player = IoC.Kernel.Get<IPlayer>();
+
+            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
+            Assert.That(pile.Cards.Count, Is.EqualTo(10));
+
 
             Game.MoveCards(pile, player.DiscardPile);
 

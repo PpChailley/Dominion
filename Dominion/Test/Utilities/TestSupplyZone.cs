@@ -8,31 +8,22 @@ using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Test.Utilities
 {
-    public class TestSupplyZone: ISupplyZone
+    public class TestSupplyZone : AbstractSupplyZone, ISupplyZone
     {
-        public IList<ICard> Cards
-        {
-            get { throw new NotImplementedException(); }
-        }
 
-        public IEnumerable<ICard> Get(int amount, Position positionFrom = Position.Top)
+
+        public override void MakeReadyToStartGame()
         {
             throw new NotImplementedException();
         }
 
-        public void SortCards(Func<ICard, IComparable> comparer)
+        public override void GetReadyToPlay()
         {
             throw new NotImplementedException();
         }
 
-        public int TotalCardsAvailable
+        public TestSupplyZone(IList<ISupplyPile> piles) : base(piles)
         {
-            get { throw new NotImplementedException(); }
-        }
-
-        public void MakeReadyToStartGame()
-        {
-            throw new NotImplementedException();
         }
     }
 }
