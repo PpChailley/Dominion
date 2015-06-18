@@ -9,7 +9,7 @@ namespace gbd.Dominion.Test.Utilities
     /// <summary>
     /// A card that is included in the supply only in test games
     /// </summary>
-    public class TestCard : AbstractCard, ICard
+    public class TestCard : Card, ICard
     {
         public static int LastIndex = 0;
 

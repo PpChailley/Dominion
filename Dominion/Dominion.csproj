@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Cards\ConditionalCard.cs" />
+    <Compile Include="Model\Cards\Card.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="Model\Cards\CardMetadata.cs" />
     <Compile Include="Model\Zones\CardOrigin.cs" />
     <Compile Include="Model\Zones\CardRepartition.cs" />
-    <Compile Include="Model\Cards\AbstractCard.cs" />
+    <Compile Include="Model\Cards\PrintedCard.cs" />
     <Compile Include="Model\Cards\Action.cs" />
     <Compile Include="Model\Cards\CardAttribute.cs" />
     <Compile Include="Model\Cards\CardMechanics.cs" />

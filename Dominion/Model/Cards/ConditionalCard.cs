@@ -7,7 +7,7 @@ using gbd.Dominion.Contents;
 
 namespace gbd.Dominion.Model.Cards
 {
-    public abstract class ConditionalCard: AbstractCard
+    public abstract class ConditionalCard: Card
     {
         
 

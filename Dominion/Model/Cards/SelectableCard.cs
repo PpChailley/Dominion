@@ -5,7 +5,7 @@
     /// and count towards the 10 piles limit.
     /// Like most cards : Village, Hermit, Lighthouse, ...
     /// </summary>
-    public abstract class SelectableCard: AbstractCard
+    public abstract class SelectableCard: Card
     {
         public override GameSet PresentInSet
         {

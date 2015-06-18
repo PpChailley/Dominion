@@ -5,7 +5,7 @@
     /// A card that can be included in the supply or not, as selected by the game creator. 
     /// Like Platinum or any Ruins
     /// </summary>
-    public abstract class OptionalCard: AbstractCard
+    public abstract class OptionalCard: Card
     {
         public override GameSet PresentInSet
         {

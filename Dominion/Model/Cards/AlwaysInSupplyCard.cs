@@ -5,7 +5,7 @@ namespace gbd.Dominion.Model.Cards
     /// <summary>
     /// A card that is always in the supply, whatever the game. Like copper, curse, province...
     /// </summary>
-    public abstract class AlwaysInSupplyCard: AbstractCard
+    public abstract class AlwaysInSupplyCard: Card
     {
         public override GameSet PresentInSet
         {
