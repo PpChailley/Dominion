@@ -14,6 +14,7 @@ namespace gbd.Dominion.Model.GameMechanics
         IHand Hand { get; }
         IDiscardPile DiscardPile { get; }
         ILibrary Library { get; }
+        IBattleField BattleField { get; }
 
         int CurrentScore { get; }
 

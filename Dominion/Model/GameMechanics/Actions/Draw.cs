@@ -1,4 +1,7 @@
-﻿namespace gbd.Dominion.Model.GameMechanics.Actions
+﻿using gbd.Dominion.Tools;
+using Ninject;
+
+namespace gbd.Dominion.Model.GameMechanics.Actions
 {
     public class Draw: GameAction, IGameAction
     {
@@ -14,7 +17,7 @@
 
         public override void Do()
         {
-            Game.G.CurrentPlayer.Draw();
+            IoC.Kernel.Get<IGame>().CurrentPlayer.Draw();
         }
     }
 }

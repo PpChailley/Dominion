@@ -31,6 +31,7 @@ namespace gbd.Dominion.Model.Zones
         public IHand Hand { get; protected set; }
         public IDiscardPile DiscardPile { get; protected set; }
         public ILibrary Library { get; protected set; }
+
         public IBattleField BattleField { get; protected set; }
 
         public IList<ICard> Cards

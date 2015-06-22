@@ -4,6 +4,9 @@ using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
 using gbd.Tools.Cli;
+using gbd.Dominion.Tools;
+using gbd.Tools.Cli;
+using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
@@ -26,7 +29,7 @@ namespace gbd.Dominion.Model.GameMechanics
             switch (designatedPlayer)
             {
                 case PlayerChoice.Current:
-                    return Game.G.CurrentPlayer;
+                    return IoC.Kernel.Get<IGame>().CurrentPlayer;
 
                 case PlayerChoice.Left:
                 case PlayerChoice.Right:
@@ -58,7 +61,10 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public IHand Hand{ get { return Deck.Hand; }}
         public IDiscardPile DiscardPile{ get { return Deck.DiscardPile; }}
-        public ILibrary Library{ get { return Deck.Library; }} 
+        public ILibrary Library{ get { return Deck.Library; }}
+
+        public IBattleField BattleField { get { return Deck.BattleField; } }
+   
 
 
         public int CurrentScore
@@ -94,7 +100,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Receive(IList<ICard> cards)
         {
-            Model.MoveCards(cards, Game.G.SupplyZone, DiscardPile, Position.Top);
+            Model.MoveCards(cards, IoC.Kernel.Get<IGame>().SupplyZone, DiscardPile, Position.Top);
         }
         public void Receive(ICard card)
         {
@@ -113,6 +119,8 @@ namespace gbd.Dominion.Model.GameMechanics
             {
                 trigger.Do();
             }
+
+            Model.MoveCard(card, Hand, BattleField);
         }
 
 
