@@ -10,6 +10,7 @@ namespace gbd.Dominion.Model.Zones
         IHand Hand { get; }
         IDiscardPile DiscardPile { get; }
         ILibrary Library { get;  }
+        IBattleField BattleField { get; }
 
         int CurrentScore { get; }
         CardRepartition CardCountByZone { get; }

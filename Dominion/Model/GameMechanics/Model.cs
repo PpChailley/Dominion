@@ -15,12 +15,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
             foreach (var card in l)
             {
-                if (@from.Cards.Contains(card) == false)
-                    throw new InvalidOperationException(String.Format("Card {0} is not in source collection {1}", card, @from));
-
-                @from.Cards.Remove(card);
-                to.Cards.Add(card);
-                card.ClearInPlayAttributes();
+                MoveCard(card, from, to);
             }
             
             return l.Count;
@@ -49,6 +44,16 @@ namespace gbd.Dominion.Model.GameMechanics
             {
                 MoveCards(@from.Get(amount, positionFrom), @from, to, positionTo);
             }
+        }
+
+        public static void MoveCard(ICard card, IZone from, IZone to)
+        {
+            if (@from.Cards.Contains(card) == false)
+                throw new InvalidOperationException(String.Format("Card {0} is not in source collection {1}", card, @from));
+
+            @from.Cards.Remove(card);
+            to.Cards.Add(card);
+            card.ClearInPlayAttributes();
         }
     }
 }

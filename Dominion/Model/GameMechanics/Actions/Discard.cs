@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using gbd.Dominion.Tools;
+using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics.Actions
 {
@@ -16,7 +18,7 @@ namespace gbd.Dominion.Model.GameMechanics.Actions
 
         public override void Do()
         {
-            Game.G.GetPlayers(Who).ToList().ForEach(p => p.DiscardFromHand(Amount));
+            IoC.Kernel.Get<IGame>().GetPlayers(Who).ToList().ForEach(p => p.DiscardFromHand(Amount));
         }
     }
 }
