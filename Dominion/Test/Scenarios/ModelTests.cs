@@ -190,41 +190,43 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
+
         [Test]
         public void CardGet()
         {
+            TestCard.ResetCounters();
+            IoC.Kernel.Rebind<ICardShuffler>().To<CardShuffleBySorting>();
+
             var player = IoC.Kernel.Get<Player>();
-
-            player.Deck.Library.Init(player.Deck);
-            player.Deck.Library.SortCards(card => ((TestCard) card).Index);
-
+            // player.Ready();
 
             var sample = player.Deck.Library.Get(1, Position.Top).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(1));
-            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(1));
-            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(1));
+            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(0));
+            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(0));
 
             sample = player.Deck.Library.Get(5, Position.Top).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(5));
-            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(1));
-            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(5));
+            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(0));
+            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(4));
 
             sample = player.Deck.Library.Get(1, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(1));
-            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(10));
-            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(10));
+            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(9));
+            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(9));
 
             sample = player.Deck.Library.Get(4, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(4));
-            Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(7));
-            Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(10));
-     
+            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(6));
+            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(9));
         }
 
+
+  
 
         [Test, ExpectedException(typeof(NotEnoughCardsException))]
         public void GetTooManyCardsFromZone()

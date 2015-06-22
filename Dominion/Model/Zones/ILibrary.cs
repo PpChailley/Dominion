@@ -5,11 +5,11 @@ using gbd.Dominion.Model.GameMechanics;
 
 namespace gbd.Dominion.Model.Zones
 {
-    public interface ILibrary: IZone
+    public interface ILibrary: IZone, IMutableZone
     {
         [Obsolete] IEnumerable<ICard> GetFromTop(int amount);
         void Add(ICard card, Position position);
-        void Init(IDeck deck);
+        void Ready(IDeck deck);
         void ShuffleDiscardToLibrary();
     }
 }

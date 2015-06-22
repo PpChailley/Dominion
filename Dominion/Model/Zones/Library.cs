@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Tools.Cli;
+using gbd.Dominion.Tools;
 using Ninject;
 
 namespace gbd.Dominion.Model.Zones
@@ -15,12 +15,9 @@ namespace gbd.Dominion.Model.Zones
 
 
         [Inject]
-        public Library(IList<ICard> cards) : base(cards)
-        {
-     
-        }
+        public Library(IList<ICard> cards) : base(cards) { }
 
-        public void Init(IDeck deck)
+        public void Ready(IDeck deck)
         {
             ParentDeck = deck;
 
@@ -29,7 +26,8 @@ namespace gbd.Dominion.Model.Zones
                 Cards.Add(card);
             }
             ParentDeck.DiscardPile.Cards.Clear();
-            Cards.Shuffle();
+
+            IoC.Kernel.Get<ICardShuffler>().Shuffle(this);
 
         }
 
@@ -90,10 +88,17 @@ namespace gbd.Dominion.Model.Zones
         }
 
 
+        public new IList<ICard> Cards
+        {
+            get { return base.Cards; }
+            set { base.Cards = value; }
+        }
+
         public override int TotalCardsAvailable
         {
             get { return Cards.Count + ParentDeck.DiscardPile.Cards.Count; }
         }
+
 
     }
 }

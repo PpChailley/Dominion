@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Tools;
 using gbd.Tools.Cli;
 using Ninject;
 
@@ -116,7 +117,8 @@ namespace gbd.Dominion.Model.Zones
             {
                 Library.Cards.Add(card);
             }
-            Library.Cards.Shuffle();
+
+            IoC.Kernel.Get<ICardShuffler>().Shuffle(Library);
             DiscardPile.Cards.Clear();
 
             return Library;
@@ -124,7 +126,7 @@ namespace gbd.Dominion.Model.Zones
 
         public void Ready()
         {
-            Library.Init(this);
+            Library.Ready(this);
         }
 
         public override string ToString()

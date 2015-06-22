@@ -14,6 +14,12 @@ namespace gbd.Dominion.Test.Utilities
 
         public int Index;
 
+        public static void ResetCounters()
+        {
+            LastIndex = 0;
+        }
+
+
         public TestCard()
         {
             Index = LastIndex ++;
