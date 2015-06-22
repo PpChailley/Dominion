@@ -1,7 +1,4 @@
-﻿using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.GameMechanics.Actions;
-
-namespace gbd.Dominion.Model.Actions
+﻿namespace gbd.Dominion.Model.GameMechanics.Actions
 {
     public class Draw: GameActionTargetingPlayers, IGameActionTargetingPlayers
     {

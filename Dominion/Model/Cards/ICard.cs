@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using gbd.Dominion.Contents;
-using gbd.Dominion.Model.Cards;
 
-namespace gbd.Dominion.Model
+namespace gbd.Dominion.Model.Cards
 
 {
     public interface ICard

@@ -1,5 +1,4 @@
-﻿using gbd.Dominion.Model;
-using gbd.Dominion.Model.Cards;
+﻿using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 
 namespace gbd.Dominion.Contents.Cards
@@ -9,7 +8,7 @@ namespace gbd.Dominion.Contents.Cards
         public Copper()
         {
             Mechanics.Cost = new Resources(0);
-            Mechanics.Types.Add(new Treasure(1));
+            Mechanics.Types.Add(new TreasureType(1));
         }
     }
 }

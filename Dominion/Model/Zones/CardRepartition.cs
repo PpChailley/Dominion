@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace gbd.Dominion.Model
+namespace gbd.Dominion.Model.Zones
 {
     public class CardRepartition
     {

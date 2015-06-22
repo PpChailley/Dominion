@@ -1,6 +1,7 @@
 ﻿using System;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
 using gbd.Tools.NInject;

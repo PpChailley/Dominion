@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Dominion
+namespace gbd.Dominion.UI
 {
     public partial class formGame : Form
     {

@@ -74,6 +74,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\Cards\Card.cs" />
     <Compile Include="Model\TestDeck.cs" />
@@ -113,13 +114,13 @@
     <Compile Include="Model\Zones\CardOrigin.cs" />
     <Compile Include="Model\Zones\CardRepartition.cs" />
     <Compile Include="Model\Cards\PrintedCard.cs" />
-    <Compile Include="Model\Cards\Action.cs" />
+    <Compile Include="Model\Cards\ActionType.cs" />
     <Compile Include="Model\Cards\CardAttribute.cs" />
     <Compile Include="Model\Cards\CardMechanics.cs" />
     <Compile Include="Model\Cards\ICardType.cs" />
-    <Compile Include="Model\Cards\Curse.cs" />
-    <Compile Include="Model\Cards\Treasure.cs" />
-    <Compile Include="Model\Cards\Victory.cs" />
+    <Compile Include="Model\Cards\CurseType.cs" />
+    <Compile Include="Model\Cards\TreasureType.cs" />
+    <Compile Include="Model\Cards\VictoryType.cs" />
     <Compile Include="Model\GameMechanics\Game.cs" />
     <Compile Include="Model\Cards\GameSet.cs" />
     <Compile Include="Model\GameMechanics\IIntelligence.cs" />

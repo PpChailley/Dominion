@@ -1,5 +1,4 @@
 using System;
-using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Test.Utilities
@@ -21,7 +20,7 @@ namespace gbd.Dominion.Test.Utilities
 
         public override string ToString()
         {
-            return String.Format("{0}  with testIndex {1}", this.GetType(), Index);
+            return String.Format("{0}  # {1}", this.GetType(), Index);
         }
 
     }

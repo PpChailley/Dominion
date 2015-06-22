@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using gbd.Dominion.Tools;
+using gbd.Dominion.Model.Cards;
 using Ninject;
 
 namespace gbd.Dominion.Model.Zones

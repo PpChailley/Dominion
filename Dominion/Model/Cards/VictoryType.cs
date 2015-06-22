@@ -2,11 +2,11 @@
 
 namespace gbd.Dominion.Model.Cards
 {
-    public class Victory : ICardType
+    public class VictoryType : ICardType
     {
         public int VictoryPoints;
 
-        public Victory(int points)
+        public VictoryType(int points)
         {
             if (points < 0)
                 throw new InvalidOperationException("Victory cards must have a positive points value");

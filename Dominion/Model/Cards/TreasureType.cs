@@ -3,16 +3,16 @@
 namespace gbd.Dominion.Model.Cards
 
 {
-    public class Treasure : ICardType
+    public class TreasureType : ICardType
     {
         public Resources BuyValue;
 
-        public Treasure(Resources res)
+        public TreasureType(Resources res)
         {
             BuyValue = res;
         }
 
-        public Treasure(int coins)
+        public TreasureType(int coins)
         {
             BuyValue = new Resources(coins);
         }

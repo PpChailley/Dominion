@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Test.Utilities;
 using NUnit.Framework;
 
@@ -59,8 +59,11 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(t.GetCustomAttributes(typeof (TestFixtureAttribute), true).Any(), Is.True);
         }
 
-        [Test]
-        public double TestMethodsAmountIsCorrect()
+        [TestCase(0.3)]
+        [TestCase(0.5)]
+        [TestCase(0.7)]
+        [TestCase(0.9)]
+        public void TestMethodsRatio(double expectedRatio)
         {
             var testMethods = ReflectionClassFinder.GetAllTestRelatedClasses()
                                 .Select(clazz => clazz.GetMethods().Where( m =>     m.GetCustomAttributes(typeof(TestAttribute)).Any()
@@ -76,17 +79,10 @@ namespace gbd.Dominion.Test.Scenarios
 
             double ratio = 1D * nbTestMethods/nbNonTestClasses;
 
-            Assert.That(ratio, Is.GreaterThan(0.3));
-
-            return ratio;
+            Assert.That(ratio, Is.GreaterThan(expectedRatio));
         }
 
 
-        [Test]
-        public void TestMethodsAmountIsGood()
-        {
-            Assert.That(TestMethodsAmountIsCorrect(), Is.GreaterThan(0.6));
-        }
 
     }
 }
