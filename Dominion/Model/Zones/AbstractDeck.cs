@@ -121,10 +121,17 @@ namespace gbd.Dominion.Model.Zones
             return Library;
         }
 
-        public void GetReadyToStartGame()
+        public void Ready()
         {
             Library.Init(this);
         }
 
+        public override string ToString()
+        {
+            return "{0} # {1} with {2}"
+                .Format(this.GetType(),
+                    this.GetHashCode(),
+                    this.CardCountByZone);
+        }
     }
 }

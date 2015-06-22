@@ -1,6 +1,6 @@
 ﻿namespace gbd.Dominion.Model.GameMechanics.Actions
 {
-    public class Draw: GameActionTargetingPlayers, IGameActionTargetingPlayers
+    public class Draw: GameAction, IGameAction
     {
         
         public int Amount;
@@ -12,10 +12,9 @@
         }
 
 
-
-        protected override void DoToPlayer(IPlayer p)
+        public override void Do()
         {
-            p.Draw(this.Amount);
+            Game.G.CurrentPlayer.Draw();
         }
     }
 }

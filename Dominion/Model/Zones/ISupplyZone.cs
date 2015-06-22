@@ -7,6 +7,6 @@ namespace gbd.Dominion.Model.Zones
         IList<ISupplyPile> Piles { get; }
 
 
-        void MakeReadyToStartGame();
+        void Ready();
     }
 }

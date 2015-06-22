@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
+using gbd.Tools.Cli;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
@@ -66,9 +67,9 @@ namespace gbd.Dominion.Model.GameMechanics
         }
 
 
-        public void GetReadyToStartGame()
+        public void Ready()
         {
-            Deck.GetReadyToStartGame();
+            Deck.Ready();
             _intelligence.Init(this);
             Draw(STARTING_HAND_SIZE);
         }
@@ -76,13 +77,13 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Draw(int amount = 1)
         {
-            Game.MoveCards(Library, Hand, amount);
+            Model.MoveCards(Library, Hand, amount);
         }
 
         public void DiscardFromHand(int amount)
         {
             var toDiscard = this._intelligence.ChooseAndDiscard(amount);
-            Game.MoveCards(toDiscard, Hand, this.DiscardPile, Position.Top);
+            Model.MoveCards(toDiscard, Hand, this.DiscardPile, Position.Top);
         }
 
 
@@ -93,7 +94,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Receive(IList<ICard> cards)
         {
-            Game.MoveCards(cards, Game.G.SupplyZone, DiscardPile, Position.Top);
+            Model.MoveCards(cards, Game.G.SupplyZone, DiscardPile, Position.Top);
         }
         public void Receive(ICard card)
         {
@@ -105,10 +106,29 @@ namespace gbd.Dominion.Model.GameMechanics
             this.Status.Resources.Pay(cards.Select(card => card.Mechanics.Cost));
             Receive(cards);
         }
+
+        public void Play(ICard card)
+        {
+            foreach (var trigger in card.Mechanics.OnPlayTriggers)
+            {
+                trigger.Do();
+            }
+        }
+
+
         public void Buy(ICard card)
         {
             Buy(new List<ICard>() { card });
         }
 
+
+        public override string ToString()
+        {
+            return "{0} # {1} with {2} {3}".Format(
+                this.GetType(),
+                this.GetHashCode(),
+                this.Deck.GetType(),
+                this.Deck.CardCountByZone);
+        }
     }
 }

@@ -74,9 +74,13 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Cards\AlwaysInSupplyCardsModule.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\Cards\Card.cs" />
+    <Compile Include="Model\Cards\ICardMechanics.cs" />
+    <Compile Include="Model\GameMechanics\IGameObject.cs" />
+    <Compile Include="Model\GameMechanics\Model.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
@@ -92,6 +96,7 @@
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
+    <Compile Include="Test\Scenarios\CardsTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
     <Compile Include="Test\Scenarios\NInjectExtensionsRobustness.cs" />
     <Compile Include="Test\Scenarios\NInjectExtensionsTests.cs" />
@@ -106,8 +111,6 @@
     <Compile Include="Model\GameMechanics\Player.cs" />
     <Compile Include="Model\Zones\AbstractZone.cs" />
     <Compile Include="Model\GameMechanics\Actions\Discard.cs" />
-    <Compile Include="Model\GameMechanics\Actions\GameActionTargetingPlayers.cs" />
-    <Compile Include="Model\GameMechanics\Actions\IGameActionTargetingPlayers.cs" />
     <Compile Include="Model\Cards\AlwaysInSupplyCard.cs" />
     <Compile Include="Model\GameMechanics\Actions\Draw.cs" />
     <Compile Include="Model\Cards\CardMetadata.cs" />

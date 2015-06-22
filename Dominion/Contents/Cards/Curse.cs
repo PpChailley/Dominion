@@ -7,8 +7,8 @@ namespace gbd.Dominion.Contents.Cards
     {
         public Curse()
         {
-            Mechanics.Cost = new Resources(0);
-            Mechanics.Types.Add(new CurseType(-1));
+            //Mechanics.Cost = new Resources(0);
+            //Mechanics.Types.Add(new CurseType(-1));
         }
     }
 }

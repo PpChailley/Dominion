@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using Ninject.Modules;
@@ -16,9 +17,12 @@ namespace gbd.Dominion.Tools
             Bind<ILibrary>().To<Library>();
             Bind<IBattleField>().To<BattleField>();
             Bind<IPlayer>().To<Player>();
-            Bind<IGame>().To<Game>();
 
-            Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+            Bind<IGame>().To<Game>().InSingletonScope();
+
+            Bind<ICardMechanics>().To<CardMechanics>();
+
+            //Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
         }
 

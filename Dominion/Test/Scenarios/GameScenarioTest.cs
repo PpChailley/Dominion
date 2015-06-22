@@ -29,7 +29,7 @@ namespace gbd.Dominion.Test.Scenarios
             base.SetUp();
 
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
-            Game.G.MakeReadyToStart();
+            Game.G.Ready();
 
         }
 

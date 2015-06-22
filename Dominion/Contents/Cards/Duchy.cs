@@ -7,8 +7,8 @@ namespace gbd.Dominion.Contents.Cards
     {
         public Duchy()
         {
-            Mechanics.Cost = new Resources(5);
-            Mechanics.Types.Add(new VictoryType(3));
+            //Mechanics.Cost = new Resources(5);
+            //Mechanics.Types.Add(new VictoryType(3));
         }
     }
 }

@@ -5,6 +5,8 @@
         Current,
         Left, 
         Right,
+        Opponents,
+
         
     }
 }

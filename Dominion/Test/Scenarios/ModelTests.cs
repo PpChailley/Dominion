@@ -49,7 +49,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<IPlayer>();
-            player.GetReadyToStartGame();
+            player.Ready();
 
             player.Draw(draw);
             player.DiscardFromHand(discard);
@@ -72,7 +72,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void PlayerDraw(int amountToDraw, int expectedInHand, int expectedInLibrary)
         {
             var player = IoC.Kernel.Get<Player>();
-            player.GetReadyToStartGame();
+            player.Ready();
 
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
@@ -93,7 +93,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
-            player.GetReadyToStartGame();
+            player.Ready();
 
 
             player.Draw(6);
@@ -103,7 +103,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void PlayerGainCard()
         {
             var player = IoC.Kernel.Get<IPlayer>();
-            player.GetReadyToStartGame();
+            player.Ready();
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
@@ -154,11 +154,11 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var player = IoC.Kernel.Get<Player>();
-            player.GetReadyToStartGame();
+            player.Ready();
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
-            Game.MoveCards(player.Hand, player.DiscardPile, 3);
+            Model.GameMechanics.Model.MoveCards(player.Hand, player.DiscardPile, 3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,2,3,0)));
 
             player.Draw(5);
@@ -179,7 +179,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.ReBind<IDeck>().To<StartingDeck>();
 
             var player = IoC.Kernel.Get<Player>();
-            player.GetReadyToStartGame();
+            player.Ready();
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 

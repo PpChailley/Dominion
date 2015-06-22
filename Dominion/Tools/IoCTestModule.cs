@@ -29,7 +29,10 @@ namespace gbd.Dominion.Tools
 
 
 
+            // This will be bound to CurrentPlayer
+            //Bind<IPlayer>().To<Player>();
             
+
         }
 
     }
