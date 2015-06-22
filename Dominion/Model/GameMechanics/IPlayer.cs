@@ -11,10 +11,7 @@ namespace gbd.Dominion.Model.GameMechanics
         PlayerStatus Status { get; set; }
 
         IDeck Deck { get; set; }
-        IHand Hand { get; }
-        IDiscardPile DiscardPile { get; }
-        ILibrary Library { get; }
-        IBattleField BattleField { get; }
+
 
         int CurrentScore { get; }
 

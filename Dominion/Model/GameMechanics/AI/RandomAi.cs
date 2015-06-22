@@ -12,7 +12,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
         public override IEnumerable<ICard> ChooseAndDiscard(int amount)
         {
-            return Player.Hand.Cards.Random(amount);
+            return Player.Deck.Hand.Cards.Random(amount);
         }
 
 

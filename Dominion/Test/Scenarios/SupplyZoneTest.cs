@@ -59,7 +59,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(pile.Cards.Count, Is.EqualTo(10));
 
 
-            Model.GameMechanics.Model.MoveCards(pile, player.DiscardPile);
+            Model.GameMechanics.Model.MoveCards(pile, player.Deck.DiscardPile);
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(11));
             Assert.That(pile.Cards.Count, Is.EqualTo(9));

@@ -59,9 +59,9 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
 
-            Assert.That(player.Hand.Cards.Count, Is.EqualTo(expectInHand));
-            Assert.That(player.DiscardPile.Cards.Count, Is.EqualTo(expectInDiscard));
-            Assert.That(player.Library.Cards.Count, Is.EqualTo(expectInLib));
+            Assert.That(player.Deck.Hand.Cards.Count, Is.EqualTo(expectInHand));
+            Assert.That(player.Deck.DiscardPile.Cards.Count, Is.EqualTo(expectInDiscard));
+            Assert.That(player.Deck.Library.Cards.Count, Is.EqualTo(expectInLib));
         }
 
 
@@ -76,13 +76,13 @@ namespace gbd.Dominion.Test.Scenarios
 
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(5));
+            Assert.That(player.Deck.Library.Cards.Count(), Is.EqualTo(5));
 
             player.Draw(amountToDraw);
 
             Assert.That(player.Deck.Cards.Count(), Is.EqualTo(NB_CARDS_IN_DEFAULT_DECK));
-            Assert.That(player.Library.Cards.Count(), Is.EqualTo(expectedInLibrary));
-            Assert.That(player.Hand.Cards.Count(), Is.EqualTo(expectedInHand));
+            Assert.That(player.Deck.Library.Cards.Count(), Is.EqualTo(expectedInLibrary));
+            Assert.That(player.Deck.Hand.Cards.Count(), Is.EqualTo(expectedInHand));
 
         }
 
@@ -158,7 +158,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
-            Model.GameMechanics.Model.MoveCards(player.Hand, player.DiscardPile, 3);
+            Model.GameMechanics.Model.MoveCards(player.Deck.Hand, player.Deck.DiscardPile, 3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,2,3,0)));
 
             player.Draw(5);
@@ -195,29 +195,29 @@ namespace gbd.Dominion.Test.Scenarios
         {
             var player = IoC.Kernel.Get<Player>();
 
-            player.Library.Init(player.Deck);
+            player.Deck.Library.Init(player.Deck);
             player.Deck.Library.SortCards(card => ((TestCard) card).Index);
 
 
-            var sample = player.Library.Get(1, Position.Top).ToList();
+            var sample = player.Deck.Library.Get(1, Position.Top).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(1));
             Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(1));
             Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(1));
 
-            sample = player.Library.Get(5, Position.Top).ToList();
+            sample = player.Deck.Library.Get(5, Position.Top).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(5));
             Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(1));
             Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(5));
 
-            sample = player.Library.Get(1, Position.Bottom).ToList();
+            sample = player.Deck.Library.Get(1, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(1));
             Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(10));
             Assert.That(((TestCard) sample.Last()).Index, Is.EqualTo(10));
 
-            sample = player.Library.Get(4, Position.Bottom).ToList();
+            sample = player.Deck.Library.Get(4, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(4));
             Assert.That(((TestCard) sample.First()).Index, Is.EqualTo(7));

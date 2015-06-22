@@ -29,7 +29,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
-            player.Play(player.Hand.Cards.First());
+            player.Play(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4,5,0,1)));
         }

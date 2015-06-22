@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
-using gbd.Tools.Cli;
 using gbd.Dominion.Tools;
 using gbd.Tools.Cli;
 using Ninject;
@@ -59,12 +58,6 @@ namespace gbd.Dominion.Model.GameMechanics
             Status = status;
         }
 
-        public IHand Hand{ get { return Deck.Hand; }}
-        public IDiscardPile DiscardPile{ get { return Deck.DiscardPile; }}
-        public ILibrary Library{ get { return Deck.Library; }}
-
-        public IBattleField BattleField { get { return Deck.BattleField; } }
-   
 
 
         public int CurrentScore
@@ -83,13 +76,13 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Draw(int amount = 1)
         {
-            Model.MoveCards(Library, Hand, amount);
+            Model.MoveCards(Deck.Library, Deck.Hand, amount);
         }
 
         public void DiscardFromHand(int amount)
         {
             var toDiscard = this._intelligence.ChooseAndDiscard(amount);
-            Model.MoveCards(toDiscard, Hand, this.DiscardPile, Position.Top);
+            Model.MoveCards(toDiscard, Deck.Hand, Deck.DiscardPile, Position.Top);
         }
 
 
@@ -100,7 +93,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Receive(IList<ICard> cards)
         {
-            Model.MoveCards(cards, IoC.Kernel.Get<IGame>().SupplyZone, DiscardPile, Position.Top);
+            Model.MoveCards(cards, IoC.Kernel.Get<IGame>().SupplyZone, Deck.DiscardPile, Position.Top);
         }
         public void Receive(ICard card)
         {
@@ -120,7 +113,7 @@ namespace gbd.Dominion.Model.GameMechanics
                 trigger.Do();
             }
 
-            Model.MoveCard(card, Hand, BattleField);
+            Model.MoveCard(card, Deck.Hand, Deck.BattleField);
         }
 
 
