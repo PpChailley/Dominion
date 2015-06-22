@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using gbd.Dominion.Contents.Cards;
+using Ninject;
 
 namespace gbd.Dominion.Tools
 {
@@ -16,7 +17,9 @@ namespace gbd.Dominion.Tools
         public static IKernel InitKernel()
         {
             _kernel = new StandardKernel(   new IoCMechanicsModule(),
-                                            new IoCTestModule());
+                                            new IoCTestModule(),
+                                            new AlwaysInSupplyCardsModule()
+                                            );
 
             return _kernel;
         }

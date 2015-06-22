@@ -7,8 +7,8 @@ namespace gbd.Dominion.Contents.Cards
     {
         public Estate()
         {
-            Mechanics.Cost = new Resources(2);
-            Mechanics.Types.Add(new VictoryType(1));
+            //Mechanics.Cost = new Resources(2);
+            //Mechanics.Types.Add(new VictoryType(1));
         }
     }
 }

@@ -19,6 +19,6 @@ namespace gbd.Dominion.Model.Zones
 
         void EndOfTurnCleanup();
         ILibrary ShuffleDiscardToLibrary();
-        void GetReadyToStartGame();
+        void Ready();
     }
 }

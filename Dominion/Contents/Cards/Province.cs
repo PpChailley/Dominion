@@ -7,8 +7,8 @@ namespace gbd.Dominion.Contents.Cards
     {
         public Province()
         {
-            Mechanics.Cost = new Resources(8);
-            Mechanics.Types.Add(new VictoryType(6));
+            //Mechanics.Cost = new Resources(8);
+            //Mechanics.Types.Add(new VictoryType(6));
         }
     }
 }

@@ -19,10 +19,12 @@ namespace gbd.Dominion.Model.GameMechanics
 
 
         void Receive(ICard card);
-        void GetReadyToStartGame();
+        void Ready();
         void Draw(int amount = 1);
         void DiscardFromHand(int amount);
         void AddToDeck(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top);
         void Buy(IList<ICard> cards);
+        void Play(ICard card);
+        
     }
 }

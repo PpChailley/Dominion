@@ -9,11 +9,15 @@ namespace gbd.Dominion.Model.GameMechanics
         public int Money;
         public int Potions;
 
-        public Resources(int money, int potions = 0)
+        public Resources(int money, int potions)
         {
             Money = money;
             Potions = potions;
         }
+
+        public Resources(int money): this(money, 0){ }
+
+
 
         public void Reset()
         {

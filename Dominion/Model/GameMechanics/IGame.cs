@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using gbd.Dominion.Model.Zones;
+using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
-    public interface IGame
+    public interface IGame: IGameObject
     {
 
-        ICollection<IPlayer> Players { get; set; }
-        IPlayer CurrentPlayer { get; }
+        IList<IPlayer> Players { get;  }
         ISupplyZone SupplyZone { get; }
 
 
-        void MakeReadyToStart();
+        IPlayer CurrentPlayer { get; }
+
 
         void Init();
+        IList<IPlayer> GetPlayers(PlayerChoice who);
+        
     }
 }

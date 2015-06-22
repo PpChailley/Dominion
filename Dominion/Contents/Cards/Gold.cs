@@ -7,8 +7,8 @@ namespace gbd.Dominion.Contents.Cards
     {
         public Gold()
         {
-            Mechanics.Cost = new Resources(6);
-            Mechanics.Types.Add(new TreasureType(3));
+            //Mechanics.Cost = new Resources(6);
+            //Mechanics.Types.Add(new TreasureType(3));
         }
     }
 }

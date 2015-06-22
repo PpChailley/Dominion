@@ -17,8 +17,8 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyZone()
         {
-            IoC.Kernel.ReBind<ICollection<IPlayer>>()
-                .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+            //IoC.Kernel.ReBind<ICollection<IPlayer>>()
+            //    .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 
             var player = IoC.Kernel.Get<IPlayer>();
@@ -59,7 +59,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(pile.Cards.Count, Is.EqualTo(10));
 
 
-            Game.MoveCards(pile, player.DiscardPile);
+            Model.GameMechanics.Model.MoveCards(pile, player.DiscardPile);
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(11));
             Assert.That(pile.Cards.Count, Is.EqualTo(9));

@@ -3,20 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
+using Ninject;
 
 namespace gbd.Dominion.Model.Cards
 {
-    public class CardMechanics
+    public class CardMechanics : ICardMechanics
     {
-        public Resources Cost;
+        [Inject]
+        public CardMechanics(IList<ICardType> types, IList<IGameAction> onBuy, IList<IGameAction> onPlay)
+        {
+            OnBuyTrigger = onBuy;
+            OnPlayTriggers = onPlay;
+            Types = types;
+        }
+
+
+        [Inject]
+        public Resources Cost { get; private set; }
+
+        [Inject]
+        public IList<IGameAction> OnBuyTrigger { get; private set; }
+
+        [Inject]
+        public IList<IGameAction> OnPlayTriggers { get; private set; }
+
+        [Inject]
+        public IList<ICardType> Types { get; private set; }
+
 
         public Resources TreasureValue
         {
             get
             {
                 var treasureType = (TreasureType) GetCardType<TreasureType>();
-                if (treasureType == null)   return new Resources(0);
-                else                        return treasureType.BuyValue;
+                return treasureType == null ? new Resources(0) : treasureType.BuyValue;
             }
         }
 
@@ -25,35 +45,26 @@ namespace gbd.Dominion.Model.Cards
             get
             {
                 var victoryType = (VictoryType)GetCardType<VictoryType>();
-                if (victoryType == null) return 0;
-                else return victoryType.VictoryPoints;
+                return victoryType == null ? 0 : victoryType.VictoryPoints;
+            }
+        }
+
+        public string PrintedText
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 
 
-        private ICardType GetCardType<TCardType>() where TCardType:ICardType
+        public ICardType GetCardType<TCardType>() where TCardType:ICardType
         {
-            var matchingTypes = Types.Where(t => t.GetType() == typeof (TCardType)).Cast<TCardType>();
-            if (matchingTypes.Any() == false)
-            {
-                return null;
-            }
-            if (matchingTypes.Count() == 1)
-            {
-                return matchingTypes.Single();
-            }
-            else
-            {
-                throw new InvalidOperationException("Card has more than once the same card type " + typeof(TCardType).Name);
-            }            
+            var matchingTypes = Types.Where(t => t.GetType() == typeof (TCardType)).Cast<TCardType>().SingleOrDefault();
+
+            return matchingTypes;
         }
 
         
-        public List<IGameAction> OnBuyTrigger = new List<IGameAction>();
-        public List<IGameAction> OnPlayTrigger = new List<IGameAction>();
-
-        public IList<ICardType> Types = new List<ICardType>();
-
-
     }
 }

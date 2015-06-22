@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,6 +12,19 @@ namespace gbd.Dominion.Test.Utilities
 {
     public class ReflectionClassFinder
     {
+
+        public static IEnumerable<TestCaseData> GetAllInterfaces
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(t => t.IsInterface)
+                    .Select(type => new TestCaseData(type))
+                    .ToList();
+            }
+        }
+        
+
         public static IEnumerable<TestCaseData> GetAllImplementedCardsTestData
         {
             get

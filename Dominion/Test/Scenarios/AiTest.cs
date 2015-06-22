@@ -30,7 +30,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.ReBind<IAi>().To(ai);
 
             var player = IoC.Kernel.Get<Player>();
-            player.GetReadyToStartGame();
+            player.Ready();
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
             player.DiscardFromHand(0);
