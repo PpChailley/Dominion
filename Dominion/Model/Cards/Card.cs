@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using gbd.Dominion.Contents;
+using gbd.Tools.Cli;
 using Ninject;
 
 namespace gbd.Dominion.Model.Cards
@@ -9,7 +10,7 @@ namespace gbd.Dominion.Model.Cards
     {
 
         [Inject]
-        public ICardMechanics Mechanics { get; set; }
+        public abstract ICardMechanics Mechanics { get; set; }
 
         [Inject]
         public IList<CardAttribute> Attributes { get; protected set; }
@@ -36,9 +37,12 @@ namespace gbd.Dominion.Model.Cards
         }
 
 
-
-
-
-
+        public override string ToString()
+        {
+            return String.Format("{0} # {1} with {{{2}}}",
+                GetType().Name,
+                GetHashCode(),
+                Mechanics);
+        }
     }
 }

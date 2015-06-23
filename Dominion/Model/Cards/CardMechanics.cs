@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
+using gbd.Tools.Cli;
 using Ninject;
 
 namespace gbd.Dominion.Model.Cards
@@ -10,24 +12,25 @@ namespace gbd.Dominion.Model.Cards
     public class CardMechanics : ICardMechanics
     {
         [Inject]
-        public CardMechanics(IList<ICardType> types, IList<IGameAction> onBuy, IList<IGameAction> onPlay)
+        public CardMechanics(   Resources cost,
+                                IList<ICardType> types, 
+                                IList<IGameAction> onBuy, 
+                                IList<IGameAction> onPlay
+                                )
         {
+            Cost = cost;
             OnBuyTrigger = onBuy;
             OnPlayTriggers = onPlay;
             Types = types;
         }
 
 
-        [Inject]
         public Resources Cost { get; private set; }
 
-        [Inject]
         public IList<IGameAction> OnBuyTrigger { get; private set; }
-
-        [Inject]
+        
         public IList<IGameAction> OnPlayTriggers { get; private set; }
-
-        [Inject]
+        
         public IList<ICardType> Types { get; private set; }
 
 
@@ -65,6 +68,36 @@ namespace gbd.Dominion.Model.Cards
             return matchingTypes;
         }
 
-        
+
+        public override string ToString()
+        {
+            var toreturn = new StringBuilder();
+
+            toreturn.Append("{{ {0} V - {1} - ".Format(VictoryPoints, TreasureValue));
+
+            if (OnPlayTriggers.Any())
+            {
+                toreturn.Append("{{ PLAY: ");
+                foreach (var trigger in OnPlayTriggers)
+                {
+                    toreturn.Append(trigger);
+                }
+                toreturn.Append(" }}");
+            }
+
+            if (OnBuyTrigger.Any())
+            {
+                toreturn.Append("{{ BUY: ");
+                foreach (var trigger in OnPlayTriggers)
+                {
+                    toreturn.Append(trigger);
+                }
+                toreturn.Append(" }}");
+            }
+
+            toreturn.Append(" }}");
+
+            return toreturn.ToString();
+        }
     }
 }

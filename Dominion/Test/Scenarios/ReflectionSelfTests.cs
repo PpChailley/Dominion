@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Test.Utilities;
+using gbd.Dominion.Tools;
+using Ninject;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Test.Scenarios
@@ -33,16 +35,15 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
         [Test, TestCaseSource(typeof(ReflectionClassFinder),"GetAllImplementedCardsTestData")]
-        public void CardsRequirements(ICard card)
+        public void CardsRequirements(Type type)
         {
-            //Assert.That(card.Mechanics.Types.Any());
-            //Assert.That(card.Mechanics.Cost, Is.Not.Null);
-            //Assert.That(card.Mechanics.TreasureValue, Is.Not.Null);
+            var card = (ICard) IoC.Kernel.Get(type);
 
+            Assert.That(card.Mechanics.Types.Any());
+            Assert.That(card.Mechanics.Types, Is.Unique);
+            Assert.That(card.Mechanics.Cost, Is.Not.Null);
+            Assert.That(card.Mechanics.TreasureValue, Is.Not.Null);
 
-            //TODO: Many tests to add => change model ?
-
-            throw new InconclusiveException("Think it over");
 
         }
 

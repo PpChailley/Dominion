@@ -29,12 +29,9 @@ namespace gbd.Dominion.Test.Utilities
         {
             get
             {
-                var cards = GetAllImplementedCards().Select(type => (ICard)Activator.CreateInstance(type));
+                var types = GetAllImplementedCards();
 
-                // TODO: try to remove this line. Should be useless and safe...
-                var castedCards = cards.Cast<ICard>();
-
-                var testCaseData = castedCards.Select(c => new TestCaseData(c));
+                var testCaseData = types.Select(c => new TestCaseData(c));
 
                 return testCaseData;
             }

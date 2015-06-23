@@ -5,6 +5,8 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Curse: AlwaysInSupplyCard
     {
+        public override ICardMechanics Mechanics { get; set; }
+
         public Curse()
         {
             //Mechanics.Cost = new Resources(0);

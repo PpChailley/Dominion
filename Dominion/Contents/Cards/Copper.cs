@@ -5,5 +5,6 @@ namespace gbd.Dominion.Contents.Cards
 {
     class Copper : AlwaysInSupplyCard, ICard
     {
+        public override ICardMechanics Mechanics { get; set; }
     }
 }
