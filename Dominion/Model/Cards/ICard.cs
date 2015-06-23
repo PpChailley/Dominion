@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using gbd.Dominion.Contents;
+using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.Cards
 
@@ -9,6 +10,7 @@ namespace gbd.Dominion.Model.Cards
     {
         GameExtension Extension { get; }
 
+        IZone Zone { get; }
 
         ICardMechanics Mechanics { get; }
 
@@ -17,5 +19,7 @@ namespace gbd.Dominion.Model.Cards
         String PrintedText { get; }
 
         void ClearInPlayAttributes();
+        void Ready(IZone zone);
+        
     }
 }
