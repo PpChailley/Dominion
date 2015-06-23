@@ -2,9 +2,13 @@
 
 namespace gbd.Dominion.Model.Cards
 {
-    public class CurseType : ICardType
+    public class CurseType : CardType, ICardType
     {
         public int CurseValue;
+
+
+
+
 
 
         public CurseType(int value)
@@ -13,5 +17,6 @@ namespace gbd.Dominion.Model.Cards
                 throw new InvalidOperationException("Curse value must be negative or null");
             CurseValue = value;
         }
+
     }
 }

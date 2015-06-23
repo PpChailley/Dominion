@@ -16,14 +16,9 @@ namespace gbd.Dominion.Model.Cards
             get { return GameSet.Selectable; }
         }
 
-        public override GameExtension Extension { get; private set; }
+        // public override GameExtension Extension { get; }
 
 
-        [Inject]
-        protected SelectableCard(GameExtension extension)
-        {
-            Extension = extension;
-        }
 
     }
 }

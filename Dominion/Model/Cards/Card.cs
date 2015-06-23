@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using gbd.Dominion.Contents;
+using gbd.Dominion.Model.Zones;
 using gbd.Tools.Cli;
 using Ninject;
 
@@ -9,7 +10,7 @@ namespace gbd.Dominion.Model.Cards
     public abstract class Card: PrintedCard, ICard
     {
 
-        [Inject]
+        // This has to stay abstract so that NInject will see the implementing type when injecting it
         public abstract ICardMechanics Mechanics { get; set; }
 
         [Inject]
@@ -34,6 +35,14 @@ namespace gbd.Dominion.Model.Cards
         public void ClearInPlayAttributes()
         {
             this.Attributes.Clear();
+        }
+
+        public void Ready(IZone zone)
+        {
+            foreach (var cardType in this.Mechanics.Types)
+            {
+                cardType.Ready(zone);
+            }
         }
 
 

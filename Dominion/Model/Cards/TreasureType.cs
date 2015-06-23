@@ -1,4 +1,5 @@
 ﻿using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.Cards
 
@@ -6,6 +7,7 @@ namespace gbd.Dominion.Model.Cards
     public class TreasureType : ICardType
     {
         public Resources BuyValue;
+        protected IZone Zone { get; set; }
 
         public TreasureType(Resources res)
         {
@@ -16,5 +18,12 @@ namespace gbd.Dominion.Model.Cards
         {
             BuyValue = new Resources(coins);
         }
+
+        public void Ready(IZone zone)
+        {
+            Zone = zone;
+        }
+
+        
     }
 }

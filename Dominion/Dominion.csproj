@@ -74,13 +74,27 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Cards\CouncilRoom.cs" />
+    <Compile Include="Contents\Cards\Festival.cs" />
+    <Compile Include="Contents\Cards\Gardens.cs" />
     <Compile Include="Contents\Cards\IoCCardsModule.cs" />
+    <Compile Include="Contents\Cards\Laboratory.cs" />
+    <Compile Include="Contents\Cards\Market.cs" />
+    <Compile Include="Contents\Cards\ReceiveCurse.cs" />
+    <Compile Include="Contents\Cards\Smithy.cs" />
     <Compile Include="Contents\Cards\Village.cs" />
+    <Compile Include="Contents\Cards\Witch.cs" />
+    <Compile Include="Contents\Cards\Woodcutter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\Cards\CardType.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\Cards\Card.cs" />
     <Compile Include="Model\Cards\ICardMechanics.cs" />
+    <Compile Include="Model\GameMechanics\Actions\AddAction.cs" />
+    <Compile Include="Model\GameMechanics\Actions\AddBuy.cs" />
+    <Compile Include="Model\GameMechanics\Actions\AddCoins.cs" />
     <Compile Include="Model\GameMechanics\Actions\CardShufflerRandom.cs" />
+    <Compile Include="Model\GameMechanics\Actions\DiscardDownTo.cs" />
     <Compile Include="Model\GameMechanics\IGameObject.cs" />
     <Compile Include="Model\GameMechanics\Model.cs" />
     <Compile Include="Model\TestDeck.cs" />
@@ -94,12 +108,14 @@
     <Compile Include="Model\GameMechanics\IGame.cs" />
     <Compile Include="Model\GameMechanics\IPlayer.cs" />
     <Compile Include="Model\GameMechanics\PlayerStatus.cs" />
+    <Compile Include="Model\Zones\CursePile.cs" />
     <Compile Include="Model\Zones\ICardShuffler.cs" />
     <Compile Include="Model\Zones\IMutableZone.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
+    <Compile Include="Model\Zones\ZoneChoice.cs" />
     <Compile Include="Test\Scenarios\CardsTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
     <Compile Include="Test\Scenarios\NInjectExtensionsRobustness.cs" />
