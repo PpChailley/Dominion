@@ -39,6 +39,7 @@ namespace gbd.Dominion.Contents.Cards
 
         private void BindCardsFromBaseGame()
         {
+            // TODO: comment back in cards and implement them
             //SetBaseData<Cellar>(2, 0, 0);
             //SetBaseData<Chapel>(2, 0, 0);
             //SetBaseData<Moat>(2, 0, 0);
