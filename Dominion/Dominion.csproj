@@ -85,6 +85,8 @@
     <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="Contents\Cards\Witch.cs" />
     <Compile Include="Contents\Cards\Woodcutter.cs" />
+    <Compile Include="Contents\Cards\IoCCardsModule.cs" />
+    <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Cards\CardType.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />
