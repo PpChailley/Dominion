@@ -74,7 +74,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contents\Cards\AlwaysInSupplyCardsModule.cs" />
+    <Compile Include="Contents\Cards\IoCCardsModule.cs" />
+    <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\Cards\Card.cs" />
