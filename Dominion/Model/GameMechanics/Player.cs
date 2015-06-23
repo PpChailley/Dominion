@@ -125,8 +125,8 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public override string ToString()
         {
-            return "{0} # {1} with {2} {3}".Format(
-                this.GetType(),
+            return String.Format("{0} # {1} with {2} {3}",
+                this.GetType().Name,
                 this.GetHashCode(),
                 this.Deck.GetType(),
                 this.Deck.CardCountByZone);

@@ -131,8 +131,8 @@ namespace gbd.Dominion.Model.Zones
 
         public override string ToString()
         {
-            return "{0} # {1} with {2}"
-                .Format(this.GetType(),
+            return String.Format("{0} # {1} with {2}",   
+                    this.GetType().Name,
                     this.GetHashCode(),
                     this.CardCountByZone);
         }
