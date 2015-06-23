@@ -18,7 +18,7 @@ namespace gbd.Dominion.Tools
         {
             _kernel = new StandardKernel(   new IoCMechanicsModule(),
                                             new IoCTestModule(),
-                                            new AlwaysInSupplyCardsModule()
+                                            new IoCCardsModule()
                                             );
 
             return _kernel;

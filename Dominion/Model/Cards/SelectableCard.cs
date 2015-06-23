@@ -1,4 +1,7 @@
-﻿namespace gbd.Dominion.Model.Cards
+﻿using gbd.Dominion.Contents;
+using Ninject;
+
+namespace gbd.Dominion.Model.Cards
 {
     /// <summary>
     /// A standard card that can be randomly included in the supply by the game creation process 
@@ -7,9 +10,20 @@
     /// </summary>
     public abstract class SelectableCard: Card
     {
+
         public override GameSet PresentInSet
         {
             get { return GameSet.Selectable; }
         }
+
+        public override GameExtension Extension { get; private set; }
+
+
+        [Inject]
+        protected SelectableCard(GameExtension extension)
+        {
+            Extension = extension;
+        }
+
     }
 }
