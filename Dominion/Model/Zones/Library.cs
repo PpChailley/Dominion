@@ -24,6 +24,7 @@ namespace gbd.Dominion.Model.Zones
             foreach (var card in ParentDeck.DiscardPile.Cards)
             {
                 Cards.Add(card);
+                card.Ready(ParentDeck);
             }
             ParentDeck.DiscardPile.Cards.Clear();
 
