@@ -6,7 +6,7 @@ namespace gbd.Dominion.Test.Utilities
 {
     public class TestSupplyZone : AbstractSupplyZone, ISupplyZone
     {
-        public TestSupplyZone(IList<ISupplyPile> piles) : base(piles)
+        public TestSupplyZone(IList<ISupplyPile> piles, CursePile cursePile) : base(piles, cursePile)
         {
         }
     }

@@ -43,8 +43,13 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(card.Mechanics.Types, Is.Unique);
             Assert.That(card.Mechanics.Cost, Is.Not.Null);
             Assert.That(card.Mechanics.TreasureValue, Is.Not.Null);
+        }
 
 
+        [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllImplementedCardsTestData")]
+        public void CardIsPublic(Type type)
+        {
+            Assert.That(type.IsPublic);
         }
 
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllTestRelatedClassesTestCaseData")]

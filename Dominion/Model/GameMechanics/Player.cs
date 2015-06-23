@@ -15,7 +15,6 @@ namespace gbd.Dominion.Model.GameMechanics
         public const int STARTING_HAND_SIZE = 5;
 
 
-
         #region Static Accessors
 
         public static ICollection<IPlayer> Get(ICollection<PlayerChoice> designatedPlayers)
@@ -46,13 +45,25 @@ namespace gbd.Dominion.Model.GameMechanics
 
         private readonly IIntelligence _intelligence;
 
+        public int AvailableActions { get; set; }
+
+        public int AvailableBuys { get; set; }
+
+        public int AvailableCoins{ get; set; }
+
+
         public PlayerStatus Status { get; set; }
         public IDeck Deck { get; set; }
         public String Name;
 
 
+        [Inject]
         public Player(IDeck deck, IIntelligence intel, PlayerStatus status)
         {
+            AvailableActions = 0;
+            AvailableCoins = 0;
+            AvailableBuys = 0;
+
             Deck = deck;
             _intelligence = intel;
             Status = status;
@@ -66,11 +77,22 @@ namespace gbd.Dominion.Model.GameMechanics
         }
 
 
+
         public void Ready()
         {
             Deck.Ready();
             _intelligence.Init(this);
             Draw(STARTING_HAND_SIZE);
+        }
+
+        public void StartTurn()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EndTurn()
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -114,6 +136,29 @@ namespace gbd.Dominion.Model.GameMechanics
             }
 
             Model.MoveCard(card, Deck.Hand, Deck.BattleField);
+        }
+
+        public void ReceiveFrom(ISupplyPile @from, int amount)
+        {
+            try
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    var card = from.Get(1).Single();
+                    Receive(card);
+                }
+            }
+            catch (NotEnoughCardsException) { }
+        }
+
+        public void ChooseAndReceive(Resources maxCost)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICard[] ChooseAndTrash(ZoneChoice @from, int numberOfCards)
+        {
+            throw new NotImplementedException();
         }
 
 

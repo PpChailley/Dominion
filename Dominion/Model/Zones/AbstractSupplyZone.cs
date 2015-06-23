@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
+using Ninject;
 
 namespace gbd.Dominion.Model.Zones
 {
@@ -10,10 +11,14 @@ namespace gbd.Dominion.Model.Zones
     {
         public IList<ISupplyPile> Piles { get; protected set; }
 
-        
-        protected AbstractSupplyZone(IList<ISupplyPile> piles)
+        public CursePile CursePile { get; protected set; }
+
+
+        [Inject]
+        protected AbstractSupplyZone(IList<ISupplyPile> piles, CursePile cursePile)
         {
             Piles = piles;
+            CursePile = cursePile;
         }
 
 
