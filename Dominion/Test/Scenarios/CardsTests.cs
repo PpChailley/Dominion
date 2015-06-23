@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
@@ -32,6 +33,23 @@ namespace gbd.Dominion.Test.Scenarios
             player.Play(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4,5,0,1)));
+        }
+
+        [Test]
+        public void CardsFollowTheirZone()
+        {
+            var supplyPile = IoC.Kernel.Get<ISupplyPile>();
+            var deck = IoC.Kernel.Get<IDeck>();
+            
+
+            Assert.That(supplyPile.Cards.First().Zone, Is.EqualTo(supplyPile));
+            Assert.That(deck.Cards.First().Zone, Is.EqualTo(deck));
+
+            var movingCard = supplyPile.Cards.First();
+
+            Model.GameMechanics.Model.MoveCard(movingCard, supplyPile, deck);
+
+            Assert.That(movingCard.Zone, Is.EqualTo(deck));
         }
 
     }
