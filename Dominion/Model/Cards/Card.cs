@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Policy;
 using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Tools;
 using gbd.Tools.Cli;
 using Ninject;
 
@@ -14,8 +15,8 @@ namespace gbd.Dominion.Model.Cards
         public IZone Zone { get; private set; }
         
         
-        // This has to stay abstract so that NInject will see the implementing type when injecting it
-        public ICardMechanics Mechanics { get; set; }
+        
+        public ICardMechanics Mechanics { get; set; }  
 
         
         public IList<CardAttribute> Attributes { get; protected set; }
@@ -24,6 +25,8 @@ namespace gbd.Dominion.Model.Cards
         protected Card()
         {
             Attributes = new List<CardAttribute>();
+            Mechanics = IoC.Kernel.Get<ICardMechanics>();
+
         }
         
         
