@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
@@ -14,7 +15,7 @@ using NUnit.Framework;
 namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
-    public class NInjectExtensionsTests: BaseTest
+    public class NInjectExtensionsTests : BaseTest
     {
 
         [SetUp]
@@ -53,7 +54,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(numberOfBindings));
         }
 
-        
+
 
 
         [TestCase(0)]
@@ -71,11 +72,11 @@ namespace gbd.Dominion.Test.Scenarios
         public void WhenAnyAncestorOfType_SelfShouldBeAnAncestor_Level1()
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.Bind<ICard>().To<Silver>().WhenAnyAncestorOfType(typeof (IDeck));
+            IoC.Kernel.Bind<ICard>().To<Silver>().WhenAnyAncestorOfType(typeof(IDeck));
 
             var deck = IoC.Kernel.Get<IDeck>();
 
-            Assert.That(deck.Cards, Is.All.InstanceOf(typeof (Silver)));
+            Assert.That(deck.Cards, Is.All.InstanceOf(typeof(Silver)));
             Assert.That(deck.Cards.Count, Is.EqualTo(1));
         }
 
@@ -96,7 +97,7 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ISupplyPile>();
             IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
-            
+
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(ISupplyPile));
 
@@ -115,7 +116,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
             Assert.That(witnessdeck.Cards.Count, Is.EqualTo(1));
 
-            IoC.Kernel.Unbind<ICard>(); 
+            IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(TestDeck));
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(1));
 
@@ -131,14 +132,14 @@ namespace gbd.Dominion.Test.Scenarios
         public void WhenAnyAncestorOfType_Collection(int collectionSize)
         {
             IoC.Kernel.BindMultipleTimesTo<ICard, Silver>(collectionSize);
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck)); 
-                
+            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
+
             var witnessdeck = IoC.Kernel.Get<StartingDeck>();
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
             Assert.That(witnessdeck.Cards.Count, Is.EqualTo(collectionSize));
 
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck)); 
+            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(collectionSize));
 
             var deck = IoC.Kernel.Get<TestDeck>();
@@ -148,6 +149,107 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
+
+
+        [Test]
+        public void WhenAnyAncestorOfType_MemberFromAncestorType_Generic()
+        {
+            IoC.Kernel.Bind<GenericData<int>>().ToConstructor(syntax => new GenericData<int>(1))
+                .WhenAnyAncestorOfType<GenericData<int>, ChildA>();
+
+            IoC.Kernel.Bind<GenericData<int>>().ToConstructor(syntax => new GenericData<int>(2))
+                .WhenAnyAncestorOfType<GenericData<int>, ChildB>();
+
+
+            ChildA aAsSelf = IoC.Kernel.Get<ChildA>();
+            ChildB bAsSelf = IoC.Kernel.Get<ChildB>();
+
+            Parent aAsParent = IoC.Kernel.Get<ChildA>();
+            Parent bAsParent = IoC.Kernel.Get<ChildB>();
+
+
+            Assert.That(aAsSelf.AData.I, Is.EqualTo(1));
+            Assert.That(aAsParent.AData.I, Is.EqualTo(1));
+
+            Assert.That(bAsSelf.AData.I, Is.EqualTo(2));
+            Assert.That(bAsParent.AData.I, Is.EqualTo(2));
+
+
+        }
+
+
+        [Test]
+        public void WhenAnyAncestorOfType_MemberFromAncestorType_NonGeneric()
+        {
+            IoC.Kernel.Bind<NonGenericData>().ToConstructor(syntax => new NonGenericData(1))
+                .WhenAnyAncestorOfType<NonGenericData, ChildA>();
+
+            IoC.Kernel.Bind<NonGenericData>().ToConstructor(syntax => new NonGenericData(2))
+                .WhenAnyAncestorOfType<NonGenericData, ChildB>();
+
+
+            ChildA aAsSelf = IoC.Kernel.Get<ChildA>();
+            ChildB bAsSelf = IoC.Kernel.Get<ChildB>();
+
+            Parent aAsParent = IoC.Kernel.Get<ChildA>();
+            Parent bAsParent = IoC.Kernel.Get<ChildB>();
+
+
+            Assert.That(aAsSelf.AData.I, Is.EqualTo(1));
+            Assert.That(aAsParent.AData.I, Is.EqualTo(1));
+
+            Assert.That(bAsSelf.AData.I, Is.EqualTo(2));
+            Assert.That(bAsParent.AData.I, Is.EqualTo(2));
+
+
+        }
+
+
+        private abstract class Parent
+        {
+            protected Parent(GenericData<int> aProperty, NonGenericData aData)
+            {
+                AProperty = aProperty;
+                AData = aData;
+            }
+
+            public GenericData<int> AProperty { get; set; }
+            public NonGenericData AData { get; set; }
+        }
+
+        private class ChildA : Parent {
+            public ChildA(GenericData<int> aProperty, NonGenericData aData) : base(aProperty, aData)
+            {
+            }
+        }
+
+        private class ChildB : Parent {
+            public ChildB(GenericData<int> aProperty, NonGenericData aData) : base(aProperty, aData)
+            {
+            }
+        }
+
+        private class NonGenericData
+        {
+            public int I;
+
+            [Inject]
+            public NonGenericData(int i)
+            {
+                this.I = i;
+            }
+        }
+
+        private class GenericData<T>
+        {
+            public T I;
+
+            [Inject]
+            public GenericData(T i)
+            {
+                this.I = i;
+            }
+        }
 
 
     }
