@@ -10,6 +10,12 @@ namespace gbd.Dominion.Model.Zones
         public Hand() : base(new List<ICard>()) { }
 
 
+        public new IList<ICard> Cards
+        {
+            get { return base.Cards; }
+            set { base.Cards = value; }
+        }
+
 
         public void Add(ICollection<ICard> cards)
         {

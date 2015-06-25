@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
@@ -71,6 +70,26 @@ namespace gbd.Dominion.Test.Scenarios
             Model.GameMechanics.Model.MoveCard(movingCard, supplyPile, deck);
 
             Assert.That(movingCard.Zone, Is.EqualTo(deck));
+        }
+
+        [Test]
+        public void MoveCards()
+        {
+            IoC.Kernel.Unbind<ISupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
+            
+            var pileA = IoC.Kernel.Get<ISupplyPile>();
+            var pileB = IoC.Kernel.Get<ISupplyPile>();
+
+            pileA.Ready();
+
+            var card = pileA.Cards.First();
+            Assert.That(card.Zone, Is.EqualTo(pileA));
+
+            Model.GameMechanics.Model.MoveCard(card, pileA, pileB);
+            Assert.That(card.Zone, Is.EqualTo(pileB));
+
+
         }
 
     }

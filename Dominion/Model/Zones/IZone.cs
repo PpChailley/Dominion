@@ -14,5 +14,7 @@ namespace gbd.Dominion.Model.Zones
         void SortCards(Func<ICard, IComparable> comparer);
 
         int TotalCardsAvailable { get; }
+
+        void Ready();
     }
 }

@@ -3,7 +3,7 @@ using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Model.Zones
 {
-    public interface IHand: IZone
+    public interface IHand: IMutableZone
 
     {
         void Add(ICollection<ICard> cards);

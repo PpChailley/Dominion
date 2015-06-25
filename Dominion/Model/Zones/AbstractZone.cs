@@ -44,6 +44,11 @@ namespace gbd.Dominion.Model.Zones
             get { return Cards.Count; }
         }
 
+        public void Ready()
+        {
+            Cards.ToList().ForEach(c => c.Ready(this));
+        }
+
 
         public override string ToString()
         {

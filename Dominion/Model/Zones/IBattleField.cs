@@ -1,6 +1,6 @@
 ﻿namespace gbd.Dominion.Model.Zones
 {
-    public interface IBattleField: IZone
+    public interface IBattleField: IMutableZone
     {
         
     }

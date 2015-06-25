@@ -1,6 +1,6 @@
 namespace gbd.Dominion.Model.Zones
 {
-    public interface IDiscardPile: IZone
+    public interface IDiscardPile: IMutableZone
     {
         
     }
