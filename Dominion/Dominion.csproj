@@ -82,10 +82,8 @@
     <Compile Include="Contents\Cards\Market.cs" />
     <Compile Include="Contents\Cards\ReceiveCurse.cs" />
     <Compile Include="Contents\Cards\Smithy.cs" />
-    <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="Contents\Cards\Witch.cs" />
     <Compile Include="Contents\Cards\Woodcutter.cs" />
-    <Compile Include="Contents\Cards\IoCCardsModule.cs" />
     <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Cards\CardType.cs" />
