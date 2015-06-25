@@ -168,11 +168,11 @@ namespace gbd.Dominion.Test.Scenarios
             Parent bAsParent = IoC.Kernel.Get<ChildB>();
 
 
-            Assert.That(aAsSelf.AData.I, Is.EqualTo(1));
-            Assert.That(aAsParent.AData.I, Is.EqualTo(1));
+            Assert.That(aAsSelf.AGenericData.I, Is.EqualTo(1));
+            Assert.That(aAsParent.AGenericData.I, Is.EqualTo(1));
 
-            Assert.That(bAsSelf.AData.I, Is.EqualTo(2));
-            Assert.That(bAsParent.AData.I, Is.EqualTo(2));
+            Assert.That(bAsSelf.AGenericData.I, Is.EqualTo(2));
+            Assert.That(bAsParent.AGenericData.I, Is.EqualTo(2));
 
 
         }
@@ -195,11 +195,11 @@ namespace gbd.Dominion.Test.Scenarios
             Parent bAsParent = IoC.Kernel.Get<ChildB>();
 
 
-            Assert.That(aAsSelf.AData.I, Is.EqualTo(1));
-            Assert.That(aAsParent.AData.I, Is.EqualTo(1));
+            Assert.That(aAsSelf.ANonGenericData.I, Is.EqualTo(1));
+            Assert.That(aAsParent.ANonGenericData.I, Is.EqualTo(1));
 
-            Assert.That(bAsSelf.AData.I, Is.EqualTo(2));
-            Assert.That(bAsParent.AData.I, Is.EqualTo(2));
+            Assert.That(bAsSelf.ANonGenericData.I, Is.EqualTo(2));
+            Assert.That(bAsParent.ANonGenericData.I, Is.EqualTo(2));
 
 
         }
@@ -207,24 +207,24 @@ namespace gbd.Dominion.Test.Scenarios
 
         private abstract class Parent
         {
-            protected Parent(GenericData<int> aProperty, NonGenericData aData)
+            protected Parent(GenericData<int> aGenericData, NonGenericData aNonGenericData)
             {
-                AProperty = aProperty;
-                AData = aData;
+                AGenericData = aGenericData;
+                ANonGenericData = aNonGenericData;
             }
 
-            public GenericData<int> AProperty { get; set; }
-            public NonGenericData AData { get; set; }
+            public GenericData<int> AGenericData { get; set; }
+            public NonGenericData ANonGenericData { get; set; }
         }
 
         private class ChildA : Parent {
-            public ChildA(GenericData<int> aProperty, NonGenericData aData) : base(aProperty, aData)
+            public ChildA(GenericData<int> aGenericData, NonGenericData aNonGenericData) : base(aGenericData, aNonGenericData)
             {
             }
         }
 
         private class ChildB : Parent {
-            public ChildB(GenericData<int> aProperty, NonGenericData aData) : base(aProperty, aData)
+            public ChildB(GenericData<int> aGenericData, NonGenericData aNonGenericData) : base(aGenericData, aNonGenericData)
             {
             }
         }
