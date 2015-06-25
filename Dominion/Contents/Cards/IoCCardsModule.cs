@@ -11,7 +11,9 @@ using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
 using Ninject;
+using Ninject.Activation;
 using Ninject.Modules;
+using Ninject.Syntax;
 
 namespace gbd.Dominion.Contents.Cards
 {
@@ -72,6 +74,12 @@ namespace gbd.Dominion.Contents.Cards
             //SetBaseData<Adventurer>(6, 0, 0);
         }
 
+
+
+  
+
+
+
         private MoreBindingSyntax<T> SetBaseData<T>(int coinsCost, int coinValue, int victory) where T : ICard
         {
             Kernel.Bind<Resources>().ToConstructor(x => new Resources(coinsCost)).WhenAnyAncestorOfType<Resources, T>();
@@ -125,7 +133,7 @@ namespace gbd.Dominion.Contents.Cards
 
     public class TrashAndUpgrade : GameAction
     {
-        private ZoneChoice _from;
+        private readonly ZoneChoice _from;
         private readonly int _numberOfCards;
         private readonly int _upgradeValue;
 
@@ -140,8 +148,18 @@ namespace gbd.Dominion.Contents.Cards
         public override void Do()
         {
             var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            ICard[] trashed = player.ChooseAndTrash(_from, 1);
-            player.ChooseAndReceive(trashed.Single().Mechanics.Cost);
+            ICard[] trashed = player.ChooseAndTrash(_from, _numberOfCards);
+
+            foreach (var card in trashed)
+            {
+                player.ChooseAndReceive(
+                    new Resources(card.Mechanics.Cost.Money + _upgradeValue,
+                                  card.Mechanics.Cost.Potions  ));
+            }
+
+
+
+            
 
         }
     }
