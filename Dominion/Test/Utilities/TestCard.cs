@@ -10,7 +10,7 @@ namespace gbd.Dominion.Test.Utilities
     /// </summary>
     public class TestCard : Card, ICard
     {
-        public override ICardMechanics Mechanics { get; set; }
+        
 
 
         public static int LastIndex = 0;

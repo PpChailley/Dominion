@@ -5,7 +5,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Duchy : AlwaysInSupplyCard
     {
-        public override ICardMechanics Mechanics { get; set; }
+        
 
         public Duchy()
         {

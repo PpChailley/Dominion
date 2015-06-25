@@ -15,9 +15,9 @@ namespace gbd.Dominion.Model.Cards
         
         
         // This has to stay abstract so that NInject will see the implementing type when injecting it
-        public abstract ICardMechanics Mechanics { get; set; }
+        public ICardMechanics Mechanics { get; set; }
 
-        [Inject]
+        
         public IList<CardAttribute> Attributes { get; protected set; }
 
 
