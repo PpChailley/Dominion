@@ -6,6 +6,7 @@ namespace gbd.Dominion.Model.Zones
     {
         IList<ISupplyPile> Piles { get; }
 
+        CursePile CursePile { get; }
 
         void Ready();
     }

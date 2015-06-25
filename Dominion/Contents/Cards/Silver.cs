@@ -5,5 +5,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Silver : AlwaysInSupplyCard
     {
+        
+
     }
 }

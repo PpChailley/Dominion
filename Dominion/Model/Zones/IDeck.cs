@@ -4,9 +4,8 @@ using gbd.Dominion.Model.GameMechanics;
 
 namespace gbd.Dominion.Model.Zones
 {
-    public interface IDeck
+    public interface IDeck: IZone
     {
-        IList<ICard> Cards { get; }
         IHand Hand { get; }
         IDiscardPile DiscardPile { get; }
         ILibrary Library { get;  }

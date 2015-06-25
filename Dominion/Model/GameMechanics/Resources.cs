@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace gbd.Dominion.Model.GameMechanics
@@ -29,6 +30,11 @@ namespace gbd.Dominion.Model.GameMechanics
         {
             Money -= res.Aggregate(0, (current, r) => current + r.Money);
             Potions -= res.Aggregate(0, (current, r) => current + r.Potions);
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{{ {0} Coin - {1} Potion }}", Money, Potions);
         }
     }
 }

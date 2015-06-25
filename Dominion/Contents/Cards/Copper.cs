@@ -3,7 +3,8 @@ using gbd.Dominion.Model.GameMechanics;
 
 namespace gbd.Dominion.Contents.Cards
 {
-    class Copper : AlwaysInSupplyCard, ICard
+    public class Copper : AlwaysInSupplyCard, ICard
     {
+        
     }
 }

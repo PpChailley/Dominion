@@ -1,23 +1,29 @@
-﻿using gbd.Dominion.Tools;
+﻿using System.Linq;
+using gbd.Dominion.Tools;
 using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics.Actions
 {
     public class Draw: GameAction, IGameAction
     {
-        
-        public int Amount;
+        private readonly PlayerChoice _who;
+        private int _amount;
 
 
-        public Draw(int amount = 1)
+        public Draw(int amount)
         {
-            Amount = amount;
+            _amount = amount;
+        }
+
+        public Draw(int amount, PlayerChoice who): this(amount)
+        {
+            _who = who;
         }
 
 
         public override void Do()
         {
-            IoC.Kernel.Get<IGame>().CurrentPlayer.Draw();
+            IoC.Kernel.Get<IGame>().GetPlayers(_who).ToList().ForEach(p => p.Draw());
         }
     }
 }

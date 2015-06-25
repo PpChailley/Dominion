@@ -51,6 +51,21 @@ namespace gbd.Dominion.Model.Zones
             set { throw new NotImplementedException(); }
         }
 
+        public IEnumerable<ICard> Get(int amount, Position positionFrom = Position.Top)
+        {
+            throw new InvalidOperationException("Cannot Get cards from a deck. Try from Library instead.");
+        }
+
+        public void SortCards(Func<ICard, IComparable> comparer)
+        {
+            throw new InvalidOperationException("Cannot sort cards from a deck. Try sorting the library instead.");
+        }
+
+        public int TotalCardsAvailable
+        {
+            get { return Cards.Count; }
+        }
+
 
         public int CurrentScore
         {
@@ -131,8 +146,8 @@ namespace gbd.Dominion.Model.Zones
 
         public override string ToString()
         {
-            return "{0} # {1} with {2}"
-                .Format(this.GetType(),
+            return String.Format("{0} # {1} with {2}",   
+                    this.GetType().Name,
                     this.GetHashCode(),
                     this.CardCountByZone);
         }

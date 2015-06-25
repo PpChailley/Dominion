@@ -113,10 +113,11 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-        [TestCase(0,0)]
-        [TestCase(3,0)]
-        [TestCase(0,3)]
-        [TestCase(7,9)]
+        [TestCase(0, 0)]
+        [TestCase(3, 0)]
+        [TestCase(0, 3)]
+        [TestCase(10, 0)]
+        [TestCase(7, 9)]
         public void CountVictory(int estates, int provinces)
         {
             IoC.Kernel.Unbind<ICard>();
@@ -132,14 +133,14 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
-            player.AddToDeck(new Estate());
+            player.AddToDeck(IoC.Kernel.Get<Estate>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 1 ));
 
 
-            player.AddToDeck(new Duchy());
+            player.AddToDeck(IoC.Kernel.Get<Duchy>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 4));
 
-            player.AddToDeck(new Province());
+            player.AddToDeck(IoC.Kernel.Get<Province>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
 
 

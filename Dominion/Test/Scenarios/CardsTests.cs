@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
@@ -12,6 +14,23 @@ namespace gbd.Dominion.Test.Scenarios
     [TestFixture]
     public  class CardsTests: BaseTest
     {
+
+        [Test]
+        public void CardBinding()
+        {
+            IoC.Kernel.Unbind<ICardType>();
+            IoC.Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(1));
+
+            IoC.Kernel.Bind<ICard>().To<TestCard>();
+            
+
+            var card = IoC.Kernel.Get<ICard>();
+
+            Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(1));
+
+
+        }
+
 
         [Test]
         public void InjectionOfMechanics()
@@ -32,6 +51,26 @@ namespace gbd.Dominion.Test.Scenarios
             player.Play(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4,5,0,1)));
+        }
+
+        [Test]
+        public void CardsFollowTheirZone()
+        {
+            IoC.Kernel.Unbind<ISupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
+            
+            var supplyPile = IoC.Kernel.Get<ISupplyPile>();
+            var deck = IoC.Kernel.Get<IDeck>();
+            
+
+            Assert.That(supplyPile.Cards.First().Zone, Is.EqualTo(supplyPile));
+            Assert.That(deck.Cards.First().Zone, Is.EqualTo(deck));
+
+            var movingCard = supplyPile.Cards.First();
+
+            Model.GameMechanics.Model.MoveCard(movingCard, supplyPile, deck);
+
+            Assert.That(movingCard.Zone, Is.EqualTo(deck));
         }
 
     }

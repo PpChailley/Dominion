@@ -10,6 +10,9 @@ namespace gbd.Dominion.Test.Utilities
     /// </summary>
     public class TestCard : Card, ICard
     {
+        
+
+
         public static int LastIndex = 0;
 
         public int Index;
@@ -27,13 +30,14 @@ namespace gbd.Dominion.Test.Utilities
 
         public override string ToString()
         {
-            return String.Format("{0}  # {1}", this.GetType(), Index);
+            return String.Format("{0}  # {1}", this.GetType().Name, Index);
         }
 
         public override GameExtension Extension
         {
             get { return GameExtension.TestCards; }
         }
+
 
         public override GameSet PresentInSet
         {

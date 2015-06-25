@@ -1,4 +1,5 @@
-﻿using gbd.Dominion.Model;
+﻿using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
@@ -31,6 +32,10 @@ namespace gbd.Dominion.Tools
 
             // This will be bound to CurrentPlayer
             //Bind<IPlayer>().To<Player>();
+
+            Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(0)).WhenAnyAncestorOfType<VictoryType, TestCard>();
+            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, TestCard>();
+
             
 
         }

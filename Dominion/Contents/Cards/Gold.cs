@@ -5,6 +5,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Gold : AlwaysInSupplyCard
     {
+        
         public Gold()
         {
             //Mechanics.Cost = new Resources(6);

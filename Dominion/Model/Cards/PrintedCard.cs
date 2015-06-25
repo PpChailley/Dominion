@@ -1,5 +1,6 @@
 ﻿using System;
 using gbd.Dominion.Contents;
+using Ninject;
 
 namespace gbd.Dominion.Model.Cards
 {
@@ -15,6 +16,7 @@ namespace gbd.Dominion.Model.Cards
 
         public CardMetadata Meta;
 
+        
 
 
     }
