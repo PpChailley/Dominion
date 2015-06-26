@@ -27,6 +27,6 @@ namespace gbd.Dominion.Model.GameMechanics
 
         void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
         void ChooseAndReceive(Resources maxCost);
-        ICard[] ChooseAndTrash(ZoneChoice @from, int numberOfCards);
+        ICard[] ChooseAndTrash(ZoneChoice @from, int minAmount, int? maxAmount = null);
     }
 }

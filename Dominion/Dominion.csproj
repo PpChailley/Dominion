@@ -74,6 +74,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Cards\Chapel.cs" />
+    <Compile Include="Contents\Cards\ChooseAndTrash.cs" />
     <Compile Include="Contents\Cards\CouncilRoom.cs" />
     <Compile Include="Contents\Cards\Festival.cs" />
     <Compile Include="Contents\Cards\Gardens.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Contents\Cards\Market.cs" />
     <Compile Include="Contents\Cards\ReceiveCurse.cs" />
     <Compile Include="Contents\Cards\Smithy.cs" />
+    <Compile Include="Contents\Cards\TrashAndUpgrade.cs" />
     <Compile Include="Contents\Cards\Witch.cs" />
     <Compile Include="Contents\Cards\Woodcutter.cs" />
     <Compile Include="Contents\Cards\Village.cs" />

@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Test.Utilities;
-using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
-using Ninject;
-using Ninject.Activation;
 using Ninject.Modules;
-using Ninject.Syntax;
 
 namespace gbd.Dominion.Contents.Cards
 {
@@ -43,7 +34,7 @@ namespace gbd.Dominion.Contents.Cards
         {
             // TODO: comment back in cards and implement them
             //SetBaseData<Cellar>(2, 0, 0);
-            //SetBaseData<Chapel>(2, 0, 0);
+            SetBaseData<Chapel>(2, 0, 0).AddActions(new ChooseAndTrash(4,4));
             //SetBaseData<Moat>(2, 0, 0);
 
             //SetBaseData<Chancellor>(3, 0, 0);
@@ -129,38 +120,5 @@ namespace gbd.Dominion.Contents.Cards
             }
         }
 
-    }
-
-    public class TrashAndUpgrade : GameAction
-    {
-        private readonly ZoneChoice _from;
-        private readonly int _numberOfCards;
-        private readonly int _upgradeValue;
-
-        public TrashAndUpgrade(ZoneChoice from, int numberOfCards, int upgradeValue)
-        {
-            _from = @from;
-            _numberOfCards = numberOfCards;
-            _upgradeValue = upgradeValue;
-            throw new NotImplementedException();
-        }
-
-        public override void Do()
-        {
-            var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            ICard[] trashed = player.ChooseAndTrash(_from, _numberOfCards);
-
-            foreach (var card in trashed)
-            {
-                player.ChooseAndReceive(
-                    new Resources(card.Mechanics.Cost.Money + _upgradeValue,
-                                  card.Mechanics.Cost.Potions  ));
-            }
-
-
-
-            
-
-        }
     }
 }

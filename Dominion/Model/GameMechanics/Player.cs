@@ -154,7 +154,7 @@ namespace gbd.Dominion.Model.GameMechanics
             throw new NotImplementedException();
         }
 
-        public ICard[] ChooseAndTrash(ZoneChoice from, int numberOfCards)
+        public ICard[] ChooseAndTrash(ZoneChoice @from, int numberOfCards, int? maxAmount = null)
         {
             throw new NotImplementedException();
         }
