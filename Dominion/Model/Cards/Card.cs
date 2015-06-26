@@ -12,37 +12,22 @@ namespace gbd.Dominion.Model.Cards
     public abstract class Card: PrintedCard, ICard
     {
 
-        public IZone Zone { get; private set; }
+        public IZone Zone { get; set; }
         
         
-        
-        public ICardMechanics Mechanics { get; set; }  
+        public ICardMechanics Mechanics { get; }  
 
         
-        public IList<CardAttribute> Attributes { get; protected set; }
+        public IList<CardAttribute> Attributes { get; set; }
 
 
         protected Card()
         {
             Attributes = new List<CardAttribute>();
             Mechanics = IoC.Kernel.Get<ICardMechanics>();
-
         }
         
         
-
-
-        public string PrintedText
-        {
-            get { return Mechanics.PrintedText; }
-        }
-
-
-
-        public void ClearInPlayAttributes()
-        {
-            this.Attributes.Clear();
-        }
 
         public void Ready(IZone zone)
         {

@@ -10,15 +10,12 @@ namespace gbd.Dominion.Model.Cards
     {
         GameExtension Extension { get; }
 
-        IZone Zone { get; }
+        IZone Zone { get; set; }
 
         ICardMechanics Mechanics { get; }
 
-        IList<CardAttribute> Attributes { get; }
+        IList<CardAttribute> Attributes { get; set; }
 
-        String PrintedText { get; }
-
-        void ClearInPlayAttributes();
         void Ready(IZone zone);
         
     }
