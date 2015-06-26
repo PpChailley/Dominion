@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
@@ -19,6 +21,35 @@ namespace gbd.Dominion.Test.Scenarios
     [TestFixture]
     public class InjectionOfCardsTests: BaseTest
     {
+
+
+
+        [Test]
+        public void SmokeTest()
+        {
+            var player = IoC.Kernel.Get<IPlayer>();
+        }
+
+        [Test]
+        public void CardBinding()
+        {
+            IoC.Kernel.Unbind<ICardType>();
+            IoC.Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(1));
+
+            IoC.Kernel.Bind<ICard>().To<TestCard>();
+
+
+            var card = IoC.Kernel.Get<ICard>();
+
+            Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(1));
+
+
+        }
+
+
+
+
+
         [TestCase(1, 1, 1, 1)]
         [TestCase(2, 2, 2, 2)]
         [TestCase(10, 50, 500, 5000)]
@@ -141,6 +172,11 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(inLib, inHand, inDisc, inBf)));
         }
+
+
+
+
+
 
 
     }

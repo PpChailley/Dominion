@@ -16,43 +16,7 @@ namespace gbd.Dominion.Test.Scenarios
     public  class CardsTests: BaseTest
     {
 
-        [Test]
-        public void CardBinding()
-        {
-            IoC.Kernel.Unbind<ICardType>();
-            IoC.Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(1));
 
-            IoC.Kernel.Bind<ICard>().To<TestCard>();
-            
-
-            var card = IoC.Kernel.Get<ICard>();
-
-            Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(1));
-
-
-        }
-
-
-        [Test]
-        public void InjectionOfMechanics()
-        {
-            IoC.Kernel.Unbind<IGameAction>();
-            IoC.Kernel.Bind<IGameAction>().To<Draw>();
-
-            var witnessPlayer = IoC.Kernel.Get<IPlayer>();
-
-
-            var game = IoC.Kernel.Get<IGame>();
-            game.Ready();
-
-            var player = game.CurrentPlayer;
-
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
-
-            player.Play(player.Deck.Hand.Cards.First());
-
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4,5,0,1)));
-        }
 
         [Test]
         public void CardsFollowTheirZone()
