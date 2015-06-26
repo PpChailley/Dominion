@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
@@ -11,7 +7,6 @@ using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
 using Ninject;
-using Ninject.Syntax;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Test.Scenarios
@@ -41,15 +36,7 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
-        [ExpectedException(typeof (NotEnoughCardsException))]
-        [TestCase(10, 6)]
-        [TestCase(1, 6)]
-        [TestCase(100, 96)]
-        [TestCase(0, 1)]
-        public void DrawRobustness(int deckSize, int drawAmount)
-        {
-            Draw(deckSize, drawAmount);
-        }
+ 
         
         [TestCase(10, 1)]
         [TestCase(10, 2)]
