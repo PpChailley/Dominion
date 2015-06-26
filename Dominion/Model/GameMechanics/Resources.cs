@@ -1,5 +1,5 @@
 ﻿using System;
-using gbd.Tools.Cli;
+using gbd.Tools.Clr;
 
 namespace gbd.Dominion.Model.GameMechanics
 {

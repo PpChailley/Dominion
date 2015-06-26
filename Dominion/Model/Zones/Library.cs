@@ -4,7 +4,7 @@ using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Tools;
-using gbd.Tools.Cli;
+using gbd.Tools.Clr;
 using Ninject;
 
 namespace gbd.Dominion.Model.Zones
