@@ -119,8 +119,6 @@
     <Compile Include="Model\Zones\ZoneChoice.cs" />
     <Compile Include="Test\Scenarios\CardsTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
-    <Compile Include="Test\Scenarios\NInjectExtensionsRobustness.cs" />
-    <Compile Include="Test\Scenarios\NInjectExtensionsTests.cs" />
     <Compile Include="Test\Scenarios\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Cards\Curse.cs" />
@@ -172,6 +170,8 @@
     <Compile Include="Model\Cards\SelectableCard.cs" />
     <Compile Include="Test\Scenarios\SmokeTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
+    <Compile Include="Test\ToolsLib\NInjectExtensionsRobustness.cs" />
+    <Compile Include="Test\ToolsLib\NInjectExtensionsTests.cs" />
     <Compile Include="Test\Utilities\BaseTest.cs" />
     <Compile Include="Model\Zones\AbstractDeck.cs" />
     <Compile Include="Test\Scenarios\AiTest.cs" />

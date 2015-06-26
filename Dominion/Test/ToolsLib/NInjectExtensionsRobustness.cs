@@ -7,7 +7,7 @@ using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
 using NUnit.Framework;
 
-namespace gbd.Dominion.Test.Scenarios
+namespace gbd.Dominion.Test.ToolsLib
 {
     [TestFixture]
     public class NInjectExtensionsRobustness : BaseTest

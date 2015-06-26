@@ -11,7 +11,7 @@ using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
 
-namespace gbd.Dominion.Test.Scenarios
+namespace gbd.Dominion.Test.ToolsLib
 {
     [TestFixture]
     public class NInjectExtensionsTests : BaseTest
@@ -25,6 +25,8 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Unbind<IList<ICard>>();
             IoC.Kernel.Unbind<ICollection<ICard>>();
+            IoC.Kernel.Unbind<ISupplyPile>();
+
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(0));
         }
 
@@ -65,6 +67,26 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.BindMultipleTimesTo<ICard, TestCard>(numberOfBindings);
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(numberOfBindings));
         }
+
+
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(0)]
+        public void ToMultiple(int nbBindings)
+        {
+            IoC.Kernel.BindMultipleTimes<ICard>(nbBindings).To<ICard, Copper>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
+
+            Assert.That(IoC.Kernel.GetBindings(typeof(ICard)), Has.Count.EqualTo(nbBindings));
+
+            var pile = IoC.Kernel.Get<ISupplyPile>();
+
+
+            Assert.That(pile.Cards, Has.Count.EqualTo(nbBindings));
+
+        }
+
 
 
         [Test]
