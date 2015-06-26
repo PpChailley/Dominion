@@ -144,8 +144,8 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, TestCard>()
                 .WhenAnyAncestorOfType<TestCard, ILibrary>();
-            IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, TestCard>()
-                .WhenAnyAncestorOfType<TestCard, IDiscardPile>();
+            //IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, TestCard>()
+            //    .WhenAnyAncestorOfType<TestCard, IDiscardPile>();
 
 
             var deck = IoC.Kernel.Get<IDeck>();
@@ -158,6 +158,65 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(deck.CardCountByZone, Is.EqualTo(
                 new CardRepartition(librarySize + discardSize - pick, pick, 0, 0)));
+        }
+
+        [Test]
+        public void InjectIntoDeckComponents()
+        {
+            IoC.Kernel.Unbind<ICard>();
+
+            IoC.Kernel.BindMultipleTimes<ICard>(1).To<ICard, Copper>()
+                .WhenAnyAncestorOfType<Copper, ILibrary>();
+
+            IoC.Kernel.BindMultipleTimes<ICard>(2).To<ICard, Silver>()
+                .WhenAnyAncestorOfType<Silver, IHand>();
+
+            IoC.Kernel.BindMultipleTimes<ICard>(3).To<ICard, Gold>()
+                .WhenAnyAncestorOfType<Gold, IDiscardPile>();
+
+            IoC.Kernel.BindMultipleTimes<ICard>(4).To<ICard, Estate>()
+                .WhenAnyAncestorOfType<Estate, IBattleField>();
+
+
+            var lib = IoC.Kernel.Get<ILibrary>();
+            var hand = IoC.Kernel.Get<IHand>();
+            var discard = IoC.Kernel.Get<IDiscardPile>();
+            var bf = IoC.Kernel.Get<IBattleField>();
+
+            Assert.That(lib.Cards.Count, Is.EqualTo(1));
+            Assert.That(hand.Cards.Count, Is.EqualTo(2));
+            Assert.That(discard.Cards.Count, Is.EqualTo(3));
+            Assert.That(bf.Cards.Count, Is.EqualTo(4));
+
+
+            var deck = new TestDeck(lib, discard, bf, hand);
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(1, 2, 3, 4)));
+
+        }
+
+        [Test]
+        public void InjectIntoDeckComponents_NoOverload()
+        {
+            IoC.Kernel.Unbind<ICard>();
+            
+            IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType<Copper, ILibrary>();
+            IoC.Kernel.Bind<ICard>().To<Silver>().WhenAnyAncestorOfType<Silver, IHand>();
+
+
+            var lib = IoC.Kernel.Get<ILibrary>();
+            var hand = IoC.Kernel.Get<IHand>();
+            var discard = IoC.Kernel.Get<IDiscardPile>();
+            var bf = IoC.Kernel.Get<IBattleField>();
+
+            Assert.That(lib.Cards.Count, Is.EqualTo(1));
+            Assert.That(hand.Cards.Count, Is.EqualTo(1));
+
+
+            var deck = new TestDeck(lib, discard, bf, hand);
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(1, 1, 0, 0)));
+
         }
 
 
