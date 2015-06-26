@@ -38,6 +38,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public static void MoveTo(this IEnumerable<ICard> toMove, IZone to, Position positionInTarget = Position.Top)
         {
+            // TODO: Add robustness tests to MoveTo with 0 cards
             toMove.ToList().ForEach(c => c.MoveTo(to, positionInTarget));
         }
 

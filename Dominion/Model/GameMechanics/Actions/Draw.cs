@@ -23,7 +23,7 @@ namespace gbd.Dominion.Model.GameMechanics.Actions
 
         public override void Do()
         {
-            IoC.Kernel.Get<IGame>().GetPlayers(_who).ToList().ForEach(p => p.Draw());
+            IoC.Kernel.Get<IGame>().GetPlayers(_who).ToList().ForEach(p => p.Draw(_amount));
         }
     }
 }

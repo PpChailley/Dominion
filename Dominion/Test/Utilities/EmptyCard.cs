@@ -10,7 +10,7 @@ namespace gbd.Dominion.Test.Utilities
     /// <summary>
     /// A card that is included only in test games
     /// </summary>
-    public class TestCard : Card, ICard
+    class EmptyCard : Card, ICard
     {
         
 
@@ -25,7 +25,7 @@ namespace gbd.Dominion.Test.Utilities
         }
 
 
-        public TestCard()
+        public EmptyCard()
         {
             Index = LastIndex ++;
             Mechanics = new CardMechanics(  new Resources(0), 

@@ -15,7 +15,7 @@ namespace gbd.Dominion.Model.GameMechanics
         {
             Players = players;
             SupplyZone = supplyZone;
-            CurrentPlayer = IoC.Kernel.Get<Player>();
+            CurrentPlayer = players.FirstOrDefault();
         }
 
 

@@ -21,7 +21,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         void Receive(ICard card, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
         void Ready();
-        void Draw(int amount = 1);
+        void Draw(int amount);
         void ChooseAndDiscard(int amount);
         void Play(ICard card);
 

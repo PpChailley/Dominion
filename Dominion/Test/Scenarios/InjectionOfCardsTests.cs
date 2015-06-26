@@ -30,7 +30,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICardType>();
             IoC.Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(1));
 
-            IoC.Kernel.Bind<ICard>().To<TestCard>();
+            IoC.Kernel.Bind<ICard>().To<EmptyCard>();
 
 
             var card = IoC.Kernel.Get<ICard>();

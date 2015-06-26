@@ -28,10 +28,10 @@ namespace gbd.Dominion.Model.Zones
             switch (positionFrom)
             {
                 case Position.Top:
-                    return Cards.Take(amount);
+                    return Cards.Take(amount).ToList();
 
                 case Position.Bottom:
-                    return Cards.TakeLast(amount);
+                    return Cards.TakeLast(amount).ToList();
 
                 default:
                     throw new InvalidOperationException();

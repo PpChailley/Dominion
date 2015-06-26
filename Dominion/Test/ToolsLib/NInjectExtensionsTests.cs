@@ -34,10 +34,10 @@ namespace gbd.Dominion.Test.ToolsLib
         [Test]
         public void BindMultipleTimes()
         {
-            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, TestCard>();
+            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, EmptyCard>();
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(10));
 
-            IoC.Kernel.Bind<ICard>().To<TestCard>();
+            IoC.Kernel.Bind<ICard>().To<EmptyCard>();
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(11));
         }
 
@@ -51,7 +51,7 @@ namespace gbd.Dominion.Test.ToolsLib
         {
             IoC.Kernel.Bind<IList<ICard>>().ToConstructor(syntax => new List<ICard>());
 
-            IoC.Kernel.BindMultipleTimes<ICard>(numberOfBindings).To<ICard, TestCard>();
+            IoC.Kernel.BindMultipleTimes<ICard>(numberOfBindings).To<ICard, EmptyCard>();
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(numberOfBindings));
         }
 
@@ -64,7 +64,7 @@ namespace gbd.Dominion.Test.ToolsLib
         [TestCase(55)]
         public void BindMultipleTimesTo(int numberOfBindings)
         {
-            IoC.Kernel.BindMultipleTimesTo<ICard, TestCard>(numberOfBindings);
+            IoC.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(numberOfBindings);
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(numberOfBindings));
         }
 

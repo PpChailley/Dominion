@@ -121,6 +121,7 @@
     <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
     <Compile Include="Model\Zones\ZoneChoice.cs" />
     <Compile Include="Test\Scenarios\CardsTests.cs" />
+    <Compile Include="Test\Scenarios\GameActionTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
     <Compile Include="Test\Scenarios\InjectionOfCardsTests.cs" />
     <Compile Include="Test\Scenarios\ReflectionSelfTests.cs" />
@@ -180,9 +181,10 @@
     <Compile Include="Model\Zones\AbstractDeck.cs" />
     <Compile Include="Test\Scenarios\AiTest.cs" />
     <Compile Include="Test\Scenarios\SupplyZoneTest.cs" />
+    <Compile Include="Test\Utilities\BindableCard.cs" />
     <Compile Include="Test\Utilities\CardShuffleBySorting.cs" />
     <Compile Include="Test\Utilities\CardShufflerDryRunner.cs" />
-    <Compile Include="Test\Utilities\TestCard.cs" />
+    <Compile Include="Test\Utilities\EmptyCard.cs" />
     <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
     <Compile Include="Test\Utilities\TestSupplyPile.cs" />
     <Compile Include="Test\Utilities\TestSupplyZone.cs" />

@@ -17,7 +17,7 @@ namespace gbd.Dominion.Test.ToolsLib
         [TestCase(-100)]
         public void BindMultipleTimes(int numberOfBindings)
         {
-            IoC.Kernel.BindMultipleTimes<ICard>(numberOfBindings).To<ICard, TestCard>();
+            IoC.Kernel.BindMultipleTimes<ICard>(numberOfBindings).To<ICard, EmptyCard>();
         }
 
 
@@ -26,7 +26,7 @@ namespace gbd.Dominion.Test.ToolsLib
         [TestCase(-100)]
         public void BindMultipleTimesTo(int numberOfBindings)
         {
-            IoC.Kernel.BindMultipleTimesTo<ICard, TestCard>(numberOfBindings);
+            IoC.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(numberOfBindings);
         }
 
 
