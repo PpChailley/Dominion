@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using gbd.Dominion.Model.Cards;
-using gbd.Tools.Cli;
+using gbd.Tools.Clr;
 
 namespace gbd.Dominion.Model.GameMechanics.AI
 {

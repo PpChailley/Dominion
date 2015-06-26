@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Tools.Cli;
+using gbd.Tools.Clr;
 
 namespace gbd.Dominion.Model.Zones
 {

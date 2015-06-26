@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
-using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Tools;
-// TODO: refactor this name to Clr
-using gbd.Tools.Cli;
 using Ninject;
 
 namespace gbd.Dominion.Model.Cards
