@@ -21,6 +21,7 @@ namespace gbd.Dominion.Model.Cards
         protected Card()
         {
             Attributes = new List<CardAttribute>();
+            // TODO: use constructor injection if possible
             Mechanics = IoC.Kernel.Get<ICardMechanics>();
         }
         

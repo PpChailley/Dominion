@@ -1,4 +1,6 @@
-﻿using gbd.Dominion.Contents.Cards;
+﻿using System;
+using System.Linq;
+using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
@@ -35,6 +37,42 @@ namespace gbd.Dominion.Test.Scenarios
             var card = IoC.Kernel.Get<ICard>();
 
             Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(1));
+
+        }
+
+        [TestCase(1,0,0)]
+        [TestCase(5,0,0)]
+        [TestCase(100,0,0)]
+        [TestCase(1,1,1)]
+        public void BindCardWithSimplifiedHelper(int library, int hand, int discard)
+        {
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindCard<EmptyCard, ILibrary>(library);
+            IoC.Kernel.BindCard<EmptyCard, IHand>(hand);
+            IoC.Kernel.BindCard<EmptyCard, IDiscardPile>(discard);
+            IoC.Kernel.BindCard<EmptyCard, ISupplyPile>(10000);
+
+            var deck = IoC.Kernel.Get<IDeck>();
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(library, hand, discard, 0)));
+
+        }
+
+        [TestCase(1, 0)]
+        [TestCase(0, 1)]
+        [TestCase(7, 3)]
+        [TestCase(15, 44)]
+        public void BindFullDeckWithSimplifiedHelper(int coppers, int estates)
+        {
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindCard<Copper, ILibrary>(coppers);
+            IoC.Kernel.BindCard<Estate, ILibrary>(estates);
+
+            var deck = IoC.Kernel.Get<IDeck>();
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(coppers + estates, 0, 0, 0)));
+            Assert.That(deck.Cards.Count(c => c.GetType() == typeof(Copper)), Is.EqualTo(coppers));
+            Assert.That(deck.Cards.Count(c => c.GetType() == typeof(Estate)), Is.EqualTo(estates));
 
         }
 

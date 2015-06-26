@@ -44,7 +44,8 @@ namespace gbd.Dominion.Contents.Cards
 
             //SetBaseData<Bureaucrat>(4, 0, 0);
             //SetBaseData<Feast>(4, 0, 0);
-            SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count/10);
+            //TODO: comment back in Gardens
+//            SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count/10);
             //SetBaseData<Militia>(4, 0, 0).AddActions(new AddCoins(2), new DiscardDownTo(PlayerChoice.Opponents, 3));
             //SetBaseData<Moneylender>(4, 0, 0);
             //SetBaseData<Remodel>(4, 0, 0).AddActions(new TrashAndUpgrade(ZoneChoice.Hand, 1, 2));
@@ -75,22 +76,18 @@ namespace gbd.Dominion.Contents.Cards
         {
             Kernel.Bind<Resources>().ToConstructor(x => new Resources(coinsCost)).WhenAnyAncestorOfType<Resources, T>();
 
-
             if (coinValue > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new TreasureType(coinValue))
                     .WhenAnyAncestorOfType<TreasureType, T>();
 
             if (victory > 0)
-                //Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(victory)).WhenAnyAncestorOfType<VictoryType, T>();
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new VictoryType(victory))
                     .WhenAnyAncestorOfType<VictoryType, T>();
-            //.WhenAnyAncestorMatches(r => 
-            //    r.Request.Target.Member.DeclaringType.IsAssignableFrom(typeof(T))
-            //    );
 
             return new MoreBindingSyntax<T>(this);
+            
         }
 
 

@@ -130,16 +130,15 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
-            int numberOfFillCards = Math.Max(10 - estates - provinces, 3);
-            int expectedScore = 1*estates + 6*provinces;
-
-            IoC.Kernel.BindMultipleTimesTo<ICard, Estate>(estates).WhenAnyAncestorOfType<Estate, IDeck>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, Province>(provinces).WhenAnyAncestorOfType<Province, IDeck>();    
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(numberOfFillCards).WhenAnyAncestorOfType<Copper, IDeck>();    
+            IoC.Kernel.BindCard<Estate, ILibrary>(estates);
+            IoC.Kernel.BindCard<Province, ILibrary>(provinces);
+            IoC.Kernel.BindCard<Copper, ILibrary>(Math.Max(10 - estates - provinces, 3));
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
             player.StartTurn();
+
+            int expectedScore = 1 * estates + 6 * provinces;
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 

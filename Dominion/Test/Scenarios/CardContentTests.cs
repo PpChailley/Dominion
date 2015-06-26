@@ -27,16 +27,18 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-        [Test]
-        public void Copper()
+        [TestCase(typeof(Copper), 0, 1)]
+        [TestCase(typeof(Silver), 3, 2)]
+        [TestCase(typeof(Gold), 6, 3)]
+        public void CheckBasicTreasureProperties(Type cardType, int cost, int value)
         {
-            IoC.Kernel.Bind<ICard>().To<Copper>();
+            IoC.Kernel.Bind<ICard>().To(cardType);
 
             var card = IoC.Kernel.Get<ICard>();
 
-            Assert.That(card.Mechanics.Cost, Is.EqualTo(new Resources(0)));
+            Assert.That(card.Mechanics.Cost, Is.EqualTo(new Resources(cost)));
             Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(0));
-            Assert.That(card.Mechanics.TreasureValue, Is.EqualTo(new Resources(1)));
+            Assert.That(card.Mechanics.TreasureValue, Is.EqualTo(new Resources(value)));
 
         }
     }

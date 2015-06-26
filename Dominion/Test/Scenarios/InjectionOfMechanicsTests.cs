@@ -40,5 +40,31 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
+        [Test]
+        public void InjectionOfCardTypes()
+        {
+            IoC.Kernel = new StandardKernel();
+
+            IoC.Kernel.Bind<ICard>().To<BindableCard>();
+            IoC.Kernel.Bind<ICardMechanics>().To<CardMechanics>();
+
+            IoC.Kernel.Bind<ICardType>()
+                .ToConstructor(x => new TreasureType(7))
+                // .WhenInjectedInto<BindableCard>();
+                .WhenAnyAncestorOfType<TreasureType, BindableCard>();
+                
+
+            IoC.Kernel.Bind<Resources>()
+                    .ToConstructor(x => new Resources(12, 33));
+            
+
+            var card = IoC.Kernel.Get<ICard>();
+
+            Assert.That(card.Mechanics.Cost, Is.EqualTo(new Resources(12, 33)));
+            Assert.That(card.Mechanics.TreasureValue, Is.EqualTo(new Resources(7)));
+            
+        }
+
+
     }
 }
