@@ -4,6 +4,7 @@ using System.Security.Policy;
 using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Tools;
+// TODO: refactor this name to Clr
 using gbd.Tools.Cli;
 using Ninject;
 
@@ -15,7 +16,7 @@ namespace gbd.Dominion.Model.Cards
         public IZone Zone { get; set; }
         
         
-        public ICardMechanics Mechanics { get; }  
+        public ICardMechanics Mechanics { get; private set; }  
 
         
         public IList<CardAttribute> Attributes { get; set; }

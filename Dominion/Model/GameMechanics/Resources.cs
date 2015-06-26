@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using gbd.Tools.Cli;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
@@ -26,10 +25,16 @@ namespace gbd.Dominion.Model.GameMechanics
             Potions = 0;
         }
 
-        public void Pay(IEnumerable<Resources> res)
+        public void Pay(Resources price)
         {
-            Money -= res.Aggregate(0, (current, r) => current + r.Money);
-            Potions -= res.Aggregate(0, (current, r) => current + r.Potions);
+            // TODO: test this line
+            if (Money < price.Money || Potions < price.Potions)
+                throw new InsufficientResourcesException("Cannot pay {0} with {1}"
+                    .Format(price, this));
+
+            Money -= price.Money;
+            Potions -= price.Potions;
+
         }
 
         public override string ToString()

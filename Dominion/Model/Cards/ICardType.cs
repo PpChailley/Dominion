@@ -4,6 +4,6 @@ namespace gbd.Dominion.Model.Cards
 {
     public interface ICardType
     {
-        void Ready(IZone zone);
+        void Ready(IZone currentlyPresentIn);
     }
 }

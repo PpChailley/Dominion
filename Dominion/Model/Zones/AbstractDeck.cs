@@ -11,13 +11,7 @@ namespace gbd.Dominion.Model.Zones
 {
     public abstract class AbstractDeck: IDeck
     {
-        protected AbstractDeck(IDiscardPile discard, ILibrary lib, IBattleField bf, IHand hand)
-        {
-            DiscardPile = discard;
-            Library = lib;
-            BattleField = bf;
-            Hand = hand;
-        }
+  
 
         [Inject]
         protected AbstractDeck(ILibrary lib)
@@ -45,6 +39,7 @@ namespace gbd.Dominion.Model.Zones
                 toreturn.AddRange(DiscardPile.Cards);
                 toreturn.AddRange(BattleField.Cards);
 
+                //TODO: test this line
                 return toreturn.AsReadOnly();
             }
 
@@ -80,34 +75,6 @@ namespace gbd.Dominion.Model.Zones
             }
         }
 
-        [Obsolete] 
-        public void Add(ICard card, CardsPile destination)
-        {
-            Add(card, destination, Position.Top);
-        }
-
-        [Obsolete]
-        public void Add(ICard card, CardsPile destination, Position position)
-        {
-            switch (destination)
-            {
-                case CardsPile.Discard:
-                    DiscardPile.Cards.Add(card);
-                    break;
-
-                case CardsPile.Hand:
-                    Hand.Add(card);
-                    break;
-
-                case CardsPile.Library:
-                    Library.Add(card, position);
-                    break;
-
-                default:
-                    throw new InvalidOperationException();
-
-            }
-        }
 
         public void EndOfTurnCleanup()
         {
@@ -119,6 +86,7 @@ namespace gbd.Dominion.Model.Zones
                     continue;
                 }
 
+                //TODO: remove that mess
                 DiscardPile.Cards.Add(card);
                 BattleField.Cards.Remove(card);
             }
@@ -138,6 +106,28 @@ namespace gbd.Dominion.Model.Zones
 
             return Library;
         }
+
+        public IZone Get(ZoneChoice zone)
+        {
+            switch (zone)
+            {
+                case ZoneChoice.Discard:
+                    return DiscardPile;
+
+                case ZoneChoice.Library:
+                    return Library;
+
+                case ZoneChoice.Hand:
+                    return Hand;
+
+                case ZoneChoice.Play:
+                    return BattleField;
+
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
 
         public void Ready()
         {

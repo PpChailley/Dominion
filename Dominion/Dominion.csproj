@@ -96,6 +96,7 @@
     <Compile Include="Model\GameMechanics\Actions\CardShufflerRandom.cs" />
     <Compile Include="Model\GameMechanics\Actions\DiscardDownTo.cs" />
     <Compile Include="Model\GameMechanics\IGameObject.cs" />
+    <Compile Include="Model\GameMechanics\InsufficientResourcesException.cs" />
     <Compile Include="Model\GameMechanics\Model.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />

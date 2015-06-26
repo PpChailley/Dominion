@@ -19,7 +19,11 @@ namespace gbd.Dominion.Model.Zones
         public IEnumerable<ICard> Get(int amount, Position positionFrom = Position.Top)
         {
             if (amount > Cards.Count)
-                throw new NotEnoughCardsException("Cannot get {0} cards, collection has only {1}".Format(amount, Cards.Count));
+            {
+                throw new NotEnoughCardsException("Cannot get {0} cards, collection has only {1}"
+                    .Format(amount,Cards.Count));
+            }
+
 
             switch (positionFrom)
             {

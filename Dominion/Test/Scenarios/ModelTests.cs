@@ -52,7 +52,7 @@ namespace gbd.Dominion.Test.Scenarios
             player.Ready();
 
             player.Draw(draw);
-            player.DiscardFromHand(discard);
+            player.ChooseAndDiscard(discard);
 
             if (shuffle)
                 player.Deck.ShuffleDiscardToLibrary();
@@ -99,19 +99,7 @@ namespace gbd.Dominion.Test.Scenarios
             player.Draw(6);
         }
 
-        [Test]
-        public void PlayerGainCard()
-        {
-            var player = IoC.Kernel.Get<IPlayer>();
-            player.Ready();
-
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
-
-            player.AddToDeck(new Estate());
-
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 1, 0)));
-        }
-
+       
 
         [TestCase(0, 0)]
         [TestCase(3, 0)]
@@ -133,14 +121,14 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
-            player.AddToDeck(IoC.Kernel.Get<Estate>());
+            player.Receive(IoC.Kernel.Get<Estate>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 1 ));
 
 
-            player.AddToDeck(IoC.Kernel.Get<Duchy>());
+            player.Receive(IoC.Kernel.Get<Duchy>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 4));
 
-            player.AddToDeck(IoC.Kernel.Get<Province>());
+            player.Receive(IoC.Kernel.Get<Province>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
 
 
@@ -159,13 +147,13 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
-            Model.GameMechanics.Model.MoveCards(player.Deck.Hand, player.Deck.DiscardPile, 3);
+            player.Deck.Hand.MoveCardsTo(player.Deck.DiscardPile, 3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,2,3,0)));
 
             player.Draw(5);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 7, 3, 0)));
 
-            player.DiscardFromHand(3);
+            player.ChooseAndDiscard(3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 4, 6, 0)));
 
             player.Draw(3);

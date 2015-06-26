@@ -14,10 +14,9 @@ namespace gbd.Dominion.Model.Zones
         int CurrentScore { get; }
         CardRepartition CardCountByZone { get; }
 
-        void Add(ICard card, CardsPile destination);
-        void Add(ICard card, CardsPile destination, Position position);
-
         void EndOfTurnCleanup();
         ILibrary ShuffleDiscardToLibrary();
+
+        IZone Get(ZoneChoice zone);
     }
 }

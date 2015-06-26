@@ -55,11 +55,14 @@ namespace gbd.Dominion.Test.Scenarios
             var pile = IoC.Kernel.Get<ISupplyPile>();
             var player = IoC.Kernel.Get<IPlayer>();
 
+            pile.Ready();
+            player.Ready();
+
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
             Assert.That(pile.Cards.Count, Is.EqualTo(10));
 
 
-            Model.GameMechanics.Model.MoveCards(pile, player.Deck.DiscardPile);
+            pile.MoveCardsTo(player.Deck.Library, 1);
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(11));
             Assert.That(pile.Cards.Count, Is.EqualTo(9));

@@ -43,7 +43,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void PlayerRecievesACard()
         {
-            IoC.Kernel.Get<IGame>().CurrentPlayer.Receive(IoC.Kernel.Get<IGame>().SupplyZone.Cards.First());
+            var supply = IoC.Kernel.Get<IGame>().SupplyZone;
+            IoC.Kernel.Get<IGame>().CurrentPlayer.Receive(supply.Cards.First());
+            throw new NotImplementedException();
         }
 
         [Test]

@@ -33,25 +33,25 @@ namespace gbd.Dominion.Test.Scenarios
             player.Ready();
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
-            player.DiscardFromHand(0);
+            player.ChooseAndDiscard(0);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
-            player.DiscardFromHand(1);
+            player.ChooseAndDiscard(1);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 4, 1, 0)));
 
-            player.DiscardFromHand(2);
+            player.ChooseAndDiscard(2);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 2, 3, 0)));
 
             player.Draw(1);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 3, 3, 0)));
 
-            player.DiscardFromHand(2);
+            player.ChooseAndDiscard(2);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 1, 5, 0)));
 
             player.Draw(6);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 7, 0, 0)));
 
-            player.DiscardFromHand(5);
+            player.ChooseAndDiscard(5);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 2, 5, 0)));
 
             player.Draw(1);

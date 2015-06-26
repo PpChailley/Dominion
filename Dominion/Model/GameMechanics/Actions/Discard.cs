@@ -18,7 +18,7 @@ namespace gbd.Dominion.Model.GameMechanics.Actions
 
         public override void Do()
         {
-            IoC.Kernel.Get<IGame>().GetPlayers(Who).ToList().ForEach(p => p.DiscardFromHand(Amount));
+            IoC.Kernel.Get<IGame>().GetPlayers(Who).ToList().ForEach(p => p.ChooseAndDiscard(Amount));
         }
     }
 }

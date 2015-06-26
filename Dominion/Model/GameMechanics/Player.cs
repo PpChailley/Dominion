@@ -4,7 +4,6 @@ using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Tools;
-using gbd.Tools.Cli;
 using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics
@@ -98,34 +97,30 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Draw(int amount = 1)
         {
-            Model.MoveCards(Deck.Library, Deck.Hand, amount);
+            Deck.Library.MoveCardsTo(Deck.Hand, amount);
         }
 
-        public void DiscardFromHand(int amount)
+        public void ChooseAndDiscard(int amount)
         {
             var toDiscard = this._intelligence.ChooseAndDiscard(amount);
-            Model.MoveCards(toDiscard, Deck.Hand, Deck.DiscardPile, Position.Top);
+            toDiscard.MoveTo(Deck.DiscardPile);
         }
 
 
-        public void AddToDeck(ICard card, CardsPile destination = CardsPile.Discard, Position position = Position.Top)
+        public void Receive(IList<ICard> cards, ZoneChoice to, Position position = Position.Top)
         {
-            Deck.Add(card, destination, position);
+            cards.MoveTo(Deck.Get(to), position);
         }
 
-        public void Receive(IList<ICard> cards)
+        public void Receive(ICard card, ZoneChoice to = ZoneChoice.Discard, Position position = Position.Top)
         {
-            Model.MoveCards(cards, IoC.Kernel.Get<IGame>().SupplyZone, Deck.DiscardPile, Position.Top);
-        }
-        public void Receive(ICard card)
-        {
-            Receive(new List<ICard>() { card });
+            card.MoveTo(Deck.Get(to), position);
         }
 
-        public void Buy(IList<ICard> cards)
+        public void Buy(ICard card)
         {
-            this.Status.Resources.Pay(cards.Select(card => card.Mechanics.Cost));
-            Receive(cards);
+            this.Status.Resources.Pay(card.Mechanics.Cost);
+            Receive(card, ZoneChoice.Discard);
         }
 
         public void Play(ICard card)
@@ -135,20 +130,23 @@ namespace gbd.Dominion.Model.GameMechanics
                 trigger.Do();
             }
 
-            Model.MoveCard(card, Deck.Hand, Deck.BattleField);
+            card.MoveTo(Deck.BattleField);
         }
 
-        public void ReceiveFrom(ISupplyPile @from, int amount)
+        public void ReceiveFrom(ISupplyPile @from, int amount, ZoneChoice to, Position position = Position.Top)
         {
             try
             {
                 for (int i = 0; i < amount; i++)
                 {
                     var card = from.Get(1).Single();
-                    Receive(card);
+                    Receive(card, to, position);
                 }
             }
-            catch (NotEnoughCardsException) { }
+            catch (NotEnoughCardsException)
+            {
+                // TODO: at least there should be some logging here
+            }
         }
 
         public void ChooseAndReceive(Resources maxCost)
@@ -156,16 +154,11 @@ namespace gbd.Dominion.Model.GameMechanics
             throw new NotImplementedException();
         }
 
-        public ICard[] ChooseAndTrash(ZoneChoice @from, int numberOfCards)
+        public ICard[] ChooseAndTrash(ZoneChoice from, int numberOfCards)
         {
             throw new NotImplementedException();
         }
 
-
-        public void Buy(ICard card)
-        {
-            Buy(new List<ICard>() { card });
-        }
 
 
         public override string ToString()
