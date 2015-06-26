@@ -170,10 +170,10 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public override string ToString()
         {
-            return String.Format("{0} # {1} with {2} {3}",
+            return String.Format("{0} # {1} with {{ {2} {3} }}",
                 this.GetType().Name,
                 this.GetHashCode(),
-                this.Deck.GetType(),
+                this.Deck.GetType().Name,
                 this.Deck.CardCountByZone);
         }
     }
