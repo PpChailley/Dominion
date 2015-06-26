@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
@@ -13,7 +11,7 @@ using NUnit.Framework;
 namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
-    public  class CardsTests: BaseTest
+    public  class CardsMechanicsTests: BaseTest
     {
 
 

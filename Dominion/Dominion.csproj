@@ -121,7 +121,8 @@
     <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
     <Compile Include="Model\Zones\ZoneChoice.cs" />
-    <Compile Include="Test\Scenarios\CardsTests.cs" />
+    <Compile Include="Test\Scenarios\CardContentTests.cs" />
+    <Compile Include="Test\Scenarios\CardsMechanicsTests.cs" />
     <Compile Include="Test\Scenarios\GameActionRobustnessTests.cs" />
     <Compile Include="Test\Scenarios\GameActionTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
