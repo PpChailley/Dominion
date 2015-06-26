@@ -18,8 +18,8 @@ namespace gbd.Dominion.Tools
             //Bind<IDeck>().To<TestDeck>();
 
 
-            this.Kernel.BindMultipleTimesTo<ICard, Copper>(7).WhenAnyAncestorOfType<Copper, IDeck>();
-            this.Kernel.BindMultipleTimesTo<ICard, Estate>(3).WhenAnyAncestorOfType<Estate, IDeck>();
+            this.Kernel.BindMultipleTimesTo<ICard, Copper>(7).WhenAnyAncestorOfType<Copper, ILibrary>();
+            this.Kernel.BindMultipleTimesTo<ICard, Estate>(3).WhenAnyAncestorOfType<Estate, ILibrary>();
 
             throw new NotImplementedException("Not ready to start standard game: \n" +
                                               "  Need to init supply pile");

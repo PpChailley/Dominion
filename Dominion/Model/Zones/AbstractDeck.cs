@@ -16,7 +16,6 @@ namespace gbd.Dominion.Model.Zones
         [Inject]
         protected AbstractDeck(ILibrary lib, IDiscardPile discard, IBattleField field, IHand hand)
         {
-            // TODO: try to inject all deck components
             DiscardPile = discard;
             Library = lib;
             BattleField = field;
@@ -132,6 +131,15 @@ namespace gbd.Dominion.Model.Zones
 
         public void Ready()
         {
+            DiscardPile.Ready();
+            Hand.Ready();
+            BattleField.Ready();
+
+            // TODO: test that
+            DiscardPile.MoveCardsTo(Library, DiscardPile.Cards.Count);
+            Hand.MoveCardsTo(Library, Hand.Cards.Count);
+            BattleField.MoveCardsTo(Library, BattleField.Cards.Count);
+
             Library.Ready(this);
         }
 

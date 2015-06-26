@@ -1,6 +1,8 @@
 using System;
 using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.GameMechanics.Actions;
 
 namespace gbd.Dominion.Test.Utilities
 {
@@ -26,6 +28,10 @@ namespace gbd.Dominion.Test.Utilities
         public TestCard()
         {
             Index = LastIndex ++;
+            Mechanics = new CardMechanics(  new Resources(0), 
+                                            new ICardType[0], 
+                                            new IGameAction[0], 
+                                            new IGameAction[0]);
         }
 
         public override string ToString()

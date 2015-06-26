@@ -33,8 +33,8 @@ namespace gbd.Dominion.Tools
             // This will be bound to CurrentPlayer
             //Bind<IPlayer>().To<Player>();
 
-            Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(0)).WhenAnyAncestorOfType<VictoryType, TestCard>();
-            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, TestCard>();
+            //Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(0)).WhenAnyAncestorOfType<VictoryType, TestCard>();
+            //Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, TestCard>();
 
             
 
