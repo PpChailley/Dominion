@@ -97,7 +97,7 @@
     <Compile Include="Model\GameMechanics\Actions\DiscardDownTo.cs" />
     <Compile Include="Model\GameMechanics\IGameObject.cs" />
     <Compile Include="Model\GameMechanics\InsufficientResourcesException.cs" />
-    <Compile Include="Model\GameMechanics\Model.cs" />
+    <Compile Include="Model\GameMechanics\MoveCardsExtensions.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
@@ -119,6 +119,7 @@
     <Compile Include="Model\Zones\ZoneChoice.cs" />
     <Compile Include="Test\Scenarios\CardsTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
+    <Compile Include="Test\Scenarios\InjectionOfCardsTests.cs" />
     <Compile Include="Test\Scenarios\ReflectionSelfTests.cs" />
     <Compile Include="Contents\ContentPresenceTests.cs" />
     <Compile Include="Contents\Cards\Curse.cs" />
