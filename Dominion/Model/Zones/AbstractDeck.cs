@@ -14,12 +14,13 @@ namespace gbd.Dominion.Model.Zones
   
 
         [Inject]
-        protected AbstractDeck(ILibrary lib)
+        protected AbstractDeck(ILibrary lib, IDiscardPile discard, IBattleField field, IHand hand)
         {
-            DiscardPile = new DiscardPile();
+            // TODO: try to inject all deck components
+            DiscardPile = discard;
             Library = lib;
-            BattleField = new BattleField();
-            Hand = new Hand();
+            BattleField = field;
+            Hand = hand;
         }
         
         

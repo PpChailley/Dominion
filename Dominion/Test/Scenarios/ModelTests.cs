@@ -131,14 +131,102 @@ namespace gbd.Dominion.Test.Scenarios
             player.Receive(IoC.Kernel.Get<Province>());
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
 
+        }
 
 
+
+
+        [TestCase(10,0,10)]
+        [TestCase(10,10,15)]
+        [TestCase(1,10,3)]
+        public void LibraryReshuffle(int librarySize, int discardSize, int pick)
+        {
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, TestCard>()
+                .WhenAnyAncestorOfType<TestCard, ILibrary>();
+            IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, TestCard>()
+                .WhenAnyAncestorOfType<TestCard, IDiscardPile>();
+
+
+            var deck = IoC.Kernel.Get<IDeck>();
+            deck.Ready();
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(
+                new CardRepartition(librarySize,0,discardSize,0)));
+
+            deck.Library.MoveCardsTo(deck.Hand, pick);
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(
+                new CardRepartition(librarySize + discardSize - pick, pick, 0, 0)));
+        }
+
+
+        [Test]
+        public void LibraryCanReshuffle()
+        {
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Deck.Ready();
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(10,0,0,0)));
+
+            player.Deck.Library.MoveCardsTo(player.Deck.DiscardPile, 5);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 0, 5, 0)));
+
+            player.Deck.Library.MoveCardsTo(player.Deck.Hand, 6);
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 6, 0, 0)));
+        }
+
+        [ExpectedException(typeof(NotEnoughCardsException))]
+        [Test]
+        public void DiscardCannotReshuffle()
+        {
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Deck.Ready();
+
+            player.Deck.Library.MoveCardsTo(player.Deck.DiscardPile, 5);
+            player.Deck.DiscardPile.MoveCardsTo(player.Deck.Hand, 6);
+        }
+
+        [ExpectedException(typeof(NotEnoughCardsException))]
+        [Test]
+        public void HandCannotReshuffle()
+        {
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Deck.Ready();
+
+            player.Deck.Hand.MoveCardsTo(player.Deck.DiscardPile, 5);
+        }
+
+        [ExpectedException(typeof(NotEnoughCardsException))]
+        [Test]
+        public void BAttlefieldCannotReshuffle()
+        {
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Deck.Ready();
+
+            player.Deck.Library.MoveCardsTo(player.Deck.BattleField, 5);
+            player.Deck.BattleField.MoveCardsTo(player.Deck.Hand, 6);
+        }
+
+        [ExpectedException(typeof(NotEnoughCardsException))]
+        [Test]
+        public void SupplyCannotReshuffle()
+        {
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Deck.Ready();
+
+            IoC.Kernel.Unbind<ISupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
+            var supply = IoC.Kernel.Get<ISupplyPile>();
+            supply.Ready();
+
+            supply.MoveCardsTo(player.Deck, 11);
         }
 
 
 
         [Test]
-        public void ReshuffleWhenEmpty()
+        public void ReshuffleWhenEmpty_FullCase()
         {
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
@@ -223,6 +311,8 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var deck = IoC.Kernel.Get<IDeck>();
+            deck.Ready();
+
             Assert.That(deck.Cards.Count, Is.EqualTo(10));
 
             deck.Library.Get(11);

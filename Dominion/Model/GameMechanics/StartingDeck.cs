@@ -5,9 +5,7 @@ namespace gbd.Dominion.Model.GameMechanics
 {
     public class StartingDeck : AbstractDeck, IDeck
     {
-
-        [Inject]
-        public StartingDeck(ILibrary lib)
-            : base(lib) { }
+        public StartingDeck(ILibrary lib, IDiscardPile discard, IBattleField field, IHand hand) : 
+            base(lib, discard, field, hand) { }
     }
 }

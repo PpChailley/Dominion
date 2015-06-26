@@ -76,7 +76,8 @@ namespace gbd.Dominion.Test.Scenarios
             var deck = IoC.Kernel.Get<IDeck>();
 
             Assert.That(deck.Cards, Is.All.InstanceOf(typeof(Silver)));
-            Assert.That(deck.Cards.Count, Is.EqualTo(1));
+
+            Assert.That(deck.Cards.Count, Is.EqualTo(4)); // 1 in each subZone
         }
 
         [Test]
@@ -109,11 +110,13 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void WhenAnyAncestorOfType_Single()
         {
+            int numberOfSubZones = 4;
+
             IoC.Kernel.Bind<ICard>().To<Silver>();
             IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(TestDeck));
             var witnessdeck = IoC.Kernel.Get<StartingDeck>();
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
-            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(1));
+            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(1 * numberOfSubZones));
 
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(TestDeck));
@@ -121,7 +124,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             var deck = IoC.Kernel.Get<TestDeck>();
             Assert.That(deck.Cards, Is.All.InstanceOf(typeof(Copper)));
-            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(1));
+            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(1 * numberOfSubZones));
         }
 
         [TestCase(0)]
@@ -130,12 +133,14 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(55)]
         public void WhenAnyAncestorOfType_Collection(int collectionSize)
         {
+            int numberOfSubZones = 4;
+
             IoC.Kernel.BindMultipleTimesTo<ICard, Silver>(collectionSize);
             IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
 
             var witnessdeck = IoC.Kernel.Get<StartingDeck>();
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
-            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(collectionSize));
+            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(numberOfSubZones * collectionSize));
 
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
@@ -143,7 +148,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             var deck = IoC.Kernel.Get<TestDeck>();
             Assert.That(deck.Cards, Is.All.InstanceOf(typeof(Copper)));
-            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(collectionSize));
+            Assert.That(witnessdeck.Cards.Count, Is.EqualTo(numberOfSubZones * collectionSize));
 
         }
 

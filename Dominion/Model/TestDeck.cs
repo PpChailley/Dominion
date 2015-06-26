@@ -5,11 +5,7 @@ namespace gbd.Dominion.Model
 {
     public class TestDeck : AbstractDeck, IDeck
     {
-
-        [Inject]
-        public TestDeck(ILibrary lib)
-            : base(lib) { }
-
-
+        public TestDeck(ILibrary lib, IDiscardPile discard, IBattleField field, IHand hand) : 
+            base(lib, discard, field, hand) { }
     }
 }
