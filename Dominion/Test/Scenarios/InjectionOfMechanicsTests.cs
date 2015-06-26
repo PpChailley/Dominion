@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace gbd.Dominion.Test.Scenarios
 {
     [TestFixture]
-    public class InjectionOfMechanicsTests: BaseTest
+    public class InjectionOfMechanicsTests : BaseTest
     {
 
         [Test]

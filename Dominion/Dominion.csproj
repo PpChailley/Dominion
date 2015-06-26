@@ -172,7 +172,7 @@
     <Compile Include="Model\GameMechanics\Actions\GameAction.cs" />
     <Compile Include="Model\Zones\BattleField.cs" />
     <Compile Include="Model\Cards\SelectableCard.cs" />
-    <Compile Include="Test\Scenarios\SmokeTests.cs" />
+    <Compile Include="Test\Scenarios\InjectionOfMechanicsTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
     <Compile Include="Test\ToolsLib\NInjectExtensionsRobustness.cs" />
     <Compile Include="Test\ToolsLib\NInjectExtensionsTests.cs" />
