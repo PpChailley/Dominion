@@ -103,6 +103,37 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
+        [TestCase(10, 0, 1)]
+        [TestCase(10, 1, 1)]
+        //[TestCase(30, 10, 14)]
+        //[TestCase(30, 25, 29)]
+        public void Discard(int deckSize, int draw, int discard)
+        {
+            IoC.Kernel.BindMultipleTimes<ICard>(deckSize).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<IGameAction>().ToConstructor(x => 
+                new Discard(PlayerChoice.Current, discard));
+
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Ready();
+            player.StartTurn();
+            player.Draw(draw);
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(
+                            new CardRepartition(library: deckSize-5-draw, 
+                                                hand: 5+draw, 
+                                                discard: 0, 
+                                                battlefield: 0)));
+
+            player.Play(player.Deck.Hand.Cards.First());
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(
+                            new CardRepartition(library: deckSize - 5 - draw,
+                                                hand: 4 + draw - discard,
+                                                discard: discard,
+                                                battlefield: 1)));
+        }
+
+
 
     }
 }

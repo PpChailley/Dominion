@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gbd.Dominion.Model.GameMechanics;
+using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Test.Utilities;
 using NUnit.Framework;
 
@@ -25,6 +26,16 @@ namespace gbd.Dominion.Test.Scenarios
             base.Draw(deckSize, drawAmount);
         }
 
+
+        [ExpectedException(typeof (NotEnoughCardsException))]
+        [TestCase(10, 0, 5)]
+        [TestCase(10, 5, 10)]
+        [TestCase(100, 95, 100)]
+        [TestCase(100, 95, 999)]
+        public new void Discard(int deckSize, int draw, int discard)
+        {
+            base.Discard(deckSize, draw, discard);
+        }
 
 
     }

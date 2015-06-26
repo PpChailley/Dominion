@@ -104,6 +104,11 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void ChooseAndDiscard(int amount)
         {
+            if (amount > Deck.Hand.TotalCardsAvailable)
+            {
+                throw new NotEnoughCardsException(Deck.Hand, Deck.Hand.TotalCardsAvailable, amount);
+            }
+            
             var toDiscard = this._intelligence.ChooseAndDiscard(amount);
             toDiscard.MoveTo(Deck.DiscardPile);
         }
@@ -131,13 +136,13 @@ namespace gbd.Dominion.Model.GameMechanics
                 throw new NotEnoughActionsException();
 
             AvailableActions --;
+            card.MoveTo(Deck.BattleField);
 
             foreach (var trigger in card.Mechanics.OnPlayTriggers)
             {
                 trigger.Do();
             }
 
-            card.MoveTo(Deck.BattleField);
         }
 
         public void ReceiveFrom(ISupplyPile @from, int amount, ZoneChoice to, Position position = Position.Top)
