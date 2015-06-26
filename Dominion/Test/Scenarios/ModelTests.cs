@@ -138,6 +138,8 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(numberOfFillCards).WhenAnyAncestorOfType<Copper, IDeck>();    
 
             var player = IoC.Kernel.Get<IPlayer>();
+            player.Ready();
+            player.StartTurn();
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
