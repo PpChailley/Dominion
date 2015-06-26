@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gbd.Dominion.Contents.Cards;
+﻿using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
@@ -82,19 +76,19 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
 
             IoC.Kernel.BindMultipleTimes<ICard>(inLib).To<ICard, Copper>()
-                .Select(c => c.WhenAnyAncestorOfType<Copper, ILibrary>()).ToList();
+                .ForEach(c => c.WhenAnyAncestorOfType<Copper, ILibrary>());
 
 
             IoC.Kernel.BindMultipleTimes<ICard>(inHand).To<ICard, Silver>()
-                 .Select(c => c.WhenAnyAncestorOfType<Silver, IHand>()).ToList();
+                .ForEach(c => c.WhenAnyAncestorOfType<Silver, IHand>());
 
 
             IoC.Kernel.BindMultipleTimes<ICard>(inDisc).To<ICard, Gold>()
-                 .Select(c => c.WhenAnyAncestorOfType<Gold, IDiscardPile>()).ToList();
+                 .ForEach(c => c.WhenAnyAncestorOfType<Gold, IDiscardPile>());
 
 
             IoC.Kernel.BindMultipleTimes<ICard>(inBf).To<ICard, Estate>()
-                 .Select(c => c.WhenAnyAncestorOfType<Estate, IBattleField>()).ToList();
+                 .ForEach(c => c.WhenAnyAncestorOfType<Estate, IBattleField>());
 
 
 
