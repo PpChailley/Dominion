@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
@@ -23,16 +24,9 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Unbind<IGameAction>();
             IoC.Kernel.Unbind<ICardType>();
+            IoC.Kernel.Unbind<IPlayer>();
 
-            //IoC.Kernel.Unbind<ICardMechanics>();
-
-            //IoC.Kernel.Unbind<IDeck>();
-            //IoC.Kernel.Unbind<IHand>();
-            //IoC.Kernel.Unbind<IDiscardPile>();
-            //IoC.Kernel.Unbind<ILibrary>();
-            //IoC.Kernel.Unbind<IBattleField>();
-
-            
+            IoC.Kernel.Bind<IPlayer>().To<Player>().InSingletonScope();
 
         }
 
@@ -44,16 +38,13 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(10, 1)]
         public void Draw(int deckSize, int drawAmount)
         {
-            IoC.Kernel.Unbind<IPlayer>();
-            IoC.Kernel.Bind<IPlayer>().To<Player>().InSingletonScope();
-
             IoC.Kernel.BindMultipleTimes<ICard>(deckSize).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new Draw(drawAmount));
-            
             
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
+            player.StartTurn();
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(
                 new CardRepartition(    library: deckSize - 5, 
@@ -68,6 +59,47 @@ namespace gbd.Dominion.Test.Scenarios
                                         hand: 4 + drawAmount, 
                                         discard: 0, 
                                         battlefield: 1)));
+        }
+
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(2)]
+        [TestCase(10)]
+        public void AddAction(int amount)
+        {
+            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new AddAction(amount));
+
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Ready();
+            player.StartTurn();
+
+            Assert.That(player.AvailableActions, Is.EqualTo(1));
+
+            player.Play(player.Deck.Hand.Cards.First());
+
+            Assert.That(player.AvailableActions, Is.EqualTo(amount));
+        }
+
+
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(2)]
+        [TestCase(10)]
+        public void AddBuy(int amount)
+        {
+            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new AddBuy(amount));
+
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Ready();
+            player.StartTurn();
+
+            Assert.That(player.AvailableBuys, Is.EqualTo(1));
+
+            player.Play(player.Deck.Hand.Cards.First());
+
+            Assert.That(player.AvailableBuys, Is.EqualTo(1 + amount));
         }
 
 

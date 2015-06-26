@@ -48,7 +48,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public int AvailableBuys { get; set; }
 
-        public int AvailableCoins{ get; set; }
+        public Resources AvailableResources{ get; set; }
 
 
         public PlayerStatus Status { get; set; }
@@ -60,7 +60,7 @@ namespace gbd.Dominion.Model.GameMechanics
         public Player(IDeck deck, IIntelligence intel, PlayerStatus status)
         {
             AvailableActions = 0;
-            AvailableCoins = 0;
+            AvailableResources = new Resources(0);
             AvailableBuys = 0;
 
             Deck = deck;
@@ -86,7 +86,9 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void StartTurn()
         {
-            throw new NotImplementedException();
+            AvailableActions = 1;
+            AvailableBuys = 1;
+            AvailableResources = new Resources(0);
         }
 
         public void EndTurn()
@@ -125,6 +127,11 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Play(ICard card)
         {
+            if (AvailableActions < 1)
+                throw new NotEnoughActionsException();
+
+            AvailableActions --;
+
             foreach (var trigger in card.Mechanics.OnPlayTriggers)
             {
                 trigger.Do();

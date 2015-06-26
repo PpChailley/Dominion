@@ -15,7 +15,7 @@ namespace gbd.Dominion.Model.GameMechanics.Actions
 
         public override void Do()
         {
-            IoC.Kernel.Get<IGame>().CurrentPlayer.AvailableCoins += Amount;
+            IoC.Kernel.Get<IGame>().CurrentPlayer.AvailableResources.Money += Amount;
         }
     }
 }

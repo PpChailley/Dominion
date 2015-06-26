@@ -9,9 +9,15 @@ namespace gbd.Dominion.Test.Scenarios
     {
 
         [Test]
-        public void NoTestYet()
+        public void StartTurn()
         {
-            throw new Exception();
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void EndTurn()
+        {
+            throw new NotImplementedException();
         }
 
 

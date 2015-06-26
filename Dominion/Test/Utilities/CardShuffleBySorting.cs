@@ -1,4 +1,5 @@
 using System.Linq;
+using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Test.Utilities

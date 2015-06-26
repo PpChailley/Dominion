@@ -96,11 +96,13 @@
     <Compile Include="Model\GameMechanics\Actions\AddAction.cs" />
     <Compile Include="Model\GameMechanics\Actions\AddBuy.cs" />
     <Compile Include="Model\GameMechanics\Actions\AddCoins.cs" />
-    <Compile Include="Model\GameMechanics\Actions\CardShufflerRandom.cs" />
     <Compile Include="Model\GameMechanics\Actions\DiscardDownTo.cs" />
+    <Compile Include="Model\GameMechanics\CardShufflerRandom.cs" />
+    <Compile Include="Model\GameMechanics\ICardShuffler.cs" />
     <Compile Include="Model\GameMechanics\IGameObject.cs" />
     <Compile Include="Model\GameMechanics\InsufficientResourcesException.cs" />
     <Compile Include="Model\GameMechanics\MoveCardsExtensions.cs" />
+    <Compile Include="Model\GameMechanics\NotEnoughActionsException.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
@@ -113,7 +115,6 @@
     <Compile Include="Model\GameMechanics\IPlayer.cs" />
     <Compile Include="Model\GameMechanics\PlayerStatus.cs" />
     <Compile Include="Model\Zones\CursePile.cs" />
-    <Compile Include="Model\Zones\ICardShuffler.cs" />
     <Compile Include="Model\Zones\IMutableZone.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />

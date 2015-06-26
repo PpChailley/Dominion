@@ -1,7 +1,7 @@
 using gbd.Dominion.Model.Zones;
 using gbd.Tools.Cli;
 
-namespace gbd.Dominion.Model.GameMechanics.Actions
+namespace gbd.Dominion.Model.GameMechanics
 {
     public class CardShufflerRandom: ICardShuffler
     {
