@@ -12,7 +12,8 @@ namespace gbd.Dominion.Model.Cards
         public IZone Zone { get; set; }
         
         
-        public ICardMechanics Mechanics { get; protected set; }  
+        [Inject]
+        public ICardMechanics Mechanics { get;  set; }  
 
         
         public IList<CardAttribute> Attributes { get; set; }
@@ -21,8 +22,6 @@ namespace gbd.Dominion.Model.Cards
         protected Card()
         {
             Attributes = new List<CardAttribute>();
-            // TODO: use constructor injection if possible
-            Mechanics = IoC.Kernel.Get<ICardMechanics>();
         }
         
         
