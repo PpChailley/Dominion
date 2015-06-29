@@ -5,7 +5,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Curse: AlwaysInSupplyCard
     {
-        public override ICardMechanics Mechanics { get; set; }
+        public override ICardMechanics Mechanics { get; protected set; }
 
         public Curse()
         {

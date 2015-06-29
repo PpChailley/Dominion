@@ -1,4 +1,5 @@
-﻿using gbd.Dominion.Contents;
+﻿using System;
+using gbd.Dominion.Contents;
 
 namespace gbd.Dominion.Model.Cards
 {
@@ -15,6 +16,7 @@ namespace gbd.Dominion.Model.Cards
         public override GameExtension Extension
         {
             get { return GameExtension.AlwaysPresent; }
+            protected set { throw new InvalidOperationException();}
         }
     }
 }

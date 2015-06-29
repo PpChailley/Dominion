@@ -1,4 +1,5 @@
-﻿using gbd.Dominion.Contents;
+﻿using System;
+using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Test.Utilities
@@ -8,9 +9,10 @@ namespace gbd.Dominion.Test.Utilities
         public override GameExtension Extension
         {
             get { return GameExtension.TestCards; }
+            protected set { throw new InvalidOperationException();}
         }
 
-        public override ICardMechanics Mechanics { get; set; }
+        public override ICardMechanics Mechanics { get; protected set; }
 
         public override GameSet PresentInSet
         {

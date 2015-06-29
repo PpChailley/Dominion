@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Tools;
 using Ninject;
 
 namespace gbd.Dominion.Model.Cards
 {
     public abstract class Card: PrintedCard, ICard
     {
+        public string PrintedText
+        {
+            get { return Mechanics.PrintedText; }
+        }
+
+        public abstract override GameExtension Extension { get; protected set; }
 
         public IZone Zone { get; set; }
         
         
-        [Inject]
-        public ICardMechanics Mechanics { get;  set; }  
+        // This has to stay abstract so that NInject will see the implementing type when injecting it
+        public abstract ICardMechanics Mechanics { get; protected set; }
 
-        
-        public IList<CardAttribute> Attributes { get; set; }
+        [Inject]
+        public IList<CardAttribute> Attributes { get; protected set; }
 
 
         protected Card()
@@ -24,7 +30,7 @@ namespace gbd.Dominion.Model.Cards
             Attributes = new List<CardAttribute>();
         }
         
-        
+ 
 
         public void Ready(IZone zone)
         {

@@ -12,11 +12,21 @@ namespace gbd.Dominion.Test.Utilities
     /// </summary>
     class EmptyCard : Card, ICard
     {
-        public override ICardMechanics Mechanics { get; set; }
+        public override ICardMechanics Mechanics { get; protected set; }
+
+        public override GameExtension Extension
+        {
+            get { return GameExtension.TestCards; }
+            protected set { throw new InvalidOperationException();}
+        }
+
+        public override GameSet PresentInSet
+        {
+            get { return GameSet.TestCards; }
+        }
 
 
         public static int LastIndex = 0;
-
         public int Index;
 
         public static void ResetCounters()
@@ -39,16 +49,7 @@ namespace gbd.Dominion.Test.Utilities
             return String.Format("{0}  # {1}", this.GetType().Name, Index);
         }
 
-        public override GameExtension Extension
-        {
-            get { return GameExtension.TestCards; }
-        }
 
-
-        public override GameSet PresentInSet
-        {
-            get { return GameSet.TestCards; }
-        }
 
     }
 }

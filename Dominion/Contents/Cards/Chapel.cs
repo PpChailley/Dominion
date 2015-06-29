@@ -6,7 +6,7 @@ namespace gbd.Dominion.Contents.Cards
     {
 
 
-        public override ICardMechanics Mechanics { get; set; }
+        public override ICardMechanics Mechanics { get; protected set; }
 
         public override GameExtension Extension
         {
