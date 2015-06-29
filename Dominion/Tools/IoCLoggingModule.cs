@@ -1,8 +1,10 @@
-﻿using Ninject.Modules;
+﻿using System;
+using Ninject.Modules;
 using NLog;
 
 namespace gbd.Dominion.Tools
 {
+    [Obsolete]
     class IoCLoggingModule : NinjectModule
     {
         public override void Load()

@@ -27,7 +27,7 @@ namespace gbd.Dominion.Test.Utilities
 
         private void InitLogging()
         {
-            Logging.InitProgrammaticallyToDefault();
+            //Logging.InitProgrammaticallyToDefault();
         }
 
         private void InitIoC()
