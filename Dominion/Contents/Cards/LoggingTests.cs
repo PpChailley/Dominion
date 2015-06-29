@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gbd.Dominion.Test.Utilities;
-using Ninject;
+﻿using gbd.Dominion.Test.Utilities;
 using NLog;
-using NLog.Fluent;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Contents.Cards
@@ -16,14 +9,14 @@ namespace gbd.Dominion.Contents.Cards
 
 
     [TestFixture]
-    class LoggingTests: BaseTest
+    class LoggingTests : BaseTest
     {
-        
+        private readonly Logger _log = LogManager.GetCurrentClassLogger();
 
         [Test]
         public void LoggerInit()
         {
-            Log.Info("Testing log service");
+            _log.Info("Testing log service");
         }
     }
 }
