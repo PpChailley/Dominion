@@ -11,5 +11,6 @@ namespace gbd.Dominion.Contents.Cards
 
         public override ICardMechanics Mechanics { get; protected set; }
 
+        public Smithy(GameExtension extension) : base(extension) {}
     }
 }

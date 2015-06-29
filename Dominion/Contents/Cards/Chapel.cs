@@ -5,6 +5,7 @@ namespace gbd.Dominion.Contents.Cards
     public class Chapel: SelectableCard
     {
 
+        public Chapel(GameExtension extension) : base(extension) { }
 
         public override ICardMechanics Mechanics { get; protected set; }
 
@@ -12,5 +13,7 @@ namespace gbd.Dominion.Contents.Cards
         {
             get { return GameExtension.BaseGame; }
         }
+
+        
     }
 }
