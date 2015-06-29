@@ -10,6 +10,8 @@ namespace gbd.Dominion.Test.Utilities
             get { return GameExtension.TestCards; }
         }
 
+        public override ICardMechanics Mechanics { get; set; }
+
         public override GameSet PresentInSet
         {
             get { return GameSet.TestCards;}

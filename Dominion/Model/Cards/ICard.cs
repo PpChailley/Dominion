@@ -14,7 +14,7 @@ namespace gbd.Dominion.Model.Cards
 
         ICardMechanics Mechanics { get; }
 
-        IList<CardAttribute> Attributes { get; set; }
+        IList<CardAttribute> Attributes { get; }
 
         void Ready(IZone zone);
         

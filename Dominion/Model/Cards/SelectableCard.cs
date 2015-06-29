@@ -16,7 +16,11 @@ namespace gbd.Dominion.Model.Cards
             get { return GameSet.Selectable; }
         }
 
-
+        [Inject]
+        protected SelectableCard(GameExtension extension)
+        {
+            Extension = extension;
+        }
 
     }
 }

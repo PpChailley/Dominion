@@ -11,7 +11,7 @@ namespace gbd.Dominion.Model.Cards
         // TODO: Change type to more precise 
         public Object Illustration;
 
-        public abstract GameExtension Extension { get; }
+        public abstract GameExtension Extension { get; set; }
         public abstract GameSet PresentInSet { get; }
 
         public CardMetadata Meta;

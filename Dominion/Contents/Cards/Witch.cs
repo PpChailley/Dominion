@@ -9,6 +9,5 @@ namespace gbd.Dominion.Contents.Cards
             get { return GameExtension.BaseGame; }
         }
 
-
-    }
+        public override ICardMechanics Mechanics{ get; set; }    }
 }
