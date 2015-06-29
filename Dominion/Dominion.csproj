@@ -85,7 +85,6 @@
     <Compile Include="Contents\Cards\Gardens.cs" />
     <Compile Include="Contents\Cards\IoCCardsModule.cs" />
     <Compile Include="Contents\Cards\Laboratory.cs" />
-    <Compile Include="Contents\Cards\LoggingTests.cs" />
     <Compile Include="Contents\Cards\Market.cs" />
     <Compile Include="Contents\Cards\ReceiveCurse.cs" />
     <Compile Include="Contents\Cards\Smithy.cs" />
