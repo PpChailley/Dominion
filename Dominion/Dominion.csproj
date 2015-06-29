@@ -60,8 +60,12 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=3.2.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
+    <Reference Include="Ninject.Extensions.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Logging.3.2.2.0\lib\net45-full\Ninject.Extensions.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -81,6 +85,7 @@
     <Compile Include="Contents\Cards\Gardens.cs" />
     <Compile Include="Contents\Cards\IoCCardsModule.cs" />
     <Compile Include="Contents\Cards\Laboratory.cs" />
+    <Compile Include="Contents\Cards\LoggingTests.cs" />
     <Compile Include="Contents\Cards\Market.cs" />
     <Compile Include="Contents\Cards\ReceiveCurse.cs" />
     <Compile Include="Contents\Cards\Smithy.cs" />
@@ -191,6 +196,7 @@
     <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
     <Compile Include="Test\Utilities\TestSupplyPile.cs" />
     <Compile Include="Test\Utilities\TestSupplyZone.cs" />
+    <Compile Include="Tools\IoCLoggingModule.cs" />
     <Compile Include="Tools\IoCMechanicsModule.cs" />
     <Compile Include="Tools\IoC.cs" />
     <Compile Include="Tools\IoCStandardGameModule.cs" />

@@ -3,6 +3,7 @@ using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
 using gbd.Tools.NInject;
 using Ninject;
+using Ninject.Extensions.Logging;
 
 namespace gbd.Dominion.Tools
 {
@@ -19,9 +20,11 @@ namespace gbd.Dominion.Tools
 
         public static IKernel InitKernel()
         {
-            _kernel = new StandardKernel(new IoCMechanicsModule(),
-                new IoCTestModule(),
-                new IoCCardsModule()
+            _kernel = new StandardKernel(
+                    new IoCLoggingModule(),
+                    new IoCMechanicsModule(),
+                    new IoCTestModule(),
+                    new IoCCardsModule()
                 );
 
             return _kernel;
