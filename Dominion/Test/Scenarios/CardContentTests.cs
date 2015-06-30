@@ -65,18 +65,21 @@ namespace gbd.Dominion.Test.Scenarios
        }
 
 
-        [TestCase(10, 1, 0)]
+        [TestCase(10, 1, 1)]
+        [TestCase(10, 2, 2)]
+        [TestCase(10, 9, 9)]
+        [TestCase(10, 10, 20)]
+        [TestCase(18, 1, 1)]
+        [TestCase(19, 1, 2)]
         public void Gardens(int coppers, int gardens, int expectedScore)
         {
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(coppers).WhenAnyAncestorOfType<Copper, ILibrary>();
             IoC.Kernel.BindMultipleTimesTo<ICard, Gardens>(gardens).WhenAnyAncestorOfType<Gardens, ILibrary>();
 
-            // TODO: inject that on all types !!
-            IoC.Kernel.Bind<GameExtension>().ToConstant(GameExtension.BaseGame);
-            
 
             var deck = IoC.Kernel.Get<IDeck>();
+            deck.Ready();
 
             Assert.That(deck.CurrentScore, Is.EqualTo(expectedScore));
         }
