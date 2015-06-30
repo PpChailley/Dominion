@@ -1,6 +1,6 @@
 ﻿namespace gbd.Dominion.Model.Cards
 {
-    public enum GameSet
+    public enum Include
     {
         /// <summary>
         /// A card that is always included in the supply at game start. 

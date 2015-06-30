@@ -11,25 +11,8 @@ namespace gbd.Dominion.Model.Cards
     /// </summary>
     public abstract class SelectableCard: Card
     {
-        protected SelectableCard(ICardMechanics mechanics) : base(mechanics) { }
 
-
-        public override GameSet PresentInSet
-        {
-            get { return GameSet.Selectable; }
-        }
-
-        public override GameExtension Extension { get; protected set; }
-
-
-        // TODO: force injection of extension
-        // protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
-        // see aborted branch X_InjectEnumValues: a595f5396fd137bdb32c5b1ef9548ccc56f3368b
-        [Inject]
-        protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
-        {
-            Extension = extension;
-        }
-
+        protected SelectableCard(ICardMechanics mechanics, GameExtension ext, Include inc) 
+            : base(mechanics, ext, inc) { }
     }
 }

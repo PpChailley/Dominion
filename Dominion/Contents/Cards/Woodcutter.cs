@@ -4,7 +4,9 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Woodcutter: SelectableCard
     {
-        public Woodcutter(CardMechanics m, GameExtension e) : base(m, e) { }
+        public Woodcutter(ICardMechanics mechanics, GameExtension ext, Include inc)
+            : base(mechanics, ext, inc) { }
+
         public override ICardMechanics Mechanics { get; protected set; }
 
         

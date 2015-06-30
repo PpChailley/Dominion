@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.Generic;
 using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Zones;
 
@@ -14,7 +12,7 @@ namespace gbd.Dominion.Model.Cards
 
         GameExtension Extension { get; }
 
-        GameSet PresentInSet { get; }
+        Include PresentInSet { get; }
 
 
         IZone Zone { get; set; }

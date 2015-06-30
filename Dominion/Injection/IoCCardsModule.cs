@@ -1,4 +1,5 @@
 ﻿using System;
+using gbd.Dominion.Contents;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
@@ -11,14 +12,23 @@ namespace gbd.Dominion.Injection
 {
     public class IoCCardsModule : NinjectModule
     {
+        private GameExtension _currentExtension;
+        private Include _defaultInclude;
+
+
         public override void Load()
         {
             BindAlwaysAvailableCards();
             BindCardsFromBaseGame();
         }
 
+
+
         private void BindAlwaysAvailableCards()
         {
+            SetCurrentExtension(GameExtension.AlwaysPresent);
+            SetDefaultInclude(Include.AlwaysIncluded);
+
             SetBaseData<Copper>(0, 1, 0);
             SetBaseData<Silver>(3, 2, 0);
             SetBaseData<Gold>(6, 3, 0);
@@ -37,6 +47,11 @@ namespace gbd.Dominion.Injection
 
         private void BindCardsFromBaseGame()
         {
+
+            SetCurrentExtension(GameExtension.BaseGame);
+            SetDefaultInclude(Include.Selectable);
+
+
             // TODO: comment back in cards and implement them
             //SetBaseData<Cellar>(2, 0, 0);
             SetBaseData<Chapel>(2, 0, 0).AddActions(new ChooseAndTrash(4,4));
@@ -70,13 +85,27 @@ namespace gbd.Dominion.Injection
             //SetBaseData<Adventurer>(6, 0, 0);
         }
 
+        private void SetDefaultInclude(Include include)
+        {
+            _defaultInclude = include;
+        }
+
+        private void SetCurrentExtension(GameExtension gameExtension)
+        {
+            _currentExtension = gameExtension;
+        }
 
 
-  
+        private MoreBindingSyntax<T> SetBaseData<T>(int cost, int value,int victory) where T : ICard
+        {
+            return SetBaseData<T>(cost, value, victory, _currentExtension, _defaultInclude);
+        }
 
-
-
-        private MoreBindingSyntax<T> SetBaseData<T>(int coinsCost, int coinValue, int victory) where T : ICard
+        private MoreBindingSyntax<T> SetBaseData<T>(    int coinsCost, 
+                                                        int coinValue, 
+                                                        int victory, 
+                                                        GameExtension ext,
+                                                        Include include         ) where T : ICard
         {
             Kernel.Bind<Resources>()
                 .ToConstructor(x => new Resources(coinsCost))
@@ -86,12 +115,17 @@ namespace gbd.Dominion.Injection
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new TreasureType(coinValue))
                     .WhenAnyAncestorOfType<TreasureType, T>();
-                    
 
             if (victory > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new VictoryType(victory))
                     .WhenAnyAncestorOfType<VictoryType, T>();
+
+            Kernel.Bind<GameExtension>().ToConstant(ext)
+                .WhenAnyAncestorOfType<GameExtension, T>();
+
+            Kernel.Bind<Include>().ToConstant(include)
+                .WhenAnyAncestorOfType<Include, T>();
 
             return new MoreBindingSyntax<T>(this);
         }

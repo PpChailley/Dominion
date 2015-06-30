@@ -123,23 +123,23 @@ namespace gbd.Dominion.Test.Scenarios
 
             if (typeof (AlwaysInSupplyCard).IsAssignableFrom(type))
             {
-                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.AlwaysIncluded));
+                Assert.That(card.PresentInSet, Is.EqualTo(Include.AlwaysIncluded));
             }
             else if (typeof (SelectableCard).IsAssignableFrom(type))
             {
-                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Selectable));
+                Assert.That(card.PresentInSet, Is.EqualTo(Include.Selectable));
             }
             else if (typeof (ConditionalCard).IsAssignableFrom(type))
             {
-                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Conditional));
+                Assert.That(card.PresentInSet, Is.EqualTo(Include.Conditional));
             }
             else if (typeof (OptionalCard).IsAssignableFrom(type))
             {
-                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Optional));
+                Assert.That(card.PresentInSet, Is.EqualTo(Include.Optional));
             }
             else
             {
-                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.TestCards));
+                Assert.That(card.PresentInSet, Is.EqualTo(Include.TestCards));
             }
         }
 

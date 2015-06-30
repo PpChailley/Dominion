@@ -1,4 +1,6 @@
-﻿namespace gbd.Dominion.Model.Cards
+﻿using gbd.Dominion.Contents;
+
+namespace gbd.Dominion.Model.Cards
 {
     /// <summary>
     /// A card that appears in the supply if and only if another card is selected.
@@ -6,11 +8,7 @@
     /// </summary>
     public abstract class ConditionalCard: Card
     {
-        protected ConditionalCard(ICardMechanics mechanics) : base(mechanics) { }
-
-        public override GameSet PresentInSet
-        {
-            get { return GameSet.Conditional; }
-        }
+        protected ConditionalCard(ICardMechanics mechanics, GameExtension ext, Include inc) 
+            : base(mechanics, ext, inc) { }
     }
 }

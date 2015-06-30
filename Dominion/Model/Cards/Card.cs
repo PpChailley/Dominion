@@ -8,15 +8,8 @@ namespace gbd.Dominion.Model.Cards
 {
     public abstract class Card: PrintedCard, ICard
     {
-        public string PrintedText
-        {
-            get { return Mechanics.PrintedText; }
-        }
-
-        public abstract override GameExtension Extension { get; protected set; }
 
         public IZone Zone { get; set; }
-        
         
         // This has to stay abstract so that NInject will see the implementing type when injecting it
         public abstract ICardMechanics Mechanics { get; protected set; }
@@ -26,7 +19,7 @@ namespace gbd.Dominion.Model.Cards
 
 
         [Inject]
-        protected Card(ICardMechanics mechanics)
+        protected Card(ICardMechanics mechanics, GameExtension ext, Include inc) : base(ext, inc)
         {
             Attributes = new List<CardAttribute>();
             Mechanics = mechanics;
@@ -45,6 +38,11 @@ namespace gbd.Dominion.Model.Cards
         }
 
 
+
+        public string PrintedText
+        {
+            get { return Mechanics.PrintedText; }
+        }
 
         public override string ToString()
         {

@@ -159,7 +159,7 @@
     <Compile Include="Model\Cards\TreasureType.cs" />
     <Compile Include="Model\Cards\VictoryType.cs" />
     <Compile Include="Model\GameMechanics\Game.cs" />
-    <Compile Include="Model\Cards\GameSet.cs" />
+    <Compile Include="Model\Cards\Include.cs" />
     <Compile Include="Model\GameMechanics\IIntelligence.cs" />
     <Compile Include="Model\Zones\IZone.cs" />
     <Compile Include="Model\GameMechanics\NotEnoughCardsException.cs" />

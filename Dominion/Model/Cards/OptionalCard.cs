@@ -1,4 +1,6 @@
-﻿namespace gbd.Dominion.Model.Cards
+﻿using gbd.Dominion.Contents;
+
+namespace gbd.Dominion.Model.Cards
 {
 
     /// <summary>
@@ -7,11 +9,7 @@
     /// </summary>
     public abstract class OptionalCard: Card
     {
-        protected OptionalCard(ICardMechanics mechanics) : base(mechanics) { }
-
-        public override GameSet PresentInSet
-        {
-            get { return GameSet.Optional; }
-        }
+        protected OptionalCard(ICardMechanics mechanics, GameExtension ext, Include inc) 
+            : base(mechanics, ext, inc) { }
     }
 }

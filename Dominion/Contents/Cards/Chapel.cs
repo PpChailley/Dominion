@@ -2,18 +2,12 @@ using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Contents.Cards
 {
-    public class Chapel: SelectableCard
+    public class Chapel: SelectableCard, ICard
     {
-
-        public Chapel(CardMechanics m, GameExtension e) : base(m, e) { }
+        public Chapel(ICardMechanics mechanics, GameExtension ext, Include inc) 
+            : base(mechanics, ext, inc) { }
 
         public override ICardMechanics Mechanics { get; protected set; }
 
-        public override GameExtension Extension
-        {
-            get { return GameExtension.BaseGame; }
-        }
-
-        
     }
 }

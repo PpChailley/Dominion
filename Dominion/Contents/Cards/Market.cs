@@ -4,12 +4,8 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Market: SelectableCard
     {
-        public Market(CardMechanics m, GameExtension e) : base(m, e) { }
-
-        public override GameExtension Extension
-        {
-            get { return GameExtension.BaseGame; }
-        }
+        public Market(ICardMechanics mechanics, GameExtension ext, Include inc) 
+            : base(mechanics, ext, inc) { }
 
         public override ICardMechanics Mechanics { get; protected set; }
 

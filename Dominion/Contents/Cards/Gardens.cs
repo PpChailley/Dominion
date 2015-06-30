@@ -4,12 +4,8 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Gardens: SelectableCard
     {
-        public Gardens(CardMechanics m, GameExtension e) : base(m, e) { }
-        
-        public override GameExtension Extension
-        {
-            get { return GameExtension.BaseGame; }
-        }
+        public Gardens(ICardMechanics mechanics, GameExtension ext, Include inc)
+            : base(mechanics, ext, inc) { }
 
         public override ICardMechanics Mechanics { get; protected set; }
 

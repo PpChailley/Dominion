@@ -14,16 +14,6 @@ namespace gbd.Dominion.Test.Utilities
     {
         public override ICardMechanics Mechanics { get; protected set; }
 
-        public override GameExtension Extension
-        {
-            get { return GameExtension.TestCards; }
-            protected set { throw new InvalidOperationException();}
-        }
-
-        public override GameSet PresentInSet
-        {
-            get { return GameSet.TestCards; }
-        }
 
 
         public static int LastIndex = 0;
@@ -35,10 +25,10 @@ namespace gbd.Dominion.Test.Utilities
         }
 
 
-        public EmptyCard() : base(new CardMechanics(new Resources(0), 
-                                                    new ICardType[0], 
-                                                    new IGameAction[0], 
-                                                    new IGameAction[0]))
+        public EmptyCard() : base(
+            new CardMechanics(new Resources(0), new ICardType[0], new IGameAction[0], new IGameAction[0]),
+                                GameExtension.TestCards, 
+                                Include.TestCards)
         {
             Index = LastIndex ++;
         }

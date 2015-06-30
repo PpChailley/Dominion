@@ -7,12 +7,15 @@ namespace gbd.Dominion.Model.Cards
     public abstract class PrintedCard
     {
 
-        public abstract GameExtension Extension { get; protected set; }
-        public abstract GameSet PresentInSet { get; }
+        public GameExtension Extension { get; private set; }
+        public Include PresentInSet { get; private set; }
 
-        public CardMetadata Meta;
 
-        
+        protected PrintedCard(GameExtension ext, Include inc)
+        {
+            Extension = ext;
+            PresentInSet = inc;
+        }
 
 
     }
