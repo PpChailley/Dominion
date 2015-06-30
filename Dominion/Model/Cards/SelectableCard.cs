@@ -1,6 +1,4 @@
-﻿using System;
-using gbd.Dominion.Contents;
-using Ninject;
+﻿using gbd.Dominion.Contents;
 
 namespace gbd.Dominion.Model.Cards
 {

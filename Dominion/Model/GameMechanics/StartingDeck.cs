@@ -1,5 +1,4 @@
 using gbd.Dominion.Model.Zones;
-using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics
 {

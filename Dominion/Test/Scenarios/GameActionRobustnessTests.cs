@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.GameMechanics.Actions;
-using gbd.Dominion.Test.Utilities;
+﻿using gbd.Dominion.Model.GameMechanics;
 using NUnit.Framework;
-
 
 namespace gbd.Dominion.Test.Scenarios
 {

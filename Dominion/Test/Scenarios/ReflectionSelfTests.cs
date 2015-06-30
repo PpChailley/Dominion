@@ -101,13 +101,13 @@ namespace gbd.Dominion.Test.Scenarios
         public void InterfacesAreNotPollutedByNInjectDecorations(Type t)
         {
 
-            var decorations = t.GetCustomAttributes(typeof (Ninject.InjectAttribute));
+            var decorations = t.GetCustomAttributes(typeof (InjectAttribute));
 
             Assert.That(decorations, Is.Empty);
 
             foreach (var member in t.GetMembers())
             {
-                Assert.That(member.GetCustomAttributes(typeof(Ninject.InjectAttribute)), Is.Empty);
+                Assert.That(member.GetCustomAttributes(typeof(InjectAttribute)), Is.Empty);
             }
 
         }

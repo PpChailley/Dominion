@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model;

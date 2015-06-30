@@ -1,5 +1,3 @@
-using System;
-
 namespace gbd.Dominion.Model.Zones
 {
     

@@ -1,6 +1,4 @@
-﻿using System;
-using gbd.Dominion.Contents.Cards;
-using gbd.Dominion.Injection;
+﻿using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;

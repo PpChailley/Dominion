@@ -29,7 +29,6 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<IPlayer>();
 
             IoC.Kernel.Bind<IPlayer>().To<Player>().InSingletonScope();
-
         }
 
  

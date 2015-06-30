@@ -1,5 +1,4 @@
-﻿using System;
-using gbd.Dominion.Model.Zones;
+﻿using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.Cards
 {

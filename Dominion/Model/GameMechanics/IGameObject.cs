@@ -1,6 +1,4 @@
-﻿using Ninject;
-
-namespace gbd.Dominion.Model.GameMechanics
+﻿namespace gbd.Dominion.Model.GameMechanics
 {
     public interface IGameObject
     {
