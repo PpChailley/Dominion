@@ -20,6 +20,9 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public Resources(int money, int potions)
         {
+            if (money < 0 || potions < 0)
+                throw new InvalidOperationException("Resources amount must be nonnegative");
+
             Money = money;
             Potions = potions;
         }
@@ -36,7 +39,6 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Pay(Resources price)
         {
-            // TODO: test this line
             if (Money < price.Money || Potions < price.Potions)
                 throw new InsufficientResourcesException("Cannot pay {0} with {1}"
                     .Format(price, this));

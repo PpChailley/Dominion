@@ -519,5 +519,83 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(game.CurrentPlayer.Deck.Library.ParentDeck, Is.EqualTo(game.CurrentPlayer.Deck));
         }
+
+        [TestCase(0, 0, 0, 0)]
+        [TestCase(1, 0, 0, 0)]
+        [TestCase(1, 0, 1, 0)]
+        [TestCase(0, 1, 0, 0)]
+        [TestCase(0, 1, 0, 1)]
+        [TestCase(5, 1, 5, 1)]
+        [TestCase(5, 4, 5, 4)]
+        [TestCase(5, 4, 0, 0)]
+        public void ResourcesPay(int haveCoins, int havePot, int needCoins, int needPot)
+        {
+            var available = new Resources(haveCoins, havePot);
+            var price = new Resources(needCoins, needPot);
+
+            available.Pay(price);
+
+            Assert.That(available, Is.EqualTo(new Resources(haveCoins - needCoins, havePot - needPot)));
+
+        }
+
+        [ExpectedException(typeof (InsufficientResourcesException))]
+        [TestCase(0, 0, 1, 0)]
+        [TestCase(0, 0, 0, 1)]
+        [TestCase(1, 0, 1, 1)]
+        [TestCase(0, 1, 1, 0)]
+        [TestCase(5, 1, 5, 2)]
+        [TestCase(5, 1, 6, 1)]
+        [TestCase(5, 4, 4, 5)]
+        public void ResourcesPayRobustness(int haveCoins, int havePot, int needCoins, int needPot)
+        {
+            var available = new Resources(haveCoins, havePot);
+            var price = new Resources(needCoins, needPot);
+
+            available.Pay(price);
+
+            Assert.That(available, Is.EqualTo(new Resources(haveCoins - needCoins, havePot - needPot)));
+
+        }
+
+
+        [ExpectedException(typeof (InvalidOperationException))]
+        [TestCase(-1, 0)]
+        [TestCase(0, -1)]
+        public void ResourcesRobustness(int coins, int potions)
+        {
+            var resources = new Resources(coins, potions);
+        }
+
+        [TestCase(0, 1)]
+        [TestCase(10, 1)]
+        [TestCase(10, 0)]
+        [TestCase(1, 0)]
+        public void ResourcesReset(int coins, int potions)
+        {
+            var resources = new Resources(coins, potions);
+            Assert.That(resources, Is.EqualTo(new Resources(coins, potions)));
+
+            resources.Reset();
+            Assert.That(resources, Is.EqualTo(new Resources(0, 0)));
+        }
+
+
+
+        [TestCase(0, 0, 0, 0, true)]
+        [TestCase(0, 1, 0, 1, true)]
+        [TestCase(1, 0, 1, 0, true)]
+        [TestCase(1, 0, 0, 1, false)]
+        [TestCase(5, 4, 4, 5, false)]
+        [TestCase(5, 4, 5, 4, true)]
+        public void ResourcesEquals(int aCoins, int aPot, int bCoins, int bPot, bool expected)
+        {
+            var a = new Resources(aCoins, aPot);
+            var b = new Resources(bCoins, bPot);
+
+            Assert.That(a.Equals(b), Is.EqualTo(expected));
+        }
+
+
     }
 }
