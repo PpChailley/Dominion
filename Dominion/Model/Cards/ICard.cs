@@ -14,6 +14,8 @@ namespace gbd.Dominion.Model.Cards
 
         GameExtension Extension { get; }
 
+        GameSet PresentInSet { get; }
+
 
         IZone Zone { get; set; }
 

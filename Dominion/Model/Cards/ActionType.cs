@@ -1,14 +1,12 @@
-﻿using gbd.Dominion.Model.Zones;
+﻿using System;
+using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.Cards
 {
-    public class ActionType : ICardType
+    public abstract class ActionType : ICardType
     {
         protected IZone Zone { get; set; }
-        
-        public void Ready(IZone zone)
-        {
-            Zone = zone;
-        }
+
+        public abstract void Ready(IZone zone);
     }
 }

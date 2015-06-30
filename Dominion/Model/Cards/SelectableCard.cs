@@ -22,6 +22,8 @@ namespace gbd.Dominion.Model.Cards
         public override GameExtension Extension { get; protected set; }
 
 
+        // TODO: force injection of extension
+        // protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
         [Inject]
         protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
         {

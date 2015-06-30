@@ -37,6 +37,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test, TestCaseSource(typeof(ReflectionClassFinder),"GetAllImplementedCardsTestData")]
         public void CardsRequirements(Type type)
         {
+            if (type.Namespace.StartsWith("gbd.Dominion.Test"))
+                return;
+            
             var card = (ICard) IoC.Kernel.Get(type);
 
             Assert.That(card.Mechanics.Types.Any());
@@ -105,6 +108,39 @@ namespace gbd.Dominion.Test.Scenarios
             {
                 Assert.That(member.GetCustomAttributes(typeof(Ninject.InjectAttribute)), Is.Empty);
             }
+
+        }
+
+        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllImplementedCards")]
+        public void CardKnowsSet(Type type)
+        {
+            //if (type.Namespace.StartsWith("gbd.Dominion.Test"))
+            //    return;
+
+
+            var card = (ICard) IoC.Kernel.Get(type);
+
+            if (typeof (AlwaysInSupplyCard).IsAssignableFrom(type))
+            {
+                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.AlwaysIncluded));
+            }
+            else if (typeof (SelectableCard).IsAssignableFrom(type))
+            {
+                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Selectable));
+            }
+            else if (typeof(ConditionalCard).IsAssignableFrom(type))
+            {
+                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Conditional));
+            }
+            else if (typeof(OptionalCard).IsAssignableFrom(type))
+            {
+                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Optional));
+            }
+            else
+            {
+                Assert.That(card.PresentInSet, Is.EqualTo(GameSet.TestCards));
+            }
+            
 
         }
 
