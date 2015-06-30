@@ -193,7 +193,6 @@
     <Compile Include="Test\Utilities\CardShufflerDryRunner.cs" />
     <Compile Include="Test\Utilities\EmptyCard.cs" />
     <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
-    <Compile Include="Test\Utilities\TestSupplyPile.cs" />
     <Compile Include="Test\Utilities\TestSupplyZone.cs" />
     <Compile Include="Tools\IoCLoggingModule.cs" />
     <Compile Include="Tools\IoCMechanicsModule.cs" />

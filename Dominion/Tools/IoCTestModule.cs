@@ -24,7 +24,7 @@ namespace gbd.Dominion.Tools
             this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
 
 
-            this.Kernel.BindMultipleTimesTo<ISupplyPile, TestSupplyPile>(10);
+            this.Kernel.BindMultipleTimesTo<ISupplyPile, SupplyPile>(10);
             
             
             //this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10);

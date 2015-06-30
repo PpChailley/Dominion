@@ -34,7 +34,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void SupplyPile()
         {
             IoC.Kernel.Unbind<ISupplyPile>();
-            IoC.Kernel.Bind<ISupplyPile>().To<TestSupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
             var deck = IoC.Kernel.Get<IDeck>();
@@ -49,7 +49,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void MoveCardFromSupply()
         {
             IoC.Kernel.Unbind<ISupplyPile>();
-            IoC.Kernel.Bind<ISupplyPile>().To<TestSupplyPile>();
+            IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
             var player = IoC.Kernel.Get<IPlayer>();

@@ -9,8 +9,6 @@ namespace gbd.Dominion.Model.Zones
     public class SupplyPile : AbstractZone, ISupplyPile
     {
 
-        // Todo: get rid of this constant
-        public const int DEFAULT_SUPPLY_PILE_SIZE = 10;
 
         public Type CardType { get; private set; }
 
