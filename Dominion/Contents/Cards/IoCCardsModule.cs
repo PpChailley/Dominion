@@ -10,9 +10,6 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class IoCCardsModule : NinjectModule
     {
-        private GameSet _currentGameSetDefault;
-        private GameExtension _currentExtensionDefault;
-
         public override void Load()
         {
             BindAlwaysAvailableCards();
@@ -40,8 +37,6 @@ namespace gbd.Dominion.Contents.Cards
         private void BindCardsFromBaseGame()
         {
 
-            SetExtensionForAllCards(GameExtension.BaseGame);
-            SetGameSetForAllCards(GameSet.Selectable);
             return;
 
             // TODO: comment back in cards and implement them
@@ -78,28 +73,17 @@ namespace gbd.Dominion.Contents.Cards
             //SetBaseData<Adventurer>(6, 0, 0);
         }
 
-        private void SetExtensionForAllCards(GameExtension gameExtension)
-        {
-            _currentExtensionDefault = gameExtension;
-        }
 
-        private void SetGameSetForAllCards(GameSet gameSet)
-        {
-            _currentGameSetDefault = gameSet;
-        }
+
+  
+
+
 
         private MoreBindingSyntax<T> SetBaseData<T>(int coinsCost, int coinValue, int victory) where T : ICard
-        {
-            return SetBaseData<T>(coinsCost, coinValue, victory, _currentGameSetDefault);
-        }
-
-        private MoreBindingSyntax<T> SetBaseData<T>(int coinsCost, int coinValue, int victory, GameSet set) where T : ICard
         {
             Kernel.Bind<Resources>()
                 .ToConstructor(x => new Resources(coinsCost))
                 .WhenAnyAncestorOfType<Resources, T>();
-
-            Kernel.Bind<GameSet>().ToConstructor(x => _currentGameSetDefault);
 
             if (coinValue > 0)
                 Kernel.Bind<ICardType>()

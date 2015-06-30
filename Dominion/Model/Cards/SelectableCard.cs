@@ -24,6 +24,7 @@ namespace gbd.Dominion.Model.Cards
 
         // TODO: force injection of extension
         // protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
+        // see aborted branch X_InjectEnumValues: a595f5396fd137bdb32c5b1ef9548ccc56f3368b
         [Inject]
         protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
         {
