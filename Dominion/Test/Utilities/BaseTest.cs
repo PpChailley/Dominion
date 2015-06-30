@@ -7,14 +7,7 @@ namespace gbd.Dominion.Test.Utilities
     public class BaseTest
     {
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetUp()
-        {
-            InitLogging();
-            InitIoC();
-        }
-
-
+ 
         [SetUp]
         public void SetUp()
         {
@@ -22,13 +15,6 @@ namespace gbd.Dominion.Test.Utilities
         }
 
 
-
-
-
-        private void InitLogging()
-        {
-            //Logging.InitProgrammaticallyToDefault();
-        }
 
         private void InitIoC()
         {
