@@ -19,22 +19,22 @@ namespace gbd.Dominion.Tools
             Bind<ISupplyZone>().To<TestSupplyZone>();
 
             Bind<IDeck>().To<TestDeck>();
-            this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10).WhenAnyAncestorOfType<TestCard, ILibrary>();
-            this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10).WhenAnyAncestorOfType<TestCard, ISupplyPile>();
+            this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ILibrary>();
+            this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
 
 
             this.Kernel.BindMultipleTimesTo<ISupplyPile, TestSupplyPile>(10);
             
             
-            //this.Kernel.BindMultipleTimesTo<ICard, TestCard>(10);
+            //this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10);
 
 
 
             // This will be bound to CurrentPlayer
             //Bind<IPlayer>().To<Player>();
 
-            //Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(0)).WhenAnyAncestorOfType<VictoryType, TestCard>();
-            //Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, TestCard>();
+            //Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(0)).WhenAnyAncestorOfType<VictoryType, EmptyCard>();
+            //Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, EmptyCard>();
 
             
 

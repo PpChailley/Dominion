@@ -60,8 +60,12 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NLog, Version=3.2.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
+    <Reference Include="Ninject.Extensions.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Logging.3.2.2.0\lib\net45-full\Ninject.Extensions.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -74,6 +78,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Cards\Chapel.cs" />
+    <Compile Include="Contents\Cards\ChooseAndTrash.cs" />
     <Compile Include="Contents\Cards\CouncilRoom.cs" />
     <Compile Include="Contents\Cards\Festival.cs" />
     <Compile Include="Contents\Cards\Gardens.cs" />
@@ -82,6 +88,7 @@
     <Compile Include="Contents\Cards\Market.cs" />
     <Compile Include="Contents\Cards\ReceiveCurse.cs" />
     <Compile Include="Contents\Cards\Smithy.cs" />
+    <Compile Include="Contents\Cards\TrashAndUpgrade.cs" />
     <Compile Include="Contents\Cards\Witch.cs" />
     <Compile Include="Contents\Cards\Woodcutter.cs" />
     <Compile Include="Contents\Cards\Village.cs" />
@@ -93,11 +100,13 @@
     <Compile Include="Model\GameMechanics\Actions\AddAction.cs" />
     <Compile Include="Model\GameMechanics\Actions\AddBuy.cs" />
     <Compile Include="Model\GameMechanics\Actions\AddCoins.cs" />
-    <Compile Include="Model\GameMechanics\Actions\CardShufflerRandom.cs" />
     <Compile Include="Model\GameMechanics\Actions\DiscardDownTo.cs" />
+    <Compile Include="Model\GameMechanics\CardShufflerRandom.cs" />
+    <Compile Include="Model\GameMechanics\ICardShuffler.cs" />
     <Compile Include="Model\GameMechanics\IGameObject.cs" />
     <Compile Include="Model\GameMechanics\InsufficientResourcesException.cs" />
     <Compile Include="Model\GameMechanics\MoveCardsExtensions.cs" />
+    <Compile Include="Model\GameMechanics\NotEnoughActionsException.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
     <Compile Include="Model\GameMechanics\AI\IAi.cs" />
@@ -110,14 +119,16 @@
     <Compile Include="Model\GameMechanics\IPlayer.cs" />
     <Compile Include="Model\GameMechanics\PlayerStatus.cs" />
     <Compile Include="Model\Zones\CursePile.cs" />
-    <Compile Include="Model\Zones\ICardShuffler.cs" />
     <Compile Include="Model\Zones\IMutableZone.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
     <Compile Include="Model\Zones\ZoneChoice.cs" />
-    <Compile Include="Test\Scenarios\CardsTests.cs" />
+    <Compile Include="Test\Scenarios\CardContentTests.cs" />
+    <Compile Include="Test\Scenarios\CardsMechanicsTests.cs" />
+    <Compile Include="Test\Scenarios\GameActionRobustnessTests.cs" />
+    <Compile Include="Test\Scenarios\GameActionTests.cs" />
     <Compile Include="Test\Scenarios\GameScenarioTest.cs" />
     <Compile Include="Test\Scenarios\InjectionOfCardsTests.cs" />
     <Compile Include="Test\Scenarios\ReflectionSelfTests.cs" />
@@ -169,7 +180,7 @@
     <Compile Include="Model\GameMechanics\Actions\GameAction.cs" />
     <Compile Include="Model\Zones\BattleField.cs" />
     <Compile Include="Model\Cards\SelectableCard.cs" />
-    <Compile Include="Test\Scenarios\SmokeTests.cs" />
+    <Compile Include="Test\Scenarios\InjectionOfMechanicsTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
     <Compile Include="Test\ToolsLib\NInjectExtensionsRobustness.cs" />
     <Compile Include="Test\ToolsLib\NInjectExtensionsTests.cs" />
@@ -177,12 +188,14 @@
     <Compile Include="Model\Zones\AbstractDeck.cs" />
     <Compile Include="Test\Scenarios\AiTest.cs" />
     <Compile Include="Test\Scenarios\SupplyZoneTest.cs" />
+    <Compile Include="Test\Utilities\BindableCard.cs" />
     <Compile Include="Test\Utilities\CardShuffleBySorting.cs" />
     <Compile Include="Test\Utilities\CardShufflerDryRunner.cs" />
-    <Compile Include="Test\Utilities\TestCard.cs" />
+    <Compile Include="Test\Utilities\EmptyCard.cs" />
     <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
     <Compile Include="Test\Utilities\TestSupplyPile.cs" />
     <Compile Include="Test\Utilities\TestSupplyZone.cs" />
+    <Compile Include="Tools\IoCLoggingModule.cs" />
     <Compile Include="Tools\IoCMechanicsModule.cs" />
     <Compile Include="Tools\IoC.cs" />
     <Compile Include="Tools\IoCStandardGameModule.cs" />
@@ -211,6 +224,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

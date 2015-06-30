@@ -48,7 +48,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public int AvailableBuys { get; set; }
 
-        public int AvailableCoins{ get; set; }
+        public Resources AvailableResources{ get; set; }
 
 
         public PlayerStatus Status { get; set; }
@@ -60,7 +60,7 @@ namespace gbd.Dominion.Model.GameMechanics
         public Player(IDeck deck, IIntelligence intel, PlayerStatus status)
         {
             AvailableActions = 0;
-            AvailableCoins = 0;
+            AvailableResources = new Resources(0);
             AvailableBuys = 0;
 
             Deck = deck;
@@ -86,7 +86,9 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void StartTurn()
         {
-            throw new NotImplementedException();
+            AvailableActions = 1;
+            AvailableBuys = 1;
+            AvailableResources = new Resources(0);
         }
 
         public void EndTurn()
@@ -102,6 +104,11 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void ChooseAndDiscard(int amount)
         {
+            if (amount > Deck.Hand.TotalCardsAvailable)
+            {
+                throw new NotEnoughCardsException(Deck.Hand, Deck.Hand.TotalCardsAvailable, amount);
+            }
+            
             var toDiscard = this._intelligence.ChooseAndDiscard(amount);
             toDiscard.MoveTo(Deck.DiscardPile);
         }
@@ -125,12 +132,17 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Play(ICard card)
         {
+            if (AvailableActions < 1)
+                throw new NotEnoughActionsException();
+
+            AvailableActions --;
+            card.MoveTo(Deck.BattleField);
+
             foreach (var trigger in card.Mechanics.OnPlayTriggers)
             {
                 trigger.Do();
             }
 
-            card.MoveTo(Deck.BattleField);
         }
 
         public void ReceiveFrom(ISupplyPile @from, int amount, ZoneChoice to, Position position = Position.Top)
@@ -154,7 +166,7 @@ namespace gbd.Dominion.Model.GameMechanics
             throw new NotImplementedException();
         }
 
-        public ICard[] ChooseAndTrash(ZoneChoice from, int numberOfCards)
+        public ICard[] ChooseAndTrash(ZoneChoice @from, int numberOfCards, int? maxAmount = null)
         {
             throw new NotImplementedException();
         }
@@ -163,10 +175,10 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public override string ToString()
         {
-            return String.Format("{0} # {1} with {2} {3}",
+            return String.Format("{0} # {1} with {{ {2} {3} }}",
                 this.GetType().Name,
                 this.GetHashCode(),
-                this.Deck.GetType(),
+                this.Deck.GetType().Name,
                 this.Deck.CardCountByZone);
         }
     }

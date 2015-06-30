@@ -26,6 +26,26 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(deck.Cards.Count, Is.EqualTo(10));
         }
 
+
+        [TestCase(1)]
+        [TestCase(4)]
+        [TestCase(0)]
+        [TestCase(100)]
+        public void NoPlayersLeak(int nbPlayers)
+        {
+            IoC.Kernel.Unbind<IPlayer>();
+            // TODO: rename and shorten this method
+            IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(nbPlayers);
+
+            var game = IoC.Kernel.Get<IGame>();
+
+            Assert.That(game.Players, Has.Count.EqualTo(nbPlayers));
+            Assert.That(game.GetPlayers(PlayerChoice.Opponents), Has.Count.EqualTo(Math.Max(nbPlayers - 1, 0)));
+
+            // TODO: create a binding helper specialized for ICard (or move the one in Modules to extensions classes)
+
+        }
+
         [Test]
         public void ShuffleDeck()
         {
@@ -110,14 +130,15 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
-            int numberOfFillCards = Math.Max(10 - estates - provinces, 3);
-            int expectedScore = 1*estates + 6*provinces;
-
-            IoC.Kernel.BindMultipleTimesTo<ICard, Estate>(estates).WhenAnyAncestorOfType<Estate, IDeck>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, Province>(provinces).WhenAnyAncestorOfType<Province, IDeck>();    
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(numberOfFillCards).WhenAnyAncestorOfType<Copper, IDeck>();    
+            IoC.Kernel.BindCard<Estate, ILibrary>(estates);
+            IoC.Kernel.BindCard<Province, ILibrary>(provinces);
+            IoC.Kernel.BindCard<Copper, ILibrary>(Math.Max(10 - estates - provinces, 3));
 
             var player = IoC.Kernel.Get<IPlayer>();
+            player.Ready();
+            player.StartTurn();
+
+            int expectedScore = 1 * estates + 6 * provinces;
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
@@ -142,10 +163,10 @@ namespace gbd.Dominion.Test.Scenarios
         public void LibraryReshuffle(int librarySize, int discardSize, int pick)
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, TestCard>()
-                .WhenAnyAncestorOfType<TestCard, ILibrary>();
-            //IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, TestCard>()
-            //    .WhenAnyAncestorOfType<TestCard, IDiscardPile>();
+            IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, EmptyCard>()
+                .WhenAnyAncestorOfType<EmptyCard, ILibrary>();
+            //IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, EmptyCard>()
+            //    .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
 
 
             var deck = IoC.Kernel.Get<IDeck>();
@@ -273,7 +294,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void CardGet()
         {
-            TestCard.ResetCounters();
+            EmptyCard.ResetCounters();
             IoC.Kernel.Rebind<ICardShuffler>().To<CardShuffleBySorting>();
 
             var player = IoC.Kernel.Get<Player>();
@@ -282,26 +303,26 @@ namespace gbd.Dominion.Test.Scenarios
             var sample = player.Deck.Library.Get(1, Position.Top).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(1));
-            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(0));
-            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(0));
+            Assert.That(((EmptyCard)sample.First()).Index, Is.EqualTo(0));
+            Assert.That(((EmptyCard)sample.Last()).Index, Is.EqualTo(0));
 
             sample = player.Deck.Library.Get(5, Position.Top).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(5));
-            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(0));
-            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(4));
+            Assert.That(((EmptyCard)sample.First()).Index, Is.EqualTo(0));
+            Assert.That(((EmptyCard)sample.Last()).Index, Is.EqualTo(4));
 
             sample = player.Deck.Library.Get(1, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(1));
-            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(9));
-            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(9));
+            Assert.That(((EmptyCard)sample.First()).Index, Is.EqualTo(9));
+            Assert.That(((EmptyCard)sample.Last()).Index, Is.EqualTo(9));
 
             sample = player.Deck.Library.Get(4, Position.Bottom).ToList();
 
             Assert.That(sample.Count(), Is.EqualTo(4));
-            Assert.That(((TestCard)sample.First()).Index, Is.EqualTo(6));
-            Assert.That(((TestCard)sample.Last()).Index, Is.EqualTo(9));
+            Assert.That(((EmptyCard)sample.First()).Index, Is.EqualTo(6));
+            Assert.That(((EmptyCard)sample.Last()).Index, Is.EqualTo(9));
         }
 
 

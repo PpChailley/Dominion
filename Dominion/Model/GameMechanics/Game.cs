@@ -15,7 +15,7 @@ namespace gbd.Dominion.Model.GameMechanics
         {
             Players = players;
             SupplyZone = supplyZone;
-            CurrentPlayer = IoC.Kernel.Get<Player>();
+            CurrentPlayer = players.FirstOrDefault();
         }
 
 
@@ -67,12 +67,10 @@ namespace gbd.Dominion.Model.GameMechanics
         public void Ready()
         {
             Init();
-
             Players.ToList().ForEach(p => p.Ready());
-
             SupplyZone.Ready();
-
             CurrentPlayer = Players.First();
+            CurrentPlayer.StartTurn();
         }
 
 

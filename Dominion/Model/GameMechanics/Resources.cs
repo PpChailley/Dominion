@@ -6,6 +6,15 @@ namespace gbd.Dominion.Model.GameMechanics
     public class Resources
     {
 
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Money*397) ^ Potions;
+            }
+        }
+
         public int Money;
         public int Potions;
 
@@ -40,6 +49,18 @@ namespace gbd.Dominion.Model.GameMechanics
         public override string ToString()
         {
             return String.Format("{{ {0} Coin - {1} Potion }}", Money, Potions);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return  obj is Resources && 
+                    ((Resources)obj).Money == this.Money && 
+                    ((Resources)obj).Potions == this.Potions;
+        }
+        
+        protected bool Equals(Resources other)
+        {
+            return Money == other.Money && Potions == other.Potions;
         }
     }
 }

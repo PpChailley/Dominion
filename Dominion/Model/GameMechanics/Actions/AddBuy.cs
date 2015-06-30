@@ -3,7 +3,7 @@ using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics.Actions
 {
-    public class AddBuy : GameAction
+    public class AddBuy : GameAction, IGameAction
     {
         public int Amount;
 

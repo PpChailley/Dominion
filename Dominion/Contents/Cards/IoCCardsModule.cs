@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Test.Utilities;
-using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
-using Ninject;
-using Ninject.Activation;
 using Ninject.Modules;
-using Ninject.Syntax;
 
 namespace gbd.Dominion.Contents.Cards
 {
@@ -43,7 +34,7 @@ namespace gbd.Dominion.Contents.Cards
         {
             // TODO: comment back in cards and implement them
             //SetBaseData<Cellar>(2, 0, 0);
-            //SetBaseData<Chapel>(2, 0, 0);
+            SetBaseData<Chapel>(2, 0, 0).AddActions(new ChooseAndTrash(4,4));
             //SetBaseData<Moat>(2, 0, 0);
 
             //SetBaseData<Chancellor>(3, 0, 0);
@@ -53,7 +44,8 @@ namespace gbd.Dominion.Contents.Cards
 
             //SetBaseData<Bureaucrat>(4, 0, 0);
             //SetBaseData<Feast>(4, 0, 0);
-            SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count/10);
+            //TODO: comment back in Gardens
+//            SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count/10);
             //SetBaseData<Militia>(4, 0, 0).AddActions(new AddCoins(2), new DiscardDownTo(PlayerChoice.Opponents, 3));
             //SetBaseData<Moneylender>(4, 0, 0);
             //SetBaseData<Remodel>(4, 0, 0).AddActions(new TrashAndUpgrade(ZoneChoice.Hand, 1, 2));
@@ -84,22 +76,18 @@ namespace gbd.Dominion.Contents.Cards
         {
             Kernel.Bind<Resources>().ToConstructor(x => new Resources(coinsCost)).WhenAnyAncestorOfType<Resources, T>();
 
-
             if (coinValue > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new TreasureType(coinValue))
                     .WhenAnyAncestorOfType<TreasureType, T>();
 
             if (victory > 0)
-                //Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(victory)).WhenAnyAncestorOfType<VictoryType, T>();
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new VictoryType(victory))
                     .WhenAnyAncestorOfType<VictoryType, T>();
-            //.WhenAnyAncestorMatches(r => 
-            //    r.Request.Target.Member.DeclaringType.IsAssignableFrom(typeof(T))
-            //    );
 
             return new MoreBindingSyntax<T>(this);
+            
         }
 
 
@@ -129,38 +117,5 @@ namespace gbd.Dominion.Contents.Cards
             }
         }
 
-    }
-
-    public class TrashAndUpgrade : GameAction
-    {
-        private readonly ZoneChoice _from;
-        private readonly int _numberOfCards;
-        private readonly int _upgradeValue;
-
-        public TrashAndUpgrade(ZoneChoice from, int numberOfCards, int upgradeValue)
-        {
-            _from = @from;
-            _numberOfCards = numberOfCards;
-            _upgradeValue = upgradeValue;
-            throw new NotImplementedException();
-        }
-
-        public override void Do()
-        {
-            var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            ICard[] trashed = player.ChooseAndTrash(_from, _numberOfCards);
-
-            foreach (var card in trashed)
-            {
-                player.ChooseAndReceive(
-                    new Resources(card.Mechanics.Cost.Money + _upgradeValue,
-                                  card.Mechanics.Cost.Potions  ));
-            }
-
-
-
-            
-
-        }
     }
 }

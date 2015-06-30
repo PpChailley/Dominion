@@ -31,6 +31,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             var player = IoC.Kernel.Get<Player>();
             player.Ready();
+            player.StartTurn();
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
             player.ChooseAndDiscard(0);
@@ -47,15 +48,6 @@ namespace gbd.Dominion.Test.Scenarios
 
             player.ChooseAndDiscard(2);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 1, 5, 0)));
-
-            player.Draw(6);
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 7, 0, 0)));
-
-            player.ChooseAndDiscard(5);
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(3, 2, 5, 0)));
-
-            player.Draw(1);
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(2, 3, 5, 0)));
         }
 
  
