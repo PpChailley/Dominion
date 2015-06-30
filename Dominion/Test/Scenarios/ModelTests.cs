@@ -366,7 +366,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(numberOfPlayers);
             
             var game = IoC.Kernel.Get<IGame>();
-            var locatedPlayer = game.GetPlayers(toBeLocated);
+            var locatedPlayer = game.GetPlayers(toBeLocated).Single();
             int expectedIndex;
 
             switch (toBeLocated)

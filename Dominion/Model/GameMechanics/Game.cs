@@ -39,11 +39,11 @@ namespace gbd.Dominion.Model.GameMechanics
                     break;
 
                 case PlayerChoice.Left:
-                    toreturn.Add(Players.Before(CurrentPlayer));
+                    toreturn.Add(Players.BeforeRoundRobin(CurrentPlayer));
                     break;
 
                 case PlayerChoice.Right:
-                    toreturn.Add(Players.After(CurrentPlayer));
+                    toreturn.Add(Players.AfterRoundRobin(CurrentPlayer));
                     break;
 
                 case PlayerChoice.Opponents:
