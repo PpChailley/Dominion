@@ -9,14 +9,10 @@ namespace gbd.Dominion.Model.Cards
     /// and counts towards the 10 piles limit.
     /// Like most cards : Village, Hermit, Lighthouse, ...
     /// </summary>
-    public class SelectableCard: Card
+    public abstract class SelectableCard: Card
     {
         protected SelectableCard(ICardMechanics mechanics) : base(mechanics) { }
 
-        public override GameExtension Extension
-        {
-            get { throw new InvalidOperationException(); }
-        }
 
         public override GameSet PresentInSet
         {
@@ -27,7 +23,7 @@ namespace gbd.Dominion.Model.Cards
 
 
         [Inject]
-        protected SelectableCard(GameExtension extension)
+        protected SelectableCard(CardMechanics mechanics, GameExtension extension) : base(mechanics)
         {
             Extension = extension;
         }

@@ -41,7 +41,7 @@ namespace gbd.Dominion.Test.Scenarios
 
 
         [Test]
-        public void InjectionOfCardTypes()
+        public void InjectionOfCardTypesWithBindingConstraint()
         {
             IoC.Kernel = new StandardKernel();
 
@@ -50,13 +50,11 @@ namespace gbd.Dominion.Test.Scenarios
 
             IoC.Kernel.Bind<ICardType>()
                 .ToConstructor(x => new TreasureType(7))
-                // .WhenInjectedInto<BindableCard>();
                 .WhenAnyAncestorOfType<TreasureType, BindableCard>();
-                
 
             IoC.Kernel.Bind<Resources>()
-                    .ToConstructor(x => new Resources(12, 33));
-            
+                .ToConstructor(x => new Resources(12, 33))
+                .WhenAnyAncestorOfType<Resources, BindableCard>();
 
             var card = IoC.Kernel.Get<ICard>();
 
@@ -65,6 +63,27 @@ namespace gbd.Dominion.Test.Scenarios
             
         }
 
+        [Test]
+        public void InjectionOfCardTypesWithoutBindingConstraint()
+        {
+            IoC.Kernel = new StandardKernel();
+
+            IoC.Kernel.Bind<ICard>().To<BindableCard>();
+            IoC.Kernel.Bind<ICardMechanics>().To<CardMechanics>();
+
+            IoC.Kernel.Bind<ICardType>()
+                .ToConstructor(x => new TreasureType(7));
+
+            IoC.Kernel.Bind<Resources>()
+                    .ToConstructor(x => new Resources(12, 33));
+
+
+            var card = IoC.Kernel.Get<ICard>();
+
+            Assert.That(card.Mechanics.Cost, Is.EqualTo(new Resources(12, 33)));
+            Assert.That(card.Mechanics.TreasureValue, Is.EqualTo(new Resources(7)));
+
+        }
 
     }
 }

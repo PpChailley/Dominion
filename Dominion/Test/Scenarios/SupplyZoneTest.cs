@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
@@ -17,17 +19,14 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void SupplyZone()
         {
-            //IoC.Kernel.ReBind<ICollection<IPlayer>>()
-            //    .ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
+            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ISupplyZone>();
 
-
-            var player = IoC.Kernel.Get<IPlayer>();
             var supply = IoC.Kernel.Get<ISupplyZone>();
 
-            Assert.That(player.Deck.Cards.Count, Is.EqualTo(10));
             Assert.That(supply.Piles.Count, Is.EqualTo(10));
             Assert.That(supply.Cards.Count, Is.EqualTo(100));
-
         }
 
 
@@ -67,11 +66,6 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(11));
             Assert.That(pile.Cards.Count, Is.EqualTo(9));
         }
-
-
-
-        
-
 
 
 

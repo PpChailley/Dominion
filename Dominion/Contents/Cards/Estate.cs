@@ -5,11 +5,9 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Estate : AlwaysInSupplyCard, ICard
     {
+        public Estate(ICardMechanics mechanics) : base(mechanics){}
+
         public override ICardMechanics Mechanics { get; protected set; }
-        public Estate()
-        {
-            //Mechanics.Cost = new Resources(2);
-            //Mechanics.Types.Add(new VictoryType(1));
-        }
+ 
     }
 }

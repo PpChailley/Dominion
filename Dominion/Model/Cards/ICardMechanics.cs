@@ -19,6 +19,6 @@ namespace gbd.Dominion.Model.Cards
 
 
 
-        ICardType GetCardType<TCardType>() where TCardType:ICardType;
+        TCardType GetCardType<TCardType>() where TCardType : ICardType;
     }
 }

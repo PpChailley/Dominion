@@ -4,7 +4,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Gardens: SelectableCard
     {
-        public Gardens(GameExtension extension) : base(extension) { }
+        public Gardens(CardMechanics m, GameExtension e) : base(m, e) { }
         
         public override GameExtension Extension
         {

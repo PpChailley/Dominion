@@ -4,7 +4,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Laboratory: SelectableCard
     {
-        public Laboratory(GameExtension extension) : base(extension) { }
+        public Laboratory(CardMechanics m, GameExtension e) : base(m, e) { }
 
         public override GameExtension Extension
         {

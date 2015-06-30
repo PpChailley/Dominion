@@ -118,12 +118,11 @@
     <Compile Include="Model\GameMechanics\IGame.cs" />
     <Compile Include="Model\GameMechanics\IPlayer.cs" />
     <Compile Include="Model\GameMechanics\PlayerStatus.cs" />
-    <Compile Include="Model\Zones\CursePile.cs" />
     <Compile Include="Model\Zones\IMutableZone.cs" />
     <Compile Include="Model\Zones\ISupplyPile.cs" />
     <Compile Include="Model\Zones\ISupplyZone.cs" />
     <Compile Include="Model\Zones\SupplyPile.cs" />
-    <Compile Include="Model\Zones\AbstractSupplyZone.cs" />
+    <Compile Include="Model\Zones\SupplyZone.cs" />
     <Compile Include="Model\Zones\ZoneChoice.cs" />
     <Compile Include="Test\Scenarios\CardContentTests.cs" />
     <Compile Include="Test\Scenarios\CardsMechanicsTests.cs" />
@@ -182,6 +181,7 @@
     <Compile Include="Model\Cards\SelectableCard.cs" />
     <Compile Include="Test\Scenarios\InjectionOfMechanicsTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
+    <Compile Include="Test\Scenarios\StandardGameTests.cs" />
     <Compile Include="Test\ToolsLib\NInjectExtensionsRobustness.cs" />
     <Compile Include="Test\ToolsLib\NInjectExtensionsTests.cs" />
     <Compile Include="Test\Utilities\BaseTest.cs" />
@@ -226,6 +226,7 @@
     </Compile>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>

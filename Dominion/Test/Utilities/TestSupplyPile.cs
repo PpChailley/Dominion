@@ -5,6 +5,7 @@ using Ninject;
 
 namespace gbd.Dominion.Test.Utilities
 {
+    // TODO: remove this useless class
     public class TestSupplyPile: SupplyPile, ISupplyPile
     {
         [Inject]

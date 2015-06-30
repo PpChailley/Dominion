@@ -7,5 +7,6 @@ namespace gbd.Dominion.Contents.Cards
     {
         public override ICardMechanics Mechanics { get; protected set; }
 
+        public Silver(ICardMechanics mechanics) : base(mechanics){}
     }
 }

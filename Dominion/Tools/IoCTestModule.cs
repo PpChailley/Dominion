@@ -20,6 +20,7 @@ namespace gbd.Dominion.Tools
 
             Bind<IDeck>().To<TestDeck>();
             this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ILibrary>();
+            this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
             this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
 
 

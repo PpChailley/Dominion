@@ -47,8 +47,17 @@ namespace gbd.Dominion.Model.Cards
         {
             get
             {
-                var victoryType = (VictoryType)GetCardType<VictoryType>();
-                return victoryType == null ? 0 : victoryType.VictoryPoints;
+                int score = 0;
+
+                var victoryType = GetCardType<VictoryType>();
+                if (victoryType != null)
+                    score += victoryType.VictoryPoints;
+
+                var curseType = GetCardType<CurseType>();
+                if (curseType != null)
+                    score += curseType.CurseValue;
+
+                return score;
             }
         }
 
@@ -61,7 +70,7 @@ namespace gbd.Dominion.Model.Cards
         }
 
 
-        public ICardType GetCardType<TCardType>() where TCardType:ICardType
+        public TCardType GetCardType<TCardType>() where TCardType : ICardType
         {
             var matchingTypes = Types
                 .Where(t => t.GetType() == typeof (TCardType))

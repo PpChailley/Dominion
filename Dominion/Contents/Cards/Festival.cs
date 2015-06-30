@@ -4,7 +4,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Festival: SelectableCard
     {
-        public Festival(GameExtension extension) : base(extension) { }
+        public Festival(CardMechanics m, GameExtension e) : base(m, e) { }
         
         public override GameExtension Extension
         {

@@ -35,13 +35,12 @@ namespace gbd.Dominion.Test.Utilities
         }
 
 
-        public EmptyCard() 
+        public EmptyCard() : base(new CardMechanics(new Resources(0), 
+                                                    new ICardType[0], 
+                                                    new IGameAction[0], 
+                                                    new IGameAction[0]))
         {
             Index = LastIndex ++;
-            Mechanics = new CardMechanics(  new Resources(0), 
-                                            new ICardType[0], 
-                                            new IGameAction[0], 
-                                            new IGameAction[0]);
         }
 
         public override string ToString()

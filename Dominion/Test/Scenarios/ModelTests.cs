@@ -138,18 +138,20 @@ namespace gbd.Dominion.Test.Scenarios
             player.Ready();
             player.StartTurn();
 
+            var supply = IoC.Kernel.Get<ISupplyZone>();
+
             int expectedScore = 1 * estates + 6 * provinces;
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
-            player.Receive(IoC.Kernel.Get<Estate>());
+            player.ReceiveFrom(supply.PileOf<Estate>(), 1);
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 1 ));
 
 
-            player.Receive(IoC.Kernel.Get<Duchy>());
+            player.ReceiveFrom(supply.PileOf<Duchy>(), 1);
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 4));
 
-            player.Receive(IoC.Kernel.Get<Province>());
+            player.ReceiveFrom(supply.PileOf<Province>(), 1);
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
 
         }

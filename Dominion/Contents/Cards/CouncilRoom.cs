@@ -4,7 +4,7 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class CouncilRoom : SelectableCard
     {
-        public CouncilRoom(GameExtension extension) : base(extension) { }
+        public CouncilRoom(CardMechanics m, GameExtension e) : base(m, e) { }
         
         public override GameExtension Extension
         {

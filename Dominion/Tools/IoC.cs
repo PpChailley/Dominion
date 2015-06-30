@@ -21,10 +21,10 @@ namespace gbd.Dominion.Tools
         public static IKernel InitKernel()
         {
             _kernel = new StandardKernel(
-                    // new IoCLoggingModule(),
-                    new IoCMechanicsModule(),
-                    new IoCTestModule(),
-                    new IoCCardsModule()
+                                            // new IoCLoggingModule(),
+                                            new IoCMechanicsModule(),
+                                            new IoCTestModule(),
+                                            new IoCCardsModule()
                 );
 
             // LogManager.GetCurrentClassLogger().Trace("Kernel loaded all modules");
