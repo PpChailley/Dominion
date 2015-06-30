@@ -2,7 +2,7 @@
 
 namespace gbd.Dominion.Contents.Cards
 {
-    public class Silver : AlwaysInSupplyCard
+    public class Silver : Card, ICard
     {
       public Silver(ICardMechanics mechanics, GameExtension ext, Include inc)
             : base(mechanics, ext, inc) { }

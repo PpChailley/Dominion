@@ -99,7 +99,6 @@
     <Compile Include="Injection\IoCModule.cs" />
     <Compile Include="Injection\IoCStandardGameModule.cs" />
     <Compile Include="Model\Cards\CardType.cs" />
-    <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\Cards\Card.cs" />
     <Compile Include="Model\Cards\ICardMechanics.cs" />
     <Compile Include="Model\GameMechanics\Actions\AddAction.cs" />
@@ -146,7 +145,6 @@
     <Compile Include="Model\GameMechanics\Player.cs" />
     <Compile Include="Model\Zones\AbstractZone.cs" />
     <Compile Include="Model\GameMechanics\Actions\Discard.cs" />
-    <Compile Include="Model\Cards\AlwaysInSupplyCard.cs" />
     <Compile Include="Model\GameMechanics\Actions\Draw.cs" />
     <Compile Include="Model\Cards\CardMetadata.cs" />
     <Compile Include="Model\Zones\CardOrigin.cs" />
@@ -164,7 +162,6 @@
     <Compile Include="Model\GameMechanics\IIntelligence.cs" />
     <Compile Include="Model\Zones\IZone.cs" />
     <Compile Include="Model\GameMechanics\NotEnoughCardsException.cs" />
-    <Compile Include="Model\Cards\OptionalCard.cs" />
     <Compile Include="Test\Scenarios\PlayerTest.cs" />
     <Compile Include="Model\GameMechanics\Position.cs" />
     <Compile Include="Model\Zones\CardsPile.cs" />
@@ -183,7 +180,6 @@
     <Compile Include="Model\GameMechanics\Resources.cs" />
     <Compile Include="Model\GameMechanics\Actions\GameAction.cs" />
     <Compile Include="Model\Zones\BattleField.cs" />
-    <Compile Include="Model\Cards\SelectableCard.cs" />
     <Compile Include="Test\Scenarios\InjectionOfMechanicsTests.cs" />
     <Compile Include="Model\GameMechanics\StartingDeck.cs" />
     <Compile Include="Test\Scenarios\StandardGameTests.cs" />

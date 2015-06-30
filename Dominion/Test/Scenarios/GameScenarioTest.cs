@@ -84,12 +84,12 @@ namespace gbd.Dominion.Test.Scenarios
         {
             var classes = Assembly.GetExecutingAssembly().GetTypes();
 
-            var cards = classes.Where(t => typeof(SelectableCard).IsAssignableFrom(t)
+            var cards = classes.Where(t => typeof(Card).IsAssignableFrom(t)
                                                                && t.IsInterface == false
                                                                && t.IsAbstract == false);
 
 
-            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(10));
+            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(20));
         }
 
 

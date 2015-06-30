@@ -112,36 +112,7 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
-        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllImplementedCards")]
-        public void CardKnowsSet(Type type)
-        {
-            //if (type.Namespace.StartsWith("gbd.Dominion.Test"))
-            //    return;
-
-
-            var card = (ICard) IoC.Kernel.Get(type);
-
-            if (typeof (AlwaysInSupplyCard).IsAssignableFrom(type))
-            {
-                Assert.That(card.PresentInSet, Is.EqualTo(Include.AlwaysIncluded));
-            }
-            else if (typeof (SelectableCard).IsAssignableFrom(type))
-            {
-                Assert.That(card.PresentInSet, Is.EqualTo(Include.Selectable));
-            }
-            else if (typeof (ConditionalCard).IsAssignableFrom(type))
-            {
-                Assert.That(card.PresentInSet, Is.EqualTo(Include.Conditional));
-            }
-            else if (typeof (OptionalCard).IsAssignableFrom(type))
-            {
-                Assert.That(card.PresentInSet, Is.EqualTo(Include.Optional));
-            }
-            else
-            {
-                Assert.That(card.PresentInSet, Is.EqualTo(Include.TestCards));
-            }
-        }
+  
 
         [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllImplementedCards")]
         public void CardKnowsExtension(Type type)

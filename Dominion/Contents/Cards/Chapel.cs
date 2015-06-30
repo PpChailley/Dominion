@@ -2,7 +2,7 @@ using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Contents.Cards
 {
-    public class Chapel: SelectableCard, ICard
+    public class Chapel : Card, ICard
     {
         public Chapel(ICardMechanics mechanics, GameExtension ext, Include inc) 
             : base(mechanics, ext, inc) { }

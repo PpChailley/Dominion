@@ -2,7 +2,7 @@
 
 namespace gbd.Dominion.Contents.Cards
 {
-    public class Copper : AlwaysInSupplyCard, ICard
+    public class Copper : Card, ICard
     {
         public Copper(ICardMechanics mechanics, GameExtension ext, Include inc)
             : base(mechanics, ext, inc) { }

@@ -2,7 +2,7 @@
 
 namespace gbd.Dominion.Contents.Cards
 {
-    public class CouncilRoom : SelectableCard
+    public class CouncilRoom : Card, ICard
     {
         public CouncilRoom(ICardMechanics mechanics, GameExtension ext, Include inc) 
             : base(mechanics, ext, inc) { }
