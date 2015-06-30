@@ -5,12 +5,9 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Province : AlwaysInSupplyCard
     {
-        
+        public Province(ICardMechanics mechanics) : base(mechanics){}
 
-        public Province()
-        {
-            //Mechanics.Cost = new Resources(8);
-            //Mechanics.Types.Add(new VictoryType(6));
-        }
+        public override ICardMechanics Mechanics { get; protected set; }
+
     }
 }

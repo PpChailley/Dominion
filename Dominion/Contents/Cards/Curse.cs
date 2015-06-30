@@ -5,13 +5,10 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Curse: AlwaysInSupplyCard
     {
-        
+        public Curse(ICardMechanics mechanics) : base(mechanics) { }
+        public override ICardMechanics Mechanics { get; protected set; }
 
-        public Curse()
-        {
-            //Mechanics.Cost = new Resources(0);
-            //Mechanics.Types.Add(new CurseType(-1));
-        }
+        
     }
 }
 

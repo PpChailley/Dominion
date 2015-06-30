@@ -56,7 +56,7 @@ namespace gbd.Dominion.Model.Zones
 
         public override string ToString()
         {
-            return StringContentsExtension.Format("{0} with {1} cards available and {2} in Cards", 
+            return StringContentsExtension.Format("{0} with {2} cards ({1} available)", 
                                 this.GetType().Name, 
                                 this.TotalCardsAvailable,
                                 this.Cards.Count);

@@ -49,6 +49,9 @@ namespace gbd.Dominion.Test.Scenarios
         [Test, TestCaseSource(typeof(ReflectionClassFinder), "GetAllImplementedCardsTestData")]
         public void CardIsPublic(Type type)
         {
+            if (type.Namespace.StartsWith("gbd.Dominion.Test"))
+                return;
+
             Assert.That(type.IsPublic);
         }
 

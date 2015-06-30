@@ -5,11 +5,8 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Gold : AlwaysInSupplyCard
     {
-        
-        public Gold()
-        {
-            //Mechanics.Cost = new Resources(6);
-            //Mechanics.Types.Add(new TreasureType(3));
-        }
+        public Gold(ICardMechanics mechanics) : base(mechanics){}
+
+        public override ICardMechanics Mechanics { get; protected set; }
     }
 }

@@ -5,12 +5,10 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Duchy : AlwaysInSupplyCard
     {
-        
+        public Duchy(ICardMechanics mechanics) : base(mechanics){}
 
-        public Duchy()
-        {
-            //Mechanics.Cost = new Resources(5);
-            //Mechanics.Types.Add(new VictoryType(3));
-        }
+        public override ICardMechanics Mechanics { get; protected set; }
+
+ 
     }
 }

@@ -26,12 +26,19 @@ namespace gbd.Dominion.Contents.Cards
             SetBaseData<Province>(8, 0, 6);
 
 
-            Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1)).WhenAnyAncestorOfType<CurseType, Curse>();
-            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, Curse>();
+            Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1))
+                .WhenAnyAncestorOfType<CurseType, Curse>();
+
+
+            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0))
+                .WhenAnyAncestorOfType<Resources, Curse>();
         }
 
         private void BindCardsFromBaseGame()
         {
+
+            return;
+
             // TODO: comment back in cards and implement them
             //SetBaseData<Cellar>(2, 0, 0);
             SetBaseData<Chapel>(2, 0, 0).AddActions(new ChooseAndTrash(4,4));
@@ -74,12 +81,15 @@ namespace gbd.Dominion.Contents.Cards
 
         private MoreBindingSyntax<T> SetBaseData<T>(int coinsCost, int coinValue, int victory) where T : ICard
         {
-            Kernel.Bind<Resources>().ToConstructor(x => new Resources(coinsCost)).WhenAnyAncestorOfType<Resources, T>();
+            Kernel.Bind<Resources>()
+                .ToConstructor(x => new Resources(coinsCost))
+                .WhenAnyAncestorOfType<Resources, T>();
 
             if (coinValue > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new TreasureType(coinValue))
                     .WhenAnyAncestorOfType<TreasureType, T>();
+                    
 
             if (victory > 0)
                 Kernel.Bind<ICardType>()
@@ -87,7 +97,6 @@ namespace gbd.Dominion.Contents.Cards
                     .WhenAnyAncestorOfType<VictoryType, T>();
 
             return new MoreBindingSyntax<T>(this);
-            
         }
 
 

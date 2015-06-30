@@ -23,7 +23,6 @@ namespace gbd.Dominion.Tools
 
             Bind<ICardMechanics>().To<CardMechanics>();
 
-            Bind<CursePile>().ToSelf().InSingletonScope();
 
             //Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 

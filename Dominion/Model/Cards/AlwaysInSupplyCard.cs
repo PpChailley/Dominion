@@ -1,4 +1,5 @@
-﻿using gbd.Dominion.Contents;
+﻿using System;
+using gbd.Dominion.Contents;
 
 namespace gbd.Dominion.Model.Cards
 {
@@ -7,6 +8,8 @@ namespace gbd.Dominion.Model.Cards
     /// </summary>
     public abstract class AlwaysInSupplyCard: Card
     {
+        protected AlwaysInSupplyCard(ICardMechanics mechanics) : base(mechanics) { }
+
         public override GameSet PresentInSet
         {
             get { return GameSet.AlwaysIncluded; }
@@ -15,6 +18,7 @@ namespace gbd.Dominion.Model.Cards
         public override GameExtension Extension
         {
             get { return GameExtension.AlwaysPresent; }
+            protected set { throw new InvalidOperationException();}
         }
     }
 }

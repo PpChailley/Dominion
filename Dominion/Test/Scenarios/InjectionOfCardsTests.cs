@@ -37,7 +37,22 @@ namespace gbd.Dominion.Test.Scenarios
             var card = IoC.Kernel.Get<ICard>();
 
             Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(1));
+        }
 
+        [Test]
+        public void CardConditionalBinding()
+        {
+            IoC.Kernel.Unbind<ICardType>();
+            IoC.Kernel.Bind<ICardType>()
+                .ToConstructor(x => new VictoryType(1))
+                //.WhenInjectedInto<BindableCard>()
+                ;
+
+            IoC.Kernel.Bind<ICard>().To<BindableCard>();
+
+            var card = IoC.Kernel.Get<ICard>();
+
+            Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(1));
         }
 
         [TestCase(1,0,0)]

@@ -15,6 +15,7 @@ namespace gbd.Dominion.Model.Zones
 
         int TotalCardsAvailable { get; }
 
+        // TODO: consider implementing IInitializable. NInject will then call Initialize by itself 
         void Ready();
     }
 }

@@ -6,6 +6,7 @@ using Ninject;
 
 namespace gbd.Dominion.Contents.Cards
 {
+    // TODO: test this
     internal class ReceiveCurse : GameAction
     {
         private readonly PlayerChoice _who;
@@ -23,7 +24,7 @@ namespace gbd.Dominion.Contents.Cards
         {
             foreach (var player in IoC.Kernel.Get<IGame>().GetPlayers(_who))
             {
-                player.ReceiveFrom(IoC.Kernel.Get<CursePile>(), _amount);
+                player.ReceiveFrom(IoC.Kernel.Get<ISupplyZone>().PileOf<Curse>(), _amount);
             }
             
             

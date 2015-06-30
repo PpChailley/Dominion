@@ -27,3 +27,10 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
+/_NCrunch_Dominion
+/*.ncrunchsolution
+
+Dominion.v2.ncrunchsolution
+*.ncrunchsolution
+*.ncrunchproject
+*.ncrunchsolution

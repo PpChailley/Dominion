@@ -130,6 +130,10 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
+            IoC.Kernel.BindCard<Estate, ISupplyZone>(100);
+            IoC.Kernel.BindCard<Duchy, ISupplyZone>(100);
+            IoC.Kernel.BindCard<Province, ISupplyZone>(100);
+
             IoC.Kernel.BindCard<Estate, ILibrary>(estates);
             IoC.Kernel.BindCard<Province, ILibrary>(provinces);
             IoC.Kernel.BindCard<Copper, ILibrary>(Math.Max(10 - estates - provinces, 3));
@@ -138,18 +142,20 @@ namespace gbd.Dominion.Test.Scenarios
             player.Ready();
             player.StartTurn();
 
+            var supply = IoC.Kernel.Get<ISupplyZone>();
+
             int expectedScore = 1 * estates + 6 * provinces;
 
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
 
-            player.Receive(IoC.Kernel.Get<Estate>());
+            player.ReceiveFrom(supply.PileOf<Estate>(), 1);
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 1 ));
 
 
-            player.Receive(IoC.Kernel.Get<Duchy>());
+            player.ReceiveFrom(supply.PileOf<Duchy>(), 1);
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 4));
 
-            player.Receive(IoC.Kernel.Get<Province>());
+            player.ReceiveFrom(supply.PileOf<Province>(), 1);
             Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
 
         }
@@ -165,15 +171,15 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, EmptyCard>()
                 .WhenAnyAncestorOfType<EmptyCard, ILibrary>();
-            //IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, EmptyCard>()
-            //    .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
+            IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, EmptyCard>()
+                .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
 
 
             var deck = IoC.Kernel.Get<IDeck>();
             deck.Ready();
 
             Assert.That(deck.CardCountByZone, Is.EqualTo(
-                new CardRepartition(librarySize,0,discardSize,0)));
+                new CardRepartition(librarySize + discardSize ,0 , 0, 0)));
 
             deck.Library.MoveCardsTo(deck.Hand, pick);
 

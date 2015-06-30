@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace gbd.Dominion.Model.Zones
 {
@@ -6,6 +7,8 @@ namespace gbd.Dominion.Model.Zones
     {
         IList<ISupplyPile> Piles { get; }
 
-        CursePile CursePile { get; }
+        ISupplyPile PileOf<TCardType>();
+
+        ISupplyPile PileOf(Type cardType);
     }
 }

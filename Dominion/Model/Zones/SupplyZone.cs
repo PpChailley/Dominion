@@ -7,18 +7,40 @@ using Ninject;
 
 namespace gbd.Dominion.Model.Zones
 {
-    public abstract class AbstractSupplyZone: ISupplyZone
+    public class SupplyZone: ISupplyZone
     {
         public IList<ISupplyPile> Piles { get; protected set; }
 
-        public CursePile CursePile { get; protected set; }
-
-
+        // TODO: NInject should be able to deal with a ctor asking for ICollection<ICard>
         [Inject]
-        protected AbstractSupplyZone(IList<ISupplyPile> piles, CursePile cursePile)
+        public SupplyZone(IEnumerable<ICard> inputCards)
         {
-            Piles = piles;
-            CursePile = cursePile;
+            Piles = ReorderCards(inputCards);
+        }
+
+        private IList<ISupplyPile> ReorderCards(IEnumerable<ICard> input)
+        {
+            var types = input.Select(c => c.GetType()).Distinct();
+            var orderedPiles = new List<ISupplyPile>(20);
+
+            foreach (var t in types)
+            {
+                var cardsOfType = new List<ICard>(20);
+                cardsOfType.AddRange(input.Where(c => c.GetType() == t));
+                orderedPiles.Add(new SupplyPile(cardsOfType));
+            }
+
+            return orderedPiles;
+        }
+        
+        public ISupplyPile PileOf<TCardType>()
+        {
+            return PileOf(typeof (TCardType));
+        }
+
+        public ISupplyPile PileOf(Type cardType)
+        {
+            return Piles.Single(p => p.CardType == cardType);
         }
 
 
