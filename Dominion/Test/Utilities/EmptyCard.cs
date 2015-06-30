@@ -8,7 +8,7 @@ namespace gbd.Dominion.Test.Utilities
 {
 
     /// <summary>
-    /// A card that is included only in test games
+    /// A card that is always empty (costs 0, no type, no trigger)
     /// </summary>
     class EmptyCard : Card, ICard
     {
@@ -35,7 +35,7 @@ namespace gbd.Dominion.Test.Utilities
         }
 
 
-        public EmptyCard()
+        public EmptyCard() 
         {
             Index = LastIndex ++;
             Mechanics = new CardMechanics(  new Resources(0), 

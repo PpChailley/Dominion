@@ -7,10 +7,6 @@ namespace gbd.Dominion.Contents.Cards
     {
         public override ICardMechanics Mechanics { get; protected set; }
 
-        public Duchy()
-        {
-            //Mechanics.Cost = new Resources(5);
-            //Mechanics.Types.Add(new VictoryType(3));
-        }
+ 
     }
 }

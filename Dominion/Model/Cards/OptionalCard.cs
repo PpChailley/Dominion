@@ -7,6 +7,8 @@
     /// </summary>
     public abstract class OptionalCard: Card
     {
+        protected OptionalCard(ICardMechanics mechanics) : base(mechanics) { }
+
         public override GameSet PresentInSet
         {
             get { return GameSet.Optional; }

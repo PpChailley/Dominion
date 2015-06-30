@@ -25,12 +25,19 @@ namespace gbd.Dominion.Model.Cards
         public IList<CardAttribute> Attributes { get; protected set; }
 
 
-        protected Card()
+        [Inject]
+        protected Card(ICardMechanics mechanics)
         {
             Attributes = new List<CardAttribute>();
+            Mechanics = mechanics;
         }
-        
- 
+
+
+        //protected Card()
+        //{
+        //    // TODO: triple check that this constructor doesn't break anything
+        //}
+
 
         public void Ready(IZone zone)
         {

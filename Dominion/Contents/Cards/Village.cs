@@ -4,8 +4,8 @@ namespace gbd.Dominion.Contents.Cards
 {
     public class Village: SelectableCard
     {
-        public Village(GameExtension extension) : base(extension) { }
-        
+        protected Village(ICardMechanics mechanics) : base(mechanics) {}
+
         public override GameExtension Extension
         {
             get { return GameExtension.BaseGame; }

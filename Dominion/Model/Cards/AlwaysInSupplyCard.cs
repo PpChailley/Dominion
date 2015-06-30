@@ -8,6 +8,8 @@ namespace gbd.Dominion.Model.Cards
     /// </summary>
     public abstract class AlwaysInSupplyCard: Card
     {
+        protected AlwaysInSupplyCard(ICardMechanics mechanics) : base(mechanics) { }
+
         public override GameSet PresentInSet
         {
             get { return GameSet.AlwaysIncluded; }
