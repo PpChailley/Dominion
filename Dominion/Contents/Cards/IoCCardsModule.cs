@@ -21,9 +21,9 @@ namespace gbd.Dominion.Contents.Cards
             SetBaseData<Copper>(0, 1, 0);
             SetBaseData<Silver>(3, 2, 0);
             SetBaseData<Gold>(6, 3, 0);
-            SetBaseData<Estate>(2, 0, 1);
-            SetBaseData<Duchy>(5, 0, 3);
-            SetBaseData<Province>(8, 0, 6);
+            //SetBaseData<Estate>(2, 0, 1);
+            //SetBaseData<Duchy>(5, 0, 3);
+            //SetBaseData<Province>(8, 0, 6);
 
 
             Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1)).WhenAnyAncestorOfType<CurseType, Curse>();
@@ -32,6 +32,9 @@ namespace gbd.Dominion.Contents.Cards
 
         private void BindCardsFromBaseGame()
         {
+
+            return;
+
             // TODO: comment back in cards and implement them
             //SetBaseData<Cellar>(2, 0, 0);
             SetBaseData<Chapel>(2, 0, 0).AddActions(new ChooseAndTrash(4,4));
