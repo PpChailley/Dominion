@@ -129,7 +129,6 @@ namespace gbd.Dominion.Model.Zones
             Hand.Ready();
             BattleField.Ready();
 
-            // TODO: test that
             DiscardPile.MoveCardsTo(Library, DiscardPile.Cards.Count);
             Hand.MoveCardsTo(Library, Hand.Cards.Count);
             BattleField.MoveCardsTo(Library, BattleField.Cards.Count);
