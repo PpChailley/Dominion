@@ -89,7 +89,7 @@ namespace gbd.Dominion.Test.Scenarios
                                                                && t.IsAbstract == false);
 
 
-            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(20));
+            Assert.That(cards.Count(), Is.GreaterThanOrEqualTo(15));
         }
 
 
