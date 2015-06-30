@@ -32,3 +32,5 @@ $tf*/
 
 Dominion.v2.ncrunchsolution
 *.ncrunchsolution
+*.ncrunchproject
+*.ncrunchsolution
