@@ -387,6 +387,95 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(locatedPlayer, Is.EqualTo(game.Players[expectedIndex]));
 
         }
+
+
+        [Test]
+        public void DeckReady()
+        {
+            var deck = IoC.Kernel.Get<IDeck>();
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                                            library:10, 
+                                                            hand: 0, 
+                                                            discard: 0, 
+                                                            battlefield: 0)));
+
+            deck.Ready();
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                                            library: 10,
+                                                            hand: 0,
+                                                            discard: 0,
+                                                            battlefield: 0)));
+
+            Assert.That(deck.Hand.Cards, Has.All.Matches<ICard>(c => c.Zone == deck.Hand));
+            Assert.That(deck.Library.Cards, Has.All.Matches<ICard>(c => c.Zone == deck.Library));
+
+        }
+
+        [Test]
+        public void GameReady()
+        {
+            var game = IoC.Kernel.Get<IGame>();
+            var deck = game.Players[0].Deck;
+
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                                            library: 10,
+                                                            hand: 0,
+                                                            discard: 0,
+                                                            battlefield: 0)));
+
+            deck.Ready();
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                                            library: 10,
+                                                            hand: 0,
+                                                            discard: 0,
+                                                            battlefield: 0)));
+
+            game.Ready();
+            Assert.That(deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                                            library: 5,
+                                                            hand: 5,
+                                                            discard: 0,
+                                                            battlefield: 0)));
+        }
+
+        [TestCase(1)]
+        [TestCase(4)]
+        [TestCase(30)]
+        public void GameReadyAffectsAllPlayers(int nbPlayers)
+        {
+            IoC.Kernel.Unbind<IPlayer>();
+            IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(nbPlayers);
+
+            var game = IoC.Kernel.Get<IGame>();
+
+            foreach (var player in game.Players)
+            {
+                Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(10,0,0,0)));
+            }
+
+            game.Ready();
+
+            foreach (var player in game.Players)
+            {
+                Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
+            }
+
+            Assert.That(game.CurrentPlayer, Is.EqualTo(game.Players[0]));
+
+        }
+
+        [Test]
+        public void DeckGetZone()
+        {
+            var deck = IoC.Kernel.Get<IDeck>();
+
+            Assert.That(deck.Get(ZoneChoice.Discard), Is.EqualTo(deck.DiscardPile));
+            Assert.That(deck.Get(ZoneChoice.Hand), Is.EqualTo(deck.Hand));
+            Assert.That(deck.Get(ZoneChoice.Library), Is.EqualTo(deck.Library));
+            Assert.That(deck.Get(ZoneChoice.Play), Is.EqualTo(deck.BattleField));
+        }
+
         
     }
 }
