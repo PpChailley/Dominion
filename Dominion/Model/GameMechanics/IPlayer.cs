@@ -19,15 +19,20 @@ namespace gbd.Dominion.Model.GameMechanics
 
 
         void Receive(ICard card, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
+        void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
+
         void Ready();
         void Draw(int amount);
-        void ChooseAndDiscard(int amount);
         void Play(ICard card);
 
-        void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
-        void ChooseAndReceive(Resources minCost, Resources maxCost);
-        ICard[] ChooseAndTrash(ZoneChoice @from, int minAmount, int? maxAmount = null);
         void StartTurn();
         void EndTurn();
+
+        void ChooseAndDiscard(int amount);
+        void ChooseAndReceive(Resources minCost, Resources maxCost);
+        ICard[] ChooseAndTrash<T>(ZoneChoice @from, int minAmount, int? maxAmount = null)
+            where T : ICard;
+
+
     }
 }

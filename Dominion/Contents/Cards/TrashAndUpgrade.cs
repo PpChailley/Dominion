@@ -23,7 +23,7 @@ namespace gbd.Dominion.Contents.Cards
         public override void Do()
         {
             var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            ICard[] trashed = player.ChooseAndTrash(_from, _numberOfCards);
+            ICard[] trashed = player.ChooseAndTrash<ICard>(_from, _numberOfCards);
 
             foreach (var card in trashed)
             {

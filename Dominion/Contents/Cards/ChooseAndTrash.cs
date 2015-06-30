@@ -1,4 +1,5 @@
 using gbd.Dominion.Injection;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
@@ -20,7 +21,7 @@ namespace gbd.Dominion.Contents.Cards
 
         public override void Do()
         {
-            IoC.Kernel.Get<IGame>().CurrentPlayer.ChooseAndTrash(ZoneChoice.Hand, _minAmount, _maxAmount);
+            IoC.Kernel.Get<IGame>().CurrentPlayer.ChooseAndTrash<ICard>(ZoneChoice.Hand, _minAmount, _maxAmount);
 
         }
     }

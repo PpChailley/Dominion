@@ -101,7 +101,9 @@
     <Compile Include="Injection\IoCModule.cs" />
     <Compile Include="Injection\IoCStandardGameModule.cs" />
     <Compile Include="Injection\Militia.cs" />
+    <Compile Include="Injection\Moneylender.cs" />
     <Compile Include="Injection\Remodel.cs" />
+    <Compile Include="Injection\Trash.cs" />
     <Compile Include="Injection\TrashThis.cs" />
     <Compile Include="Model\Cards\CardType.cs" />
     <Compile Include="Model\Cards\Card.cs" />

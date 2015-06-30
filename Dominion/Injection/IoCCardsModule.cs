@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using gbd.Dominion.Contents;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model.Cards;
@@ -64,7 +65,7 @@ namespace gbd.Dominion.Injection
             SetBaseData<Feast>(4, 0, 0).AddActions(new TrashThis(), new GainCard(5, 5));
             SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count / 10);
             SetBaseData<Militia>(4, 0, 0).AddActions(new AddCoins(2), new DiscardDownTo(PlayerChoice.Opponents, 3));
-            ////SetBaseData<Moneylender>(4, 0, 0);
+            SetBaseData<Moneylender>(4, 0, 0).AddActions(new Trash<Copper>(ZoneChoice.Hand, 1, 1), new AddCoins(3));
             SetBaseData<Remodel>(4, 0, 0).AddActions(new TrashAndUpgrade(ZoneChoice.Hand, 1, 2));
             SetBaseData<Smithy>(4, 0, 0).AddActions(new Draw(3));
             ////SetBaseData<Spy>(4, 0, 0);

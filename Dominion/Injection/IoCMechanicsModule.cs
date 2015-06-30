@@ -25,8 +25,6 @@ namespace gbd.Dominion.Injection
 
             //Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
-
-
         }
 
     }
