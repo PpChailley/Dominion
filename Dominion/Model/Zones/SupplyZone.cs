@@ -13,7 +13,7 @@ namespace gbd.Dominion.Model.Zones
 
         // TODO: NInject should be able to deal with a ctor asking for ICollection<ICard>
         [Inject]
-        protected SupplyZone(IEnumerable<ICard> inputCards)
+        public SupplyZone(IEnumerable<ICard> inputCards)
         {
             Piles = ReorderCards(inputCards);
         }

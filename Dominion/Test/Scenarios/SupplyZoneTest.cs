@@ -25,8 +25,8 @@ namespace gbd.Dominion.Test.Scenarios
 
             var supply = IoC.Kernel.Get<ISupplyZone>();
 
-            Assert.That(supply.Piles.Count, Is.EqualTo(10));
-            Assert.That(supply.Cards.Count, Is.EqualTo(100));
+            Assert.That(supply.Piles.Count, Is.EqualTo(2));
+            Assert.That(supply.Cards.Count, Is.EqualTo(20));
         }
 
 

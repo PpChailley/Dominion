@@ -25,12 +25,28 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-        [TestCase(typeof(Copper))]
-        public void SupplyHasRequiredPiles(Type alwaysAvailableCardType)
+        [TestCase(typeof(Copper), IoCStandardGameModule.NB_COPPER)]
+        [TestCase(typeof(Silver), IoCStandardGameModule.NB_SILVER)]
+        [TestCase(typeof(Gold), IoCStandardGameModule.NB_GOLD)]
+        [TestCase(typeof(Estate), IoCStandardGameModule.NB_ESTATE)]
+        [TestCase(typeof(Duchy), IoCStandardGameModule.NB_DUCHY)]
+        [TestCase(typeof(Province), IoCStandardGameModule.NB_PROVINCE)]
+        [TestCase(typeof(Curse), IoCStandardGameModule.NB_CURSE)]
+        public void SupplyHasRequiredPiles(Type t, int expectedCount)
         {
             var supply = IoC.Kernel.Get<ISupplyZone>();
 
-            Assert.That(supply.PileOf(alwaysAvailableCardType), Has.Count.EqualTo(1));
+            Assert.That(supply.PileOf(t).Cards, Has.Count.EqualTo(expectedCount));
+        }
+
+
+        [Test]
+        public void StandardDeck()
+        {
+            var deck = IoC.Kernel.Get<IDeck>();
+
+            Assert.That(deck.Cards.Count(c => c.GetType() == typeof(Copper)), Is.EqualTo(7));
+            Assert.That(deck.Cards.Count(c => c.GetType() == typeof(Estate)), Is.EqualTo(3));
         }
 
     }
