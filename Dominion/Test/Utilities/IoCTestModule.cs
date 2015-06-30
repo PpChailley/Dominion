@@ -1,4 +1,6 @@
-﻿using gbd.Dominion.Model;
+﻿using gbd.Dominion.Contents;
+using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
@@ -20,6 +22,14 @@ namespace gbd.Dominion.Test.Utilities
             this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ILibrary>();
             this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
             this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
+
+
+            // Those are not bindable, no need to bind them :)
+            //Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenAnyAncestorOfType<GameExtension, EmptyCard>();
+            //Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenAnyAncestorOfType<Include, EmptyCard>();
+
+            Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenAnyAncestorOfType<GameExtension, BindableCard>();
+            Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenAnyAncestorOfType<Include, BindableCard>();
 
 
             this.Kernel.BindMultipleTimesTo<ISupplyPile, SupplyPile>(10);

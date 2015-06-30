@@ -2,9 +2,9 @@ using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Contents.Cards
 {
-    public class Village: SelectableCard
+    public class Village: SelectableCard, ICard
     {
-        protected Village(ICardMechanics mechanics, GameExtension ext, Include inc) 
+        public Village(ICardMechanics mechanics, GameExtension ext, Include inc) 
             : base(mechanics, ext, inc) { }
         
 

@@ -96,6 +96,7 @@
     <Compile Include="Injection\IoCCardsModule.cs" />
     <Compile Include="Injection\IoCLoggingModule.cs" />
     <Compile Include="Injection\IoCMechanicsModule.cs" />
+    <Compile Include="Injection\IoCModule.cs" />
     <Compile Include="Injection\IoCStandardGameModule.cs" />
     <Compile Include="Model\Cards\CardType.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />

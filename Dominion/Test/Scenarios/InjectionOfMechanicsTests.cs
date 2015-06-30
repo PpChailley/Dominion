@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using gbd.Dominion.Contents;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
@@ -47,7 +48,9 @@ namespace gbd.Dominion.Test.Scenarios
 
             IoC.Kernel.Bind<ICard>().To<BindableCard>();
             IoC.Kernel.Bind<ICardMechanics>().To<CardMechanics>();
-
+            IoC.Kernel.Bind<GameExtension>().ToConstant(GameExtension.AlwaysPresent);
+            IoC.Kernel.Bind<Include>().ToConstant(Include.AlwaysIncluded);
+            
             IoC.Kernel.Bind<ICardType>()
                 .ToConstructor(x => new TreasureType(7))
                 .WhenAnyAncestorOfType<TreasureType, BindableCard>();
@@ -70,6 +73,8 @@ namespace gbd.Dominion.Test.Scenarios
 
             IoC.Kernel.Bind<ICard>().To<BindableCard>();
             IoC.Kernel.Bind<ICardMechanics>().To<CardMechanics>();
+            IoC.Kernel.Bind<GameExtension>().ToConstant(GameExtension.AlwaysPresent);
+            IoC.Kernel.Bind<Include>().ToConstant(Include.AlwaysIncluded);
 
             IoC.Kernel.Bind<ICardType>()
                 .ToConstructor(x => new TreasureType(7));
