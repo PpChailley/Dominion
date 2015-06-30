@@ -49,8 +49,8 @@ namespace gbd.Dominion.Injection
 
             ////SetBaseData<Bureaucrat>(4, 0, 0);
             ////SetBaseData<Feast>(4, 0, 0);
-            //SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count / 10);
-            ////SetBaseData<Militia>(4, 0, 0).AddActions(new AddCoins(2), new DiscardDownTo(PlayerChoice.Opponents, 3));
+            SetBaseData<Gardens>(4, 0, 0).AddVariableVictory(deck => deck.Cards.Count / 10);
+            //SetBaseData<Militia>(4, 0, 0).AddActions(new AddCoins(2), new DiscardDownTo(PlayerChoice.Opponents, 3));
             ////SetBaseData<Moneylender>(4, 0, 0);
             //SetBaseData<Remodel>(4, 0, 0).AddActions(new TrashAndUpgrade(ZoneChoice.Hand, 1, 2));
             SetBaseData<Smithy>(4, 0, 0).AddActions(new Draw(3));
@@ -119,7 +119,9 @@ namespace gbd.Dominion.Injection
 
             public void AddVariableVictory(Func<IZone, int> computeVictory)
             {
-                _module.Bind<ICardType>().ToConstructor(syntax => new VictoryType(computeVictory));
+                _module.Bind<ICardType>()
+                    .ToConstructor(syntax => new VictoryType(computeVictory))
+                    .WhenAnyAncestorOfType<VictoryType, T>();
             }
         }
 
