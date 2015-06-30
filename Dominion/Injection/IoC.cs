@@ -1,11 +1,10 @@
-﻿using gbd.Dominion.Contents.Cards;
-using gbd.Dominion.Model.Cards;
+﻿using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
+using gbd.Dominion.Test.Utilities;
 using gbd.Tools.NInject;
 using Ninject;
-using NLog;
 
-namespace gbd.Dominion.Tools
+namespace gbd.Dominion.Injection
 {
     public static class IoC
     {

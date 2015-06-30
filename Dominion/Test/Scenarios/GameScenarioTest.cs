@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
-using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;

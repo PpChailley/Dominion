@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
-using gbd.Dominion.Tools;
 using Ninject;
 using NUnit.Framework;
 

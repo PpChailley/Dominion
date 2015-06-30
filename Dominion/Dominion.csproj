@@ -83,7 +83,6 @@
     <Compile Include="Contents\Cards\CouncilRoom.cs" />
     <Compile Include="Contents\Cards\Festival.cs" />
     <Compile Include="Contents\Cards\Gardens.cs" />
-    <Compile Include="Contents\Cards\IoCCardsModule.cs" />
     <Compile Include="Contents\Cards\Laboratory.cs" />
     <Compile Include="Contents\Cards\Market.cs" />
     <Compile Include="Contents\Cards\ReceiveCurse.cs" />
@@ -93,6 +92,11 @@
     <Compile Include="Contents\Cards\Woodcutter.cs" />
     <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Injection\IoC.cs" />
+    <Compile Include="Injection\IoCCardsModule.cs" />
+    <Compile Include="Injection\IoCLoggingModule.cs" />
+    <Compile Include="Injection\IoCMechanicsModule.cs" />
+    <Compile Include="Injection\IoCStandardGameModule.cs" />
     <Compile Include="Model\Cards\CardType.cs" />
     <Compile Include="Model\Cards\ConditionalCard.cs" />
     <Compile Include="Model\Cards\Card.cs" />
@@ -194,12 +198,7 @@
     <Compile Include="Test\Utilities\EmptyCard.cs" />
     <Compile Include="Test\Utilities\ReflectionClassFinder.cs" />
     <Compile Include="Test\Utilities\TestSupplyZone.cs" />
-    <Compile Include="Tools\IoCLoggingModule.cs" />
-    <Compile Include="Tools\IoCMechanicsModule.cs" />
-    <Compile Include="Tools\IoC.cs" />
-    <Compile Include="Tools\IoCStandardGameModule.cs" />
-    <Compile Include="Tools\IoCTestModule.cs" />
-    <Compile Include="Tools\Logging.cs" />
+    <Compile Include="Test\Utilities\IoCTestModule.cs" />
     <Compile Include="UI\formGame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +248,9 @@
       <Project>{4A58FBBA-B0C2-4CDD-991C-87163CC279D4}</Project>
       <Name>Tools</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IoC\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

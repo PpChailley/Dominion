@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
-using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
@@ -476,6 +476,48 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(deck.Get(ZoneChoice.Play), Is.EqualTo(deck.BattleField));
         }
 
-        
+
+        [Test]
+        public void ToStringTests()
+        {
+            // Not much to test here. Just do some coverage fill
+            IoC.Kernel.Bind<ICard>().To<BindableCard>();
+
+            var game = IoC.Kernel.Get<IGame>();
+            game.Ready();
+
+            game.ToString();
+
+            foreach (var player in game.Players)
+            {
+                player.ToString();
+                player.AvailableResources.ToString();
+                player.Deck.ToString();
+                player.Deck.Hand.ToString();
+                player.Deck.Library.ToString();
+                player.Deck.DiscardPile.ToString();
+                player.Deck.BattleField.ToString();
+                player.Deck.Cards.First().ToString();
+            }
+        }
+
+
+        [Test]
+        public void LibraryKnowsParentDeck()
+        {
+            var deck = IoC.Kernel.Get<IDeck>();
+            deck.Ready();
+
+            Assert.That(deck.Library.ParentDeck, Is.EqualTo(deck));
+        }
+
+        [Test]
+        public void LibraryKnowsParentDeckInGame()
+        {
+            var game = IoC.Kernel.Get<IGame>();
+            game.Ready();
+
+            Assert.That(game.CurrentPlayer.Deck.Library.ParentDeck, Is.EqualTo(game.CurrentPlayer.Deck));
+        }
     }
 }

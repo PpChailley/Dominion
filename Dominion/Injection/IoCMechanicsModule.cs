@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using gbd.Dominion.Model.Cards;
+﻿using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
 using Ninject.Modules;
 
-namespace gbd.Dominion.Tools
+namespace gbd.Dominion.Injection
 {
     public class IoCMechanicsModule : NinjectModule
     {

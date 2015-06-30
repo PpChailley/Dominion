@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
-using gbd.Dominion.Tools;
 using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics

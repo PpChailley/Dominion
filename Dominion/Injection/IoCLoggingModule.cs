@@ -2,7 +2,7 @@
 using Ninject.Modules;
 using NLog;
 
-namespace gbd.Dominion.Tools
+namespace gbd.Dominion.Injection
 {
     [Obsolete]
     class IoCLoggingModule : NinjectModule

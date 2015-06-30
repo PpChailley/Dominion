@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Tools;
 using gbd.Tools.Clr;
 using Ninject;
 

@@ -1,4 +1,4 @@
-﻿using gbd.Dominion.Tools;
+﻿using gbd.Dominion.Injection;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Test.Utilities

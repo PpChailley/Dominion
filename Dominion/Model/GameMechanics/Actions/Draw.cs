@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using gbd.Dominion.Tools;
+using gbd.Dominion.Injection;
 using Ninject;
 
 namespace gbd.Dominion.Model.GameMechanics.Actions

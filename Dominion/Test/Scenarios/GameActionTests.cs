@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Contents.Cards;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.Actions;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
-using gbd.Dominion.Tools;
 using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
