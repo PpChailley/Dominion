@@ -18,11 +18,7 @@ namespace gbd.Dominion.Test.Scenarios
     [TestFixture]
     public class GameScenarioTest: BaseTest
     {
-        [TestFixtureSetUp]
-        public new void TestFixtureSetUp()
-        {
-            base.TestFixtureSetUp();
-        }
+       
 
         [SetUp]
         public new void SetUp()
