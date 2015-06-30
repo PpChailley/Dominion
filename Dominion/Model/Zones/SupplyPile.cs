@@ -19,6 +19,7 @@ namespace gbd.Dominion.Model.Zones
         public SupplyPile(IList<ICard> cards) : base(cards)
         {
             CardType = cards.Select(c => c.GetType()).Distinct().SingleOrDefault();
+            cards.ToList().ForEach(c => c.Zone = this);
         }
 
         public new IList<ICard> Cards

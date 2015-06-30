@@ -130,6 +130,10 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
+            IoC.Kernel.BindCard<Estate, ISupplyZone>(100);
+            IoC.Kernel.BindCard<Duchy, ISupplyZone>(100);
+            IoC.Kernel.BindCard<Province, ISupplyZone>(100);
+
             IoC.Kernel.BindCard<Estate, ILibrary>(estates);
             IoC.Kernel.BindCard<Province, ILibrary>(provinces);
             IoC.Kernel.BindCard<Copper, ILibrary>(Math.Max(10 - estates - provinces, 3));
