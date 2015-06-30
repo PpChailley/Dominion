@@ -8,13 +8,6 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public static readonly Resources Zero = new Resources(0);
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (Money*397) ^ Potions;
-            }
-        }
 
         public int Money;
         public int Potions;
@@ -71,5 +64,14 @@ namespace gbd.Dominion.Model.GameMechanics
         {
             return Money == other.Money && Potions == other.Potions;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Money * 397) ^ Potions;
+            }
+        }
+
     }
 }
