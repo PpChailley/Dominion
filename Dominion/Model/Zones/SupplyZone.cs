@@ -13,26 +13,20 @@ namespace gbd.Dominion.Model.Zones
 
         // TODO: NInject should be able to deal with a ctor asking for ICollection<ICard>
         [Inject]
-        protected SupplyZone(IList<ISupplyPile> inputCards)
+        protected SupplyZone(IEnumerable<ICard> inputCards)
         {
             Piles = ReorderCards(inputCards);
         }
 
-        private IList<ISupplyPile> ReorderCards(IList<ISupplyPile> input)
+        private IList<ISupplyPile> ReorderCards(IEnumerable<ICard> input)
         {
-            var types = new List<Type>(20);
+            var types = input.Select(c => c.GetType()).Distinct();
             var orderedPiles = new List<ISupplyPile>(20);
-
-            foreach (var supplyPile in input)
-            {
-                types.AddRange(supplyPile.Cards.Select(c => c.GetType()));
-            }
 
             foreach (var t in types)
             {
                 var cardsOfType = new List<ICard>(20);
-                input.ToList().ForEach(p => 
-                    cardsOfType.AddRange(p.Cards.Where(c => c.GetType() == t)));
+                cardsOfType.AddRange(input.Where(c => c.GetType() == t));
                 orderedPiles.Add(new SupplyPile(cardsOfType));
             }
 
