@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Test.Utilities;
 using gbd.Dominion.Tools;
@@ -128,11 +129,11 @@ namespace gbd.Dominion.Test.Scenarios
             {
                 Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Selectable));
             }
-            else if (typeof(ConditionalCard).IsAssignableFrom(type))
+            else if (typeof (ConditionalCard).IsAssignableFrom(type))
             {
                 Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Conditional));
             }
-            else if (typeof(OptionalCard).IsAssignableFrom(type))
+            else if (typeof (OptionalCard).IsAssignableFrom(type))
             {
                 Assert.That(card.PresentInSet, Is.EqualTo(GameSet.Optional));
             }
@@ -140,8 +141,29 @@ namespace gbd.Dominion.Test.Scenarios
             {
                 Assert.That(card.PresentInSet, Is.EqualTo(GameSet.TestCards));
             }
-            
+        }
 
+        [Test, TestCaseSource(typeof (ReflectionClassFinder), "GetAllImplementedCards")]
+        public void CardKnowsExtension(Type type)
+        {
+            //if (type.Namespace.StartsWith("gbd.Dominion.Test"))
+            //    return;
+
+            var card = (ICard) IoC.Kernel.Get(type);
+
+            Assert.That(card.Extension, Is.Not.Null);            
+        }
+
+
+        [Test]
+        public void ReflectionClassFinderFindsAllCards()
+        {
+            var cards = ReflectionClassFinder.GetAllImplementedCards();
+
+            Assert.That(cards, Contains.Item(typeof(Copper)));
+            Assert.That(cards, Contains.Item(typeof(Estate)));
+            Assert.That(cards, Contains.Item(typeof(Village)));
+            Assert.That(cards, Contains.Item(typeof(Gardens)));
         }
 
 
