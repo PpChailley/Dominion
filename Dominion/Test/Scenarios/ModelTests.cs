@@ -601,6 +601,14 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(2, 0, 0, true, 5, 0)]
         [TestCase(5, 7, 0, true, 2, 3)]
         [TestCase(5, 7, 0, false, 5, 0)]
+        [TestCase(3, 1, 6, false, 5, 0)]
+        [TestCase(3, 1, 6, true, 5, 0)]
+        [TestCase(1, 2, 1, true, 1, 4)]
+        [TestCase(0, 5, 0, false, 0, 5)]
+        [TestCase(0, 0, 5, false, 0, 5)]
+        [TestCase(0, 0, 5, true, 0, 5)]
+        [TestCase(0, 0, 5, false, 0, 5)]
+
         public void EndOfTurnCleanup(int draw, int discard, int play, bool shuffle, int expectInLib, int expectInDiscard)
         {
             IoC.Kernel.Unbind<ICard>();
@@ -609,6 +617,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
+            player.AvailableActions = 100;
 
             player.Draw(draw);
             player.ChooseAndDiscard(discard);
