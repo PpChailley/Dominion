@@ -36,6 +36,7 @@ namespace gbd.Dominion.Tools
             Kernel.BindMultipleTimesTo<ICard, Province>(NB_PROVINCE).WhenAnyAncestorOfType<Province, ISupplyZone>();
             Kernel.BindMultipleTimesTo<ICard, Curse>(NB_CURSE).WhenAnyAncestorOfType<Curse, ISupplyZone>();
 
+            Kernel.Bind<ICardShuffler>().To<CardShufflerRandom>();
 
         }
     }

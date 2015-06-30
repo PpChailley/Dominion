@@ -33,11 +33,6 @@ namespace gbd.Dominion.Model.Cards
         }
 
 
-        //protected Card()
-        //{
-        //    // TODO: triple check that this constructor doesn't break anything
-        //}
-
 
         public void Ready(IZone zone)
         {
@@ -53,10 +48,12 @@ namespace gbd.Dominion.Model.Cards
 
         public override string ToString()
         {
-            return String.Format("{0} # {1} with {{{2}}}",
+            return String.Format("{0} # {1} (in {3} with {{{2}}}",
                 GetType().Name,
                 GetHashCode(),
-                Mechanics);
+                Mechanics,
+                Zone
+                );
         }
     }
 }

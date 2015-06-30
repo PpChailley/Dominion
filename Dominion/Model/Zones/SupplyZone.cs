@@ -11,7 +11,6 @@ namespace gbd.Dominion.Model.Zones
     {
         public IList<ISupplyPile> Piles { get; protected set; }
 
-        // TODO: NInject should be able to deal with a ctor asking for ICollection<ICard>
         [Inject]
         public SupplyZone(IEnumerable<ICard> inputCards)
         {

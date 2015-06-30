@@ -26,18 +26,8 @@ namespace gbd.Dominion.Tools
 
             this.Kernel.BindMultipleTimesTo<ISupplyPile, SupplyPile>(10);
             
-            
-            //this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10);
 
-
-
-            // This will be bound to CurrentPlayer
-            //Bind<IPlayer>().To<Player>();
-
-            //Kernel.Bind<ICardType>().ToConstructor(x => new VictoryType(0)).WhenAnyAncestorOfType<VictoryType, EmptyCard>();
-            //Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, EmptyCard>();
-
-            
+            Kernel.Bind<ICardShuffler>().To<CardShufflerRandom>();
 
         }
 

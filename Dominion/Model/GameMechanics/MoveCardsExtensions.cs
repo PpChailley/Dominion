@@ -45,8 +45,6 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public static void MoveCardsTo(this IZone from, IZone to, int amount, Position positionFrom = Position.Top, Position positionTo = Position.Top)
         {
-            // TODO: Card.Tostring should show current zone
-            // TODO: cleanup Library.PutCard
             from.Get(amount, positionFrom).MoveTo(to, positionTo);
         }
 

@@ -76,6 +76,7 @@ namespace gbd.Dominion.Model.Zones
         }
 
 
+        // TODO: test this
         public void EndOfTurnCleanup()
         {
             foreach (var card in BattleField.Cards)
@@ -86,7 +87,6 @@ namespace gbd.Dominion.Model.Zones
                     continue;
                 }
 
-                //TODO: remove that mess
                 DiscardPile.Cards.Add(card);
                 BattleField.Cards.Remove(card);
             }

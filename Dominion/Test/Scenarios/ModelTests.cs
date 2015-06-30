@@ -42,8 +42,6 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(game.Players, Has.Count.EqualTo(nbPlayers));
             Assert.That(game.GetPlayers(PlayerChoice.Opponents), Has.Count.EqualTo(Math.Max(nbPlayers - 1, 0)));
 
-            // TODO: create a binding helper specialized for ICard (or move the one in Modules to extensions classes)
-
         }
 
         [Test]

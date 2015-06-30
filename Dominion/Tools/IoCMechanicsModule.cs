@@ -27,8 +27,6 @@ namespace gbd.Dominion.Tools
             //Bind<ICollection<IPlayer>>().ToConstructor(x => new List<IPlayer>(x.Inject<IList<IPlayer>>()));
 
 
-            // TODO: move this to a specific Module
-            Kernel.Bind<ICardShuffler>().To<CardShufflerRandom>();
 
         }
 
