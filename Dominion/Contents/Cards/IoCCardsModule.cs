@@ -18,16 +18,20 @@ namespace gbd.Dominion.Contents.Cards
 
         private void BindAlwaysAvailableCards()
         {
-            SetBaseData<Copper>(0, 1, 0);
-            SetBaseData<Silver>(3, 2, 0);
-            SetBaseData<Gold>(6, 3, 0);
+            //SetBaseData<Copper>(0, 1, 0);
+            //SetBaseData<Silver>(3, 2, 0);
+            //SetBaseData<Gold>(6, 3, 0);
             //SetBaseData<Estate>(2, 0, 1);
             //SetBaseData<Duchy>(5, 0, 3);
             //SetBaseData<Province>(8, 0, 6);
 
 
-            Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1)).WhenAnyAncestorOfType<CurseType, Curse>();
-            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, Curse>();
+            Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1))
+                .WhenAnyAncestorOfType<CurseType, Curse>()
+                ;
+
+            //Kernel.Bind<Resources>().ToConstructor(x => new Resources(0))
+            //    .WhenAnyAncestorOfType<Resources, Curse>();
         }
 
         private void BindCardsFromBaseGame()
@@ -77,17 +81,20 @@ namespace gbd.Dominion.Contents.Cards
 
         private MoreBindingSyntax<T> SetBaseData<T>(int coinsCost, int coinValue, int victory) where T : ICard
         {
-            Kernel.Bind<Resources>().ToConstructor(x => new Resources(coinsCost)).WhenAnyAncestorOfType<Resources, T>();
+            Kernel.Bind<Resources>()
+                .ToConstructor(x => new Resources(coinsCost))
+                .WhenAnyAncestorOfType<Resources, T>();
 
             if (coinValue > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new TreasureType(coinValue))
-                    .WhenAnyAncestorOfType<TreasureType, T>();
+                    .WhenAnyAncestorOfType<TreasureType, ICardMechanics>();
+                    
 
             if (victory > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new VictoryType(victory))
-                    .WhenAnyAncestorOfType<VictoryType, T>();
+                    .WhenAnyAncestorOfType<VictoryType, ICardMechanics>();
 
             return new MoreBindingSyntax<T>(this);
             

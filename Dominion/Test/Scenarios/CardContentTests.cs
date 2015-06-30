@@ -41,5 +41,17 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(card.Mechanics.TreasureValue, Is.EqualTo(new Resources(value)));
 
         }
+
+
+        [Test]
+        public void Curse()
+        {
+            var card = IoC.Kernel.Get<Curse>();
+
+            Assert.That(card.Mechanics.Cost, Is.EqualTo(new Resources(0)));
+            Assert.That(card.Mechanics.VictoryPoints, Is.EqualTo(-1));
+            Assert.That(card.Mechanics.TreasureValue, Is.EqualTo(new Resources(0)));
+
+        }
     }
 }
