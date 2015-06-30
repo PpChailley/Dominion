@@ -96,13 +96,8 @@ namespace gbd.Dominion.Model.Zones
 
         public ILibrary ShuffleDiscardToLibrary()
         {
-            foreach (var card in DiscardPile.Cards)
-            {
-                Library.Cards.Add(card);
-            }
-
+            DiscardPile.Cards.MoveTo(Library);
             IoC.Kernel.Get<ICardShuffler>().Shuffle(Library);
-            DiscardPile.Cards.Clear();
 
             return Library;
         }

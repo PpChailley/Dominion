@@ -165,15 +165,15 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, EmptyCard>()
                 .WhenAnyAncestorOfType<EmptyCard, ILibrary>();
-            //IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, EmptyCard>()
-            //    .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
+            IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, EmptyCard>()
+                .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
 
 
             var deck = IoC.Kernel.Get<IDeck>();
             deck.Ready();
 
             Assert.That(deck.CardCountByZone, Is.EqualTo(
-                new CardRepartition(librarySize,0,discardSize,0)));
+                new CardRepartition(librarySize + discardSize ,0 , 0, 0)));
 
             deck.Library.MoveCardsTo(deck.Hand, pick);
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
@@ -27,38 +26,6 @@ namespace gbd.Dominion.Model.Zones
         }
 
 
-        public IEnumerable<ICard> GetFromTop(int amount = 1)
-        {
-            var toreturn = new List<ICard>();
-
-            for (var i = 0; i < amount; i++)
-            {
-                
-                toreturn.Add(GetOneFromTop());
-            }
-
-            return toreturn;
-        }
-
-        private ICard GetOneFromTop()
-        {
-            if (Cards.Any() == false)
-            {
-                if (ParentDeck.Cards.Any() == false)
-                {
-                    throw new DeckEmptyException();
-                }
-                else
-                {
-                    ParentDeck.ShuffleDiscardToLibrary();
-                }
-            }
-
-            var card = Cards.First();
-            Cards.Remove(card);
-            return card;
-        }
-
 
         public new IList<ICard> Cards
         {
@@ -82,10 +49,11 @@ namespace gbd.Dominion.Model.Zones
                         .Format(amount, GetType().Name, Cards.Count, TotalCardsAvailable));
                 }
 
-                var beforeShuffle = Cards;
+                var beforeShuffle = Cards.ToList();
                 Cards.Clear();
                 ParentDeck.ShuffleDiscardToLibrary();
-                beforeShuffle.Reverse().ToList().ForEach(c => this.PutCard(c, position));
+                beforeShuffle.Reverse();
+                beforeShuffle.MoveTo(this, position);
 
             }
 
