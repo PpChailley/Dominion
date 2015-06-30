@@ -7,7 +7,7 @@ using Ninject;
 namespace gbd.Dominion.Contents.Cards
 {
     // TODO: test this
-    internal class ReceiveCurse : GameAction
+    internal class ReceiveCurse : GameAction, IGameAction
     {
         private readonly PlayerChoice _who;
         private readonly int _amount;

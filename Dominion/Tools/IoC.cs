@@ -20,9 +20,7 @@ namespace gbd.Dominion.Tools
 
         public static IKernel InitKernel()
         {
-            _kernel = new StandardKernel(
-                                            // new IoCLoggingModule(),
-                                            new IoCMechanicsModule(),
+            _kernel = new StandardKernel(   new IoCMechanicsModule(),
                                             new IoCTestModule(),
                                             new IoCCardsModule()
                 );

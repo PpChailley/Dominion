@@ -39,7 +39,6 @@ namespace gbd.Dominion.Model.Zones
                 toreturn.AddRange(DiscardPile.Cards);
                 toreturn.AddRange(BattleField.Cards);
 
-                //TODO: test this line
                 return toreturn.AsReadOnly();
             }
 

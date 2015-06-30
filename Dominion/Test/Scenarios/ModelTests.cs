@@ -345,6 +345,48 @@ namespace gbd.Dominion.Test.Scenarios
             deck.Library.Get(11);
 
         }
+
+        [ExpectedException(typeof (NotSupportedException))]
+        [Test]
+        public void CardsInDeckAreReadOnly()
+        {
+            var deck = IoC.Kernel.Get<IDeck>();
+
+            deck.Cards.Add(new EmptyCard());
+        }
+
+
+
+        [TestCase(4, PlayerChoice.Left)]
+        [TestCase(4, PlayerChoice.Right)]
+        [TestCase(4, PlayerChoice.Current)]
+        public void PlayersSitOnARoundTable(int numberOfPlayers, PlayerChoice toBeLocated)
+        {
+            IoC.Kernel.Unbind<IPlayer>();
+            IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(numberOfPlayers);
+            
+            var game = IoC.Kernel.Get<IGame>();
+            var locatedPlayer = game.GetPlayers(toBeLocated);
+            int expectedIndex;
+
+            switch (toBeLocated)
+            {
+                case PlayerChoice.Left:
+                    expectedIndex = numberOfPlayers - 1;
+                    break;
+                case PlayerChoice.Right:
+                    expectedIndex = 1;
+                    break;
+                case PlayerChoice.Current:
+                    expectedIndex = 0;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+            Assert.That(locatedPlayer, Is.EqualTo(game.Players[expectedIndex]));
+
+        }
         
     }
 }
