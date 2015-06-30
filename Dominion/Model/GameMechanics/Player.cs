@@ -161,7 +161,7 @@ namespace gbd.Dominion.Model.GameMechanics
             }
         }
 
-        public void ChooseAndReceive(Resources maxCost)
+        public void ChooseAndReceive(Resources minCost, Resources maxCost)
         {
             throw new NotImplementedException();
         }

@@ -16,6 +16,7 @@ namespace gbd.Dominion.Injection
             Bind<ILibrary>().To<Library>();
             Bind<IBattleField>().To<BattleField>();
             Bind<IPlayer>().To<Player>();
+            Bind<ITrashZone>().To<TrashZone>();
 
             Bind<IGame>().To<Game>().InSingletonScope();
 

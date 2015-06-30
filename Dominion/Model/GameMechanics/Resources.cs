@@ -6,6 +6,7 @@ namespace gbd.Dominion.Model.GameMechanics
     public class Resources
     {
 
+        public static readonly Resources Zero = new Resources(0);
 
         public override int GetHashCode()
         {
@@ -29,6 +30,12 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public Resources(int money): this(money, 0){ }
 
+
+        public Resources Plus(Resources operand)
+        {
+            return new Resources(   this.Money + operand.Money,
+                                    this.Potions + operand.Potions  );      
+        }
 
 
         public void Reset()

@@ -10,10 +10,12 @@ namespace gbd.Dominion.Model.GameMechanics
     public class Game : IGame
     {
         [Inject]
-        public Game(IList<IPlayer> players, ISupplyZone supplyZone)
+        public Game(IList<IPlayer> players, ISupplyZone supplyZone, ITrashZone trash)
         {
             Players = players;
             SupplyZone = supplyZone;
+            Trash = trash;
+
             CurrentPlayer = players.FirstOrDefault();
         }
 
@@ -24,7 +26,8 @@ namespace gbd.Dominion.Model.GameMechanics
 
         
         public IPlayer CurrentPlayer { get; private set; }
- 
+
+        public ITrashZone Trash { get; set; }
 
 
         public IList<IPlayer> GetPlayers(PlayerChoice who)

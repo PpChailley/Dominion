@@ -11,6 +11,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
 
         IPlayer CurrentPlayer { get; }
+        ITrashZone Trash { get; set; }
 
 
         void Init();

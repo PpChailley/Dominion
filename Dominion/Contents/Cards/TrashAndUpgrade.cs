@@ -1,4 +1,3 @@
-using System;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
@@ -12,14 +11,13 @@ namespace gbd.Dominion.Contents.Cards
     {
         private readonly ZoneChoice _from;
         private readonly int _numberOfCards;
-        private readonly int _upgradeValue;
+        private readonly Resources _upgradeValue;
 
         public TrashAndUpgrade(ZoneChoice from, int numberOfCards, int upgradeValue)
         {
             _from = @from;
             _numberOfCards = numberOfCards;
-            _upgradeValue = upgradeValue;
-            throw new NotImplementedException();
+            _upgradeValue = new Resources(upgradeValue);
         }
 
         public override void Do()
@@ -29,9 +27,8 @@ namespace gbd.Dominion.Contents.Cards
 
             foreach (var card in trashed)
             {
-                player.ChooseAndReceive(
-                    new Resources(card.Mechanics.Cost.Money + _upgradeValue,
-                        card.Mechanics.Cost.Potions  ));
+                player.ChooseAndReceive(    Resources.Zero, 
+                                            card.Mechanics.Cost.Plus(_upgradeValue));
             }
 
 

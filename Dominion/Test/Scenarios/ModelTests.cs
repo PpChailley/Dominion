@@ -638,5 +638,24 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
+        [TestCase(0,0,0,0)]
+        [TestCase(0,0,1,0)]
+        [TestCase(0,0,0,1)]
+        [TestCase(1,0,0,0)]
+        [TestCase(0,1,0,0)]
+        [TestCase(1,2,2,7)]
+        [TestCase(14,48,47,18)]
+        public void ResourcesPlus(int m1, int p1, int m2, int p2)
+        {
+            Resources a = new Resources(m1, p1);
+            Resources b = new Resources(m2, p2);
+
+            var result1 = a.Plus(b);
+            var result2 = b.Plus(a);
+
+            Assert.That(result1, Is.EqualTo(result2));
+            Assert.That(result1, Is.EqualTo(new Resources(m1+m2, p1+p2)));
+        }
+
     }
 }

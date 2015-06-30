@@ -225,6 +225,24 @@ namespace gbd.Dominion.Test.Scenarios
 
         }
 
+        [Test]
+        public void TrashThis()
+        {
+            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new TrashThis());
+
+            var game = IoC.Kernel.Get<IGame>();
+            game.Ready();
+            var player = game.CurrentPlayer;
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
+
+            var card = player.Deck.Hand.Cards.First();
+            player.Play(card);
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 4, 0, 0)));
+            Assert.That(game.Trash.Cards.Single(), Is.EqualTo(card));
+        }
 
     }
 }
