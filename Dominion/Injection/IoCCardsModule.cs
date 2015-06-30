@@ -52,7 +52,7 @@ namespace gbd.Dominion.Injection
 
 
             // TODO: comment back in cards and implement them
-            //SetBaseData<Cellar>(2, 0, 0);
+            SetBaseData<Cellar>(2, 0, 0).AddActions(new DiscardAndDraw(0));
             SetBaseData<Chapel>(2, 0, 0).AddActions(new ChooseAndTrash(4,4));
             //SetBaseData<Moat>(2, 0, 0);
 

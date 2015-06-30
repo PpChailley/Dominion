@@ -10,8 +10,14 @@ namespace gbd.Dominion.Model.GameMechanics.AI
         private Random _rnd = new Random();
 
 
-        public override IEnumerable<ICard> ChooseAndDiscard(int amount)
+        public IEnumerable<ICard> ChooseAndDiscard(int amount)
         {
+            return Player.Deck.Hand.Cards.Random(amount);
+        }
+
+        public IEnumerable<ICard> ChooseAndDiscard(int minAmount, int maxAmount)
+        {
+            int amount = _rnd.Next(minAmount, maxAmount);
             return Player.Deck.Hand.Cards.Random(amount);
         }
 

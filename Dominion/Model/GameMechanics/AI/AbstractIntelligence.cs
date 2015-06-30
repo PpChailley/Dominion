@@ -3,7 +3,7 @@ using gbd.Dominion.Model.Cards;
 
 namespace gbd.Dominion.Model.GameMechanics.AI
 {
-    public abstract class AbstractIntelligence: IIntelligence
+    public abstract class AbstractIntelligence
     {
 
         public Player Player { get; protected set; }
@@ -15,8 +15,6 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             Player = player;
         }
         
-        
-        public abstract IEnumerable<ICard> ChooseAndDiscard(int amount);
 
     }
 }

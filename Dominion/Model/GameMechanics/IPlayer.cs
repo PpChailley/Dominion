@@ -28,7 +28,8 @@ namespace gbd.Dominion.Model.GameMechanics
         void StartTurn();
         void EndTurn();
 
-        void ChooseAndDiscard(int amount);
+        int ChooseAndDiscard(int amount);
+        int ChooseAndDiscard(int minAmount, int maxAmount);
         void ChooseAndReceive(Resources minCost, Resources maxCost);
         ICard[] ChooseAndTrash<T>(ZoneChoice @from, int minAmount, int? maxAmount = null)
             where T : ICard;

@@ -97,21 +97,30 @@ namespace gbd.Dominion.Model.GameMechanics
         }
 
 
+
         public void Draw(int amount = 1)
         {
             Deck.Library.MoveCardsTo(Deck.Hand, amount);
         }
 
-        public void ChooseAndDiscard(int amount)
+        public int ChooseAndDiscard(int minAmount, int maxAmount)
         {
-            if (amount > Deck.Hand.TotalCardsAvailable)
+            if (minAmount > Deck.Hand.TotalCardsAvailable)
             {
-                throw new NotEnoughCardsException(Deck.Hand, Deck.Hand.TotalCardsAvailable, amount);
+                throw new NotEnoughCardsException(Deck.Hand, Deck.Hand.TotalCardsAvailable, minAmount);
             }
-            
-            var toDiscard = this._intelligence.ChooseAndDiscard(amount);
+
+            var toDiscard = this._intelligence.ChooseAndDiscard(minAmount, maxAmount).ToList();
             toDiscard.MoveTo(Deck.DiscardPile);
+
+            return toDiscard.Count;
         }
+
+        public int ChooseAndDiscard(int amount = 1)
+        {
+            return ChooseAndDiscard(amount, amount);
+        }
+
 
 
         public void Receive(IList<ICard> cards, ZoneChoice to, Position position = Position.Top)

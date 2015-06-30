@@ -92,6 +92,8 @@
     <Compile Include="Contents\Cards\Woodcutter.cs" />
     <Compile Include="Contents\Cards\Village.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Injection\Cellar.cs" />
+    <Compile Include="Injection\DiscardAndDraw.cs" />
     <Compile Include="Injection\Feast.cs" />
     <Compile Include="Injection\GainCard.cs" />
     <Compile Include="Injection\IoC.cs" />
