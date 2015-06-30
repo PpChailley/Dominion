@@ -597,5 +597,37 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
+        [TestCase(0, 0, 0, true, 0, 5)]
+        [TestCase(2, 0, 0, true, 5, 0)]
+        [TestCase(5, 7, 0, true, 2, 3)]
+        [TestCase(5, 7, 0, false, 5, 0)]
+        public void EndOfTurnCleanup(int draw, int discard, int play, bool shuffle, int expectInLib, int expectInDiscard)
+        {
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
+
+            var player = IoC.Kernel.Get<IPlayer>();
+            player.Ready();
+
+            player.Draw(draw);
+            player.ChooseAndDiscard(discard);
+            player.Deck.Hand.Cards.Take(play).ToList().ForEach(c => player.Play(c));
+
+            if (shuffle)
+                player.Deck.ShuffleDiscardToLibrary();
+
+            player.Deck.EndOfTurnCleanup();
+
+            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                library: expectInLib , 
+                                hand: 5, 
+                                discard: expectInDiscard, 
+                                battlefield: 0
+                        )));
+
+
+        }
+
     }
 }

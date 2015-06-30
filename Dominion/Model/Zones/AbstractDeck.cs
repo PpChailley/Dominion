@@ -75,22 +75,16 @@ namespace gbd.Dominion.Model.Zones
         }
 
 
-        // TODO: test this
         public void EndOfTurnCleanup()
         {
-            foreach (var card in BattleField.Cards)
-            {
-                if (card.Attributes.Contains(CardAttribute.StayInPlayOnce))
-                {
-                    card.Attributes.Remove(CardAttribute.StayInPlayOnce);
-                    continue;
-                }
+            // TODO: implement StayInPlayOnce
 
-                DiscardPile.Cards.Add(card);
-                BattleField.Cards.Remove(card);
-            }
+            BattleField.Cards.ToList().ForEach(c => c.Attributes.Clear());
 
-            BattleField.Cards.Clear();
+            BattleField.Cards.MoveTo(DiscardPile);
+            Hand.Cards.MoveTo(DiscardPile);
+
+            Library.MoveCardsTo(Hand, 5);
         }
 
         public ILibrary ShuffleDiscardToLibrary()
