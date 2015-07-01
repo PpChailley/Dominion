@@ -23,11 +23,11 @@ namespace gbd.Dominion.Contents.Cards
         public override void Do()
         {
             var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            ICard[] trashed = player.ChooseAndTrash<ICard>(_from, _numberOfCards);
+            var trashed = player.I.Trash<ICard>(_from, _numberOfCards);
 
             foreach (var card in trashed)
             {
-                player.ChooseAndReceive(    Resources.Zero, 
+                player.I.Receive(    Resources.Zero, 
                                             card.Mechanics.Cost.Plus(_upgradeValue));
             }
 

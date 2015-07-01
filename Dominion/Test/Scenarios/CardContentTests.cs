@@ -81,7 +81,7 @@ namespace gbd.Dominion.Test.Scenarios
             var deck = IoC.Kernel.Get<IDeck>();
             deck.Ready();
 
-            Assert.That(deck.CurrentScore, Is.EqualTo(expectedScore));
+            Assert.That(deck.Score, Is.EqualTo(expectedScore));
         }
 
 

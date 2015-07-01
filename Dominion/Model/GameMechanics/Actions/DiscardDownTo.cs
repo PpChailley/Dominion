@@ -18,7 +18,7 @@ namespace gbd.Dominion.Model.GameMechanics.Actions
         {
             foreach (var player in IoC.Kernel.Get<IGame>().GetPlayers(_who))
             {
-                player.ChooseAndDiscard(player.Deck.Hand.TotalCardsAvailable - _amount);
+                player.I.Discard(player.Deck.Hand.TotalCardsAvailable - _amount);
             }
         }
     }

@@ -7,7 +7,7 @@
         ILibrary Library { get;  }
         IBattleField BattleField { get; }
 
-        int CurrentScore { get; }
+        int Score { get; }
         CardRepartition CardCountByZone { get; }
 
         void EndOfTurnCleanup();

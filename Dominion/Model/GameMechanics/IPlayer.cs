@@ -11,28 +11,25 @@ namespace gbd.Dominion.Model.GameMechanics
 
         IDeck Deck { get; set; }
 
+        IIntelligence I { get; }
 
-        int CurrentScore { get; }
+
         int AvailableActions { get; set; }
         int AvailableBuys { get; set; }
         Resources AvailableResources { get; set; }
 
 
-        void Receive(ICard card, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
-        void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
 
         void Ready();
-        void Draw(int amount);
-        void Play(ICard card);
-
         void StartTurn();
         void EndTurn();
 
-        int ChooseAndDiscard(int amount);
-        int ChooseAndDiscard(int minAmount, int maxAmount);
-        void ChooseAndReceive(Resources minCost, Resources maxCost);
-        ICard[] ChooseAndTrash<T>(ZoneChoice @from, int minAmount, int? maxAmount = null)
-            where T : ICard;
+
+        void Draw(int amount);
+        void Play(ICard card);
+        void Receive(ICard card, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
+        void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
+
 
 
     }

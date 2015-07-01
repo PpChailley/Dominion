@@ -1,14 +1,18 @@
 using System.Collections.Generic;
 using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
     public interface IIntelligence
     {
-        IEnumerable<ICard> ChooseAndDiscard(int amount);
-        IEnumerable<ICard> ChooseAndDiscard(int minAmount, int maxAmount);
+        IEnumerable<ICard> Discard(int minAmount, int? maxAmount = null);
 
-        void Init(Player player);
+        IEnumerable<ICard> Receive(Resources minCost, Resources maxCost);
+
+        IEnumerable<ICard> Trash<T>(ZoneChoice from, int minAmount, int? maxAmount = null);
+
+        void Ready(Player player);
 
         Player Player { get; }
     }

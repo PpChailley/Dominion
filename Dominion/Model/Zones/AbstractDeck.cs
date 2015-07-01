@@ -60,7 +60,7 @@ namespace gbd.Dominion.Model.Zones
         }
 
 
-        public int CurrentScore
+        public int Score
         {
             get { return Cards.Sum(card => card.Mechanics.VictoryPoints); }
         }

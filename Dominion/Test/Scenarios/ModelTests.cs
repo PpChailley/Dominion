@@ -70,7 +70,7 @@ namespace gbd.Dominion.Test.Scenarios
             player.Ready();
 
             player.Draw(draw);
-            player.ChooseAndDiscard(discard);
+            player.I.Discard(discard);
 
             if (shuffle)
                 player.Deck.ShuffleDiscardToLibrary();
@@ -144,17 +144,17 @@ namespace gbd.Dominion.Test.Scenarios
 
             int expectedScore = 1 * estates + 6 * provinces;
 
-            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore));
+            Assert.That(player.Deck.Score, Is.EqualTo(expectedScore));
 
             player.ReceiveFrom(supply.PileOf<Estate>(), 1);
-            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 1 ));
+            Assert.That(player.Deck.Score, Is.EqualTo(expectedScore + 1 ));
 
 
             player.ReceiveFrom(supply.PileOf<Duchy>(), 1);
-            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 4));
+            Assert.That(player.Deck.Score, Is.EqualTo(expectedScore + 4));
 
             player.ReceiveFrom(supply.PileOf<Province>(), 1);
-            Assert.That(player.CurrentScore, Is.EqualTo(expectedScore + 10));
+            Assert.That(player.Deck.Score, Is.EqualTo(expectedScore + 10));
 
         }
 
@@ -268,7 +268,7 @@ namespace gbd.Dominion.Test.Scenarios
             player.Draw(5);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 7, 3, 0)));
 
-            player.ChooseAndDiscard(3);
+            player.I.Discard(3);
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(0, 4, 6, 0)));
 
             player.Draw(3);
@@ -620,7 +620,7 @@ namespace gbd.Dominion.Test.Scenarios
             player.AvailableActions = 100;
 
             player.Draw(draw);
-            player.ChooseAndDiscard(discard);
+            player.I.Discard(discard);
             player.Deck.Hand.Cards.Take(play).ToList().ForEach(c => player.Play(c));
 
             if (shuffle)

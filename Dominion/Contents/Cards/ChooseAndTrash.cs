@@ -21,7 +21,7 @@ namespace gbd.Dominion.Contents.Cards
 
         public override void Do()
         {
-            IoC.Kernel.Get<IGame>().CurrentPlayer.ChooseAndTrash<ICard>(ZoneChoice.Hand, _minAmount, _maxAmount);
+            IoC.Kernel.Get<IGame>().CurrentPlayer.I.Trash<ICard>(ZoneChoice.Hand, _minAmount, _maxAmount);
 
         }
     }

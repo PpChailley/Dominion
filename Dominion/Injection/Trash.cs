@@ -24,7 +24,7 @@ namespace gbd.Dominion.Injection
         public override void Do()
         {
             var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            player.ChooseAndTrash<T>(_from, _minAmount, _maxAmount);
+            player.I.Trash<T>(_from, _minAmount, _maxAmount);
         }
     }
 }

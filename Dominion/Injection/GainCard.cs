@@ -24,7 +24,7 @@ namespace gbd.Dominion.Injection
         {
             IoC.Kernel.Get<IGame>()
                 .CurrentPlayer
-                .ChooseAndReceive(_minCost, _maxCost);
+                .I.Receive(_minCost, _maxCost);
         }
     }
 }

@@ -13,36 +13,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public const int STARTING_HAND_SIZE = 5;
 
-
-        #region Static Accessors
-
-        public static ICollection<IPlayer> Get(ICollection<PlayerChoice> designatedPlayers)
-        {
-            return designatedPlayers.Select(player => Get((PlayerChoice) player)).ToList();
-        }
-
-        private static IPlayer Get(PlayerChoice designatedPlayer)
-        {
-            switch (designatedPlayer)
-            {
-                case PlayerChoice.Current:
-                    return IoC.Kernel.Get<IGame>().CurrentPlayer;
-
-                case PlayerChoice.Left:
-                case PlayerChoice.Right:
-                    throw new NotImplementedException();
-
-                default :
-                    throw new NotImplementedException();
-
-
-            }
-        }
-
-        #endregion
-
-
-        private readonly IIntelligence _intelligence;
+        public IIntelligence I { get; private set; }
 
         public int AvailableActions { get; set; }
 
@@ -53,7 +24,6 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public PlayerStatus Status { get; set; }
         public IDeck Deck { get; set; }
-        public String Name;
 
 
         [Inject]
@@ -64,15 +34,8 @@ namespace gbd.Dominion.Model.GameMechanics
             AvailableBuys = 0;
 
             Deck = deck;
-            _intelligence = intel;
+            I = intel;
             Status = status;
-        }
-
-
-
-        public int CurrentScore
-        {
-            get { return Deck.CurrentScore; }
         }
 
 
@@ -80,7 +43,7 @@ namespace gbd.Dominion.Model.GameMechanics
         public void Ready()
         {
             Deck.Ready();
-            _intelligence.Init(this);
+            I.Ready(this);
             Draw(STARTING_HAND_SIZE);
         }
 
@@ -88,12 +51,16 @@ namespace gbd.Dominion.Model.GameMechanics
         {
             AvailableActions = 1;
             AvailableBuys = 1;
-            AvailableResources = new Resources(0);
+            AvailableResources = Resources.Zero;
         }
 
         public void EndTurn()
         {
-            throw new NotImplementedException();
+            Deck.EndOfTurnCleanup();
+
+            AvailableActions = 0;
+            AvailableBuys = 0;
+            AvailableResources = Resources.Zero;
         }
 
 
@@ -103,23 +70,7 @@ namespace gbd.Dominion.Model.GameMechanics
             Deck.Library.MoveCardsTo(Deck.Hand, amount);
         }
 
-        public int ChooseAndDiscard(int minAmount, int maxAmount)
-        {
-            if (minAmount > Deck.Hand.TotalCardsAvailable)
-            {
-                throw new NotEnoughCardsException(Deck.Hand, Deck.Hand.TotalCardsAvailable, minAmount);
-            }
 
-            var toDiscard = this._intelligence.ChooseAndDiscard(minAmount, maxAmount).ToList();
-            toDiscard.MoveTo(Deck.DiscardPile);
-
-            return toDiscard.Count;
-        }
-
-        public int ChooseAndDiscard(int amount = 1)
-        {
-            return ChooseAndDiscard(amount, amount);
-        }
 
 
 
@@ -170,16 +121,6 @@ namespace gbd.Dominion.Model.GameMechanics
             }
         }
 
-        public void ChooseAndReceive(Resources minCost, Resources maxCost)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICard[] ChooseAndTrash<T>(ZoneChoice @from, int numberOfCards, int? maxAmount = null)
-            where T: ICard
-        {
-            throw new NotImplementedException();
-        }
 
 
 
