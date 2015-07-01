@@ -52,24 +52,7 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
-        [Test]
-        public void Receive()
-        {
-            IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ISupplyZone>();
-            
-            var game = IoC.Kernel.Get<IGame>();
-            game.Ready();
-
-            var card = game.SupplyZone.Cards.First();
-
-            game.CurrentPlayer.Receive(card);
-
-            Assert.That(game.CurrentPlayer.Deck.DiscardPile.Cards, Contains.Item(card));
-            Assert.That(card.Zone, Is.EqualTo(game.CurrentPlayer.Deck.DiscardPile));
-
-        }
+       
  
 
 
