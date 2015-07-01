@@ -34,7 +34,7 @@ namespace gbd.Dominion.Injection
             where TDest : ICard
             where TContainer : IZone
         {
-            k.BindTo<ICard, TDest>(amount).WhenAnyAncestorOfType<TDest, TContainer>();
+            k.BindTo<ICard, TDest>(amount).WhenInto<TDest, TContainer>();
         }
     }
 }

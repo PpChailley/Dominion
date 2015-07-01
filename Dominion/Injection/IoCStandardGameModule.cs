@@ -24,16 +24,16 @@ namespace gbd.Dominion.Injection
             Bind<ISupplyZone>().To<SupplyZone>();
             Bind<IDeck>().To<StartingDeck>();
 
-            Kernel.BindTo<ICard, Copper>(7).WhenAnyAncestorOfType<Copper, ILibrary>();
-            Kernel.BindTo<ICard, Estate>(3).WhenAnyAncestorOfType<Estate, ILibrary>();
+            Kernel.BindTo<ICard, Copper>(7).WhenInto<Copper, ILibrary>();
+            Kernel.BindTo<ICard, Estate>(3).WhenInto<Estate, ILibrary>();
 
-            Kernel.BindTo<ICard, Copper>(NB_COPPER).WhenAnyAncestorOfType<Copper, ISupplyZone>();
-            Kernel.BindTo<ICard, Silver>(NB_SILVER).WhenAnyAncestorOfType<Silver, ISupplyZone>();
-            Kernel.BindTo<ICard, Gold>(NB_GOLD).WhenAnyAncestorOfType<Gold, ISupplyZone>();
-            Kernel.BindTo<ICard, Estate>(NB_ESTATE).WhenAnyAncestorOfType<Estate, ISupplyZone>();
-            Kernel.BindTo<ICard, Duchy>(NB_DUCHY).WhenAnyAncestorOfType<Duchy, ISupplyZone>();
-            Kernel.BindTo<ICard, Province>(NB_PROVINCE).WhenAnyAncestorOfType<Province, ISupplyZone>();
-            Kernel.BindTo<ICard, Curse>(NB_CURSE).WhenAnyAncestorOfType<Curse, ISupplyZone>();
+            Kernel.BindTo<ICard, Copper>(NB_COPPER).WhenInto<Copper, ISupplyZone>();
+            Kernel.BindTo<ICard, Silver>(NB_SILVER).WhenInto<Silver, ISupplyZone>();
+            Kernel.BindTo<ICard, Gold>(NB_GOLD).WhenInto<Gold, ISupplyZone>();
+            Kernel.BindTo<ICard, Estate>(NB_ESTATE).WhenInto<Estate, ISupplyZone>();
+            Kernel.BindTo<ICard, Duchy>(NB_DUCHY).WhenInto<Duchy, ISupplyZone>();
+            Kernel.BindTo<ICard, Province>(NB_PROVINCE).WhenInto<Province, ISupplyZone>();
+            Kernel.BindTo<ICard, Curse>(NB_CURSE).WhenInto<Curse, ISupplyZone>();
 
             Kernel.Bind<ICardShuffler>().To<CardShufflerRandom>();
 

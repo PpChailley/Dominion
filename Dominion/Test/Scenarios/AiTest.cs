@@ -97,7 +97,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void Receive()
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, Copper>(10).WhenAnyAncestorOfType<Copper, ILibrary>();
+            IoC.Kernel.BindTo<ICard, Copper>(10).WhenInto<Copper, ILibrary>();
 
             var game = IoC.Kernel.Get<IGame>();
             game.Ready();

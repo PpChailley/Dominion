@@ -160,14 +160,14 @@ namespace gbd.Dominion.Test.ToolsLib
             const int numberOfSubZones = 4;
 
             IoC.Kernel.BindTo<ICard, Silver>(collectionSize);
-            IoC.Kernel.BindTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
+            IoC.Kernel.BindTo<ICard, Copper>(collectionSize).WhenInto(typeof(TestDeck));
 
             var witnessdeck = IoC.Kernel.Get<StartingDeck>();
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
             Assert.That(witnessdeck.Cards.Count, Is.EqualTo(numberOfSubZones * collectionSize));
 
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
+            IoC.Kernel.BindTo<ICard, Copper>(collectionSize).WhenInto(typeof(TestDeck));
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(collectionSize));
 
             var deck = IoC.Kernel.Get<TestDeck>();
@@ -183,10 +183,10 @@ namespace gbd.Dominion.Test.ToolsLib
         public void WhenAnyAncestorOfType_MemberFromAncestorType_Generic()
         {
             IoC.Kernel.Bind<GenericData<int>>().ToConstructor(syntax => new GenericData<int>(1))
-                .WhenAnyAncestorOfType<GenericData<int>, ChildA>();
+                .WhenInto<GenericData<int>, ChildA>();
 
             IoC.Kernel.Bind<GenericData<int>>().ToConstructor(syntax => new GenericData<int>(2))
-                .WhenAnyAncestorOfType<GenericData<int>, ChildB>();
+                .WhenInto<GenericData<int>, ChildB>();
 
 
             ChildA aAsSelf = IoC.Kernel.Get<ChildA>();
@@ -210,10 +210,10 @@ namespace gbd.Dominion.Test.ToolsLib
         public void WhenAnyAncestorOfType_MemberFromAncestorType_NonGeneric()
         {
             IoC.Kernel.Bind<NonGenericData>().ToConstructor(syntax => new NonGenericData(1))
-                .WhenAnyAncestorOfType<NonGenericData, ChildA>();
+                .WhenInto<NonGenericData, ChildA>();
 
             IoC.Kernel.Bind<NonGenericData>().ToConstructor(syntax => new NonGenericData(2))
-                .WhenAnyAncestorOfType<NonGenericData, ChildB>();
+                .WhenInto<NonGenericData, ChildB>();
 
 
             ChildA aAsSelf = IoC.Kernel.Get<ChildA>();

@@ -168,9 +168,9 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Bind<ICard>(librarySize).To<ICard, EmptyCard>()
-                .WhenAnyAncestorOfType<EmptyCard, ILibrary>();
+                .WhenInto<EmptyCard, ILibrary>();
             IoC.Kernel.Bind<ICard>(discardSize).To<ICard, EmptyCard>()
-                .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
+                .WhenInto<EmptyCard, IDiscardPile>();
 
 
             var deck = IoC.Kernel.Get<IDeck>();
@@ -612,7 +612,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void EndOfTurnCleanup(int draw, int discard, int play, bool shuffle, int expectInLib, int expectInDiscard)
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var player = IoC.Kernel.Get<IPlayer>();

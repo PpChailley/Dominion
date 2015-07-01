@@ -37,10 +37,10 @@ namespace gbd.Dominion.Injection
             SetBaseData<Province>(8, 0, 6);
 
 
-            Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1)).WhenAnyAncestorOfType<CurseType, Curse>();
-            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenAnyAncestorOfType<Resources, Curse>();
-            Kernel.Bind<GameExtension>().ToConstant(GameExtension.AlwaysPresent).WhenAnyAncestorOfType<GameExtension, Curse>();
-            Kernel.Bind<Include>().ToConstant(Include.AlwaysIncluded).WhenAnyAncestorOfType<Include, Curse>();
+            Kernel.Bind<ICardType>().ToConstructor(x => new CurseType(-1)).WhenInto<CurseType, Curse>();
+            Kernel.Bind<Resources>().ToConstructor(x => new Resources(0)).WhenInto<Resources, Curse>();
+            Kernel.Bind<GameExtension>().ToConstant(GameExtension.AlwaysPresent).WhenInto<GameExtension, Curse>();
+            Kernel.Bind<Include>().ToConstant(Include.AlwaysIncluded).WhenInto<Include, Curse>();
 
         }
 

@@ -74,8 +74,8 @@ namespace gbd.Dominion.Test.Scenarios
         public void Gardens(int coppers, int gardens, int expectedScore)
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, Copper>(coppers).WhenAnyAncestorOfType<Copper, ILibrary>();
-            IoC.Kernel.BindTo<ICard, Gardens>(gardens).WhenAnyAncestorOfType<Gardens, ILibrary>();
+            IoC.Kernel.BindTo<ICard, Copper>(coppers).WhenInto<Copper, ILibrary>();
+            IoC.Kernel.BindTo<ICard, Gardens>(gardens).WhenInto<Gardens, ILibrary>();
 
 
             var deck = IoC.Kernel.Get<IDeck>();

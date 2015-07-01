@@ -39,23 +39,23 @@ namespace gbd.Dominion.Injection
         {
             Kernel.Bind<Resources>()
                 .ToConstructor(x => new Resources(coinsCost))
-                .WhenAnyAncestorOfType<Resources, T>();
+                .WhenInto<Resources, T>();
 
             if (coinValue > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new TreasureType(coinValue))
-                    .WhenAnyAncestorOfType<TreasureType, T>();
+                    .WhenInto<TreasureType, T>();
 
             if (victory > 0)
                 Kernel.Bind<ICardType>()
                     .ToConstructor(x => new VictoryType(victory))
-                    .WhenAnyAncestorOfType<VictoryType, T>();
+                    .WhenInto<VictoryType, T>();
 
             Kernel.Bind<GameExtension>().ToConstant(ext)
-                .WhenAnyAncestorOfType<GameExtension, T>();
+                .WhenInto<GameExtension, T>();
 
             Kernel.Bind<Include>().ToConstant(include)
-                .WhenAnyAncestorOfType<Include, T>();
+                .WhenInto<Include, T>();
 
             return new MoreBindingSyntax<T>(this);
         }
@@ -85,7 +85,7 @@ namespace gbd.Dominion.Injection
             {
                 _module.Bind<ICardType>()
                     .ToConstructor(syntax => new VictoryType(computeVictory))
-                    .WhenAnyAncestorOfType<VictoryType, T>();
+                    .WhenInto<VictoryType, T>();
             }
         }
 

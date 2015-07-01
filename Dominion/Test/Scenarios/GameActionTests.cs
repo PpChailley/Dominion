@@ -39,7 +39,7 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(10, 1)]
         public void Draw(int deckSize, int drawAmount)
         {
-            IoC.Kernel.Bind<ICard>(deckSize).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(deckSize).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new Draw(drawAmount));
             
 
@@ -68,7 +68,7 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(10)]
         public void AddAction(int amount)
         {
-            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new AddAction(amount));
 
             var player = IoC.Kernel.Get<IPlayer>();
@@ -89,7 +89,7 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(10)]
         public void AddBuy(int amount)
         {
-            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new AddBuy(amount));
 
             var player = IoC.Kernel.Get<IPlayer>();
@@ -110,7 +110,7 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(30, 25, 29)]
         public void Discard(int deckSize, int draw, int discard)
         {
-            IoC.Kernel.Bind<ICard>(deckSize).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(deckSize).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => 
                 new Discard(PlayerChoice.Current, discard));
 
@@ -139,9 +139,9 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(100)]
         public void ReceiveCurse(int amount)
         {
-            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new ReceiveCurse(PlayerChoice.Current, amount));
-            IoC.Kernel.BindTo<ICard, Curse>(100).WhenAnyAncestorOfType<Curse, ISupplyZone>();
+            IoC.Kernel.BindTo<ICard, Curse>(100).WhenInto<Curse, ISupplyZone>();
 
 
             var player = IoC.Kernel.Get<IPlayer>();
@@ -161,9 +161,9 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(1, PlayerChoice.Current)]
         public void ReceiveCurse(int amount, PlayerChoice who)
         {
-            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new ReceiveCurse(who, amount));
-            IoC.Kernel.BindTo<ICard, Curse>(100).WhenAnyAncestorOfType<Curse, ISupplyZone>();
+            IoC.Kernel.BindTo<ICard, Curse>(100).WhenInto<Curse, ISupplyZone>();
 
             IoC.Kernel.Unbind<IPlayer>();
             IoC.Kernel.BindTo<IPlayer, Player>(4);
@@ -228,7 +228,7 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void TrashThis()
         {
-            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new TrashThis());
 
             var game = IoC.Kernel.Get<IGame>();

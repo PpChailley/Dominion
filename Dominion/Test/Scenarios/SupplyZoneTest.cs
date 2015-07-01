@@ -18,8 +18,8 @@ namespace gbd.Dominion.Test.Scenarios
         public void SupplyZone()
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
-            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ISupplyZone>();
+            IoC.Kernel.BindTo<ICard, EmptyCard>(10).WhenInto<EmptyCard, ISupplyZone>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ISupplyZone>();
 
             var supply = IoC.Kernel.Get<ISupplyZone>();
 

@@ -19,17 +19,17 @@ namespace gbd.Dominion.Test.Utilities
             Bind<ISupplyZone>().To<TestSupplyZone>();
 
             Bind<IDeck>().To<TestDeck>();
-            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ILibrary>();
-            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
-            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
+            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenInto<EmptyCard, ILibrary>();
+            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenInto<EmptyCard, ISupplyZone>();
+            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenInto<EmptyCard, ISupplyPile>();
 
 
             // Those are not bindable, no need to bind them :)
             //Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenInto<GameExtension, EmptyCard>();
             //Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenInto<Include, EmptyCard>();
 
-            Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenAnyAncestorOfType<GameExtension, BindableCard>();
-            Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenAnyAncestorOfType<Include, BindableCard>();
+            Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenInto<GameExtension, BindableCard>();
+            Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenInto<Include, BindableCard>();
 
 
             this.Kernel.BindTo<ISupplyPile, SupplyPile>(10);

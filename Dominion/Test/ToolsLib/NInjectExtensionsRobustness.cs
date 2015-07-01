@@ -36,7 +36,7 @@ namespace gbd.Dominion.Test.ToolsLib
         public void WhenAnyAncestorOfType_Collection(int collectionSize)
         {
             IoC.Kernel.BindTo<ICard, Copper>(collectionSize)
-                .WhenAnyAncestorOfType(typeof (TestDeck));
+                .WhenInto(typeof (TestDeck));
         }
     }
 }

@@ -60,8 +60,8 @@ namespace gbd.Dominion.Test.Scenarios
         public void Receive()
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
-            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ISupplyZone>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ISupplyZone>();
 
             var game = IoC.Kernel.Get<IGame>();
             game.Ready();

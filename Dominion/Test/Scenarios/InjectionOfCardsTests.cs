@@ -102,16 +102,16 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
 
             IoC.Kernel.Bind<ICard>(inLib).To<ICard, Copper>()
-                .WhenAnyAncestorOfType<Copper, ILibrary>();
+                .WhenInto<Copper, ILibrary>();
 
             IoC.Kernel.Bind<ICard>(inHand).To<ICard, Silver>()
-                .WhenAnyAncestorOfType<Silver, IHand>();
+                .WhenInto<Silver, IHand>();
 
             IoC.Kernel.Bind<ICard>(inDisc).To<ICard, Gold>()
-                .WhenAnyAncestorOfType<Gold, IDiscardPile>();
+                .WhenInto<Gold, IDiscardPile>();
 
             IoC.Kernel.Bind<ICard>(inBf).To<ICard, Estate>()
-                .WhenAnyAncestorOfType<Estate, IBattleField>();
+                .WhenInto<Estate, IBattleField>();
 
 
             InjectIntoDeckComponents_InternalCheck(inLib, inHand, inDisc, inBf);
@@ -126,19 +126,19 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
 
             IoC.Kernel.Bind<ICard>(inLib).To<ICard, Copper>()
-                .ForEach(c => c.WhenAnyAncestorOfType<Copper, ILibrary>());
+                .ForEach(c => c.WhenInto<Copper, ILibrary>());
 
 
             IoC.Kernel.Bind<ICard>(inHand).To<ICard, Silver>()
-                .ForEach(c => c.WhenAnyAncestorOfType<Silver, IHand>());
+                .ForEach(c => c.WhenInto<Silver, IHand>());
 
 
             IoC.Kernel.Bind<ICard>(inDisc).To<ICard, Gold>()
-                 .ForEach(c => c.WhenAnyAncestorOfType<Gold, IDiscardPile>());
+                 .ForEach(c => c.WhenInto<Gold, IDiscardPile>());
 
 
             IoC.Kernel.Bind<ICard>(inBf).To<ICard, Estate>()
-                 .ForEach(c => c.WhenAnyAncestorOfType<Estate, IBattleField>());
+                 .ForEach(c => c.WhenInto<Estate, IBattleField>());
 
 
 
@@ -155,19 +155,19 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
 
             foreach (var syntax in IoC.Kernel.Bind<ICard>(inLib).To<ICard, Copper>())
-                syntax.WhenAnyAncestorOfType<Copper, ILibrary>();
+                syntax.WhenInto<Copper, ILibrary>();
 
 
             foreach (var syntax in IoC.Kernel.Bind<ICard>(inHand).To<ICard, Silver>())
-                syntax.WhenAnyAncestorOfType<Silver, IHand>();
+                syntax.WhenInto<Silver, IHand>();
 
 
             foreach (var syntax in IoC.Kernel.Bind<ICard>(inDisc).To<ICard, Gold>())
-                syntax.WhenAnyAncestorOfType<Gold, IDiscardPile>();
+                syntax.WhenInto<Gold, IDiscardPile>();
 
 
             foreach (var syntax in IoC.Kernel.Bind<ICard>(inBf).To<ICard, Estate>())
-                syntax.WhenAnyAncestorOfType<Estate, IBattleField>();
+                syntax.WhenInto<Estate, IBattleField>();
 
 
 
@@ -184,16 +184,16 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<ICard>();
 
             for (int i = 0; i < inLib; i++)
-                IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType<Copper, ILibrary>();
+                IoC.Kernel.Bind<ICard>().To<Copper>().WhenInto<Copper, ILibrary>();
 
             for (int i = 0; i < inHand; i++)
-                IoC.Kernel.Bind<ICard>().To<Silver>().WhenAnyAncestorOfType<Silver, IHand>();
+                IoC.Kernel.Bind<ICard>().To<Silver>().WhenInto<Silver, IHand>();
 
             for (int i = 0; i < inDisc; i++)
-                IoC.Kernel.Bind<ICard>().To<Gold>().WhenAnyAncestorOfType<Gold, IDiscardPile>();
+                IoC.Kernel.Bind<ICard>().To<Gold>().WhenInto<Gold, IDiscardPile>();
 
             for (int i = 0; i < inBf; i++)
-                IoC.Kernel.Bind<ICard>().To<Estate>().WhenAnyAncestorOfType<Estate, IBattleField>();
+                IoC.Kernel.Bind<ICard>().To<Estate>().WhenInto<Estate, IBattleField>();
 
 
             InjectIntoDeckComponents_InternalCheck(inLib, inHand, inDisc, inBf);

@@ -23,7 +23,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<IGameAction>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new Draw(1));
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ILibrary>();
 
             var witnessPlayer = IoC.Kernel.Get<IPlayer>();
 
@@ -53,11 +53,11 @@ namespace gbd.Dominion.Test.Scenarios
             
             IoC.Kernel.Bind<ICardType>()
                 .ToConstructor(x => new TreasureType(7))
-                .WhenAnyAncestorOfType<TreasureType, BindableCard>();
+                .WhenInto<TreasureType, BindableCard>();
 
             IoC.Kernel.Bind<Resources>()
                 .ToConstructor(x => new Resources(12, 33))
-                .WhenAnyAncestorOfType<Resources, BindableCard>();
+                .WhenInto<Resources, BindableCard>();
 
             var card = IoC.Kernel.Get<ICard>();
 
