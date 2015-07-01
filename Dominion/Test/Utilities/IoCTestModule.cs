@@ -25,8 +25,8 @@ namespace gbd.Dominion.Test.Utilities
 
 
             // Those are not bindable, no need to bind them :)
-            //Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenAnyAncestorOfType<GameExtension, EmptyCard>();
-            //Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenAnyAncestorOfType<Include, EmptyCard>();
+            //Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenInto<GameExtension, EmptyCard>();
+            //Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenInto<Include, EmptyCard>();
 
             Kernel.Bind<GameExtension>().ToConstant(GameExtension.TestCards).WhenAnyAncestorOfType<GameExtension, BindableCard>();
             Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenAnyAncestorOfType<Include, BindableCard>();

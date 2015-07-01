@@ -93,7 +93,7 @@ namespace gbd.Dominion.Test.ToolsLib
         public void WhenAnyAncestorOfType_SelfShouldBeAnAncestor_Level1()
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.Bind<ICard>().To<Silver>().WhenAnyAncestorOfType(typeof(IDeck));
+            IoC.Kernel.Bind<ICard>().To<Silver>().WhenInto(typeof(IDeck));
 
             var deck = IoC.Kernel.Get<IDeck>();
 
@@ -106,7 +106,7 @@ namespace gbd.Dominion.Test.ToolsLib
         public void WhenAnyAncestorOfType_SelfShouldBeAnAncestor_Level0A()
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.Bind<ICard>().To<Silver>().WhenAnyAncestorOfType(typeof(ILibrary));
+            IoC.Kernel.Bind<ICard>().To<Silver>().WhenInto(typeof(ILibrary));
 
             var deck = IoC.Kernel.Get<IDeck>();
 
@@ -121,7 +121,7 @@ namespace gbd.Dominion.Test.ToolsLib
             IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
 
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(ISupplyPile));
+            IoC.Kernel.Bind<ICard>().To<Copper>().WhenInto(typeof(ISupplyPile));
 
             var pile = IoC.Kernel.Get<ISupplyPile>();
 
@@ -135,13 +135,13 @@ namespace gbd.Dominion.Test.ToolsLib
             const int numberOfSubZones = 4;
 
             IoC.Kernel.Bind<ICard>().To<Silver>();
-            IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(TestDeck));
+            IoC.Kernel.Bind<ICard>().To<Copper>().WhenInto(typeof(TestDeck));
             var witnessdeck = IoC.Kernel.Get<StartingDeck>();
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
             Assert.That(witnessdeck.Cards.Count, Is.EqualTo(1 * numberOfSubZones));
 
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.Bind<ICard>().To<Copper>().WhenAnyAncestorOfType(typeof(TestDeck));
+            IoC.Kernel.Bind<ICard>().To<Copper>().WhenInto(typeof(TestDeck));
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(1));
 
             var deck = IoC.Kernel.Get<TestDeck>();
