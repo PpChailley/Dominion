@@ -20,7 +20,11 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
         public IEnumerable<ICard> Discard(int minAmount, int? maxAmount = null)
         {
-            int amount = _rnd.Next(minAmount, maxAmount ?? minAmount);
+            if (minAmount > Player.Deck.Hand.Cards.Count)
+                throw new NotEnoughCardsException();
+
+            int actualMax = Math.Min(maxAmount ?? minAmount, Player.Deck.Hand.Cards.Count);
+            int amount = _rnd.Next(minAmount, actualMax);
             var cards =  Player.Deck.Hand.Cards.Random(amount);
             
             cards.ToList().ForEach(c => 
