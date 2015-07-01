@@ -17,18 +17,5 @@ namespace gbd.Dominion.Model.Zones
         }
 
 
-        public void Add(ICollection<ICard> cards)
-        {
-            foreach (var card in cards)
-            {
-                this.Add(card);
-            }
-        }
-
-        public void Add(ICard card)
-        {
-            Cards.Add(card);
-        }
-
     }
 }
