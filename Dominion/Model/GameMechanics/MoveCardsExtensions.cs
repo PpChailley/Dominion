@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
+using NLog;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
     internal static class MoveCardsExtensions
     {
+        private static readonly ILogger _log = LogManager.GetCurrentClassLogger();
+
         internal static void MoveTo(this ICard card, IZone to, Position positionInTarget = Position.Top)
         {
             card.Zone.Cards.Remove(card);
@@ -15,6 +18,8 @@ namespace gbd.Dominion.Model.GameMechanics
 
             card.Attributes.Clear();
             card.Zone = to;
+
+            _log.Debug("Move {0} from {1} to {2}", card, card.Zone, to);
         }
 
 
