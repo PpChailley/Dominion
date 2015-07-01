@@ -14,6 +14,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         
+        // TODO : better testing if we inject a custom RandomProvider
         private readonly Random _rnd = new Random();
 
 
@@ -57,9 +58,23 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             return card;
         }
 
-        public IEnumerable<ICard> Trash<T>(ZoneChoice @from, int minAmount, int? maxAmount = null)
+        public IEnumerable<ICard> Trash<T>(ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
         {
-            throw new NotImplementedException();
+            IZone from = Player.Deck.Get(zoneFrom);
+
+            if (minAmount > from.Cards.Count)
+                throw new NotEnoughCardsException(from, from.Cards.Count, minAmount);
+
+            int actualMax = Math.Min(maxAmount ?? minAmount, Player.Deck.Hand.Cards.Count);
+            int amount = _rnd.Next(minAmount, actualMax);
+            var cards = from.Cards.Random(amount);
+
+            cards.ToList().ForEach(c =>
+                Log.Info("Choose to trash {0}", c));
+
+            cards.MoveTo(IoC.Kernel.Get<IGame>().Trash);
+
+            return cards;
         }
 
     }

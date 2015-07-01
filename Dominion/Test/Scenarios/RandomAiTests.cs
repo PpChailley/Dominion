@@ -1,6 +1,8 @@
-﻿using gbd.Dominion.Injection;
+﻿using System;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
+using gbd.Dominion.Model.Zones;
 using gbd.Tools.NInject;
 using NUnit.Framework;
 
@@ -63,6 +65,7 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(10,  1,10, 2,10, 3,10,   0,0)]
         [TestCase(10,  1,10, 2,10, 3,10,   2,1)]
         [TestCase(10,  1,0,  2,10, 3,10,   1,1)]
+        [TestCase(10,  1,0,  2,0,  3,0,    1,1)]
         public void ReceiveRobustness(int coppers,      int costA, int amountA,
                                                         int costB, int amountB,
                                                         int costC, int amountC,
@@ -110,6 +113,41 @@ namespace gbd.Dominion.Test.Scenarios
                                         new Resources(0), 0,
                                         new Resources(minCoinCost, minPotionsCost),
                                         new Resources(maxCoinCost, maxPotionsCost));
+        }
+
+
+        [TestCase(ZoneChoice.Hand, 10, 1, 1)]
+        [TestCase(ZoneChoice.Hand, 10, 1, null)]
+        [TestCase(ZoneChoice.Library, 10, 1, 1)]
+        [TestCase(ZoneChoice.Library, 10, 1, null)]
+        [TestCase(ZoneChoice.Discard, 10, 1, 1)]
+        [TestCase(ZoneChoice.Discard, 10, 1, null)]
+        [TestCase(ZoneChoice.Play, 10, 1, 1)]
+        [TestCase(ZoneChoice.Play, 10, 1, null)]
+        [TestCase(ZoneChoice.Play, 10, 2, null)]
+        [TestCase(ZoneChoice.Play, 10, 10, null)]
+        [TestCase(ZoneChoice.Play, 10, 0, null)]
+        [TestCase(ZoneChoice.Play, 10, 0, 10)]
+        [TestCase(ZoneChoice.Hand, 10, 15, null)]
+        public new void Trash(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
+        {
+            base.Trash(zone, cardsInEveryZone, minAmount, maxAmountOrNull);
+        }
+
+        [ExpectedException(typeof(NotEnoughCardsException))]
+        [TestCase(ZoneChoice.Play, 10, 11, 11)]
+        [TestCase(ZoneChoice.Play, 10, 11, null)]
+        [TestCase(ZoneChoice.Hand, 10, 16, null)]
+        public new void TrashRobustness(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
+        {
+            base.Trash(zone, cardsInEveryZone, minAmount, maxAmountOrNull);
+        }
+
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [TestCase(ZoneChoice.Play, 10, 5, 4)]
+        public new void TrashRobustnessOutOfRangeException(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
+        {
+            base.Trash(zone, cardsInEveryZone, minAmount, maxAmountOrNull);
         }
 
 

@@ -4,18 +4,15 @@ using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
-using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Dominion.Model.Zones;
 using gbd.Dominion.Test.Utilities;
+using gbd.Tools.Clr;
 using gbd.Tools.NInject;
 using Ninject;
 using NUnit.Framework;
 
 namespace gbd.Dominion.Test.Scenarios
 {
-
-
-
 
     public abstract class SpecificAiTestBase: BaseTest
     {
@@ -72,5 +69,41 @@ namespace gbd.Dominion.Test.Scenarios
 
 
         }
+
+
+        protected void Trash(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
+        {
+            int maxAmount = maxAmountOrNull ?? minAmount;
+
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(cardsInEveryZone);
+
+            var game = IoC.Kernel.Get<IGame>();
+            var player = game.CurrentPlayer;
+            player.Ready();
+            player.StartTurn();
+            player.Deck.Library.Cards.Random(cardsInEveryZone).MoveTo(player.Deck.Hand);
+            player.Deck.Library.Cards.Random(cardsInEveryZone).MoveTo(player.Deck.DiscardPile);
+            player.Deck.Library.Cards.Random(cardsInEveryZone).MoveTo(player.Deck.BattleField);
+
+            Assert.That(game.CurrentPlayer.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                            library: cardsInEveryZone - 5,
+                                            hand: cardsInEveryZone + 5,
+                                            discard: cardsInEveryZone,
+                                            battlefield: cardsInEveryZone)));
+
+            var trashed = game.CurrentPlayer.I.Trash<ICard>(zone, minAmount, maxAmount).ToList();
+
+            Assert.That(trashed, Has.Count.GreaterThanOrEqualTo(minAmount));
+            Assert.That(trashed, Has.Count.LessThanOrEqualTo(maxAmount));
+            Assert.That(trashed, Has.All.Matches<ICard>(c => c.Zone == game.Trash));
+            Assert.That(game.CurrentPlayer.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                        library: cardsInEveryZone - 5 - (zone == ZoneChoice.Library ? trashed.Count() : 0),
+                        hand: cardsInEveryZone + 5 -    (zone == ZoneChoice.Hand ? trashed.Count() : 0),
+                        discard: cardsInEveryZone  -    (zone == ZoneChoice.Discard ? trashed.Count() : 0),
+                        battlefield: cardsInEveryZone - (zone == ZoneChoice.Play ? trashed.Count() : 0))));
+        }
+
+
     }
 }
