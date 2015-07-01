@@ -17,16 +17,17 @@ namespace gbd.Dominion.Model.GameMechanics.AI
         private Random _rnd = new Random();
 
 
-        public IEnumerable<ICard> Discard(int amount)
-        {
-            return Player.Deck.Hand.Cards.Random(amount);
-        }
-
 
         public IEnumerable<ICard> Discard(int minAmount, int? maxAmount = null)
         {
             int amount = _rnd.Next(minAmount, maxAmount ?? minAmount);
-            return Player.Deck.Hand.Cards.Random(amount);
+            var cards =  Player.Deck.Hand.Cards.Random(amount);
+            
+            cards.ToList().ForEach(c => 
+                _log.Info("Choose to discard {0}", c));
+
+            cards.MoveTo(Player.Deck.DiscardPile);
+            return cards;
         }
 
         public ICard Receive(Resources minCost, Resources maxCost)
