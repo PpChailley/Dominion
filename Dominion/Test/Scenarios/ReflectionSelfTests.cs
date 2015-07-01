@@ -75,7 +75,6 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(0.3)]
         [TestCase(0.5)]
         [TestCase(0.7)]
-        [TestCase(0.9)]
         public void TestMethodsRatio(double expectedRatio)
         {
             var testMethods = ReflectionClassFinder.GetAllTestRelatedClasses()
