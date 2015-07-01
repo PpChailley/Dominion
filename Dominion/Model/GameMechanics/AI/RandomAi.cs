@@ -12,9 +12,9 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 {
     public class RandomAi : AbstractIntelligence, IIntelligence, IAi
     {
-        private static readonly ILogger _log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         
-        private Random _rnd = new Random();
+        private readonly Random _rnd = new Random();
 
 
 
@@ -28,7 +28,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             var cards =  Player.Deck.Hand.Cards.Random(amount);
             
             cards.ToList().ForEach(c => 
-                _log.Info("Choose to discard {0}", c));
+                Log.Info("Choose to discard {0}", c));
 
             cards.MoveTo(Player.Deck.DiscardPile);
             return cards;
@@ -51,7 +51,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
             var card = possibleCards.Random();
 
-            _log.Info("Choose to Receive {0}", card);
+            Log.Info("Choose to Receive {0}", card);
             card.MoveTo(Player.Deck.DiscardPile);
 
             return card;

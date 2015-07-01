@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gbd.Dominion.Injection;
+﻿using gbd.Dominion.Injection;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Tools.NInject;
