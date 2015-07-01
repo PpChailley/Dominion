@@ -35,7 +35,7 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<IPlayer>();
             // TODO: rename and shorten this method
-            IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(nbPlayers);
+            IoC.Kernel.BindTo<IPlayer, Player>(nbPlayers);
 
             var game = IoC.Kernel.Get<IGame>();
 
@@ -167,9 +167,9 @@ namespace gbd.Dominion.Test.Scenarios
         public void LibraryReshuffle(int librarySize, int discardSize, int pick)
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimes<ICard>(librarySize).To<ICard, EmptyCard>()
+            IoC.Kernel.Bind<ICard>(librarySize).To<ICard, EmptyCard>()
                 .WhenAnyAncestorOfType<EmptyCard, ILibrary>();
-            IoC.Kernel.BindMultipleTimes<ICard>(discardSize).To<ICard, EmptyCard>()
+            IoC.Kernel.Bind<ICard>(discardSize).To<ICard, EmptyCard>()
                 .WhenAnyAncestorOfType<EmptyCard, IDiscardPile>();
 
 
@@ -363,7 +363,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void PlayersSitOnARoundTable(int numberOfPlayers, PlayerChoice toBeLocated)
         {
             IoC.Kernel.Unbind<IPlayer>();
-            IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(numberOfPlayers);
+            IoC.Kernel.BindTo<IPlayer, Player>(numberOfPlayers);
             
             var game = IoC.Kernel.Get<IGame>();
             var locatedPlayer = game.GetPlayers(toBeLocated).Single();
@@ -445,7 +445,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void GameReadyAffectsAllPlayers(int nbPlayers)
         {
             IoC.Kernel.Unbind<IPlayer>();
-            IoC.Kernel.BindMultipleTimesTo<IPlayer, Player>(nbPlayers);
+            IoC.Kernel.BindTo<IPlayer, Player>(nbPlayers);
 
             var game = IoC.Kernel.Get<IGame>();
 
@@ -612,7 +612,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void EndOfTurnCleanup(int draw, int discard, int play, bool shuffle, int expectInLib, int expectInDiscard)
         {
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var player = IoC.Kernel.Get<IPlayer>();

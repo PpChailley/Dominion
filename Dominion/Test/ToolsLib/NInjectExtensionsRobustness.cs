@@ -17,25 +17,25 @@ namespace gbd.Dominion.Test.ToolsLib
         [TestCase(-100)]
         public void BindMultipleTimes(int numberOfBindings)
         {
-            IoC.Kernel.BindMultipleTimes<ICard>(numberOfBindings).To<ICard, EmptyCard>();
+            IoC.Kernel.Bind<ICard>(numberOfBindings).To<ICard, EmptyCard>();
         }
 
 
-        [ExpectedException(typeof (InvalidOperationException))]
+        [ExpectedException(typeof (ArgumentOutOfRangeException))]
         [TestCase(-1)]
         [TestCase(-100)]
         public void BindMultipleTimesTo(int numberOfBindings)
         {
-            IoC.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(numberOfBindings);
+            IoC.Kernel.BindTo<ICard, EmptyCard>(numberOfBindings);
         }
 
 
-        [ExpectedException(typeof (InvalidOperationException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestCase(-1)]
         [TestCase(-100)]
         public void WhenAnyAncestorOfType_Collection(int collectionSize)
         {
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize)
+            IoC.Kernel.BindTo<ICard, Copper>(collectionSize)
                 .WhenAnyAncestorOfType(typeof (TestDeck));
         }
     }

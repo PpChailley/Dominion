@@ -19,9 +19,9 @@ namespace gbd.Dominion.Test.Utilities
             Bind<ISupplyZone>().To<TestSupplyZone>();
 
             Bind<IDeck>().To<TestDeck>();
-            this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ILibrary>();
-            this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
-            this.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
+            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ILibrary>();
+            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyZone>();
+            this.Kernel.BindTo<ICard, EmptyCard>(10).WhenAnyAncestorOfType<EmptyCard, ISupplyPile>();
 
 
             // Those are not bindable, no need to bind them :)
@@ -32,7 +32,7 @@ namespace gbd.Dominion.Test.Utilities
             Kernel.Bind<Include>().ToConstant(Include.TestCards).WhenAnyAncestorOfType<Include, BindableCard>();
 
 
-            this.Kernel.BindMultipleTimesTo<ISupplyPile, SupplyPile>(10);
+            this.Kernel.BindTo<ISupplyPile, SupplyPile>(10);
             
 
             Kernel.Bind<ICardShuffler>().To<CardShufflerRandom>();

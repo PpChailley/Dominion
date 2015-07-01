@@ -34,7 +34,7 @@ namespace gbd.Dominion.Test.ToolsLib
         [Test]
         public void BindMultipleTimes()
         {
-            IoC.Kernel.BindMultipleTimes<ICard>(10).To<ICard, EmptyCard>();
+            IoC.Kernel.Bind<ICard>(10).To<ICard, EmptyCard>();
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(10));
 
             IoC.Kernel.Bind<ICard>().To<EmptyCard>();
@@ -51,7 +51,7 @@ namespace gbd.Dominion.Test.ToolsLib
         {
             IoC.Kernel.Bind<IList<ICard>>().ToConstructor(syntax => new List<ICard>());
 
-            IoC.Kernel.BindMultipleTimes<ICard>(numberOfBindings).To<ICard, EmptyCard>();
+            IoC.Kernel.Bind<ICard>(numberOfBindings).To<ICard, EmptyCard>();
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(numberOfBindings));
         }
 
@@ -64,7 +64,7 @@ namespace gbd.Dominion.Test.ToolsLib
         [TestCase(55)]
         public void BindMultipleTimesTo(int numberOfBindings)
         {
-            IoC.Kernel.BindMultipleTimesTo<ICard, EmptyCard>(numberOfBindings);
+            IoC.Kernel.BindTo<ICard, EmptyCard>(numberOfBindings);
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(numberOfBindings));
         }
 
@@ -75,7 +75,7 @@ namespace gbd.Dominion.Test.ToolsLib
         [TestCase(0)]
         public void ToMultiple(int nbBindings)
         {
-            IoC.Kernel.BindMultipleTimes<ICard>(nbBindings).To<ICard, Copper>();
+            IoC.Kernel.Bind<ICard>(nbBindings).To<ICard, Copper>();
             IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
 
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)), Has.Count.EqualTo(nbBindings));
@@ -159,15 +159,15 @@ namespace gbd.Dominion.Test.ToolsLib
             // TODO: test more. See InjectIntoDeckComponents() test
             const int numberOfSubZones = 4;
 
-            IoC.Kernel.BindMultipleTimesTo<ICard, Silver>(collectionSize);
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
+            IoC.Kernel.BindTo<ICard, Silver>(collectionSize);
+            IoC.Kernel.BindTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
 
             var witnessdeck = IoC.Kernel.Get<StartingDeck>();
             Assert.That(witnessdeck.Cards, Is.All.InstanceOf(typeof(Silver)));
             Assert.That(witnessdeck.Cards.Count, Is.EqualTo(numberOfSubZones * collectionSize));
 
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
+            IoC.Kernel.BindTo<ICard, Copper>(collectionSize).WhenAnyAncestorOfType(typeof(TestDeck));
             Assert.That(IoC.Kernel.GetBindings(typeof(ICard)).Count(), Is.EqualTo(collectionSize));
 
             var deck = IoC.Kernel.Get<TestDeck>();

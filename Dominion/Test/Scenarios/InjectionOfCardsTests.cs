@@ -101,16 +101,16 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inLib).To<ICard, Copper>()
+            IoC.Kernel.Bind<ICard>(inLib).To<ICard, Copper>()
                 .WhenAnyAncestorOfType<Copper, ILibrary>();
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inHand).To<ICard, Silver>()
+            IoC.Kernel.Bind<ICard>(inHand).To<ICard, Silver>()
                 .WhenAnyAncestorOfType<Silver, IHand>();
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inDisc).To<ICard, Gold>()
+            IoC.Kernel.Bind<ICard>(inDisc).To<ICard, Gold>()
                 .WhenAnyAncestorOfType<Gold, IDiscardPile>();
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inBf).To<ICard, Estate>()
+            IoC.Kernel.Bind<ICard>(inBf).To<ICard, Estate>()
                 .WhenAnyAncestorOfType<Estate, IBattleField>();
 
 
@@ -125,19 +125,19 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inLib).To<ICard, Copper>()
+            IoC.Kernel.Bind<ICard>(inLib).To<ICard, Copper>()
                 .ForEach(c => c.WhenAnyAncestorOfType<Copper, ILibrary>());
 
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inHand).To<ICard, Silver>()
+            IoC.Kernel.Bind<ICard>(inHand).To<ICard, Silver>()
                 .ForEach(c => c.WhenAnyAncestorOfType<Silver, IHand>());
 
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inDisc).To<ICard, Gold>()
+            IoC.Kernel.Bind<ICard>(inDisc).To<ICard, Gold>()
                  .ForEach(c => c.WhenAnyAncestorOfType<Gold, IDiscardPile>());
 
 
-            IoC.Kernel.BindMultipleTimes<ICard>(inBf).To<ICard, Estate>()
+            IoC.Kernel.Bind<ICard>(inBf).To<ICard, Estate>()
                  .ForEach(c => c.WhenAnyAncestorOfType<Estate, IBattleField>());
 
 
@@ -154,19 +154,19 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
 
-            foreach (var syntax in IoC.Kernel.BindMultipleTimes<ICard>(inLib).To<ICard, Copper>())
+            foreach (var syntax in IoC.Kernel.Bind<ICard>(inLib).To<ICard, Copper>())
                 syntax.WhenAnyAncestorOfType<Copper, ILibrary>();
 
 
-            foreach (var syntax in IoC.Kernel.BindMultipleTimes<ICard>(inHand).To<ICard, Silver>())
+            foreach (var syntax in IoC.Kernel.Bind<ICard>(inHand).To<ICard, Silver>())
                 syntax.WhenAnyAncestorOfType<Silver, IHand>();
 
 
-            foreach (var syntax in IoC.Kernel.BindMultipleTimes<ICard>(inDisc).To<ICard, Gold>())
+            foreach (var syntax in IoC.Kernel.Bind<ICard>(inDisc).To<ICard, Gold>())
                 syntax.WhenAnyAncestorOfType<Gold, IDiscardPile>();
 
 
-            foreach (var syntax in IoC.Kernel.BindMultipleTimes<ICard>(inBf).To<ICard, Estate>())
+            foreach (var syntax in IoC.Kernel.Bind<ICard>(inBf).To<ICard, Estate>())
                 syntax.WhenAnyAncestorOfType<Estate, IBattleField>();
 
 

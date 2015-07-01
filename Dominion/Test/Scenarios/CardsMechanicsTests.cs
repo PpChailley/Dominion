@@ -50,12 +50,12 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.Unbind<ISupplyPile>();
-            IoC.Kernel.BindMultipleTimes<ICard>(sourceSize).To<ICard, EmptyCard>();
+            IoC.Kernel.Bind<ICard>(sourceSize).To<ICard, EmptyCard>();
             IoC.Kernel.Bind<ISupplyPile>().To<SupplyPile>();
             var src = IoC.Kernel.Get<ISupplyPile>();
 
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimes<ICard>(destSize).To<ICard, EmptyCard>();
+            IoC.Kernel.Bind<ICard>(destSize).To<ICard, EmptyCard>();
             var dst = IoC.Kernel.Get<ISupplyPile>();
 
             src.Ready();

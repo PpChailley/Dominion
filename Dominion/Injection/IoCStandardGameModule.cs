@@ -24,16 +24,16 @@ namespace gbd.Dominion.Injection
             Bind<ISupplyZone>().To<SupplyZone>();
             Bind<IDeck>().To<StartingDeck>();
 
-            Kernel.BindMultipleTimesTo<ICard, Copper>(7).WhenAnyAncestorOfType<Copper, ILibrary>();
-            Kernel.BindMultipleTimesTo<ICard, Estate>(3).WhenAnyAncestorOfType<Estate, ILibrary>();
+            Kernel.BindTo<ICard, Copper>(7).WhenAnyAncestorOfType<Copper, ILibrary>();
+            Kernel.BindTo<ICard, Estate>(3).WhenAnyAncestorOfType<Estate, ILibrary>();
 
-            Kernel.BindMultipleTimesTo<ICard, Copper>(NB_COPPER).WhenAnyAncestorOfType<Copper, ISupplyZone>();
-            Kernel.BindMultipleTimesTo<ICard, Silver>(NB_SILVER).WhenAnyAncestorOfType<Silver, ISupplyZone>();
-            Kernel.BindMultipleTimesTo<ICard, Gold>(NB_GOLD).WhenAnyAncestorOfType<Gold, ISupplyZone>();
-            Kernel.BindMultipleTimesTo<ICard, Estate>(NB_ESTATE).WhenAnyAncestorOfType<Estate, ISupplyZone>();
-            Kernel.BindMultipleTimesTo<ICard, Duchy>(NB_DUCHY).WhenAnyAncestorOfType<Duchy, ISupplyZone>();
-            Kernel.BindMultipleTimesTo<ICard, Province>(NB_PROVINCE).WhenAnyAncestorOfType<Province, ISupplyZone>();
-            Kernel.BindMultipleTimesTo<ICard, Curse>(NB_CURSE).WhenAnyAncestorOfType<Curse, ISupplyZone>();
+            Kernel.BindTo<ICard, Copper>(NB_COPPER).WhenAnyAncestorOfType<Copper, ISupplyZone>();
+            Kernel.BindTo<ICard, Silver>(NB_SILVER).WhenAnyAncestorOfType<Silver, ISupplyZone>();
+            Kernel.BindTo<ICard, Gold>(NB_GOLD).WhenAnyAncestorOfType<Gold, ISupplyZone>();
+            Kernel.BindTo<ICard, Estate>(NB_ESTATE).WhenAnyAncestorOfType<Estate, ISupplyZone>();
+            Kernel.BindTo<ICard, Duchy>(NB_DUCHY).WhenAnyAncestorOfType<Duchy, ISupplyZone>();
+            Kernel.BindTo<ICard, Province>(NB_PROVINCE).WhenAnyAncestorOfType<Province, ISupplyZone>();
+            Kernel.BindTo<ICard, Curse>(NB_CURSE).WhenAnyAncestorOfType<Curse, ISupplyZone>();
 
             Kernel.Bind<ICardShuffler>().To<CardShufflerRandom>();
 

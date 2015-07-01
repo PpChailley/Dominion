@@ -23,7 +23,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Unbind<IGameAction>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new Draw(1));
             IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
 
             var witnessPlayer = IoC.Kernel.Get<IPlayer>();
 
