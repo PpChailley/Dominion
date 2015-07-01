@@ -2,6 +2,7 @@
 using System.Linq;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model;
+using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Dominion.Model.Zones;
@@ -50,6 +51,25 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 1, 5, 0)));
         }
 
+
+        [Test]
+        public void Receive()
+        {
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ILibrary>();
+            IoC.Kernel.BindMultipleTimesTo<ICard, BindableCard>(10).WhenAnyAncestorOfType<BindableCard, ISupplyZone>();
+            
+            var game = IoC.Kernel.Get<IGame>();
+            game.Ready();
+
+            var card = game.SupplyZone.Cards.First();
+
+            game.CurrentPlayer.Receive(card);
+
+            Assert.That(game.CurrentPlayer.Deck.DiscardPile.Cards, Contains.Item(card));
+            Assert.That(card.Zone, Is.EqualTo(game.CurrentPlayer.Deck.DiscardPile));
+
+        }
  
 
 

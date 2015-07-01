@@ -18,16 +18,13 @@ namespace gbd.Dominion.Test.Scenarios
     [TestFixture]
     public class GameScenarioTest: BaseTest
     {
-       
+        private IGame Game = IoC.Kernel.Get<IGame>();
 
         [SetUp]
         public new void SetUp()
         {
             base.SetUp();
-
-            IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
-            IoC.Kernel.Get<IGame>().Ready();
-
+            Game.Ready();
         }
 
 

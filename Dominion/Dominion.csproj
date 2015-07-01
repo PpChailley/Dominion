@@ -98,7 +98,6 @@
     <Compile Include="Injection\GainCard.cs" />
     <Compile Include="Injection\IoC.cs" />
     <Compile Include="Injection\IoCCardsModule.cs" />
-    <Compile Include="Injection\IoCLoggingModule.cs" />
     <Compile Include="Injection\IoCMechanicsModule.cs" />
     <Compile Include="Injection\IoCModule.cs" />
     <Compile Include="Injection\IoCStandardGameModule.cs" />

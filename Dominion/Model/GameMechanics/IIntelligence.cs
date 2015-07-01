@@ -8,7 +8,7 @@ namespace gbd.Dominion.Model.GameMechanics
     {
         IEnumerable<ICard> Discard(int minAmount, int? maxAmount = null);
 
-        IEnumerable<ICard> Receive(Resources minCost, Resources maxCost);
+        ICard Receive(Resources minCost, Resources maxCost);
 
         IEnumerable<ICard> Trash<T>(ZoneChoice from, int minAmount, int? maxAmount = null);
 

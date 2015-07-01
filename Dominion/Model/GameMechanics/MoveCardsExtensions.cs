@@ -6,9 +6,9 @@ using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
-    public static class MoveCardsExtensions
+    internal static class MoveCardsExtensions
     {
-        public static void MoveTo(this ICard card, IZone to, Position positionInTarget = Position.Top)
+        internal static void MoveTo(this ICard card, IZone to, Position positionInTarget = Position.Top)
         {
             card.Zone.Cards.Remove(card);
             to.PutCard(card, positionInTarget);
@@ -18,7 +18,7 @@ namespace gbd.Dominion.Model.GameMechanics
         }
 
 
-         private static void PutCard(this IZone zone, ICard card, Position position = Position.Top)
+        internal static void PutCard(this IZone zone, ICard card, Position position = Position.Top)
         {
             switch (position)
             {
@@ -36,14 +36,14 @@ namespace gbd.Dominion.Model.GameMechanics
         }
 
 
-        public static void MoveTo(this IEnumerable<ICard> toMove, IZone to, Position positionInTarget = Position.Top)
+        internal static void MoveTo(this IEnumerable<ICard> toMove, IZone to, Position positionInTarget = Position.Top)
         {
             // TODO: Add robustness tests to MoveTo with 0 cards
             toMove.ToList().ForEach(c => c.MoveTo(to, positionInTarget));
         }
 
 
-        public static void MoveCardsTo(this IZone from, IZone to, int amount, Position positionFrom = Position.Top, Position positionTo = Position.Top)
+        internal static void MoveCardsTo(this IZone from, IZone to, int amount, Position positionFrom = Position.Top, Position positionTo = Position.Top)
         {
             from.Get(amount, positionFrom).MoveTo(to, positionTo);
         }

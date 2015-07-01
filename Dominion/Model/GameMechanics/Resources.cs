@@ -73,5 +73,16 @@ namespace gbd.Dominion.Model.GameMechanics
             }
         }
 
+        public bool GreaterOrEqual(Resources r)
+        {
+            return (Money >= r.Money
+                    && Potions >= r.Potions);
+        }
+
+        public bool SmallerOrEqual(Resources r)
+        {
+            return (Money <= r.Money
+                    && Potions <= r.Potions);
+        }
     }
 }

@@ -657,5 +657,18 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(result1, Is.EqualTo(new Resources(m1+m2, p1+p2)));
         }
 
+        [TestCase(0, 0, 0, 0, true, true)]
+        [TestCase(0, 0, 0, 1, false, true)]
+        [TestCase(0, 1, 0, 1, true, true)]
+        [TestCase(0, 1, 1, 0, false, false)]
+        public void ResourcesComparison(int m, int p, int refM, int refP, bool expectedGoE, bool expectedSoE)
+        {
+            Resources a = new Resources(m, p);
+            Resources b = new Resources(refM, refP);
+
+            Assert.That(a.GreaterOrEqual(b), Is.EqualTo(expectedGoE));
+            Assert.That(a.SmallerOrEqual(b), Is.EqualTo(expectedSoE));
+        }
+        
     }
 }
