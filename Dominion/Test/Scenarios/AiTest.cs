@@ -52,59 +52,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 1, 5, 0)));
         }
 
-        [TestCase(0, 0)]
-        [TestCase(0, 1)]
-        [TestCase(0, 5)]
-        [TestCase(1, 5)]
-        [TestCase(1, 6)]
-        [TestCase(5, 10)]
-        public void Discard(int drawAmount, int discardAmount)
-        {
-            var player = IoC.Kernel.Get<IPlayer>();
-            player.Ready();
-            player.StartTurn();
-
-            player.Draw(drawAmount);
-            var discarded = player.I.Discard(discardAmount);
-
-            Assert.That(discarded, Has.Count.EqualTo(discardAmount));
-            Assert.That(discarded, Has.All.Matches<ICard>(c => c.Zone == player.Deck.DiscardPile));
-            Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(
-                                            library: 5 - drawAmount, 
-                                            hand: 5 + drawAmount - discardAmount, 
-                                            discard: discardAmount, 
-                                            battlefield: 0  )));
-        }
-
-
-        [ExpectedException(typeof (NotEnoughCardsException))]
-        [TestCase(0, 6)]
-        [TestCase(0, 99)]
-        [TestCase(1, 7)]
-        [TestCase(5, 11)]
-        public void DiscardRobustness(int drawAmount, int discardAmount)
-        {
-            var player = IoC.Kernel.Get<IPlayer>();
-            player.Ready();
-            player.StartTurn();
-            player.Draw(drawAmount);
-
-            player.I.Discard(discardAmount);
-        }
-
-
-        [Test]
-        public void Receive()
-        {
-            IoC.Kernel.Unbind<ICard>();
-            IoC.Kernel.BindTo<ICard, Copper>(10).WhenInto<Copper, ILibrary>();
-
-            var game = IoC.Kernel.Get<IGame>();
-            game.Ready();
-            var player = game.CurrentPlayer;
-
-
-        }
+        
  
 
 

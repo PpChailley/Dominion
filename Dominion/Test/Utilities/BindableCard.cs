@@ -13,6 +13,23 @@ namespace gbd.Dominion.Test.Utilities
 
         public override ICardMechanics Mechanics { get; protected set; }
 
+        public class A : BindableCard, ICard
+        {
+            public A(ICardMechanics mechanics, GameExtension ext, Include inc) 
+                : base(mechanics, ext, inc) { }
+        }
+
+        public class B : BindableCard, ICard
+        {
+            public B(ICardMechanics mechanics, GameExtension ext, Include inc)
+                : base(mechanics, ext, inc) { }
+        }
+
+        public class C : BindableCard, ICard
+        {
+            public C(ICardMechanics mechanics, GameExtension ext, Include inc)
+                : base(mechanics, ext, inc) { }
+        }
 
     }
 }

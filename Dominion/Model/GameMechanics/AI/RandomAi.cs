@@ -36,11 +36,20 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
         public ICard Receive(Resources minCost, Resources maxCost)
         {
-            var card = IoC.Kernel.Get<IGame>().SupplyZone.Cards
-                .Where(c => c.Mechanics.Cost.GreaterOrEqual(minCost)
-                            && c.Mechanics.Cost.SmallerOrEqual(maxCost))
-                .ToList()
-                .Random();
+            var supply = IoC.Kernel.Get<IGame>().SupplyZone;
+
+            if (supply.Cards.Count < 1)
+                throw new NotEnoughCardsException("Supply is empty");
+
+            var possibleCards = supply.Cards
+                                .Where(c => c.Mechanics.Cost.GreaterOrEqual(minCost)
+                                            && c.Mechanics.Cost.SmallerOrEqual(maxCost))
+                                .ToList();
+
+            if (possibleCards.Any() == false)
+                throw new NotEnoughCardsException("Supply has no cards acceptable to pick");
+
+            var card = possibleCards.Random();
 
             _log.Info("Choose to Receive {0}", card);
             card.MoveTo(Player.Deck.DiscardPile);

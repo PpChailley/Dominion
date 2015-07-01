@@ -23,6 +23,11 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public Resources(int money): this(money, 0){ }
 
+        public Resources Clone()
+        {
+            return new Resources(Money, Potions);
+        }
+
 
         public Resources Plus(Resources operand)
         {
