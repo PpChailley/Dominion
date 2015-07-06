@@ -10,5 +10,8 @@ namespace gbd.Dominion.Model.Cards
         {
             // Nothing to do yet
         }
+
+        // TODO: move on play triggers from Card to ActionType
+
     }
 }
