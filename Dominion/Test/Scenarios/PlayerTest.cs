@@ -25,9 +25,9 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
             player.StartTurn();
-            Assert.That(player.AvailableResources, Is.EqualTo(new Resources(0)));
-            Assert.That(player.AvailableBuys, Is.EqualTo(1));
-            Assert.That(player.AvailableActions, Is.EqualTo(1));
+            Assert.That(player.Status.Resources, Is.EqualTo(new Resources(0)));
+            Assert.That(player.Status.Buys, Is.EqualTo(1));
+            Assert.That(player.Status.Actions, Is.EqualTo(1));
 
         }
 
@@ -37,19 +37,19 @@ namespace gbd.Dominion.Test.Scenarios
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
             player.StartTurn();
-            Assert.That(player.AvailableResources, Is.EqualTo(new Resources(0)));
-            Assert.That(player.AvailableBuys, Is.EqualTo(1));
-            Assert.That(player.AvailableActions, Is.EqualTo(1));
+            Assert.That(player.Status.Resources, Is.EqualTo(new Resources(0)));
+            Assert.That(player.Status.Buys, Is.EqualTo(1));
+            Assert.That(player.Status.Actions, Is.EqualTo(1));
 
-            player.AvailableActions = 12;
-            player.AvailableBuys = 12;
-            player.AvailableResources = new Resources(5,48);
+            player.Status.Actions = 12;
+            player.Status.Buys = 12;
+            player.Status.Resources = new Resources(5,48);
             player.Draw(1);
 
             player.EndTurn();
-            Assert.That(player.AvailableResources, Is.EqualTo(new Resources(0)));
-            Assert.That(player.AvailableBuys, Is.EqualTo(0));
-            Assert.That(player.AvailableActions, Is.EqualTo(0));
+            Assert.That(player.Status.Resources, Is.EqualTo(new Resources(0)));
+            Assert.That(player.Status.Buys, Is.EqualTo(0));
+            Assert.That(player.Status.Actions, Is.EqualTo(0));
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
         }

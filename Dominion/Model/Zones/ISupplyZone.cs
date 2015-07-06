@@ -6,6 +6,7 @@ namespace gbd.Dominion.Model.Zones
     public interface ISupplyZone: IZone
     {
         IList<ISupplyPile> Piles { get; }
+        bool EndOfGameCondition { get; }
 
         ISupplyPile PileOf<TCardType>();
 

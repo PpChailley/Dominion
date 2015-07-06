@@ -24,6 +24,7 @@ namespace gbd.Dominion.Test.Scenarios
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new Draw(1));
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
 
             var witnessPlayer = IoC.Kernel.Get<IPlayer>();
 
@@ -35,7 +36,7 @@ namespace gbd.Dominion.Test.Scenarios
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 5, 0, 0)));
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 5, 0, 1)));
         }

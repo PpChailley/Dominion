@@ -1,15 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using Ninject;
+using NLog;
 
 namespace gbd.Dominion.Model.Zones
 {
     public class SupplyZone: ISupplyZone
     {
+        private const int EMPTY_PILES_NEEDED_TO_END_GAME = 3;
+
+        
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
+
+
         public IList<ISupplyPile> Piles { get; protected set; }
+
+        public bool EndOfGameCondition
+        {
+            get
+            {
+                if (PileOf<Province>() != null
+                    && PileOf<Province>().Cards.Any() == false)
+                {
+                    Log.Info("No more provinces - End of game reached");
+                    return true;
+                }
+
+                if (Piles.Count(p => p.Cards.Any() == false) >= EMPTY_PILES_NEEDED_TO_END_GAME)
+                {
+                    Log.Info("Many empty pailes - End of game reached");
+                    return true;
+                }
+
+                return false;
+            }
+        }
 
         [Inject]
         public SupplyZone(IEnumerable<ICard> inputCards)
@@ -39,7 +69,7 @@ namespace gbd.Dominion.Model.Zones
 
         public ISupplyPile PileOf(Type cardType)
         {
-            return Piles.Single(p => p.CardType == cardType);
+            return Piles.SingleOrDefault(p => p.CardType == cardType);
         }
 
 

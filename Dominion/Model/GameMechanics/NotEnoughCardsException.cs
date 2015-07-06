@@ -10,7 +10,7 @@ namespace gbd.Dominion.Model.GameMechanics
         public NotEnoughCardsException() { }
 
         public NotEnoughCardsException(IZone zone, int nbAvailableCards, int required)
-            : base(String.Format("Not Enough cards in {0}: expected {1}, available {2}",
+            : base(String.Format("Not Enough cards in {0}: expected {1}, Status. {2}",
             zone, required, nbAvailableCards))
         { }
     }

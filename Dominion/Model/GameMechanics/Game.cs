@@ -4,11 +4,15 @@ using System.Linq;
 using gbd.Dominion.Model.Zones;
 using gbd.Tools.Clr;
 using Ninject;
+using NLog;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
     public class Game : IGame
     {
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
+
         [Inject]
         public Game(IList<IPlayer> players, ISupplyZone supplyZone, ITrashZone trash)
         {
@@ -28,6 +32,8 @@ namespace gbd.Dominion.Model.GameMechanics
         public IPlayer CurrentPlayer { get; private set; }
 
         public ITrashZone Trash { get; set; }
+
+        public GamePhase CurrentPhase { get; set; }
 
 
         public IList<IPlayer> GetPlayers(PlayerChoice who)
@@ -61,28 +67,40 @@ namespace gbd.Dominion.Model.GameMechanics
             return toreturn;
         }
 
-        
-
-
 
 
         public void Ready()
         {
-            Init();
             Players.ToList().ForEach(p => p.Ready());
             SupplyZone.Ready();
+            Log.Info("Current player is now {0} (first time)", CurrentPlayer);
             CurrentPlayer = Players.First();
             CurrentPlayer.StartTurn();
+            Log.Info("Entering ACTION Phase");
+            CurrentPhase = GamePhase.Action;
         }
 
 
-        public void Init()
+
+        public void NextTurn()
         {
-            // Nothing to do yet
+            Log.Info("Entering CLEANUP Phase");
+            CurrentPhase = GamePhase.Cleanup;
+            CurrentPlayer.EndTurn();
+            CurrentPlayer = Players.AfterRoundRobin(CurrentPlayer);
+            Log.Info("Current player is now {0}", CurrentPlayer);
+            CurrentPlayer.StartTurn();
+            Log.Info("Entering ACTION Phase");
+            CurrentPhase = GamePhase.Action;
+        }
+
+        public void EndActionsPhase()
+        {
+            Log.Info("Entering BUY Phase");
+            CurrentPhase = GamePhase.Buy;
         }
 
         
-
     }
     
 }

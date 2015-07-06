@@ -6,16 +6,30 @@ namespace gbd.Dominion.Model.GameMechanics
     public class PlayerStatus
     {
 
-        public Resources Resources = IoC.Kernel.Get<Resources>();
-        public int AvailableActions { get; set; }
-        public int AvailableBuys { get; set; }
+        public Resources Resources;
+        public int Actions { get; set; }
+        public int Buys { get; set; }
 
-        
+        public PlayerStatus()
+        {
+            Actions = 0;
+            Resources = new Resources(0);
+            Buys = 0;
+        }
+
+
         public void StartTurn()
         {
-            AvailableActions = 1;
-            AvailableBuys = 1;
-            Resources.Reset();
+            Actions = 1;
+            Buys = 1;
+            Resources = Resources.Zero;
+        }
+
+        public void EndTurn()
+        {
+            Actions = 0;
+            Buys = 0;
+            Resources = Resources.Zero;
         }
 
     }

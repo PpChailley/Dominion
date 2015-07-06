@@ -491,7 +491,7 @@ namespace gbd.Dominion.Test.Scenarios
             foreach (var player in game.Players)
             {
                 player.ToString();
-                player.AvailableResources.ToString();
+                player.Status.Resources.ToString();
                 player.Deck.ToString();
                 player.Deck.Hand.ToString();
                 player.Deck.Library.ToString();
@@ -613,15 +613,16 @@ namespace gbd.Dominion.Test.Scenarios
         {
             IoC.Kernel.Unbind<ICard>();
             IoC.Kernel.BindTo<ICard, BindableCard>(10).WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.ReBind<IDeck>().To<TestDeck>();
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
-            player.AvailableActions = 100;
+            player.Status.Actions = 100;
 
             player.Draw(draw);
             player.I.Discard(discard);
-            player.Deck.Hand.Cards.Take(play).ToList().ForEach(c => player.Play(c));
+            player.Deck.Hand.Cards.Take(play).ToList().ForEach(c => player.PlayAction(c));
 
             if (shuffle)
                 player.Deck.ShuffleDiscardToLibrary();

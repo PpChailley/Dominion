@@ -14,8 +14,9 @@ namespace gbd.Dominion.Model.GameMechanics
         ITrashZone Trash { get; set; }
 
 
-        void Init();
         IList<IPlayer> GetPlayers(PlayerChoice who);
-        
+
+        void NextTurn();
+        void EndActionsPhase();
     }
 }

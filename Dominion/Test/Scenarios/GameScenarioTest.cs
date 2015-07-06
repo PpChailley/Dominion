@@ -45,9 +45,10 @@ namespace gbd.Dominion.Test.Scenarios
         [Test]
         public void PlayerBuysACard()
         {
-            var player = IoC.Kernel.Get<IGame>().CurrentPlayer;
-            player.Status.Resources = new Resources(100);
-            player.Buy(IoC.Kernel.Get<IGame>().SupplyZone.Cards.First());
+            var game = IoC.Kernel.Get<IGame>();
+            game.Ready();
+            game.CurrentPlayer.Status.Resources = new Resources(100);
+            game.CurrentPlayer.Buy(IoC.Kernel.Get<IGame>().SupplyZone.Cards.First());
 
             Assert.That(IoC.Kernel.Get<IGame>().CurrentPlayer.Deck.Cards.Count == 11);
         }

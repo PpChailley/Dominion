@@ -14,11 +14,6 @@ namespace gbd.Dominion.Model.GameMechanics
         IIntelligence I { get; }
 
 
-        int AvailableActions { get; set; }
-        int AvailableBuys { get; set; }
-        Resources AvailableResources { get; set; }
-
-
 
         void Ready();
         void StartTurn();
@@ -26,7 +21,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
 
         void Draw(int amount);
-        void Play(ICard card);
+        void PlayAction(ICard card);
         void Receive(ICard card, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
         void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
 

@@ -73,6 +73,8 @@ namespace gbd.Dominion.Injection
 
             public MoreBindingSyntax<T> AddActions(params GameAction[] actions)
             {
+                _module.Bind<ICardType>().To<ActionType>().WhenInjectedInto<T>();
+
                 foreach (var action in actions)
                 {
                     _module.Bind<GameAction>().ToConstant(action).WhenInjectedInto<T>();

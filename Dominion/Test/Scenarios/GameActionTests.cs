@@ -40,6 +40,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void Draw(int deckSize, int drawAmount)
         {
             IoC.Kernel.Bind<ICard>(deckSize).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new Draw(drawAmount));
             
 
@@ -53,7 +54,7 @@ namespace gbd.Dominion.Test.Scenarios
                                         discard: 0, 
                                         battlefield: 0)));
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(
                 new CardRepartition(    library: deckSize - 5 - drawAmount,
@@ -69,17 +70,18 @@ namespace gbd.Dominion.Test.Scenarios
         public void AddAction(int amount)
         {
             IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.Bind<ICardType>().To<ActionType>();
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new AddAction(amount));
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
             player.StartTurn();
 
-            Assert.That(player.AvailableActions, Is.EqualTo(1));
+            Assert.That(player.Status.Actions, Is.EqualTo(1));
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
-            Assert.That(player.AvailableActions, Is.EqualTo(amount));
+            Assert.That(player.Status.Actions, Is.EqualTo(amount));
         }
 
 
@@ -90,17 +92,18 @@ namespace gbd.Dominion.Test.Scenarios
         public void AddBuy(int amount)
         {
             IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new AddBuy(amount));
 
             var player = IoC.Kernel.Get<IPlayer>();
             player.Ready();
             player.StartTurn();
 
-            Assert.That(player.AvailableBuys, Is.EqualTo(1));
+            Assert.That(player.Status.Buys, Is.EqualTo(1));
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
-            Assert.That(player.AvailableBuys, Is.EqualTo(1 + amount));
+            Assert.That(player.Status.Buys, Is.EqualTo(1 + amount));
         }
 
 
@@ -111,6 +114,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void Discard(int deckSize, int draw, int discard)
         {
             IoC.Kernel.Bind<ICard>(deckSize).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => 
                 new Discard(PlayerChoice.Current, discard));
 
@@ -125,7 +129,7 @@ namespace gbd.Dominion.Test.Scenarios
                                                 discard: 0, 
                                                 battlefield: 0)));
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(
                             new CardRepartition(library: deckSize - 5 - draw,
@@ -140,6 +144,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void ReceiveCurse(int amount)
         {
             IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new ReceiveCurse(PlayerChoice.Current, amount));
             IoC.Kernel.BindTo<ICard, Curse>(100).WhenInto<Curse, ISupplyZone>();
 
@@ -148,7 +153,7 @@ namespace gbd.Dominion.Test.Scenarios
             player.Ready();
             player.StartTurn();
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
             Assert.That(player.Deck.Cards.Count, Is.EqualTo(10 + amount));
             Assert.That(player.Deck.Cards.Count(c => c.GetType() == typeof(Curse)), Is.EqualTo(amount));
@@ -162,6 +167,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void ReceiveCurse(int amount, PlayerChoice who)
         {
             IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new ReceiveCurse(who, amount));
             IoC.Kernel.BindTo<ICard, Curse>(100).WhenInto<Curse, ISupplyZone>();
 
@@ -209,7 +215,7 @@ namespace gbd.Dominion.Test.Scenarios
                     throw new NotImplementedException();
             }
 
-            player.Play(player.Deck.Hand.Cards.First());
+            player.PlayAction(player.Deck.Hand.Cards.First());
 
             foreach (var safe in affectedPlayers)
             {
@@ -229,6 +235,7 @@ namespace gbd.Dominion.Test.Scenarios
         public void TrashThis()
         {
             IoC.Kernel.Bind<ICard>(10).To<ICard, BindableCard>().WhenInto<BindableCard, ILibrary>();
+            IoC.Kernel.BindToInto<ICardType, ActionType, BindableCard>(1);
             IoC.Kernel.Bind<IGameAction>().ToConstructor(x => new TrashThis());
 
             var game = IoC.Kernel.Get<IGame>();
@@ -238,7 +245,7 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5,5,0,0)));
 
             var card = player.Deck.Hand.Cards.First();
-            player.Play(card);
+            player.PlayAction(card);
 
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(5, 4, 0, 0)));
             Assert.That(game.Trash.Cards.Single(), Is.EqualTo(card));

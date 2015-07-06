@@ -46,12 +46,12 @@ namespace gbd.Dominion.Model.Cards
 
         public override string ToString()
         {
-            return String.Format("{0} # {1} (in {3} with {{{2}}}",
+            return String.Format("{0} # {1} with {{{2}}} (in {{{3}}})",
                 GetType().Name,
                 GetHashCode(),
                 Mechanics,
                 Zone
-                );
+            );
         }
     }
 }

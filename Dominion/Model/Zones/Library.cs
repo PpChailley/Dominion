@@ -53,7 +53,7 @@ namespace gbd.Dominion.Model.Zones
                 Cards.Clear();
                 ParentDeck.ShuffleDiscardToLibrary();
                 beforeShuffle.Reverse();
-                beforeShuffle.MoveTo(this, position);
+                beforeShuffle.ForEach(c => this.PutCard(c, position));
 
             }
 

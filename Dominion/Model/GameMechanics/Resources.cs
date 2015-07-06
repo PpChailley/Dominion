@@ -55,7 +55,7 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public override string ToString()
         {
-            return String.Format("{{ {0} Coin - {1} Potion }}", Money, Potions);
+            return String.Format("{{ {0}$ - {1}P }}", Money, Potions);
         }
 
         public override bool Equals(object obj)

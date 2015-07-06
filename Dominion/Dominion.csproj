@@ -114,12 +114,14 @@
     <Compile Include="Model\GameMechanics\Actions\AddCoins.cs" />
     <Compile Include="Model\GameMechanics\Actions\DiscardDownTo.cs" />
     <Compile Include="Model\GameMechanics\CardShufflerRandom.cs" />
+    <Compile Include="Model\GameMechanics\GamePhase.cs" />
     <Compile Include="Model\GameMechanics\ICardShuffler.cs" />
     <Compile Include="Model\GameMechanics\IGameObject.cs" />
     <Compile Include="Model\GameMechanics\InsufficientResourcesException.cs" />
     <Compile Include="Model\GameMechanics\ITrashZone.cs" />
     <Compile Include="Model\GameMechanics\MoveCardsExtensions.cs" />
     <Compile Include="Model\GameMechanics\NotEnoughActionsException.cs" />
+    <Compile Include="Model\GameMechanics\NotEnoughBuysException.cs" />
     <Compile Include="Model\GameMechanics\TrashZone.cs" />
     <Compile Include="Model\TestDeck.cs" />
     <Compile Include="Model\GameMechanics\AI\AbstractIntelligence.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Model\Zones\SupplyPile.cs" />
     <Compile Include="Model\Zones\SupplyZone.cs" />
     <Compile Include="Model\Zones\ZoneChoice.cs" />
+    <Compile Include="Test\Scenarios\AiFightTests.cs" />
     <Compile Include="Test\Scenarios\CardContentTests.cs" />
     <Compile Include="Test\Scenarios\CardsMechanicsTests.cs" />
     <Compile Include="Test\Scenarios\GameActionRobustnessTests.cs" />

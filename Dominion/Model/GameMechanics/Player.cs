@@ -1,26 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
 using Ninject;
+using NLog;
 
 namespace gbd.Dominion.Model.GameMechanics
 {
     public class Player : IPlayer
     {
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
 
         public const int STARTING_HAND_SIZE = 5;
 
         public IIntelligence I { get; private set; }
-
-        public int AvailableActions { get; set; }
-
-        public int AvailableBuys { get; set; }
-
-        public Resources AvailableResources{ get; set; }
-
 
         public PlayerStatus Status { get; set; }
         public IDeck Deck { get; set; }
@@ -29,10 +24,6 @@ namespace gbd.Dominion.Model.GameMechanics
         [Inject]
         public Player(IDeck deck, IIntelligence intel, PlayerStatus status)
         {
-            AvailableActions = 0;
-            AvailableResources = new Resources(0);
-            AvailableBuys = 0;
-
             Deck = deck;
             I = intel;
             Status = status;
@@ -49,18 +40,18 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void StartTurn()
         {
-            AvailableActions = 1;
-            AvailableBuys = 1;
-            AvailableResources = Resources.Zero;
+            Log.Info("Start of turn for {0}", this);
+
+            Status.StartTurn();
         }
 
         public void EndTurn()
         {
+            Log.Info("End of turn for {0}", this);
+
             Deck.EndOfTurnCleanup();
 
-            AvailableActions = 0;
-            AvailableBuys = 0;
-            AvailableResources = Resources.Zero;
+            Status.EndTurn();
         }
 
 
@@ -86,16 +77,23 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void Buy(ICard card)
         {
-            this.Status.Resources.Pay(card.Mechanics.Cost);
+            if (Status.Buys < 1)
+                throw new NotEnoughBuysException();
+
+            Status.Resources.Pay(card.Mechanics.Cost);
+            Status.Buys--;
             Receive(card, ZoneChoice.Discard);
         }
 
-        public void Play(ICard card)
+        public void PlayAction(ICard card)
         {
-            if (AvailableActions < 1)
+            if (Status.Actions < 1)
                 throw new NotEnoughActionsException();
 
-            AvailableActions --;
+            if (card.Mechanics.GetCardType<ActionType>() == null)
+                throw new InvalidOperationException("Card is not an action and cannot be played");
+
+            Status.Actions--;
             card.MoveTo(Deck.BattleField);
 
             foreach (var trigger in card.Mechanics.OnPlayTriggers)
@@ -103,6 +101,24 @@ namespace gbd.Dominion.Model.GameMechanics
                 trigger.Do();
             }
 
+        }
+
+        public void PlayTreasure(ICard card)
+        {
+            card.MoveTo(Deck.BattleField);
+
+            if (card.Mechanics.GetCardType<TreasureType>() == null)
+                throw new InvalidOperationException("Card is not a treasure and cannot be played");
+
+
+            foreach (var trigger in card.Mechanics.OnPlayTriggers)
+            {
+                trigger.Do();
+            }
+
+            // TODO: with some special treasure cards this will report a wrong count
+            // Probably need to count extra resources + resources in play - spent
+            Status.Resources = Status.Resources.Plus(card.Mechanics.TreasureValue);
         }
 
         public void ReceiveFrom(ISupplyPile @from, int amount, ZoneChoice to, Position position = Position.Top)
@@ -132,5 +148,6 @@ namespace gbd.Dominion.Model.GameMechanics
                 this.Deck.GetType().Name,
                 this.Deck.CardCountByZone);
         }
+
     }
 }

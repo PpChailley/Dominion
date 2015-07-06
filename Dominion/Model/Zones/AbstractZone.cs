@@ -56,10 +56,11 @@ namespace gbd.Dominion.Model.Zones
 
         public override string ToString()
         {
-            return StringContentsExtension.Format("{0} with {2} cards ({1} available)", 
+            return StringContentsExtension.Format("{0} # {3} with {2}/{1} cards)", 
                                 this.GetType().Name, 
                                 this.TotalCardsAvailable,
-                                this.Cards.Count);
+                                this.Cards.Count,
+                                this.GetHashCode());
         }
     }
 }

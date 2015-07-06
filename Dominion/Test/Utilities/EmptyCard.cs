@@ -35,7 +35,13 @@ namespace gbd.Dominion.Test.Utilities
 
         public override string ToString()
         {
-            return String.Format("{0}  # {1}", this.GetType().Name, Index);
+            return String.Format("{0} # {1} with {{{2}}} (in {{{3}}})",
+                GetType().Name,
+                Index,
+                Mechanics,
+                Zone
+            );
+
         }
 
 

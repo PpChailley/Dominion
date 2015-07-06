@@ -15,5 +15,6 @@ namespace gbd.Dominion.Model.GameMechanics
         void Ready(Player player);
 
         Player Player { get; }
+        void PlayTurn();
     }
 }

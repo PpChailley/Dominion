@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
+using gbd.Tools.Clr;
 using NLog;
 
 namespace gbd.Dominion.Model.GameMechanics
@@ -13,13 +14,17 @@ namespace gbd.Dominion.Model.GameMechanics
 
         internal static void MoveTo(this ICard card, IZone to, Position positionInTarget = Position.Top)
         {
+            if (card.Zone == to)
+            {
+                throw new InvalidOperationException("Cannot move card {0} to the same zone {1}".Format(card, to));
+            }
+            _log.Debug("Move {0} from {1} to {2}", card, card.Zone, to);
+
             card.Zone.Cards.Remove(card);
             to.PutCard(card, positionInTarget);
 
             card.Attributes.Clear();
             card.Zone = to;
-
-            _log.Debug("Move {0} from {1} to {2}", card, card.Zone, to);
         }
 
 

@@ -72,12 +72,12 @@ namespace gbd.Dominion.Model.Cards
 
         public TCardType GetCardType<TCardType>() where TCardType : ICardType
         {
-            var matchingTypes = Types
+            var matchingType = Types
                 .Where(t => t.GetType() == typeof (TCardType))
                 .Cast<TCardType>()
                 .SingleOrDefault();
 
-            return matchingTypes;
+            return matchingType;
         }
 
 

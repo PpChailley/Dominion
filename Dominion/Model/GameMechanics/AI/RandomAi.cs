@@ -60,12 +60,64 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             return card;
         }
 
-        public IEnumerable<ICard> Trash<T>(ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
+
+
+        public void PlayTurn()
         {
-            return Trash(typeof(T), zoneFrom, minAmount, maxAmount);
+            Log.Info("Starting AI turn: Action phase");
+            PlayActionsUntilCannot();
+            IoC.Kernel.Get<IGame>().EndActionsPhase();
+
+            Log.Info("Starting Buy phase");
+            PlayAllTreasures();
+            BuyUntilCannot();
+            Log.Info("AI turn over");
         }
 
-        public IEnumerable<ICard> Trash(Type t, ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
+        private void PlayAllTreasures()
+        {
+            var treasures = Player.Deck.Hand.Cards.Where(c => c.Mechanics.GetCardType<TreasureType>() != null);
+
+            treasures.ToList().ForEach(t => Player.PlayTreasure(t));
+        }
+
+        private void BuyUntilCannot()
+        {
+            while (Player.Status.Buys > 0)
+            {
+                var supply = IoC.Kernel.Get<IGame>().SupplyZone;
+                var possibleBuys = supply.Piles.Where(p =>
+                    p.Cards.Any(c => 
+                        c.Mechanics.Cost.SmallerOrEqual(Player.Status.Resources))).ToList();
+
+                if (possibleBuys.Any() == false)
+                {
+                    return;
+                }
+
+                var chosen = possibleBuys.Random().Cards.First();
+                Log.Info("{0} ({2} buys left) choses to buy {1}", this, chosen, Player.Status.Buys);
+                Player.Buy(chosen);
+            }
+        }
+
+        private void PlayActionsUntilCannot()
+        {
+            while (Player.Status.Actions > 0)
+            {
+                var actions = Player.Deck.Hand.Cards.Where(c =>
+                    c.Mechanics.GetCardType<ActionType>() != null).ToList();
+
+                if (actions.Any() == false)
+                    break;
+
+                var chosen = actions.Random();
+                Log.Info("{0} ({2} actions left) choses to play {1}", this, chosen, Player.Status.Actions);
+                Player.PlayAction(chosen);
+            }
+        }
+
+        public override IEnumerable<ICard> Trash(Type t, ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
         {
             IZone from = Player.Deck.Get(zoneFrom);
             int actualMax = Math.Min(maxAmount ?? minAmount, from.Cards.Count);
