@@ -138,16 +138,22 @@ namespace gbd.Dominion.Test.Scenarios
         [TestCase(ZoneChoice.Play, 10, 11, 11)]
         [TestCase(ZoneChoice.Play, 10, 11, null)]
         [TestCase(ZoneChoice.Hand, 10, 16, null)]
-        public new void TrashRobustness(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
+        public void TrashRobustness(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
         {
             base.Trash(zone, cardsInEveryZone, minAmount, maxAmountOrNull);
         }
 
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestCase(ZoneChoice.Play, 10, 5, 4)]
-        public new void TrashRobustnessOutOfRangeException(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
+        public void TrashRobustnessOutOfRangeException(ZoneChoice zone, int cardsInEveryZone, int minAmount, int? maxAmountOrNull)
         {
             base.Trash(zone, cardsInEveryZone, minAmount, maxAmountOrNull);
+        }
+
+        [Test]
+        public new void TrashWithTypeConstraint()
+        {
+            base.TrashWithTypeConstraint();
         }
 
 

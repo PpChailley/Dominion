@@ -27,7 +27,9 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             int actualMax = Math.Min(maxAmount ?? minAmount, Player.Deck.Hand.Cards.Count);
             int amount = _rnd.Next(minAmount, actualMax);
             var cards =  Player.Deck.Hand.Cards.Random(amount);
-            
+
+            Log.Info("Discarding {0} cards (between {1} and {2}", amount, minAmount, maxAmount);
+
             cards.ToList().ForEach(c => 
                 Log.Info("Choose to discard {0}", c));
 
@@ -60,14 +62,25 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
         public IEnumerable<ICard> Trash<T>(ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
         {
+            return Trash(typeof(T), zoneFrom, minAmount, maxAmount);
+        }
+
+        public IEnumerable<ICard> Trash(Type t, ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
+        {
             IZone from = Player.Deck.Get(zoneFrom);
+            int actualMax = Math.Min(maxAmount ?? minAmount, from.Cards.Count);
 
             if (minAmount > from.Cards.Count)
                 throw new NotEnoughCardsException(from, from.Cards.Count, minAmount);
 
-            int actualMax = Math.Min(maxAmount ?? minAmount, Player.Deck.Hand.Cards.Count);
+            var pickableCards = from.Cards.Where(card => t.IsInstanceOfType(card)).ToList();
+            if (pickableCards.Count < minAmount)
+                throw new NotEnoughCardsException("Not enough cards match type constraint");
+
             int amount = _rnd.Next(minAmount, actualMax);
-            var cards = from.Cards.Random(amount);
+            var cards = pickableCards.Random(amount);
+
+            Log.Info("Trashing {0} cards (between {1} and {2}", amount, minAmount, maxAmount);
 
             cards.ToList().ForEach(c =>
                 Log.Info("Choose to trash {0}", c));

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
@@ -105,5 +104,31 @@ namespace gbd.Dominion.Test.Scenarios
         }
 
 
+        protected void TrashWithTypeConstraint()
+        {
+            IoC.Kernel.Unbind<ICard>();
+            IoC.Kernel.BindToInto<ICard, BindableCard.A, ILibrary>(3);
+            IoC.Kernel.BindToInto<ICard, BindableCard.B, ILibrary>(2);
+            IoC.Kernel.BindToInto<ICardType, VictoryType, BindableCard.A>(1);
+            IoC.Kernel.BindToInto<ICardType, VictoryType, BindableCard.B>(1);
+
+            var game = IoC.Kernel.Get<IGame>();
+            var player = game.CurrentPlayer;
+            player.Ready();
+            player.StartTurn();
+
+            Assert.That(game.CurrentPlayer.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(
+                                library: 0,
+                                hand: 5,
+                                discard: 0,
+                                battlefield: 0)));
+
+            var trashed = game.CurrentPlayer.I.Trash<BindableCard.A>(ZoneChoice.Hand, 3, 3).ToList();
+
+            Assert.That(trashed, Has.Count.EqualTo(3));
+            Assert.That(trashed, Has.All.Matches<ICard>(c => c is BindableCard.A));
+            Assert.That(player.Deck.Hand.Cards, Has.Count.EqualTo(2));
+            Assert.That(player.Deck.Hand.Cards, Has.All.Matches<ICard>(c => c is BindableCard.B));
+        }
     }
 }
