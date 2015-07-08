@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using gbd.Dominion.Contents;
+using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 
 namespace gbd.Dominion.Model.Cards
@@ -13,6 +14,9 @@ namespace gbd.Dominion.Model.Cards
         GameExtension Extension { get; }
 
         Include PresentInSet { get; }
+
+        ActionContinue Continue { get; }
+
 
 
         IZone Zone { get; set; }

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using gbd.Dominion.Contents;
+using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.Zones;
 using Ninject;
 
 namespace gbd.Dominion.Model.Cards
 {
-    public abstract class Card: PrintedCard, ICard
+    public abstract class Card: PrintedCard
     {
-
         public IZone Zone { get; set; }
-        
+
+
         // This has to stay abstract so that NInject will see the implementing type when injecting it
         public abstract ICardMechanics Mechanics { get; protected set; }
 
