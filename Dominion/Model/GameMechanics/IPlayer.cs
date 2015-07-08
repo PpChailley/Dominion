@@ -26,6 +26,6 @@ namespace gbd.Dominion.Model.GameMechanics
         void ReceiveFrom(ISupplyPile from, int amount, ZoneChoice to = ZoneChoice.Discard, Position where = Position.Top);
 
 
-
+        void PlayTreasure(ICard card);
     }
 }

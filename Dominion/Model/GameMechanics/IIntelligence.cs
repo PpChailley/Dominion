@@ -8,13 +8,13 @@ namespace gbd.Dominion.Model.GameMechanics
     {
         IEnumerable<ICard> Discard(int minAmount, int? maxAmount = null);
 
-        ICard Receive(Resources minCost, Resources maxCost);
+        ICard Receive(Resources minCost, Resources maxCost = null);
 
-        IEnumerable<ICard> Trash<T>(ZoneChoice from, int minAmount, int? maxAmount = null);
+        IEnumerable<ICard> Trash<T>(ZoneChoice fromZone, int minAmount, int? maxAmount = null);
 
-        void Ready(Player player);
+        void Ready(IPlayer player);
 
-        Player Player { get; }
+        IPlayer Player { get; }
         void PlayTurn();
     }
 }

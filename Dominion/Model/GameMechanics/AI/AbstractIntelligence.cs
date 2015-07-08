@@ -7,10 +7,10 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 {
     public abstract class AbstractIntelligence
     {
-        public Player Player { get; protected set; }
+        public IPlayer Player { get; protected set; }
 
 
-        public void Ready(Player player)
+        public void Ready(IPlayer player)
         {
             Player = player;
         }
