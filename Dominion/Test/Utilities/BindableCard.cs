@@ -1,5 +1,6 @@
 ﻿using gbd.Dominion.Contents;
 using gbd.Dominion.Model.Cards;
+using gbd.Dominion.Model.GameMechanics;
 
 namespace gbd.Dominion.Test.Utilities
 {
@@ -10,6 +11,8 @@ namespace gbd.Dominion.Test.Utilities
     {
         public BindableCard(ICardMechanics mechanics, GameExtension ext, Include inc)
             : base(mechanics, ext, inc) { }
+
+        public ActionContinue Continue { get { return ActionContinue.Terminal; } }
 
         public override ICardMechanics Mechanics { get; protected set; }
 

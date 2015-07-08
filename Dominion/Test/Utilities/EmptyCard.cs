@@ -14,7 +14,7 @@ namespace gbd.Dominion.Test.Utilities
     {
         public override ICardMechanics Mechanics { get; protected set; }
 
-
+        public ActionContinue Continue { get { return ActionContinue.NotAnAction;} }
 
         public static int LastIndex = 0;
         public int Index;
