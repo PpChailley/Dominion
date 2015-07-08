@@ -21,6 +21,7 @@ namespace gbd.Dominion.Model.GameMechanics
             Trash = trash;
 
             CurrentPlayer = players.FirstOrDefault();
+            TurnIndex = 0;
         }
 
 
@@ -34,6 +35,8 @@ namespace gbd.Dominion.Model.GameMechanics
         public ITrashZone Trash { get; set; }
 
         public GamePhase CurrentPhase { get; set; }
+
+        public int TurnIndex { get; private set; }
 
 
         public IList<IPlayer> GetPlayers(PlayerChoice who)
@@ -88,7 +91,8 @@ namespace gbd.Dominion.Model.GameMechanics
             CurrentPhase = GamePhase.Cleanup;
             CurrentPlayer.EndTurn();
             CurrentPlayer = Players.AfterRoundRobin(CurrentPlayer);
-            Log.Info("Current player is now {0}", CurrentPlayer);
+            TurnIndex += CurrentPlayer == Players[0] ? 1 : 0;
+            Log.Info("Current player is now {0} - Turn {1}", CurrentPlayer, TurnIndex);
             CurrentPlayer.StartTurn();
             Log.Info("Entering ACTION Phase");
             CurrentPhase = GamePhase.Action;

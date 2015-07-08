@@ -3,7 +3,6 @@ using System.Linq;
 using gbd.Dominion.Contents.Cards;
 using gbd.Dominion.Injection;
 using gbd.Dominion.Model;
-using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.GameMechanics;
 using gbd.Dominion.Model.GameMechanics.AI;
 using gbd.Dominion.Model.Zones;
@@ -52,12 +51,21 @@ namespace gbd.Dominion.Test.Scenarios
             Assert.That(player.Deck.CardCountByZone, Is.EqualTo(new CardRepartition(4, 1, 5, 0)));
         }
 
-        
+        [Test]
+        public void ModularAiInstantiate()
+        {
+            IoC.Kernel.BindTo<IDiscardDelegate, ValueDiscardDelegate>(1);
+            IoC.Kernel.BindTo<IPlayDelegate, ActionCollectorPlayDelegate>(1);
+            IoC.Kernel.BindTo<IReceiveDelegate, ValueReceiveDelegate>(1);
+            IoC.Kernel.BindTo<ITrashDelegate, ValueTrashDelegate>(1);
+            IoC.Kernel.BindTo<IIntelligence, ModularAi>(1);
+
+            IoC.Kernel.Get<IGame>();
+            
+        }
  
 
 
 
     }
-
-
 }

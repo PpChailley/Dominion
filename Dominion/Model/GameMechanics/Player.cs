@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using gbd.Dominion.Injection;
 using gbd.Dominion.Model.Cards;
 using gbd.Dominion.Model.Zones;
 using Ninject;
@@ -87,11 +88,14 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void PlayAction(ICard card)
         {
+            if (this != IoC.Kernel.Get<IGame>().CurrentPlayer)
+                throw new InvalidOperationException("Player is not active and cannot play an action");
+
             if (Status.Actions < 1)
                 throw new NotEnoughActionsException();
 
             if (card.Mechanics.GetCardType<ActionType>() == null)
-                throw new InvalidOperationException("Card is not an action and cannot be played");
+                throw new InvalidOperationException("Card is not an action and cannot be played as one");
 
             Status.Actions--;
             card.MoveTo(Deck.BattleField);
@@ -105,10 +109,13 @@ namespace gbd.Dominion.Model.GameMechanics
 
         public void PlayTreasure(ICard card)
         {
-            card.MoveTo(Deck.BattleField);
+            if (this != IoC.Kernel.Get<IGame>().CurrentPlayer)
+                throw new InvalidOperationException("Player is not active and cannot play a treasure");
 
             if (card.Mechanics.GetCardType<TreasureType>() == null)
-                throw new InvalidOperationException("Card is not a treasure and cannot be played");
+                throw new InvalidOperationException("Card is not a treasure and cannot be played as one");
+
+            card.MoveTo(Deck.BattleField);
 
 
             foreach (var trigger in card.Mechanics.OnPlayTriggers)
