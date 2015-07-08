@@ -12,6 +12,8 @@ namespace gbd.Dominion.Model.GameMechanics
 
         IList<ICard> Trash<T>(ZoneChoice fromZone, int minAmount, int? maxAmount = null);
 
+        IList<ICard> Buy();
+
         void Ready(IPlayer player);
 
         IPlayer Player { get; }

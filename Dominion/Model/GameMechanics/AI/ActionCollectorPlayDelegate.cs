@@ -27,7 +27,8 @@ namespace gbd.Dominion.Model.GameMechanics.AI
                 .Where(c => c.Mechanics.GetCardType<TreasureType>() != null)
                 .ToList()
                 .ForEach(c => Ai.Player.PlayTreasure(c));
-            
+
+            Ai.Buy();
         }
 
         private ICard BestAction(IList<ICard> hand)
