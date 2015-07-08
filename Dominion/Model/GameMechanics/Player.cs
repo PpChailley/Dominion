@@ -76,15 +76,19 @@ namespace gbd.Dominion.Model.GameMechanics
             card.MoveTo(Deck.Get(to), position);
         }
 
-        public void Buy(ICard card)
+        public void Buy(List<ICard> cards)
         {
-            if (Status.Buys < 1)
+            if (Status.Buys < cards.Count)
                 throw new NotEnoughBuysException();
 
-            Status.Resources.Pay(card.Mechanics.Cost);
-            Status.Buys--;
-            Receive(card, ZoneChoice.Discard);
+            foreach (var card in cards)
+            {
+                Status.Resources.Pay(card.Mechanics.Cost);
+                Status.Buys--;
+                Receive(card, ZoneChoice.Discard);
+            }
         }
+    
 
         public void PlayAction(ICard card)
         {

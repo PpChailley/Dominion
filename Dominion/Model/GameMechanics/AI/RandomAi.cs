@@ -79,9 +79,11 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             treasures.ToList().ForEach(t => Player.PlayTreasure(t));
         }
 
-        private void BuyUntilCannot()
+        public IList<ICard> Buy()
         {
-            while (Player.Status.Buys > 0)
+            var toBuy = new List<ICard>();
+
+            while (toBuy.Count <= Player.Status.Buys)
             {
                 var supply = IoC.Kernel.Get<IGame>().SupplyZone;
                 var possibleBuys = supply.Piles.Where(p =>
@@ -90,13 +92,16 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
                 if (possibleBuys.Any() == false)
                 {
-                    return;
+                    return toBuy;
                 }
 
                 var chosen = possibleBuys.Random().Cards.First();
                 Log.Info("{0} ({2} buys left) choses to buy {1}", this, chosen, Player.Status.Buys);
-                Player.Buy(chosen);
+                toBuy.Add(chosen);
             }
+
+            Player.Buy(toBuy);
+            return toBuy;
         }
 
         private void PlayActionsUntilCannot()
