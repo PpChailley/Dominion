@@ -19,7 +19,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
 
 
-        public IEnumerable<ICard> Discard(int minAmount, int? maxAmount = null)
+        public IList<ICard> Discard(int minAmount, int? maxAmount = null)
         {
             if (minAmount > Player.Deck.Hand.Cards.Count)
                 throw new NotEnoughCardsException();
@@ -34,10 +34,10 @@ namespace gbd.Dominion.Model.GameMechanics.AI
                 Log.Info("Choose to discard {0}", c));
 
             cards.MoveTo(Player.Deck.DiscardPile);
-            return cards;
+            return cards.ToList();
         }
 
-        public ICard Receive(Resources minCost, Resources maxCost)
+        public IList<ICard> Receive(Resources minCost, Resources maxCost)
         {
             var supply = IoC.Kernel.Get<IGame>().SupplyZone;
 
@@ -57,10 +57,8 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             Log.Info("Choose to Receive {0}", card);
             card.MoveTo(Player.Deck.DiscardPile);
 
-            return card;
+            return new[]{card};
         }
-
-
 
         public void PlayTurn()
         {
@@ -117,7 +115,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
             }
         }
 
-        public override IEnumerable<ICard> Trash(Type t, ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
+        public override IList<ICard> Trash(Type t, ZoneChoice zoneFrom, int minAmount, int? maxAmount = null)
         {
             IZone from = Player.Deck.Get(zoneFrom);
             int actualMax = Math.Min(maxAmount ?? minAmount, from.Cards.Count);
@@ -139,7 +137,7 @@ namespace gbd.Dominion.Model.GameMechanics.AI
 
             cards.MoveTo(IoC.Kernel.Get<IGame>().Trash);
 
-            return cards;
+            return cards.ToList();
         }
 
     }
